@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.lang.String;
 import java.sql.Time;
 
-
 public class Quota {
     private String title;
     private String description;

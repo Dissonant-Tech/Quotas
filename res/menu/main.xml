@@ -1,11 +1,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.dissonant.quotas.MainActivity" >
+    tools:context="com.dissonant.quotas.MainActivity"
+    android:elevation="2dp"
+    >
 
+    <!-- Search Action -->
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_action_search"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_search"/>
+
+    <!-- Settings Action -->
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:showAsAction="never"
+        android:icon="@drawable/ic_action_settings"
+        android:showAsAction="ifRoom"
         android:title="@string/action_settings"/>
 
 </menu>

@@ -1,0 +1,16 @@
+<resources>
+    <!-- Quotas Material Theme -->
+    <style name="QuotasTheme"
+            parent="@android:style/Theme.Material.Light">
+        <item name="android:actionBarStyle">@style/QuotasActionBar</item>
+        <item name="android:colorPrimary">@color/SteelBlue</item>
+        <item name="android:colorPrimaryDark">@color/SteelBlueDark</item>
+        <item name="android:textColorPrimary">@color/White</item>
+    </style>
+
+    <!-- Quotas ActionBar Style -->
+    <style name="QuotasActionBar"
+            parent="@android:style/Widget.Material.Light">
+        <item name="android:background">@color/SteelBlue</item>
+    </style>
+</resources>
