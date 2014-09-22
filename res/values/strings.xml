@@ -5,6 +5,6 @@
     <string name="action_settings">Settings</string>
     <string name="action_search">search</string>
     <string name="action_websearch">search</string>
-    <string name="title_main">Overview</string>
+    <string name="label_main">Overview</string>
 
 </resources>
