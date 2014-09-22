@@ -2,6 +2,7 @@ package com.dissonant.quotas;
 
 
 import android.app.Activity;
+import android.graphics.Outline;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +15,12 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // FAB Outline
+        int size = getResources().getDimensionPixelSize(R.dimen.fab_size);
+        Outline mOutline = new Outline();
+        mOutline.setOval(0, 0, size, size);
+        findViewById(R.id.fab).setOutline(mOutline);
     }
 
 

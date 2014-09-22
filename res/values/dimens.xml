@@ -6,7 +6,7 @@
 
     <dimen name="fab_size">56dp</dimen>
 
-    <dimen name="button_elevation">2dp</dimen>
+    <dimen name="button_elevation">1dp</dimen>
     <dimen name="button_press_elevation">4dp</dimen>
 
 </resources>

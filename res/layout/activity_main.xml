@@ -16,7 +16,7 @@
         android:background="@drawable/ripple"
         android:stateListAnimator="@anim/anim"
         android:src="@drawable/ic_action_attach"
-        android:elevation="4dp"
+        android:elevation="1dp"
         />
 
 
