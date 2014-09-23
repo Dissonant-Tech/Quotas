@@ -1,0 +1,11 @@
+<resources>
+    <declare-styleable name="PieChart">
+        <attr name="showText" format="boolean" />
+        <attr name="labelPosition" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+            <enum name="bottom" value="0"/>
+            <enum name="top" value="0"/>
+        </attr>
+    </declare-styleable>
+</resources>
