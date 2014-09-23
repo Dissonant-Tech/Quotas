@@ -1,11 +1,14 @@
 package com.dissonant.quotas;
 
 
+import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.graphics.Outline;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+import android.widget.SearchView;
 
 
 public class MainActivity extends Activity {
@@ -28,6 +31,13 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
+            .getActionView();
+        int searchBarId = searchView.getContext().getResources().getIdentifier("android:id/search_bar", null, null);
+        LinearLayout searchBar = (LinearLayout) searchView.findViewById(searchBarId);
+        searchBar.setLayoutTransition(new LayoutTransition());
+
         return true;
     }
 

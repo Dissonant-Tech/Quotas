@@ -1,15 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.dissonant.quotas.MainActivity"
-    android:elevation="2dp"
+    android:elevation="1dp"
     >
 
     <!-- Search Action -->
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/ic_action_search"
-        android:showAsAction="ifRoom"
-        android:title="@string/action_search"/>
+        android:title="@string/action_search"
+        android:showAsAction="collapseActionView|ifRoom"
+        android:actionViewClass="android.widget.SearchView"
+    />
 
     <!-- Settings Action -->
     <item

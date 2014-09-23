@@ -6,11 +6,13 @@
         <item name="android:colorPrimary">@color/SteelBlue</item>
         <item name="android:colorPrimaryDark">@color/SteelBlueDark</item>
         <item name="android:textColorPrimary">@color/White</item>
+        <item name="android:windowContentTransitions">True</item>
     </style>
 
     <!-- Quotas ActionBar Style -->
     <style name="QuotasActionBar"
             parent="@android:style/Widget.Material.Light">
         <item name="android:background">@color/SteelBlue</item>
+        <item name="android:displayOptions">showTitle</item>
     </style>
 </resources>

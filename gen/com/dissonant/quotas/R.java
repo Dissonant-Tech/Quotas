@@ -9,7 +9,10 @@ package com.dissonant.quotas;
 
 public final class R {
     public static final class anim {
-        public static final int anim=0x7f040000;
+        public static final int fab_anim=0x7f040000;
+        public static final int search_anim=0x7f040001;
+        public static final int search_in=0x7f040002;
+        public static final int search_out=0x7f040003;
     }
     public static final class attr {
     }
