@@ -1,36 +1,34 @@
 package com.dissonant.quotas;
 
-import android.content.Context;
-import android.graphics.BlurMaskFilter;
-import android.graphics.Paint;
-import android.util.AttributeSet;
-import android.view.View;
+import org.achartengine.GraphicalView;
+import org.achartengine.model.XYMultipleSeriesDataset;
+import org.achartengine.model.XYSeries;
+import org.achartengine.renderer.XYMultipleSeriesRenderer;
+import org.achartengine.renderer.XYSeriesRenderer;
 
 
-public class PieChart extends View {
+public class PieChart {
+    public GraphicalView mChart;
+    public XYMultipleSeriesDataset mDataSet = new XYMultipleSeriesDataset();
+    public XYMultipleSeriesRenderer mRenderer = new XYMultipleSeriesRenderer();
 
-    Paint mTextPaint;
-    Paint mPiePaint;
-    Paint mShadowPaint;
+    public XYSeries mCurrentSeries;
+    public XYSeriesRenderer mCurrentRenderer;
 
-    public PieChart(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    public void initChart() {
+        mCurrentSeries = new XYSeries("Sample Data");
+        mDataSet.addSeries(mCurrentSeries);
+        mCurrentRenderer = new XYSeriesRenderer();
+        mRenderer.addSeriesRenderer(mCurrentRenderer);
     }
 
-    private void init() {
-        mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mTextPaint.setColor(mTextColor);
-        if (mTextHeight == 0) {
-            mTextHeight = mTextPaint.getTextSize();
-        } else {
-            mTextPaint.setTextSize(mTextHeight);
-        }
-        mPiePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPiePaint.setStyle(Paint.Style.FILL);
-        mPiePaint.setTextSize(mTextHeight);
-
-        mShadowPaint = new Paint(0);
-        mShadowPaint.setColor(0xff101010);
-        mShadowPaint.setMaskFilter(new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL));
+    public void addSampleData() {
+        mCurrentSeries.add(1,2);
+        mCurrentSeries.add(2,3);
+        mCurrentSeries.add(3,2);
+        mCurrentSeries.add(4,5);
+        mCurrentSeries.add(5,3);
+        mCurrentSeries.add(4,6);
     }
+
 }

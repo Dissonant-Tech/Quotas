@@ -1,6 +1,9 @@
 package com.dissonant.quotas;
 
 
+import org.achartengine.ChartFactory;
+import org.achartengine.GraphicalView;
+
 import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.graphics.Outline;
@@ -10,9 +13,10 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
-
 public class MainActivity extends Activity {
 
+    GraphicalView mChart;
+    PieChart mPieChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,20 @@ public class MainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
+        if (mChart == null) {
+            mPieChart = new PieChart();
+            mPieChart.initChart();
+            mPieChart.addSampleData();
+            mChart = ChartFactory.getCubeLineChartView(this, mPieChart.mDataSet, mPieChart.mRenderer, 0.3f);
+            layout.addView(mChart);
+        } else {
+            mChart.repaint();
+        }
     }
 
 }

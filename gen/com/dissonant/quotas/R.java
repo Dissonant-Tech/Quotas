@@ -220,15 +220,16 @@ containing a value of this type.
         public static final int ripple=0x7f020019;
     }
     public static final class id {
-        public static final int action_search=0x7f050008;
-        public static final int action_settings=0x7f050009;
-        public static final int action_websearch=0x7f05000a;
+        public static final int action_search=0x7f050009;
+        public static final int action_settings=0x7f05000a;
+        public static final int action_websearch=0x7f05000b;
         public static final int bottom=0x7f050002;
-        public static final int content_frame=0x7f050006;
-        public static final int drawer_layout=0x7f050005;
+        public static final int chart=0x7f050005;
+        public static final int content_frame=0x7f050007;
+        public static final int drawer_layout=0x7f050006;
         public static final int fab=0x7f050004;
         public static final int left=0x7f050000;
-        public static final int left_drawer=0x7f050007;
+        public static final int left_drawer=0x7f050008;
         public static final int right=0x7f050001;
         public static final int top=0x7f050003;
     }
