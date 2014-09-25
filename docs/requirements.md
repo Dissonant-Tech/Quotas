@@ -65,3 +65,13 @@ System Architecture
         * DB Management UI
         * Daily/Weekly/Monthly Quota Overviews
 
+        * PieChart/DoughnutChart:
+            * Uses Database API to update chart on homepage.
+            * update method.
+            * on Selected/deselected methods.
+
+        * QuotaList:
+            * Uses Database API to update quota list on homepage.
+            * update method.
+            * on Selected/deselected methods.
+
