@@ -40,6 +40,9 @@ public class PieChart {
         mRenderer.setShowLegend(false);
         mRenderer.setZoomEnabled(false);
         mRenderer.setPanEnabled(false);
+
+        mRenderer.setAntialiasing(true);
+        mRenderer.setLabelsTextSize(24.0f);
     }
 
     public int genColor() {
