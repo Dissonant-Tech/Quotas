@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
             mPieChart = new PieChart();
             mPieChart.initChart();
             mPieChart.addSampleData();
-            mChart = ChartFactory.getCubeLineChartView(this, mPieChart.mDataSet, mPieChart.mRenderer, 0.3f);
+            mChart = ChartFactory.getPieChartView(this, mPieChart.mSeries, mPieChart.mRenderer);
             layout.addView(mChart);
         } else {
             mChart.repaint();

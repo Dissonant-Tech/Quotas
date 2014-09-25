@@ -1,34 +1,52 @@
 package com.dissonant.quotas;
 
-import org.achartengine.GraphicalView;
-import org.achartengine.model.XYMultipleSeriesDataset;
-import org.achartengine.model.XYSeries;
-import org.achartengine.renderer.XYMultipleSeriesRenderer;
-import org.achartengine.renderer.XYSeriesRenderer;
+import java.util.Random;
+
+import org.achartengine.model.CategorySeries;
+import org.achartengine.renderer.DefaultRenderer;
+import org.achartengine.renderer.SimpleSeriesRenderer;
+
+import android.graphics.Color;
 
 
 public class PieChart {
-    public GraphicalView mChart;
-    public XYMultipleSeriesDataset mDataSet = new XYMultipleSeriesDataset();
-    public XYMultipleSeriesRenderer mRenderer = new XYMultipleSeriesRenderer();
+    private float []TimeValues;
+    private Color []mColors;
 
-    public XYSeries mCurrentSeries;
-    public XYSeriesRenderer mCurrentRenderer;
+    public CategorySeries mSeries;
+    public DefaultRenderer mRenderer;
 
     public void initChart() {
-        mCurrentSeries = new XYSeries("Sample Data");
-        mDataSet.addSeries(mCurrentSeries);
-        mCurrentRenderer = new XYSeriesRenderer();
-        mRenderer.addSeriesRenderer(mCurrentRenderer);
+        mSeries = new CategorySeries("pie");
+        mRenderer = new DefaultRenderer();
+
     }
 
     public void addSampleData() {
-        mCurrentSeries.add(1,2);
-        mCurrentSeries.add(2,3);
-        mCurrentSeries.add(3,2);
-        mCurrentSeries.add(4,5);
-        mCurrentSeries.add(5,3);
-        mCurrentSeries.add(4,6);
+        int []sampleData = {42, 43, 23, 5};
+        mSeries.add("Test1", sampleData[0]);
+        mSeries.add("Test2", sampleData[1]);
+        mSeries.add("Test3", sampleData[2]);
+        mSeries.add("Test4", sampleData[3]);
+        
+        for (int data : sampleData) {
+            SimpleSeriesRenderer r = new SimpleSeriesRenderer();
+            r.setDisplayChartValues(true);
+            r.setDisplayBoundingPoints(true);
+            mRenderer.addSeriesRenderer(r);
+        }
+    }
+
+    public void genColors() {
+        Random mRand = new Random();
+
+        for (int i = 0; i < this.TimeValues.length; ++i) {
+            
+        }
+    }
+
+    public void updateData() {
+        this.genColors();
     }
 
 }
