@@ -1,7 +1,0 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/action_websearch"
-        android:icon="@drawable/ic_action_search"
-        android:title="@string/action_websearch"
-        android:showAsAction="ifRoom|withText" />
-</menu>
-<!-- From: file:/home/dissonance/code/android-studio/Quotas/app/src/main/res/menu/navigation_drawer.xml -->
