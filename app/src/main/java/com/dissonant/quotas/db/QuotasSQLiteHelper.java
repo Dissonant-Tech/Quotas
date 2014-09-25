@@ -20,12 +20,12 @@ public class QuotasSQLiteHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     //Database Creation
-    private static final DATABASE_CREATE = "create table "
+    private static final String DATABASE_CREATE = "create table "
         + TABLE_QUOTAS + "(" + COLUMN_ID
         + " integer primary key autoincrement, " + COLUMN_QUOTA_ID;
 
     public QuotasSQLiteHelper(Context context) {
-        super(content, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
