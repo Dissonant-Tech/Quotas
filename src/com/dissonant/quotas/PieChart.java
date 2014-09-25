@@ -12,6 +12,7 @@ import android.graphics.Color;
 public class PieChart {
     private float []TimeValues;
     private Color []mColors;
+    private Random rand = new Random();
 
     public CategorySeries mSeries;
     public DefaultRenderer mRenderer;
@@ -31,22 +32,16 @@ public class PieChart {
         
         for (int data : sampleData) {
             SimpleSeriesRenderer r = new SimpleSeriesRenderer();
+            r.setColor(genColor());
             r.setDisplayChartValues(true);
             r.setDisplayBoundingPoints(true);
             mRenderer.addSeriesRenderer(r);
         }
+        mRenderer.setShowLegend(false);
     }
 
-    public void genColors() {
-        Random mRand = new Random();
-
-        for (int i = 0; i < this.TimeValues.length; ++i) {
-            
-        }
-    }
-
-    public void updateData() {
-        this.genColors();
+    public int genColor() {
+        return Color.argb(255, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
     }
 
 }
