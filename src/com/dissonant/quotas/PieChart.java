@@ -38,6 +38,8 @@ public class PieChart {
             mRenderer.addSeriesRenderer(r);
         }
         mRenderer.setShowLegend(false);
+        mRenderer.setZoomEnabled(false);
+        mRenderer.setPanEnabled(false);
     }
 
     public int genColor() {
