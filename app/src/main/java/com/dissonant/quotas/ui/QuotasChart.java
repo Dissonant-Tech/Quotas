@@ -30,6 +30,9 @@ public class QuotasChart {
         this.repaint();
     }
 
+    /*
+     * Repaints the view. Needed after re-opening app or updating data
+     */
     public void repaint() {
         mView.repaint();
     }
