@@ -1,5 +1,7 @@
 package com.dissonant.quotas;
 
+import org.achartengine.ChartFactory;
+import org.achartengine.GraphicalView;
 
 import android.animation.LayoutTransition;
 import android.app.Activity;
@@ -10,8 +12,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
-import org.achartengine.ChartFactory;
-import org.achartengine.GraphicalView;
+import com.dissonant.quotas.R;
 
 public class MainActivity extends Activity {
 
