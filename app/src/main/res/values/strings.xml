@@ -13,7 +13,11 @@
     <string name="pref_notify_summ">Quotas will notify you when you\'re behind on your quotas, or when an opportunity to complete one arises</string>
 
     <string name="pref_colors_title">Color Settings</string>
+    <string name="pref_color_default">Use Default colors</string>
+    <string name="pref_color_default_summ">Quotas Chart will use default app colors</string>
     <string name="pref_color_rand">Use Random Colors</string>
     <string name="pref_color_rand_summ">Quotas doughnut graph will use randomly generated colors</string>
+
+    <string name="pref_color_screen_title">Edit Colors</string>
 
 </resources>
