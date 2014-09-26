@@ -29,7 +29,7 @@ public class PieChart {
         mSeries.add("Test2", sampleData[1]);
         mSeries.add("Test3", sampleData[2]);
         mSeries.add("Test4", sampleData[3]);
-        
+
         for (int data : sampleData) {
             SimpleSeriesRenderer r = new SimpleSeriesRenderer();
             r.setColor(genColor());
