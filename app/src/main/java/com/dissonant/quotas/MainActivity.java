@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Outline;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -14,7 +15,6 @@ import com.dissonant.quotas.settings.SettingsActivity;
 import com.dissonant.quotas.ui.QuotasChart;
 
 public class MainActivity extends Activity {
-
     QuotasChart mQuotasChart;
 
     @Override
@@ -27,6 +27,9 @@ public class MainActivity extends Activity {
         Outline mOutline = new Outline();
         mOutline.setOval(0, 0, size, size);
         findViewById(R.id.fab).setOutline(mOutline);
+
+        // Load default preferences
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
     }
 
 

@@ -12,28 +12,4 @@
                 android:defaultValue="true"
             />
     </PreferenceCategory>
-    <PreferenceCategory
-            android:title="@string/pref_colors_title"
-            android:key="pref_colors_title"
-            >
-        <CheckBoxPreference
-                android:key="pref_color_default"
-                android:title="@string/pref_color_default"
-                android:summary="@string/pref_color_default_summ"
-                android:defaultValue="true"
-            />
-        <CheckBoxPreference
-                android:key="pref_color_rand"
-                android:title="@string/pref_color_rand"
-                android:summary="@string/pref_color_rand_summ"
-                android:defaultValue="false"
-                android:dependency="pref_color_default"
-            />
-        <PreferenceScreen
-                android:key="pref_color_screen"
-                android:title="@string/pref_color_screen_title"
-                android:persistent="true">
-
-        </PreferenceScreen>
-    </PreferenceCategory>
 </PreferenceScreen>
