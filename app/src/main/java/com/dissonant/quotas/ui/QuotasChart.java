@@ -8,7 +8,10 @@ import org.achartengine.model.MultipleCategorySeries;
 import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
 
+import com.dissonant.quotas.R;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 
 public class QuotasChart {
@@ -19,7 +22,7 @@ public class QuotasChart {
     public void init(Context context) {
         mSeries = new MultipleCategorySeries("QuotasChart");
         mRenderer = new DefaultRenderer();
-        
+
         mView = ChartFactory.getDoughnutChartView(context, mSeries, mRenderer);
     }
 
@@ -67,7 +70,7 @@ public class QuotasChart {
 
         this.updateData();
     }
-    
+
     public int genColor() {
         return Color.argb(255, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
     }

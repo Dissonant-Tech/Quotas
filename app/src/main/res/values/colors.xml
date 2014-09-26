@@ -141,4 +141,13 @@
  <color name="DarkBlue">#00008B</color>
  <color name="Navy">#000080</color>
  <color name="Black">#000000</color>
+
+ <color name="Cobalt">#154BA6</color>
+ <color name="Dark_Purple">#741274</color>
+ <color name="Sunflower">#E3C30B</color>
+ <color name="Harley_Davidson_Orange">#BE2E01</color>
+ <color name="Summer_Sky">#3FA6E8</color>
+ <color name="Apple_Green">#8DB103</color>
+ <color name="Light_Goldenrod">#EEE083</color>
+ <color name="Burning_Sand">#C97C64</color>
 </resources>

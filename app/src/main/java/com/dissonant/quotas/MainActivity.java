@@ -13,6 +13,7 @@ import android.widget.SearchView;
 
 import com.dissonant.quotas.settings.SettingsActivity;
 import com.dissonant.quotas.ui.QuotasChart;
+import com.dissonant.quotas.R;
 
 public class MainActivity extends Activity {
     QuotasChart mQuotasChart;
