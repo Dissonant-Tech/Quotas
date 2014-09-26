@@ -2,6 +2,7 @@ package com.dissonant.quotas;
 
 import android.animation.LayoutTransition;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Outline;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,8 +10,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
-import com.dissonant.quotas.R;
-
+import com.dissonant.quotas.settings.SettingsActivity;
 import com.dissonant.quotas.ui.QuotasChart;
 
 public class MainActivity extends Activity {
@@ -51,7 +51,8 @@ public class MainActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            return true;
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -68,5 +69,6 @@ public class MainActivity extends Activity {
             mQuotasChart.repaint();
         }
     }
+
 
 }

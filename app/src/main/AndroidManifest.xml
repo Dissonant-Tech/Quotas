@@ -22,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+                android:name="com.dissonant.quotas.settings.SettingsActivity"
+                android:label="@string/settings_label" 
+                android:parentActivityName="com.dissonant.quotas.MainActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.dissonant.quotas.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
