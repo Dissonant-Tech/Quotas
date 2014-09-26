@@ -16,23 +16,18 @@ public class QuotasChart {
     private DefaultRenderer mRenderer;
     private MultipleCategorySeries mSeries;
 
-    public void initChart() {
+    public void init(Context context) {
         mSeries = new MultipleCategorySeries("QuotasChart");
         mRenderer = new DefaultRenderer();
+        
+        mView = ChartFactory.getDoughnutChartView(context, mSeries, mRenderer);
     }
 
     /*
      * Updates Chart after reloading information from the database
      */
     public void updateData() {
-
-    }
-
-    /*
-     * Initialize the view
-     */
-    public void initView(Context context) {
-        mView = ChartFactory.getDoughnutChartView(context, mSeries, mRenderer);
+        this.repaint();
     }
 
     public void repaint() {
@@ -66,6 +61,8 @@ public class QuotasChart {
 
         mRenderer.setAntialiasing(true);
         mRenderer.setLabelsTextSize(24.0f);
+
+        this.updateData();
     }
     
     public int genColor() {

@@ -1,8 +1,5 @@
 package com.dissonant.quotas;
 
-import org.achartengine.ChartFactory;
-import org.achartengine.GraphicalView;
-
 import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.graphics.Outline;
@@ -14,10 +11,11 @@ import android.widget.SearchView;
 
 import com.dissonant.quotas.R;
 
+import com.dissonant.quotas.ui.QuotasChart;
+
 public class MainActivity extends Activity {
 
-    GraphicalView mChart;
-    PieChart mPieChart;
+    QuotasChart mQuotasChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +59,13 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
-        if (mChart == null) {
-            mPieChart = new PieChart();
-            mPieChart.initChart();
-            mPieChart.addSampleData();
-            mChart = ChartFactory.getPieChartView(this, mPieChart.mSeries, mPieChart.mRenderer);
-            layout.addView(mChart);
+        if (mQuotasChart == null) {
+            mQuotasChart = new QuotasChart();
+            mQuotasChart.init(this);
+            mQuotasChart.useSampleData();
+            layout.addView(mQuotasChart.getView());
         } else {
-            mChart.repaint();
+            mQuotasChart.repaint();
         }
     }
 
