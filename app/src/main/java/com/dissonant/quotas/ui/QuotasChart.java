@@ -69,15 +69,16 @@ public class QuotasChart {
         mSeries.add(emptyTitle, emptyData);
 
         SimpleSeriesRenderer r = new SimpleSeriesRenderer();
-        r.setColor(R.color.WhiteSmoke);
+        r.setColor(context.getResources().getColor(R.color.LightGrey));
         r.setDisplayChartValues(false);
         
         mRenderer.addSeriesRenderer(r);
-        mRenderer.setChartTitle(context.getResources().getText(R.string.chart_empty).toString());
+
+        mRenderer.setChartTitle(
+                context.getResources().getText(R.string.chart_empty).toString());
         mRenderer.setChartTitleTextSize(72f);
 
         mRenderer.setShowLegend(false);
-        //mRenderer.setShowLabels(false);
         mRenderer.setZoomEnabled(false);
         mRenderer.setPanEnabled(false);
         mRenderer.setAntialiasing(true);
