@@ -65,14 +65,17 @@ public class MainActivity extends Activity {
         super.onResume();
         LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
         if (mQuotasChart == null) {
-            mQuotasChart = new QuotasChart();
-            mQuotasChart.init(this);
-            mQuotasChart.useSampleData();
-            layout.addView(mQuotasChart.getView());
+            populateView();
         } else {
             mQuotasChart.repaint();
         }
     }
 
+    public void populateView() {
+        mQuotasChart = new QuotasChart();
+        mQuotasChart.init(this);
+        mQuotasChart.useSampleData();
+        layout.addView(mQuotasChart.getView());
+    }
 
 }
