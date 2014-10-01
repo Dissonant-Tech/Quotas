@@ -18,6 +18,8 @@ import com.dissonant.quotas.R;
 import com.dissonant.quotas.db.QuotaModel;
 
 public class MainActivity extends Activity {
+    boolean resuming = false;
+
     QuotasChart mQuotasChart;
     QuotaModel []models;
 
@@ -66,10 +68,11 @@ public class MainActivity extends Activity {
 
     protected void onResume() {
         super.onResume();
-        if (mQuotasChart == null) {
+        if (!resuming) {
             populateView();
+            resuming = true;
         } else {
-            mQuotasChart.repaint();
+            repaintView();
         }
     }
 
@@ -81,4 +84,7 @@ public class MainActivity extends Activity {
         layout.addView(mQuotasChart.getView());
     }
 
+    public void repaintView() {
+        mQuotasChart.repaint();
+    }
 }
