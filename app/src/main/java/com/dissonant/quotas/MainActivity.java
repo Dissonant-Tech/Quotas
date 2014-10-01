@@ -15,8 +15,11 @@ import com.dissonant.quotas.settings.SettingsActivity;
 import com.dissonant.quotas.ui.QuotasChart;
 import com.dissonant.quotas.R;
 
+import com.dissonant.quotas.db.QuotaModel;
+
 public class MainActivity extends Activity {
     QuotasChart mQuotasChart;
+    QuotaModel []models;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +66,6 @@ public class MainActivity extends Activity {
 
     protected void onResume() {
         super.onResume();
-        LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
         if (mQuotasChart == null) {
             populateView();
         } else {
@@ -72,9 +74,10 @@ public class MainActivity extends Activity {
     }
 
     public void populateView() {
+        LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
         mQuotasChart = new QuotasChart();
         mQuotasChart.init(this);
-        mQuotasChart.useSampleData();
+        mQuotasChart.setData(models);
         layout.addView(mQuotasChart.getView());
     }
 
