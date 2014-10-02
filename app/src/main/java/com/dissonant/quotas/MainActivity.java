@@ -8,16 +8,18 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
+import com.dissonant.quotas.db.QuotaModel;
 import com.dissonant.quotas.settings.SettingsActivity;
 import com.dissonant.quotas.ui.QuotasChart;
-import com.dissonant.quotas.R;
 
-import com.dissonant.quotas.db.QuotaModel;
-
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnClickListener {
     boolean resuming = false;
 
     QuotasChart mQuotasChart;
@@ -33,6 +35,9 @@ public class MainActivity extends Activity {
         Outline mOutline = new Outline();
         mOutline.setOval(0, 0, size, size);
         findViewById(R.id.fab).setOutline(mOutline);
+
+        ImageButton button = (ImageButton)findViewById(R.id.fab);
+        button.setOnClickListener(this);
 
         // Load default preferences
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
@@ -64,6 +69,11 @@ public class MainActivity extends Activity {
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClick(View v) {
+        Intent i = new Intent(this, EditActivity.class);
+        startActivity(i);
     }
 
     protected void onResume() {

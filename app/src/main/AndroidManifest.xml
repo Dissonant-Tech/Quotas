@@ -13,24 +13,44 @@
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name"
             android:theme="@style/QuotasTheme" >
+
+        <!-- MainActivity -->
         <activity
                 android:name="com.dissonant.quotas.MainActivity"
-                android:label="@string/app_name" >
+                android:label="@string/app_name"
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- SettingsActivity -->
         <activity
                 android:name="com.dissonant.quotas.settings.SettingsActivity"
-                android:label="@string/settings_label" 
+                android:label="@string/settings_label"
                 android:parentActivityName="com.dissonant.quotas.MainActivity"
-                android:theme="@style/QuotasSettingsTheme">
+                android:theme="@style/QuotasSettingsTheme"
+                >
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.dissonant.quotas.MainActivity" />
+                    android:value="com.dissonant.quotas.MainActivity"
+                />
         </activity>
-    </application>
 
+        <!-- EditActivity -->
+        <activity
+                android:name="com.dissonant.quotas.EditActivity"
+                android:label="@string/edit_label"
+                android:parentActivityName="com.dissonant.quotas.MainActivity"
+                android:theme="@style/QuotasTheme"
+                >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.dissonant.quotas.MainActivity"
+                />
+        </activity>
+
+    </application>
 </manifest>

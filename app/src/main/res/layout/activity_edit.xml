@@ -1,0 +1,31 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.dissonant.quotas.EditActivity" >
+
+    <LinearLayout
+            android:id="@+id/edit_quota"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        <EditText
+                android:id="@+id/edit_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_title_hint"
+                android:inputType="textCapWords"
+            />
+        <EditText
+                android:id="@+id/edit_description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_description_hint"
+                android:inputType="textMultiLine"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>
