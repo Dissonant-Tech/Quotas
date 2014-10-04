@@ -1,5 +1,8 @@
 package com.dissonant.quotas.db;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -68,7 +71,7 @@ public class QuotasSQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void getQuota(int id) {
+    public QuotaModel getQuota(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_QUOTAS, COLUMNS, " id = ?", 
@@ -81,5 +84,53 @@ public class QuotasSQLiteHelper extends SQLiteOpenHelper {
         QuotaModel quota = new QuotaModel(cursor.getInt(0), 
                 cursor.getString(1), cursor.getString(2), cursor.getString(3), 
                 cursor.getString(4), cursor.getString(5), cursor.getInt(6));
+
+        Log.d("getQuota("+id+")", quota.toString());
+        return quota;
+    }
+
+    public List<QuotaModel> getAllQuotas() {
+        List<QuotaModel> quotas = new LinkedList<QuotaModel>();
+
+        String query = "SELECT * FROM " + TABLE_QUOTAS;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        QuotaModel quota = null;
+        if (cursor.moveToFirst()) {
+            do {
+                quota = getQuota(cursor.getInt(0));
+
+                quotas.add(quota);
+            } while (cursor.moveToNext());
+        }
+        return quotas;
+    }
+
+    public int updateQuota(QuotaModel quota) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("title", quota.getTitle());
+        values.put("description", quota.getDescription());
+
+        int i = db.update(TABLE_QUOTAS,
+                values,
+                COLUMN_ID+" = ?",
+                new String[] {String.valueOf(quota.getId())});
+
+        db.close();
+        return i;
+    }
+
+    public void deleteQuota(QuotaModel quota) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_QUOTAS,
+                COLUMN_ID+" = ?",
+                new String[] {String.valueOf(quota.getId())});
+
+        db.close();
     }
 }
