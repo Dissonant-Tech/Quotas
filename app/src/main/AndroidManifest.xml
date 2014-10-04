@@ -44,7 +44,7 @@
                 android:name="com.dissonant.quotas.EditActivity"
                 android:label="@string/edit_label"
                 android:parentActivityName="com.dissonant.quotas.MainActivity"
-                android:theme="@style/QuotasTheme"
+                android:theme="@style/QuotasEditTheme"
                 >
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
