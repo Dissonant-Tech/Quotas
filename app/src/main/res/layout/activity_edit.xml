@@ -3,13 +3,16 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.dissonant.quotas.EditActivity" >
+        tools:context="com.dissonant.quotas.EditActivity" 
+        android:elevation="5dp"
+        >
 
     <LinearLayout
             android:id="@+id/edit_quota"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:elevation="5dp"
             >
         <EditText
                 android:id="@+id/edit_title"

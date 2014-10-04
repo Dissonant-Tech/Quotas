@@ -7,6 +7,9 @@
         <item name="android:colorPrimaryDark">@color/SteelBlueDark</item>
         <item name="android:textColorPrimary">@color/White</item>
         <item name="android:windowContentTransitions">True</item>
+        <item name="android:windowEnterTransition">@transition/slide</item>
+        <item name="android:windowExitTransition">@transition/slide</item>
+
     </style>
 
     <!-- Quotas SettingsActivity Style -->

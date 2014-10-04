@@ -2,6 +2,7 @@ package com.dissonant.quotas;
 
 import android.animation.LayoutTransition;
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Outline;
 import android.os.Bundle;
@@ -30,14 +31,8 @@ public class MainActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // FAB Outline
-        int size = getResources().getDimensionPixelSize(R.dimen.fab_size);
-        Outline mOutline = new Outline();
-        mOutline.setOval(0, 0, size, size);
-        findViewById(R.id.fab).setOutline(mOutline);
-
-        ImageButton button = (ImageButton)findViewById(R.id.fab);
-        button.setOnClickListener(this);
+        //init FAB, as well as set onClick
+        createView();
 
         // Load default preferences
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
@@ -84,6 +79,25 @@ public class MainActivity extends Activity implements OnClickListener {
         } else {
             repaintView();
         }
+    }
+
+    public void createView() {
+        // FAB Outline
+        int size = getResources().getDimensionPixelSize(R.dimen.fab_size);
+        Outline mOutline = new Outline();
+        mOutline.setOval(0, 0, size, size);
+        findViewById(R.id.fab).setOutline(mOutline);
+
+        ImageButton button = (ImageButton)findViewById(R.id.fab);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, EditActivity.class);
+                //Bundle bundleAnim = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.right_slide_in, R.anim.none).toBundle();
+                //startActivity(i, bundleAnim);
+                startActivity(i);
+            }
+        });
     }
 
     public void populateView() {
