@@ -27,7 +27,8 @@
 
     <string name="chart_empty">There are no Quotas</string>
 
-    <string name="edit_title_hint">What\'s this Quota for?</string>
+    <string name="edit_title_text">Name</string>
+    <string name="edit_title_hint">i.e. Run, Study, etc...</string>
     <string name="edit_description_hint">Describe this Quota in more detail</string>
 
 </resources>
