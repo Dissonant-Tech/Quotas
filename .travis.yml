@@ -1,8 +1,9 @@
 language: android
 android:
-    - platform-tools
-    - tools
-    - android-20
-    - extra
+    components:
+        - platform-tools
+        - tools
+        - android-20
+        - extra
 
 script: "gradle assemble"
