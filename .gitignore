@@ -58,3 +58,4 @@ app/build
 build/
 /bin/
 workbench.xmi
+.idea

@@ -1,5 +1,7 @@
 package com.dissonant.quotas;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.Calendar;
 
 import android.app.Activity;
@@ -30,6 +32,9 @@ public class EditActivity extends Activity {
     private Button eTimeButton;
     private Spinner colorSpinner;
 
+    private Calendar mStartTime;
+    private Calendar mEndTime;
+
     private Integer[] colorArray;
 
     @Override
@@ -45,8 +50,8 @@ public class EditActivity extends Activity {
 
         // Create onClickListener for buttons, load colorArray spinner
         addButtonListeners();
-        setupColorSpinner();
-        setupDurationPicker();
+        initColorSpinner();
+        initDurationPicker();
     }
 
     @Override
@@ -82,11 +87,16 @@ public class EditActivity extends Activity {
                 if (v.getId() == R.id.edit_start_time) {
                     Button startTimeButton = (Button) findViewById(R.id.edit_start_time);
                     startTimeButton.setText(getTimeAsString(hourOfDay, minute));
+                    mStartTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                    mStartTime.set(Calendar.MINUTE, minute);
                 }
                 else if (v.getId() == R.id.edit_end_time) {
                     Button endTimeButton = (Button) findViewById(R.id.edit_end_time);
                     endTimeButton.setText(getTimeAsString(hourOfDay, minute));
+                    mEndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                    mEndTime.set(Calendar.MINUTE, minute);
                 }
+                genDefaultDuration();
             }
     }
 
@@ -155,7 +165,7 @@ public class EditActivity extends Activity {
         }
     }
 
-    public void setupColorSpinner() {
+    public void initColorSpinner() {
         colorSpinner = (Spinner) findViewById(R.id.edit_color_spinner);
         colorSpinner.setAdapter(new ColorSpinnerAdapter(this, R.layout.color_spinner, colorArray));
     }
@@ -192,7 +202,7 @@ public class EditActivity extends Activity {
         return integerArray;
     }
 
-    public void setupDurationPicker() {
+    public void initDurationPicker() {
         DoughnutSelector mDoughnutSelector = (DoughnutSelector) findViewById(R.id.doughnutSelector);
         mDoughnutSelector.setColor(Color.CYAN);
         mDoughnutSelector.setFormatDigits(0);
@@ -202,5 +212,14 @@ public class EditActivity extends Activity {
         mDoughnutSelector.setTouchEnabled(true);
         mDoughnutSelector.setElevation(1);
         mDoughnutSelector.setmDoubleTapEnabled(false);
+    }
+
+    public void genDefaultDuration() {
+        if (mStartTime.isSet(Calendar.HOUR_OF_DAY) 
+                && mEndTime.isSet(Calendar.HOUR_OF_DAY)) {
+            long milliSeconds = mStartTime.getTimeInMillis() - mEndTime.getTimeInMillis();
+            long hours = milliSeconds/(1000*60*60);
+            long mins = milliSeconds%(1000*60*60);
+        }
     }
 }
