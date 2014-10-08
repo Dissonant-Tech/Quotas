@@ -1,6 +1,8 @@
-language: java
-jdk:
-    - oraclejdk7
-    - openjdk7
+language: android
+android:
+    - platform-tools
+    - tools
+    - android-20
+    - extra
 
 script: "gradle assemble"
