@@ -37,6 +37,7 @@ Software Requirements
     3. Delete quotas
     4. List all quotas
     5. Organize quotas
+    6. Notifications on Quota Completion/Overdue
 
 
 System Architecture
@@ -56,7 +57,15 @@ System Architecture
 
 **Main Classes and interfaces:**
 
-    * Quota Class
+    * QuotaModel Class
+        * Fields:
+            * Id
+            * Title
+            * Description/Notes
+            * Start Time
+            * End Time
+            * Duration/Length Time
+            * Repeats (i.e. Daily, Monthlu, Mon-Thur, etc...)
 
     * Database API
 
@@ -65,7 +74,7 @@ System Architecture
         * DB Management UI
         * Daily/Weekly/Monthly Quota Overviews
 
-        * PieChart/DoughnutChart:
+        * DoughnutChart:
             * Uses Database API to update chart on homepage.
             * update method.
             * on Selected/deselected methods.
