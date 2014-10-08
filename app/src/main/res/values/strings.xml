@@ -11,6 +11,7 @@
     <string name="action_search">search</string>
     <string name="action_websearch">search</string>
 
+    <!-- Settings and Preferences -->
     <string name="pref_notifications_title">Notification Settings</string>
     <string name="pref_notify">Enable Notifications</string>
     <string name="pref_notify_summ">Quotas will notify you when you\'re behind on your quotas, or when an opportunity to complete one arises</string>
@@ -27,8 +28,17 @@
 
     <string name="chart_empty">There are no Quotas</string>
 
-    <string name="edit_title_text">Name</string>
-    <string name="edit_title_hint">i.e. Run, Study, etc...</string>
+    <!-- EditActivity -->
+    <string name="edit_title_hint">Name</string>
+    <string name="edit_description_title">Description</string>
     <string name="edit_description_hint">Describe this Quota in more detail</string>
+
+    <string name="edit_times_title">Times</string>
+
+    <string name="edit_color_text">Color:</string>
+    <string name="edit_start_time_text">Between </string>
+    <string name="edit_start_time_time"> --:-- AM </string>
+    <string name="edit_end_time_text"> and </string>
+    <string name="edit_end_time_time"> --:-- AM </string>
 
 </resources>

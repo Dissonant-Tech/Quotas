@@ -16,16 +16,19 @@ public class QuotasSQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ID = "_id";
 
     public static final String COLUMN_TITLE = "title";
-    public static final String COLUMN_LENGTH_TIME = "length_time";
-    public static final String COLUMN_START_TIME = "start_time";
-    public static final String COLUMN_END_TIME = "end_time";
     public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_REPEAT = "repeat";
+    public static final String COLUMN_STARTTIME = "start_time";
+    public static final String COLUMN_ENDTIME = "end_time";
+    public static final String COLUMN_ISACTIVE = "isActive";
 
     private static final String DATABASE_NAME = "quotas.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String[] COLUMNS = {COLUMN_ID, COLUMN_TITLE,
-        COLUMN_DESCRIPTION, COLUMN_START_TIME, COLUMN_END_TIME};
+        COLUMN_DESCRIPTION, COLUMN_REPEAT, COLUMN_STARTTIME, COLUMN_ENDTIME,
+        COLUMN_ISACTIVE
+    };
 
     //Database Creation
     private static final String DATABASE_CREATE = "create table "
@@ -33,9 +36,10 @@ public class QuotasSQLiteHelper extends SQLiteOpenHelper {
         + " integer primary key autoincrement, "
         + " text not null " + COLUMN_TITLE 
         + " text not null " + COLUMN_DESCRIPTION
-        + " text not null " + COLUMN_LENGTH_TIME
-        + " text not null " + COLUMN_START_TIME
-        + " text not null " + COLUMN_END_TIME;
+        + " integer default 0 " + COLUMN_REPEAT
+        + " text not null " + COLUMN_STARTTIME
+        + " text not null " + COLUMN_ENDTIME
+        + " integer default 0 " + COLUMN_ISACTIVE;
 
     public QuotasSQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -63,9 +67,10 @@ public class QuotasSQLiteHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_TITLE, quota.getTitle());
         values.put(COLUMN_DESCRIPTION, quota.getDescription());
-        values.put(COLUMN_LENGTH_TIME, quota.getLengthTime().toString());
-        values.put(COLUMN_START_TIME, quota.getStartTime().toString());
-        values.put(COLUMN_END_TIME, quota.getEndTime().toString());
+        values.put(COLUMN_REPEAT, quota.getRepeat());
+        values.put(COLUMN_STARTTIME, quota.getStartTime().toString());
+        values.put(COLUMN_ENDTIME, quota.getEndTime().toString());
+        values.put(COLUMN_ISACTIVE, quota.getIsActive());
 
         db.insert(TABLE_QUOTAS, null, values);
         db.close();
@@ -82,7 +87,7 @@ public class QuotasSQLiteHelper extends SQLiteOpenHelper {
         }
 
         QuotaModel quota = new QuotaModel(cursor.getInt(0), 
-                cursor.getString(1), cursor.getString(2), cursor.getString(3), 
+                cursor.getString(1), cursor.getString(2), cursor.getInt(3), 
                 cursor.getString(4), cursor.getString(5), cursor.getInt(6));
 
         Log.d("getQuota("+id+")", quota.toString());

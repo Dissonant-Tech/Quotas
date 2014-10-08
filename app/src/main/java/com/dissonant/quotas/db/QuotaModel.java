@@ -1,5 +1,6 @@
 package com.dissonant.quotas.db;
 
+import com.dissonant.quotas.db.DaysEnum;
 import java.sql.Time;
 
 public class QuotaModel {
@@ -7,18 +8,23 @@ public class QuotaModel {
     private int id;
     private String title;
     private String description;
-    private Time lengthTime;
+    private boolean repeat;
     private Time startTime;
     private Time endTime;
     private boolean isActive;
+    private DaysEnum[] repeatDays;
+
+    public QuotaModel() {
+
+    }
 
     public QuotaModel(int id, String title, String description, 
-            Time lengthTime, Time startTime, Time endTime, boolean isActive) { 
+            boolean repeat, Time startTime, Time endTime, boolean isActive) { 
 
         this.id = id;
         this.title = title;
         this.description = description;
-        this.lengthTime = lengthTime;
+        this.repeat = repeat;
         this.startTime = startTime;
         this.endTime = endTime;
         this.isActive = isActive;
@@ -28,12 +34,12 @@ public class QuotaModel {
      * Constructor for SQL 
      */
     public QuotaModel(int id, String title, String description, 
-            String lengthTime, String startTime, String endTime, int isActive) { 
+            int repeat, String startTime, String endTime, int isActive) { 
 
         this.id = id;
         this.title = title;
         this.description = description;
-        this.setLengthTime(lengthTime);
+        this.setRepeat(repeat);
         this.setStartTime(startTime);
         this.setEndTime(endTime);
         this.setIsActive(isActive);
@@ -77,6 +83,20 @@ public class QuotaModel {
         return isActive;
     }
 
+    /**
+     * @return the repeatDays
+     */
+    public DaysEnum[] getRepeatDays() {
+        return repeatDays;
+    }
+
+    /**
+     * @param repeatDays the repeatDays to set
+     */
+    public void setRepeatDays(DaysEnum[] repeatDays) {
+        this.repeatDays = repeatDays;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -85,17 +105,20 @@ public class QuotaModel {
         return description;
     }
     
-    public void setLengthTime(String lengthTime) {
-        Time t = Time.valueOf(lengthTime);
-        this.lengthTime = t;
+    public void setRepeat(int repeat) {
+        if (repeat >= 1) {
+            this.repeat = true;
+        } else {
+            this.repeat = false;
+        }
     }
 
-    public void setLengthTime(Time lengthTime) {
-        this.lengthTime = lengthTime;
+    public void setRepeat(boolean repeat) {
+        this.repeat = repeat;
     }
 
-    public Time getLengthTime() {    
-        return lengthTime;
+    public boolean getRepeat() {    
+        return repeat;
     }
 
     public void setStartTime(String startTime) {

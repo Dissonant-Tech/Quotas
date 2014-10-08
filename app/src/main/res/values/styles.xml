@@ -17,4 +17,41 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <style name="EditDivider">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">2dip</item>
+        <item name="android:layout_marginRight">8dip</item>
+        <item name="android:layout_marginLeft">8dip</item>
+        <item name="android:layout_marginBottom">8dip</item>
+        <item name="android:background">@color/DimGray</item>
+    </style>
+
+    <style name="EditDividerTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16dip</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">16dip</item>
+    </style>
+
+    <style name="LinearLayout">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TimeLinearLayout">
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="LabelText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/Gray</item>
+        <item name="android:textSize">16dip</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

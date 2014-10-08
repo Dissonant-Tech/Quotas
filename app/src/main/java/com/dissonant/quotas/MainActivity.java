@@ -17,8 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.SearchView;
 
 import com.dissonant.quotas.db.QuotaModel;
-import com.dissonant.quotas.settings.SettingsActivity;
 import com.dissonant.quotas.ui.QuotasChart;
+import com.dissonant.quotas.settings.SettingsActivity;
 
 public class MainActivity extends Activity implements OnClickListener {
     boolean resuming = false;
@@ -93,6 +93,7 @@ public class MainActivity extends Activity implements OnClickListener {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, EditActivity.class);
+                // Old style animation
                 //Bundle bundleAnim = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.right_slide_in, R.anim.none).toBundle();
                 //startActivity(i, bundleAnim);
                 startActivity(i);
