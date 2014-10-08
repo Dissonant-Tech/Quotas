@@ -77,7 +77,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/edit_start_time_time"
-                    android:onClick="showDatePickerDialog"
                     style="?android:attr/borderlessButtonStyle"
                 />
             >
@@ -90,7 +89,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/edit_end_time_time"
-                    android:onClick="showDatePickerDialog"
                     style="?android:attr/borderlessButtonStyle"
                 />
         </LinearLayout>
