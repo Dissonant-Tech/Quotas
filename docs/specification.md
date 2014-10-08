@@ -57,30 +57,45 @@ System Architecture
 
 **Main Classes and interfaces:**
 
-    * QuotaModel Class
-        * Fields:
-            * Id
-            * Title
-            * Description/Notes
-            * Start Time
-            * End Time
-            * Duration/Length Time
-            * Repeats (i.e. Daily, Monthlu, Mon-Thur, etc...)
+QuotaModel Class
+  * Fields:
+      * Id
+      * Title
+      * Description/Notes
+      * Start Time
+      * End Time
+      * Duration/Length Time
+      * Repeats (i.e. Daily, Monthlu, Mon-Thur, etc...)
 
-    * Database API
+Database API
 
-    * UI Classes:
-        * Quota UI
-        * DB Management UI
-        * Daily/Weekly/Monthly Quota Overviews
+UI Classes:
+  * Quota UI
+  * DB Management UI
+  * Daily/Weekly/Monthly Quota Overviews
 
-        * DoughnutChart:
-            * Uses Database API to update chart on homepage.
-            * update method.
-            * on Selected/deselected methods.
+  * DoughnutChart:
+      * Uses Database API to update chart on homepage.
+      * update method.
+      * on Selected/deselected methods.
 
-        * QuotaList:
-            * Uses Database API to update quota list on homepage.
-            * update method.
-            * on Selected/deselected methods.
+  * QuotaList:
+      * Uses Database API to update quota list on homepage.
+      * update method.
+      * on Selected/deselected methods.
 
+
+General Overview
+================
+
+```
+SQLHelper ----> MainActivity -----------> QuotasChart
+      \        /            \           \
+       \      /              \           \
+      EditActivity    SettingsActivity  QuotasList
+                                |
+                                |
+                                V
+                            Preferences
+
+```
