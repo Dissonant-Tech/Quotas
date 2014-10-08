@@ -95,7 +95,31 @@
                     style="?android:attr/borderlessButtonStyle"
                 />
         </LinearLayout>
+        <LinearLayout
+                style="@style/LinearLayout"
+                android:orientation="horizontal"
+                android:layout_marginLeft="16dip"
+                android:layout_marginRight="16dip"
+                android:layout_centerInParent="True"
+                >
+            <TextView
+                    style="@style/LabelText"
+                    android:text="@string/edit_duration_text"
+                />
+            <Button
+                    android:id="@+id/edit_duration_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit_duration_time"
+                    style="?android:attr/borderlessButtonStyle"
+                />
+        </LinearLayout>
 
+        <com.dissonant.quotas.ui.CircleDisplay
+                android:id="@+id/circleDisplay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+            />
 
     </LinearLayout>
 

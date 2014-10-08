@@ -2,11 +2,14 @@ package com.dissonant.quotas;
 
 import java.util.Calendar;
 
+import com.dissonant.quotas.ui.CircleDisplay;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.format.DateFormat;
@@ -35,13 +38,16 @@ public class EditActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
+        // Parse int[] resource to Integer[]
         colorArray = getIntegerArray(getResources().getIntArray(R.array.default_color_array));
 
         // Load default preferences
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
+        // Create onClickListener for buttons, load colorArray spinner
         addButtonListeners();
         setupColorSpinner();
+        setupDurationPicker();
     }
 
     @Override
@@ -118,7 +124,7 @@ public class EditActivity extends Activity {
             this.colorArray = colorArray;
         }
 
-        @Override 
+        @Override
         public View getDropDownView(int position, View convertView, ViewGroup parent) {
             super.getDropDownView(position, convertView, parent);
             View row = convertView;
@@ -185,5 +191,16 @@ public class EditActivity extends Activity {
             counter++;
         }
         return integerArray;
+    }
+
+    public void setupDurationPicker() {
+        CircleDisplay cd = (CircleDisplay) findViewById(R.id.circleDisplay);
+        cd.setColor(Color.CYAN);
+        cd.setFormatDigits(0);
+        cd.setUnit("");
+        cd.showValue(0, 60, false);
+        cd.setStepSize(1);
+        cd.setTouchEnabled(true);
+        cd.setElevation(1);
     }
 }

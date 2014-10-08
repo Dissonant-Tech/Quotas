@@ -41,4 +41,7 @@
     <string name="edit_end_time_text"> and </string>
     <string name="edit_end_time_time"> --:-- AM </string>
 
+    <string name="edit_duration_text">Duration: </string>
+    <string name="edit_duration_time"> --:-- </string>
+
 </resources>
