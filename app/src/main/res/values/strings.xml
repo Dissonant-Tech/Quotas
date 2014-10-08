@@ -30,7 +30,7 @@
 
     <!-- EditActivity -->
     <string name="edit_title_hint">Name</string>
-    <string name="edit_description_title">Description</string>
+    <string name="edit_description_title">Notes</string>
     <string name="edit_description_hint">Describe this Quota in more detail</string>
 
     <string name="edit_times_title">Times</string>

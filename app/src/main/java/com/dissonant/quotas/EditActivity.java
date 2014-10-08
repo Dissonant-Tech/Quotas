@@ -2,8 +2,6 @@ package com.dissonant.quotas;
 
 import java.util.Calendar;
 
-import com.dissonant.quotas.ui.CircleDisplay;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -23,8 +21,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
-import android.widget.TextView;
 import android.widget.TimePicker;
+
+import com.dissonant.quotas.ui.DoughnutSelector;
 
 public class EditActivity extends Activity {
     private Button sTimeButton;
@@ -194,13 +193,14 @@ public class EditActivity extends Activity {
     }
 
     public void setupDurationPicker() {
-        CircleDisplay cd = (CircleDisplay) findViewById(R.id.circleDisplay);
-        cd.setColor(Color.CYAN);
-        cd.setFormatDigits(0);
-        cd.setUnit("");
-        cd.showValue(0, 60, false);
-        cd.setStepSize(1);
-        cd.setTouchEnabled(true);
-        cd.setElevation(1);
+        DoughnutSelector mDoughnutSelector = (DoughnutSelector) findViewById(R.id.doughnutSelector);
+        mDoughnutSelector.setColor(Color.CYAN);
+        mDoughnutSelector.setFormatDigits(0);
+        mDoughnutSelector.setUnit("");
+        mDoughnutSelector.showValue(0, 60, false);
+        mDoughnutSelector.setStepSize(1);
+        mDoughnutSelector.setTouchEnabled(true);
+        mDoughnutSelector.setElevation(1);
+        mDoughnutSelector.setmDoubleTapEnabled(false);
     }
 }

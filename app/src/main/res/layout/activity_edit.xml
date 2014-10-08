@@ -115,8 +115,8 @@
                 />
         </LinearLayout>
 
-        <com.dissonant.quotas.ui.CircleDisplay
-                android:id="@+id/circleDisplay"
+        <com.dissonant.quotas.ui.DoughnutSelector
+                android:id="@+id/doughnutSelector"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
             />
