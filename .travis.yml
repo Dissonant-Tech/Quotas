@@ -5,12 +5,14 @@ before_script:
     - unzip gradle-2.1-bin.zip
     - export GRADLE_HOME=$PWD/gradle-2.1
     - export PATH=$GRADLE_HOME/bin:$PATH
+    - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
+    - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
 
 android:
     components:
         - platform-tools
         - tools
-        - android-20
+        - android-L
         - extra
 
 script: "gradle assemble"
