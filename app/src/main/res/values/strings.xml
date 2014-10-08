@@ -16,7 +16,7 @@
     <string name="pref_notify">Enable Notifications</string>
     <string name="pref_notify_summ">Quotas will notify you when you\'re behind on your quotas, or when an opportunity to complete one arises</string>
 
-    <string-array name="default_color_array">
+    <array name="default_color_array">
         <item>@color/Cobalt</item>
         <item>@color/Dark_Purple</item>
         <item>@color/Harley_Davidson_Orange</item>
@@ -24,7 +24,7 @@
         <item>@color/Burning_Sand</item>
         <item>@color/Summer_Sky</item>
         <item>@color/Sunflower</item>
-    </string-array>
+    </array>
 
     <string name="chart_empty">There are no Quotas</string>
 

@@ -1,41 +1,47 @@
 package com.dissonant.quotas;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.format.DateFormat;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 public class EditActivity extends Activity {
-    private TimePicker startTimePicker;
-    private TimePicker endTimePicker;
-    private TimePicker lengthTimePicker;
-
     private Button sTimeButton;
     private Button eTimeButton;
+    private Spinner colorSpinner;
 
+    private Integer[] colorArray;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
+        colorArray = getIntegerArray(getResources().getIntArray(R.array.default_color_array));
+
         // Load default preferences
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         addButtonListeners();
+        setupColorSpinner();
     }
 
     @Override
@@ -99,24 +105,85 @@ public class EditActivity extends Activity {
         });
     }
 
+    public class ColorSpinnerAdapter extends ArrayAdapter<Integer>
+            implements SpinnerAdapter {
+
+        Context context;
+        int layoutId;
+        Integer[] colorArray;
+
+        public ColorSpinnerAdapter(Context context, int layoutId, Integer[] colorArray) {
+            super(context,R.layout.color_spinner, colorArray);
+            this.context = context;
+            this.colorArray = colorArray;
+        }
+
+        @Override 
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            super.getDropDownView(position, convertView, parent);
+            View row = convertView;
+
+            if (row == null) {
+                LayoutInflater inflater = getLayoutInflater();
+                row = inflater.inflate(R.layout.color_spinner, parent, false);
+
+                row.setBackgroundColor(colorArray[position]);
+            } else {
+                row.setBackgroundColor(colorArray[position]);
+            }
+            return row;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View row = convertView;
+
+            if (row == null) {
+                LayoutInflater inflater = getLayoutInflater();
+                row = inflater.inflate(R.layout.color_spinner, parent, false);
+
+                row.setBackgroundColor(colorArray[position]);
+            } else {
+                row.setBackgroundColor(colorArray[position]);
+            }
+            return row;
+        }
+    }
+
+    public void setupColorSpinner() {
+        colorSpinner = (Spinner) findViewById(R.id.edit_color_spinner);
+        colorSpinner.setAdapter(new ColorSpinnerAdapter(this, R.layout.color_spinner, colorArray));
+    }
+
     public String getTimeAsString(int hourOfDay, int minute) {
         StringBuilder result;
         String format;
 
         if (hourOfDay == 0) {
-         hourOfDay += 12;
-         format = "AM";
-      } else if (hourOfDay == 12) {
-         format = "PM";
-      } else if (hourOfDay > 12) {
-         hourOfDay -= 12;
-         format = "PM";
-      } else {
-         format = "AM";
-      }
-      result = new StringBuilder().append(hourOfDay).append(":").append(minute)
-      .append(" ").append(format);
+            hourOfDay += 12;
+            format = "AM";
+        } else if (hourOfDay == 12) {
+            format = "PM";
+        } else if (hourOfDay > 12) {
+            hourOfDay -= 12;
+            format = "PM";
+        } else {
+            format = "AM";
+        }
+        result = new StringBuilder().append(hourOfDay).append(":").append(minute)
+            .append(" ").append(format);
 
-      return result.toString();
+        return result.toString();
+    }
+
+    public Integer[] getIntegerArray(int[] intArray) {
+        Integer[] integerArray = new Integer[intArray.length];
+        int counter = 0;
+
+        for (int i : intArray) {
+            integerArray[counter] = i;
+            counter++;
+        }
+        return integerArray;
     }
 }
