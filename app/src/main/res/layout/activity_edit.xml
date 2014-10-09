@@ -126,14 +126,60 @@
             <View
                     style="@style/EditDivider"
                 />
-
-            <CheckBox
-                    android:title="@string/edit_repeat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/edit_repeat_checkbox"
-                    android:defaultValue="true"
-                />
+            <LinearLayout
+                    style="@style/LinearLayout"
+                    android:orientation="horizontal"
+                    >
+                <CheckBox
+                        android:title="@string/edit_repeat_monday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_repeat_monday"
+                        android:textSize="12dp"
+                    />
+                <CheckBox
+                        android:title="@string/edit_repeat_tuesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_repeat_tuesday"
+                        android:textSize="12dp"
+                    />
+                <CheckBox
+                        android:title="@string/edit_repeat_wednesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_repeat_wednesday"
+                        android:textSize="12dp"
+                    />
+                <CheckBox
+                        android:title="@string/edit_repeat_thursday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_repeat_thursday"
+                        android:textSize="12dp"
+                    />
+                <CheckBox
+                        android:title="@string/edit_repeat_friday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_repeat_friday"
+                        android:textSize="12dp"
+                    />
+                <CheckBox
+                        android:title="@string/edit_repeat_saturday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_repeat_saturday"
+                        android:textSize="12dp"
+                    />
+                <CheckBox
+                        android:title="@string/edit_repeat_sunday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_repeat_sunday"
+                        android:textSize="12dp"
+                    />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
