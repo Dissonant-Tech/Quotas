@@ -120,7 +120,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
             />
+        
+        <TextView
+                style="@style/EditDividerTitle"
+                android:text="@string/edit_repeat_title"
+            />
+        <View
+                style="@style/EditDivider"
+            />
 
+        <CheckBox
+                android:title="@string/edit_repeat"
+                android:defaultValue="true"
+            />
     </LinearLayout>
-
 </RelativeLayout>

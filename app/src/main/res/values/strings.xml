@@ -44,4 +44,18 @@
     <string name="edit_duration_text">Duration: </string>
     <string name="edit_duration_time"> --:-- </string>
 
+    <string name="edit_repeat_title">Repeat</string>
+    <string name="edit_repeat">Repeat</string>
+    <string name="edit_repeat_daily">Daily</string>
+    <string name="edit_repeat_weekly">Weekly</string>
+    <string name="edit_repeat_monthly">Monthly</string>
+
+    <string name="edit_repeat_monday">Mon</string>
+    <string name="edit_repeat_tuesday">Tue</string>
+    <string name="edit_repeat_wednesday">Wed</string>
+    <string name="edit_repeat_thursday">Thur</string>
+    <string name="edit_repeat_friday">Fri</string>
+    <string name="edit_repeat_saturday">Sat</string>
+    <string name="edit_repeat_sunday">Sun</string>
+
 </resources>
