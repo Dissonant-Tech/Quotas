@@ -29,6 +29,9 @@
     <string name="chart_empty">There are no Quotas</string>
 
     <!-- EditActivity -->
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+
     <string name="edit_title_hint">Name</string>
     <string name="edit_description_title">Notes</string>
     <string name="edit_description_hint">Describe this Quota in more detail</string>
@@ -46,6 +49,7 @@
 
     <string name="edit_repeat_title">Repeat</string>
     <string name="edit_repeat">Repeat</string>
+    <string name="edit_repeat_checkbox">Repeat</string>
     <string name="edit_repeat_daily">Daily</string>
     <string name="edit_repeat_weekly">Weekly</string>
     <string name="edit_repeat_monthly">Monthly</string>

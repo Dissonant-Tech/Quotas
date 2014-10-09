@@ -5,10 +5,12 @@ import java.sql.Time;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -51,7 +53,6 @@ public class EditActivity extends Activity {
         // Create onClickListener for buttons, load colorArray spinner
         addButtonListeners();
         initColorSpinner();
-        initDurationPicker();
     }
 
     @Override
@@ -116,6 +117,14 @@ public class EditActivity extends Activity {
             public void onClick(View v) {
                 DialogFragment endTimeFragment = new TimePickerFragment(v);
                 endTimeFragment.show(getFragmentManager(), "endTimePicker");
+            }
+        });
+
+        Button durationButton = (Button) findViewById(R.id.edit_duration_time);
+
+        durationButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                showDoughnutDialog();
             }
         });
     }
@@ -215,11 +224,42 @@ public class EditActivity extends Activity {
     }
 
     public void genDefaultDuration() {
-        if (mStartTime.isSet(Calendar.HOUR_OF_DAY) 
+        if (mStartTime.isSet(Calendar.HOUR_OF_DAY)
                 && mEndTime.isSet(Calendar.HOUR_OF_DAY)) {
             long milliSeconds = mStartTime.getTimeInMillis() - mEndTime.getTimeInMillis();
             long hours = milliSeconds/(1000*60*60);
             long mins = milliSeconds%(1000*60*60);
+        }
+    }
+
+    public void showDoughnutDialog() {
+        DialogFragment mDoughnutFragment = new DoughnutDialogFragment();
+        mDoughnutFragment.show(getFragmentManager(), "doughnutSelector");
+    }
+
+    public class DoughnutDialogFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Get dialog bulder and layout infalter
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+
+            builder.setView(inflater.inflate(R.layout.dialog_doughnut_selector, null))
+                .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        // save clicked
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        DoughnutDialogFragment.this.getDialog().cancel();
+                    }
+            });
+
+            // Create the AlertDialog and return it
+            return builder.create();
         }
     }
 }
