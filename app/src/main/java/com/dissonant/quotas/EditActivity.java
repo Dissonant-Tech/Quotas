@@ -1,7 +1,5 @@
 package com.dissonant.quotas;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.Calendar;
 
 import android.app.Activity;
@@ -28,6 +26,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TimePicker;
 
 import com.dissonant.quotas.ui.DoughnutSelector;
+
 
 public class EditActivity extends Activity {
     private Button sTimeButton;
@@ -172,7 +171,7 @@ public class EditActivity extends Activity {
     /*
      * Dialog Fragment and Spinner classes
      */
-    
+
     public class TimePickerFragment extends DialogFragment
             implements TimePickerDialog.OnTimeSetListener {
             View v;
@@ -238,7 +237,7 @@ public class EditActivity extends Activity {
             return builder.create();
         }
     }
-    
+
     public class ColorSpinnerAdapter extends ArrayAdapter<Integer>
             implements SpinnerAdapter {
 
