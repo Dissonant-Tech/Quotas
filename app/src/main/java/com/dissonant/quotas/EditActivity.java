@@ -65,6 +65,114 @@ public class EditActivity extends Activity {
         return false;
     }
 
+    public void initColorSpinner() {
+        colorSpinner = (Spinner) findViewById(R.id.edit_color_spinner);
+        colorSpinner.setAdapter(new ColorSpinnerAdapter(this, R.layout.color_spinner, colorArray));
+    }
+
+
+    public void addButtonListeners() {
+        // StartTime Dialog
+        sTimeButton = (Button) findViewById(R.id.edit_start_time);
+        sTimeButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                showStartTimeDialog(v);
+            }
+        });
+
+        // EndTime Dialog
+        eTimeButton = (Button) findViewById(R.id.edit_end_time);
+        eTimeButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                showEndTimeDialog(v);
+            }
+        });
+
+        // DoughnutSelector Dialog
+        Button durationButton = (Button) findViewById(R.id.edit_duration_time);
+        durationButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                showDoughnutDialog();
+            }
+        });
+    }
+
+    public String getTimeAsString(int hourOfDay, int minute) {
+        StringBuilder result;
+        String format;
+
+        if (hourOfDay == 0) {
+            hourOfDay += 12;
+            format = "AM";
+        } else if (hourOfDay == 12) {
+            format = "PM";
+        } else if (hourOfDay > 12) {
+            hourOfDay -= 12;
+            format = "PM";
+        } else {
+            format = "AM";
+        }
+        result = new StringBuilder().append(hourOfDay).append(":").append(minute)
+            .append(" ").append(format);
+
+        return result.toString();
+    }
+
+    public Integer[] getIntegerArray(int[] intArray) {
+        Integer[] integerArray = new Integer[intArray.length];
+        int counter = 0;
+
+        for (int i : intArray) {
+            integerArray[counter] = i;
+            counter++;
+        }
+        return integerArray;
+    }
+
+    public void initDoughnutSelector(View v) {
+        DoughnutSelector mDoughnutSelector = (DoughnutSelector) v.findViewById(R.id.doughnutSelector);
+        mDoughnutSelector.setColor(Color.CYAN);
+        mDoughnutSelector.setFormatDigits(0);
+        mDoughnutSelector.setUnit("");
+        mDoughnutSelector.showValue(0, 60, false);
+        mDoughnutSelector.setStepSize(1);
+        mDoughnutSelector.setTouchEnabled(true);
+        mDoughnutSelector.setElevation(1);
+        mDoughnutSelector.setmDoubleTapEnabled(false);
+    }
+
+    public void genDefaultDuration() {
+        if (mStartTime.isSet(Calendar.HOUR_OF_DAY)
+                && mEndTime.isSet(Calendar.HOUR_OF_DAY)) {
+            long milliSeconds = mStartTime.getTimeInMillis() - mEndTime.getTimeInMillis();
+            long hours = milliSeconds/(1000*60*60);
+            long mins = milliSeconds%(1000*60*60);
+        }
+    }
+
+    /*
+     * show Dialog methods
+     */
+
+    public void showStartTimeDialog(View v) {
+        DialogFragment startTimeFragment = new TimePickerFragment(v);
+        startTimeFragment.show(getFragmentManager(), "startTimePicker");
+    }
+
+    public void showEndTimeDialog(View v) {
+        DialogFragment endTimeFragment = new TimePickerFragment(v);
+        endTimeFragment.show(getFragmentManager(), "endTimePicker");
+    }
+
+    public void showDoughnutDialog() {
+        DialogFragment mDoughnutFragment = new DoughnutDialogFragment();
+        mDoughnutFragment.show(getFragmentManager(), "doughnutSelector");
+    }
+
+    /*
+     * Dialog Fragment and Spinner classes
+     */
+    
     public class TimePickerFragment extends DialogFragment
             implements TimePickerDialog.OnTimeSetListener {
             View v;
@@ -101,34 +209,36 @@ public class EditActivity extends Activity {
             }
     }
 
-    public void addButtonListeners() {
-        sTimeButton = (Button) findViewById(R.id.edit_start_time);
+    public class DoughnutDialogFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Get dialog bulder and inflate the dialog layout
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View mDialogView = inflater.inflate(R.layout.dialog_doughnut_selector, null);
 
-        sTimeButton.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                DialogFragment startTimeFragment = new TimePickerFragment(v);
-                startTimeFragment.show(getFragmentManager(), "startTimePicker");
-            }
-        });
+            // Pass the inflated view and initialize the DoughnutSelector
+            initDoughnutSelector(mDialogView);
 
-        eTimeButton = (Button) findViewById(R.id.edit_end_time);
+            builder.setView(mDialogView)
+                .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        // save clicked
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        DoughnutDialogFragment.this.getDialog().cancel();
+                    }
+            });
 
-        eTimeButton.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                DialogFragment endTimeFragment = new TimePickerFragment(v);
-                endTimeFragment.show(getFragmentManager(), "endTimePicker");
-            }
-        });
-
-        Button durationButton = (Button) findViewById(R.id.edit_duration_time);
-
-        durationButton.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                showDoughnutDialog();
-            }
-        });
+            // Create the AlertDialog and return it
+            return builder.create();
+        }
     }
-
+    
     public class ColorSpinnerAdapter extends ArrayAdapter<Integer>
             implements SpinnerAdapter {
 
@@ -171,95 +281,6 @@ public class EditActivity extends Activity {
                 row.setBackgroundColor(colorArray[position]);
             }
             return row;
-        }
-    }
-
-    public void initColorSpinner() {
-        colorSpinner = (Spinner) findViewById(R.id.edit_color_spinner);
-        colorSpinner.setAdapter(new ColorSpinnerAdapter(this, R.layout.color_spinner, colorArray));
-    }
-
-    public String getTimeAsString(int hourOfDay, int minute) {
-        StringBuilder result;
-        String format;
-
-        if (hourOfDay == 0) {
-            hourOfDay += 12;
-            format = "AM";
-        } else if (hourOfDay == 12) {
-            format = "PM";
-        } else if (hourOfDay > 12) {
-            hourOfDay -= 12;
-            format = "PM";
-        } else {
-            format = "AM";
-        }
-        result = new StringBuilder().append(hourOfDay).append(":").append(minute)
-            .append(" ").append(format);
-
-        return result.toString();
-    }
-
-    public Integer[] getIntegerArray(int[] intArray) {
-        Integer[] integerArray = new Integer[intArray.length];
-        int counter = 0;
-
-        for (int i : intArray) {
-            integerArray[counter] = i;
-            counter++;
-        }
-        return integerArray;
-    }
-
-    public void initDurationPicker() {
-        DoughnutSelector mDoughnutSelector = (DoughnutSelector) findViewById(R.id.doughnutSelector);
-        mDoughnutSelector.setColor(Color.CYAN);
-        mDoughnutSelector.setFormatDigits(0);
-        mDoughnutSelector.setUnit("");
-        mDoughnutSelector.showValue(0, 60, false);
-        mDoughnutSelector.setStepSize(1);
-        mDoughnutSelector.setTouchEnabled(true);
-        mDoughnutSelector.setElevation(1);
-        mDoughnutSelector.setmDoubleTapEnabled(false);
-    }
-
-    public void genDefaultDuration() {
-        if (mStartTime.isSet(Calendar.HOUR_OF_DAY)
-                && mEndTime.isSet(Calendar.HOUR_OF_DAY)) {
-            long milliSeconds = mStartTime.getTimeInMillis() - mEndTime.getTimeInMillis();
-            long hours = milliSeconds/(1000*60*60);
-            long mins = milliSeconds%(1000*60*60);
-        }
-    }
-
-    public void showDoughnutDialog() {
-        DialogFragment mDoughnutFragment = new DoughnutDialogFragment();
-        mDoughnutFragment.show(getFragmentManager(), "doughnutSelector");
-    }
-
-    public class DoughnutDialogFragment extends DialogFragment {
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Get dialog bulder and layout infalter
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            LayoutInflater inflater = getActivity().getLayoutInflater();
-
-            builder.setView(inflater.inflate(R.layout.dialog_doughnut_selector, null))
-                .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        // save clicked
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        DoughnutDialogFragment.this.getDialog().cancel();
-                    }
-            });
-
-            // Create the AlertDialog and return it
-            return builder.create();
         }
     }
 }
