@@ -26,6 +26,8 @@ public class MainActivity extends Activity implements OnClickListener {
     QuotasChart mQuotasChart;
     QuotaModel []models;
 
+    private ImageButton fabButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,21 +84,16 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     public void createView() {
-        // FAB Outline
-        int size = getResources().getDimensionPixelSize(R.dimen.fab_size);
-        Outline mOutline = new Outline();
-        mOutline.setOval(0, 0, size, size);
-        findViewById(R.id.fab).setOutline(mOutline);
+        initFab();
+        final View fabView = findViewById(R.id.fab);
 
-        ImageButton button = (ImageButton)findViewById(R.id.fab);
-        button.setOnClickListener(new View.OnClickListener() {
+        fabButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, EditActivity.class);
-                // Old style animation
-                //Bundle bundleAnim = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.right_slide_in, R.anim.none).toBundle();
-                //startActivity(i, bundleAnim);
-                startActivity(i);
+                ActivityOptions options = ActivityOptions
+                    .makeSceneTransitionAnimation(MainActivity.this, fabView, "fab_button");
+                startActivity(i, options.toBundle());
             }
         });
     }
@@ -107,6 +104,16 @@ public class MainActivity extends Activity implements OnClickListener {
         mQuotasChart.init(this);
         mQuotasChart.setData(models);
         layout.addView(mQuotasChart.getView());
+    }
+
+    public void initFab() {
+        fabButton = (ImageButton)findViewById(R.id.fab);
+
+        // FAB Outline
+        int size = getResources().getDimensionPixelSize(R.dimen.fab_size);
+        Outline mOutline = new Outline();
+        mOutline.setOval(0, 0, size, size);
+        findViewById(R.id.fab).setOutline(mOutline);
     }
 
     public void repaintView() {

@@ -10,6 +10,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Outline;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.format.DateFormat;
@@ -21,6 +22,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TimePicker;
@@ -37,11 +39,14 @@ public class EditActivity extends Activity {
     private Calendar mEndTime;
 
     private Integer[] colorArray;
+    private ImageButton fabButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+        
+        initFab();
 
         // Parse int[] resource to Integer[]
         colorArray = getIntegerArray(getResources().getIntArray(R.array.default_color_array));
@@ -67,6 +72,16 @@ public class EditActivity extends Activity {
     public void initColorSpinner() {
         colorSpinner = (Spinner) findViewById(R.id.edit_color_spinner);
         colorSpinner.setAdapter(new ColorSpinnerAdapter(this, R.layout.color_spinner, colorArray));
+    }
+    
+    public void initFab() {
+        fabButton = (ImageButton)findViewById(R.id.fab);
+
+        // FAB Outline
+        int size = getResources().getDimensionPixelSize(R.dimen.fab_size);
+        Outline mOutline = new Outline();
+        mOutline.setOval(0, 0, size, size);
+        findViewById(R.id.fab).setOutline(mOutline);
     }
 
 

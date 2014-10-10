@@ -8,6 +8,11 @@
         <item name="android:textColorPrimary">@color/White</item>
         <item name="android:windowContentTransitions">True</item>
         <item name="android:windowEnterTransition">@transition/slide</item>
+        <!-- specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/move_image</item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/move_image</item>
     </style>
 
     <!-- Quotas SettingsActivity Style -->
@@ -19,7 +24,7 @@
         <item name="android:textColorPrimary">@color/Black</item>
         <item name="android:windowContentTransitions">True</item>
     </style>
-    
+
     <!-- Quotas EditActivity Style -->
     <style name="QuotasEditTheme"
             parent="@android:style/Widget.Material.Light">
@@ -30,6 +35,10 @@
         <item name="android:windowContentTransitions">True</item>
         <item name="android:windowEnterTransition">@transition/slide</item>
         <item name="android:windowExitTransition">@transition/slide</item>
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/move_image</item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/move_image</item>
     </style>
 
     <!-- Quotas ActionBar Style -->
