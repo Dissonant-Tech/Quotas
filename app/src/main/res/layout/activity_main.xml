@@ -4,24 +4,6 @@
         android:layout_height="match_parent"
         tools:context="com.dissonant.quotas.MainActivity" >
 
-    <ImageButton
-            android:id="@+id/fab"
-            android:viewName="fab_button"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_width="@dimen/fab_size"
-            android:layout_height="@dimen/fab_size"
-            android:layout_gravity="bottom|right"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/ripple"
-            android:stateListAnimator="@anim/fab_anim"
-            android:src="@drawable/ic_action_new"
-            android:elevation="2dp"
-            android:padding="12dp"
-            android:scaleType="fitCenter"
-        />
-
 
     <LinearLayout
             style="@style/LinearLayout"
@@ -39,6 +21,24 @@
                 android:elevation="1dp"
                 card_view:cardBackgroundColor="@color/primary"
                 >
+
+    <ImageButton
+            android:id="@+id/fab"
+            android:viewName="fab_button"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="@dimen/fab_size"
+            android:layout_height="@dimen/fab_size"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="@dimen/margin_size"
+            android:background="@drawable/ripple"
+            android:stateListAnimator="@anim/fab_anim"
+            android:src="@drawable/ic_action_new"
+            android:elevation="2dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+        />
             <LinearLayout
                     android:id="@+id/chart"
                     android:orientation="vertical"
