@@ -16,6 +16,10 @@
     <string name="pref_notify">Enable Notifications</string>
     <string name="pref_notify_summ">Quotas will notify you when you\'re behind on your quotas, or when an opportunity to complete one arises</string>
 
+    <string name="pref_disturb_title">Do not Disturb Settings</string>
+    <string name="pref_disturb">Do not Disturb</string>
+    <string name="pref_disturb_summ">Set a range of time where Quotas will never be scheduled. This is useful for times when you would be asleep.</string>
+
     <array name="default_color_array">
         <item>@color/Cobalt</item>
         <item>@color/Dark_Purple</item>
@@ -50,8 +54,6 @@
     <string name="edit_repeat_title">Repeat</string>
     <string name="edit_repeat">Repeat</string>
     <string name="edit_repeat_checkbox">Repeat</string>
-    <string name="edit_repeat_daily">Daily</string>
-    <string name="edit_repeat_weekly">Weekly</string>
     <string name="edit_repeat_monthly">Monthly</string>
 
     <string name="edit_repeat_monday">Mon</string>
