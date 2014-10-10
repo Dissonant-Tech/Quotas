@@ -35,6 +35,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
         //init FAB, as well as set onClick
         createView();
+        createClickListeners();
 
         // Load default preferences
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
@@ -85,6 +86,9 @@ public class MainActivity extends Activity implements OnClickListener {
 
     public void createView() {
         initFab();
+    }
+
+    public void createClickListeners() {
         final View fabView = findViewById(R.id.fab);
 
         fabButton.setOnClickListener(new View.OnClickListener() {

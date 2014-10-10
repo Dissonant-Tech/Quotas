@@ -45,18 +45,13 @@ public class EditActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        
-        initFab();
-
-        // Parse int[] resource to Integer[]
-        colorArray = getIntegerArray(getResources().getIntArray(R.array.default_color_array));
 
         // Load default preferences
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         // Create onClickListener for buttons, load colorArray spinner
-        addButtonListeners();
-        initColorSpinner();
+        createView();
+        createClickListeners();
     }
 
     @Override
@@ -69,11 +64,19 @@ public class EditActivity extends Activity {
         return false;
     }
 
+    public void createView() {
+        initColorSpinner();
+        initFab();
+    }
+
     public void initColorSpinner() {
+        // Parse int[] resource to Integer[]
+        colorArray = getIntegerArray(getResources().getIntArray(R.array.default_color_array));
+
         colorSpinner = (Spinner) findViewById(R.id.edit_color_spinner);
         colorSpinner.setAdapter(new ColorSpinnerAdapter(this, R.layout.color_spinner, colorArray));
     }
-    
+
     public void initFab() {
         fabButton = (ImageButton)findViewById(R.id.fab);
 
@@ -85,7 +88,7 @@ public class EditActivity extends Activity {
     }
 
 
-    public void addButtonListeners() {
+    public void createClickListeners() {
         // StartTime Dialog
         sTimeButton = (Button) findViewById(R.id.edit_start_time);
         sTimeButton.setOnClickListener(new OnClickListener() {
