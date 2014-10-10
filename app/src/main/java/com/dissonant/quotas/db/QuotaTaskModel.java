@@ -5,11 +5,13 @@ import java.util.Calendar;
 public class QuotaTaskModel {
 
     private int id;
+    private int refId;
     private Calendar taskDate;
     private boolean completed;
 
-    public QuotaTaskModel(int id, Calendar taskDate, boolean completed) {
+    public QuotaTaskModel(int id, int refId, Calendar taskDate, boolean completed) {
         this.id = id;
+        this.refId = refId;
         this.taskDate = taskDate;
         this.completed = completed;
     }
@@ -24,6 +26,14 @@ public class QuotaTaskModel {
 
     public void setTaskDate(Calendar taskDate) {
         this.taskDate = taskDate;
+    }
+
+    public int getRefId() {
+        return refId;
+    }
+
+    public void setRefId(int refId) {
+        this.refId = refId;
     }
 
     public Calendar getTaskDate() {
