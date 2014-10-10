@@ -22,12 +22,39 @@
             android:scaleType="fitCenter"
         />
 
+
     <LinearLayout
-            android:id="@+id/chart"
+            style="@style/LinearLayout"
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             >
+
+        <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_view"
+                android:layout_gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:elevation="1dp"
+                card_view:cardBackgroundColor="@color/primary"
+                >
+            <LinearLayout
+                    android:id="@+id/chart"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <LinearLayout
+            style="@style/LinearLayout"
+            android:orientation="vertical"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+                >
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

@@ -76,6 +76,7 @@ public class QuotasChart {
 
         mRenderer.setChartTitle(
                 context.getResources().getText(R.string.chart_empty).toString());
+        mRenderer.setBackgroundColor(context.getResources().getColor(R.color.primary));
         mRenderer.setChartTitleTextSize(72f);
         mRenderer.setShowLabels(false);
         mRenderer.setShowLegend(false);
