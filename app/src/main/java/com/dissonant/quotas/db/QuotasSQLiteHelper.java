@@ -47,7 +47,7 @@ public class QuotasSQLiteHelper extends SQLiteOpenHelper {
         + COLUMN_ENDTIME        + " text not null "
         + COLUMN_ISACTIVE       + " integer default 0 "
         + ");";
-    
+
     private static final String CREATE_TASKS_TABLE = "create table "
         + TABLE_TASKS + "(" + COLUMN_ID
         + " integer primary key autoincrement, "
@@ -95,15 +95,15 @@ public class QuotasSQLiteHelper extends SQLiteOpenHelper {
     public QuotaModel getQuota(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_QUOTAS, QUOTAS_COLUMNS, " id = ?", 
+        Cursor cursor = db.query(TABLE_QUOTAS, QUOTAS_COLUMNS, " id = ?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
 
         if (cursor != null) {
             cursor.moveToFirst();
         }
 
-        QuotaModel quota = new QuotaModel(cursor.getInt(0), 
-                cursor.getString(1), cursor.getString(2), cursor.getInt(3), 
+        QuotaModel quota = new QuotaModel(cursor.getInt(0),
+                cursor.getString(1), cursor.getString(2), cursor.getInt(3),
                 cursor.getString(4), cursor.getString(5), cursor.getInt(6));
 
         Log.d("getQuota("+id+")", quota.toString());
