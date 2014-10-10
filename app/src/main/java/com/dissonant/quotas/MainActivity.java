@@ -93,9 +93,6 @@ public class MainActivity extends Activity implements OnClickListener {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, EditActivity.class);
-                // Old style animation
-                //Bundle bundleAnim = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.right_slide_in, R.anim.none).toBundle();
-                //startActivity(i, bundleAnim);
                 startActivity(i);
             }
         });
