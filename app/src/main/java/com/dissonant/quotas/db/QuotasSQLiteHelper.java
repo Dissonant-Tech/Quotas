@@ -13,6 +13,8 @@ import android.util.Log;
 public class QuotasSQLiteHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_QUOTAS = "quotas:";
+    public static final String TABLE_TASKS = "tasks:";
+
     public static final String COLUMN_ID = "_id";
 
     public static final String COLUMN_TITLE = "title";
@@ -22,24 +24,37 @@ public class QuotasSQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ENDTIME = "end_time";
     public static final String COLUMN_ISACTIVE = "isActive";
 
+    private static final String COLUMNS_REFID = "refId";
+    private static final String COLUMN_TASKDATE = "taskDate";
+    private static final String COLUMN_COMPLETED = "completed";
+
     private static final String DATABASE_NAME = "quotas.db";
     private static final int DATABASE_VERSION = 1;
 
-    private static final String[] COLUMNS = {COLUMN_ID, COLUMN_TITLE,
+    private static final String[] QUOTAS_COLUMNS = {COLUMN_ID, COLUMN_TITLE,
         COLUMN_DESCRIPTION, COLUMN_REPEAT, COLUMN_STARTTIME, COLUMN_ENDTIME,
         COLUMN_ISACTIVE
     };
 
-    //Database Creation
-    private static final String DATABASE_CREATE = "create table "
+    // Databse tables
+    private static final String CREATE_QUOTAS_TABLE = "create table "
         + TABLE_QUOTAS + "(" + COLUMN_ID
         + " integer primary key autoincrement, "
-        + " text not null " + COLUMN_TITLE 
-        + " text not null " + COLUMN_DESCRIPTION
-        + " integer default 0 " + COLUMN_REPEAT
-        + " text not null " + COLUMN_STARTTIME
-        + " text not null " + COLUMN_ENDTIME
-        + " integer default 0 " + COLUMN_ISACTIVE;
+        + COLUMN_TITLE          + " text not null "
+        + COLUMN_REPEAT         + " text not null "
+        + COLUMN_DESCRIPTION    + " text not null "
+        + COLUMN_STARTTIME      + " text not null "
+        + COLUMN_ENDTIME        + " text not null "
+        + COLUMN_ISACTIVE       + " integer default 0 "
+        + ");";
+    
+    private static final String CREATE_TASKS_TABLE = "create table "
+        + TABLE_TASKS + "(" + COLUMN_ID
+        + " integer primary key autoincrement, "
+        + COLUMNS_REFID         + " integer "
+        + COLUMN_TASKDATE       + " text not null "
+        + COLUMN_COMPLETED      + " integer default 0 "
+        + ");";
 
     public QuotasSQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -47,7 +62,8 @@ public class QuotasSQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(DATABASE_CREATE);
+        db.execSQL(CREATE_QUOTAS_TABLE);
+        db.execSQL(CREATE_TASKS_TABLE);
     }
 
     @Override
@@ -79,7 +95,7 @@ public class QuotasSQLiteHelper extends SQLiteOpenHelper {
     public QuotaModel getQuota(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_QUOTAS, COLUMNS, " id = ?", 
+        Cursor cursor = db.query(TABLE_QUOTAS, QUOTAS_COLUMNS, " id = ?", 
                 new String[] { String.valueOf(id) }, null, null, null, null);
 
         if (cursor != null) {
