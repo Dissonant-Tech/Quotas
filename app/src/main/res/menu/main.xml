@@ -1,7 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.dissonant.quotas.MainActivity"
-    android:elevation="1dp"
     >
 
     <!-- Search Action -->
