@@ -53,7 +53,7 @@ public class EditActivity extends Activity {
         initView();
 
         // Create click listeners for buttons
-        addButtonListeners();
+        initListeners();
     }
 
     @Override
@@ -83,12 +83,13 @@ public class EditActivity extends Activity {
         colorSpinner.setAdapter(new ColorSpinnerAdapter(this, R.layout.color_spinner, colorArray));
 
         // Setup TimeRangeChart
+        mTimeRangeChart.setTouchEnabled(false);
         mTimeRangeChart.setDrawText(false);
         mTimeRangeChart.setElevation(1);
-        mTimeRangeChart.setColor(getResources().getColor(R.color.primary));
+        mTimeRangeChart.setColor(getResources().getColor(R.color.primary_dark));
     }
 
-    public void addButtonListeners() {
+    public void initListeners() {
         // StartTime Dialog
         sTimeButton = (Button) findViewById(R.id.edit_start_time);
         sTimeButton.setOnClickListener(new OnClickListener() {
@@ -110,6 +111,13 @@ public class EditActivity extends Activity {
         durationButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 showDoughnutDialog();
+            }
+        });
+
+        // TimeRangeChart Dialog
+        mTimeRangeChart.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                showTimeRangeChartDialog();
             }
         });
     }
@@ -186,6 +194,11 @@ public class EditActivity extends Activity {
         mDoughnutFragment.show(getFragmentManager(), "doughnutSelector");
     }
 
+    public void showTimeRangeChartDialog() {
+        DialogFragment mTimeRangeDialogFragment = new TimeRangeDialogFragment();
+        mTimeRangeDialogFragment.show(getFragmentManager(), "TimeRangeChart");
+    }
+
     /*
      * Dialog Fragment and Spinner classes
      */
@@ -256,48 +269,86 @@ public class EditActivity extends Activity {
         }
     }
 
+    public class TimeRangeDialogFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Get dialog bulder and inflate the dialog layout
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View mDialogView = inflater.inflate(R.layout.dialog_time_range, null);
+
+            // Pass the inflated view and initialize the DoughnutSelector
+            initTimeRangeSelector(mDialogView);
+
+            builder.setView(mDialogView)
+                .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        // save clicked
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        TimeRangeDialogFragment.this.getDialog().cancel();
+                    }
+            });
+
+            // Create the AlertDialog and return it
+            return builder.create();
+        }
+
+        public void initTimeRangeSelector(View v) {
+            DoughnutSelector mTimeRangeChart = (DoughnutSelector) v.findViewById(R.id.TimeRangeChart);
+            mTimeRangeChart.setTouchEnabled(true);
+            mTimeRangeChart.setDrawText(false);
+            mTimeRangeChart.setElevation(1);
+            mTimeRangeChart.setColor(getResources().getColor(R.color.primary_dark));
+        }
+    }
+
     public class ColorSpinnerAdapter extends ArrayAdapter<Integer>
             implements SpinnerAdapter {
 
-        Context context;
-        int layoutId;
-        Integer[] colorArray;
+            Context context;
+            int layoutId;
+            Integer[] colorArray;
 
-        public ColorSpinnerAdapter(Context context, int layoutId, Integer[] colorArray) {
-            super(context,R.layout.color_spinner, colorArray);
-            this.context = context;
-            this.colorArray = colorArray;
-        }
-
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            super.getDropDownView(position, convertView, parent);
-            View row = convertView;
-
-            if (row == null) {
-                LayoutInflater inflater = getLayoutInflater();
-                row = inflater.inflate(R.layout.color_spinner, parent, false);
-
-                row.setBackgroundColor(colorArray[position]);
-            } else {
-                row.setBackgroundColor(colorArray[position]);
+            public ColorSpinnerAdapter(Context context, int layoutId, Integer[] colorArray) {
+                super(context,R.layout.color_spinner, colorArray);
+                this.context = context;
+                this.colorArray = colorArray;
             }
-            return row;
-        }
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View row = convertView;
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                super.getDropDownView(position, convertView, parent);
+                View row = convertView;
 
-            if (row == null) {
-                LayoutInflater inflater = getLayoutInflater();
-                row = inflater.inflate(R.layout.color_spinner, parent, false);
+                if (row == null) {
+                    LayoutInflater inflater = getLayoutInflater();
+                    row = inflater.inflate(R.layout.color_spinner, parent, false);
 
-                row.setBackgroundColor(colorArray[position]);
-            } else {
-                row.setBackgroundColor(colorArray[position]);
+                    row.setBackgroundColor(colorArray[position]);
+                } else {
+                    row.setBackgroundColor(colorArray[position]);
+                }
+                return row;
             }
-            return row;
-        }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View row = convertView;
+
+                if (row == null) {
+                    LayoutInflater inflater = getLayoutInflater();
+                    row = inflater.inflate(R.layout.color_spinner, parent, false);
+
+                    row.setBackgroundColor(colorArray[position]);
+                } else {
+                    row.setBackgroundColor(colorArray[position]);
+                }
+                return row;
+            }
     }
 }

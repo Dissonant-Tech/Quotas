@@ -153,4 +153,5 @@
 
  <color name="primary">#2099FF</color>
  <color name="primary_dark">#2078FF</color>
+ <color name="accent">#87CEFA</color>
 </resources>

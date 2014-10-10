@@ -7,9 +7,9 @@
         <item name="android:colorPrimary">@color/primary</item>
         <item name="android:colorPrimaryDark">@color/primary_dark</item>
         <item name="android:textColorPrimary">@color/White</item>
+        <item name="android:colorControlHighlight">@color/accent</item>
 
         <item name="android:windowContentTransitions">True</item>
-        <item name="android:windowEnterTransition">@transition/slide</item>
         <!-- specify shared element transitions -->
         <item name="android:windowSharedElementEnterTransition">
             @transition/move_image</item>
@@ -31,7 +31,7 @@
     <style name="QuotasEditTheme"
             parent="@style/QuotasTheme">
         <item name="android:actionBarStyle">@style/QuotasActionBar</item>
-        <item name="android:textColorPrimary">@color/White</item>
+        <item name="android:textColor">@color/Black</item>
         <item name="android:windowContentTransitions">True</item>
         <item name="android:windowEnterTransition">@transition/slide</item>
         <item name="android:windowExitTransition">@transition/slide</item>
@@ -45,7 +45,7 @@
     <style name="QuotasActionBar"
             parent="@android:style/Widget.Material.Light">
         <item name="android:background">@color/primary</item>
-        <item name="android:textColorPrimary">@color/White</item>
+        <item name="android:textColor">@color/White</item>
         <item name="android:displayOptions">showTitle</item>
     </style>
 </resources>
