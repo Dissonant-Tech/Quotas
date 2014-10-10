@@ -22,15 +22,21 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.dissonant.quotas.db.QuotaModel;
+import com.dissonant.quotas.db.QuotasSQLiteHelper;
 import com.dissonant.quotas.ui.DoughnutSelector;
 
 
 public class EditActivity extends Activity {
+    private Context context;
+
     private Button sTimeButton;
     private Button eTimeButton;
     private Spinner colorSpinner;
@@ -40,11 +46,17 @@ public class EditActivity extends Activity {
 
     private Integer[] colorArray;
     private ImageButton fabButton;
+    private QuotaModel mQuota;
+
+    // Add/Edit Form views
+    private EditText formTitle;
+    private EditText formDescription;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+        context = getApplicationContext();
 
         // Load default preferences
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
@@ -84,7 +96,7 @@ public class EditActivity extends Activity {
         int size = getResources().getDimensionPixelSize(R.dimen.fab_size);
         Outline mOutline = new Outline();
         mOutline.setOval(0, 0, size, size);
-        findViewById(R.id.fab).setOutline(mOutline);
+        fabButton.setOutline(mOutline);
     }
 
 
@@ -112,6 +124,34 @@ public class EditActivity extends Activity {
                 showDoughnutDialog();
             }
         });
+
+        // FAB clickListener, Save/Edit Quota
+        fabButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                if (validInput()) {
+                    // Do Nothing
+                } else {
+                    Toast toast = Toast.makeText(context, context.getResources()
+                        .getString(R.string.save_failed), Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+        });
+    }
+
+    public boolean validInput() {
+        formTitle = (EditText) findViewById(R.id.edit_title);
+        formDescription = (EditText) findViewById(R.id.edit_description);
+
+        if (formTitle.getText() == null) {
+            return false;
+        } else if(mStartTime == null) {
+            return false;
+        } else if(mEndTime == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public String getTimeAsString(int hourOfDay, int minute) {
@@ -211,12 +251,18 @@ public class EditActivity extends Activity {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
                 if (v.getId() == R.id.edit_start_time) {
+                    if (mStartTime == null) {
+                        mStartTime.getInstance();
+                    }
                     Button startTimeButton = (Button) findViewById(R.id.edit_start_time);
                     startTimeButton.setText(getTimeAsString(hourOfDay, minute));
                     mStartTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
                     mStartTime.set(Calendar.MINUTE, minute);
                 }
                 else if (v.getId() == R.id.edit_end_time) {
+                    if (mEndTime == null) {
+                        mEndTime.getInstance();
+                    }
                     Button endTimeButton = (Button) findViewById(R.id.edit_end_time);
                     endTimeButton.setText(getTimeAsString(hourOfDay, minute));
                     mEndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
