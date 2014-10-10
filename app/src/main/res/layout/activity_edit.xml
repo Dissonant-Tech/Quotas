@@ -4,6 +4,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="True"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
         tools:context="com.dissonant.quotas.EditActivity"
         >
     <ImageButton
@@ -44,6 +46,7 @@
                     >
                 <EditText
                         android:id="@+id/edit_title"
+                        style="@style/QuotasEditText"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:hint="@string/edit_title_hint"
@@ -60,61 +63,86 @@
                         android:divider="@null"
                     />
             </LinearLayout>
-
-            <TextView
-                    style="@style/EditDividerTitle"
-                    android:text="@string/edit_description_title"
-                />
-            <View
-                    style="@style/EditDivider"
-                />
-
-            <EditText
-                    android:id="@+id/edit_description"
-                    android:layout_width="fill_parent"
+            <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/edit_description_hint"
-                    android:inputType="textMultiLine"
-                    android:layout_marginBottom="12dip"
-                />
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dip"
+                    >
 
-            <TextView
-                    style="@style/EditDividerTitle"
-                    android:text="@string/edit_times_title"
-                />
-            <View
-                    style="@style/EditDivider"
-                />
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitCenter"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/ic_action_edit"
+                    />
+                <EditText
+                        android:id="@+id/edit_description"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/edit_description_hint"
+                        android:inputType="textMultiLine"
+                        android:layout_marginBottom="12dip"
+                    />
+
+            </LinearLayout>
+            <!-- ========== Times ========== -->
             <LinearLayout
                     style="@style/LinearLayout"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="16dip"
-                    android:layout_marginRight="16dip"
-                    android:layout_centerInParent="True"
                     >
-                <TextView
-                        style="@style/LabelText"
-                        android:text="@string/edit_start_time_text"
+                <LinearLayout
+                        style="@style/LinearLayout"
+                        android:orientation="vertical"
+                        android:layout_height="fill_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        >
+                    <TextView
+                            style="@style/LabelText"
+                            android:text="@string/edit_start_time_text"
+                            android:layout_height="0dp"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                        />
+                    <TextView
+                            style="@style/LabelText"
+                            android:text="@string/edit_end_time_text"
+                            android:layout_height="0dp"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                        style="@style/LinearLayout"
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        >
+                    <Button
+                            android:id="@+id/edit_start_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edit_start_time_time"
+                            style="?android:attr/borderlessButtonStyle"
+                        />
+                    <Button
+                            android:id="@+id/edit_end_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edit_end_time_time"
+                            style="?android:attr/borderlessButtonStyle"
+                        />
+                </LinearLayout>
+
+                <com.dissonant.quotas.ui.DoughnutSelector
+                        android:id="@+id/TimeRangeChart"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
                     />
-                <Button
-                        android:id="@+id/edit_start_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit_start_time_time"
-                        style="?android:attr/borderlessButtonStyle"
-                    />
-                >
-                <TextView
-                        style="@style/LabelText"
-                        android:text="@string/edit_end_time_text"
-                    />
-                <Button
-                        android:id="@+id/edit_end_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit_end_time_time"
-                        style="?android:attr/borderlessButtonStyle"
-                    />
+
             </LinearLayout>
             <LinearLayout
                     style="@style/LinearLayout"

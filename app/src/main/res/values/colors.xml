@@ -150,4 +150,7 @@
  <color name="Apple_Green">#8DB103</color>
  <color name="Light_Goldenrod">#EEE083</color>
  <color name="Burning_Sand">#C97C64</color>
+
+ <color name="primary">#2099FF</color>
+ <color name="primary_dark">#2078FF</color>
 </resources>

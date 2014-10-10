@@ -17,6 +17,10 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <style name ="QuotasEditText"
+            parent="@android:style/Widget.EditText">
+    </style>
+
     <style name="EditDivider">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">2dip</item>

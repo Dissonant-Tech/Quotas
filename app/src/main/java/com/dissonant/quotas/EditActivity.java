@@ -39,23 +39,21 @@ public class EditActivity extends Activity {
 
     private Integer[] colorArray;
     private ImageButton fabButton;
+    private DoughnutSelector mTimeRangeChart;
+    private DoughnutSelector mDurationChart;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        
-        initFab();
-
-        // Parse int[] resource to Integer[]
-        colorArray = getIntegerArray(getResources().getIntArray(R.array.default_color_array));
 
         // Load default preferences
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
-        // Create onClickListener for buttons, load colorArray spinner
+        initView();
+
+        // Create click listeners for buttons
         addButtonListeners();
-        initColorSpinner();
     }
 
     @Override
@@ -68,21 +66,27 @@ public class EditActivity extends Activity {
         return false;
     }
 
-    public void initColorSpinner() {
-        colorSpinner = (Spinner) findViewById(R.id.edit_color_spinner);
-        colorSpinner.setAdapter(new ColorSpinnerAdapter(this, R.layout.color_spinner, colorArray));
-    }
-    
-    public void initFab() {
+    public void initView() {
+        // get views
         fabButton = (ImageButton)findViewById(R.id.fab);
+        colorSpinner = (Spinner) findViewById(R.id.edit_color_spinner);
+        mTimeRangeChart = (DoughnutSelector) findViewById(R.id.TimeRangeChart);
 
-        // FAB Outline
+        // draw FAB Outline
         int size = getResources().getDimensionPixelSize(R.dimen.fab_size);
         Outline mOutline = new Outline();
         mOutline.setOval(0, 0, size, size);
         findViewById(R.id.fab).setOutline(mOutline);
-    }
 
+        // Parse int[] resource to Integer[], set colorSpinner colors
+        colorArray = getIntegerArray(getResources().getIntArray(R.array.default_color_array));
+        colorSpinner.setAdapter(new ColorSpinnerAdapter(this, R.layout.color_spinner, colorArray));
+
+        // Setup TimeRangeChart
+        mTimeRangeChart.setDrawText(false);
+        mTimeRangeChart.setElevation(1);
+        mTimeRangeChart.setColor(getResources().getColor(R.color.primary));
+    }
 
     public void addButtonListeners() {
         // StartTime Dialog
@@ -185,7 +189,7 @@ public class EditActivity extends Activity {
     /*
      * Dialog Fragment and Spinner classes
      */
-    
+
     public class TimePickerFragment extends DialogFragment
             implements TimePickerDialog.OnTimeSetListener {
             View v;
@@ -251,7 +255,7 @@ public class EditActivity extends Activity {
             return builder.create();
         }
     }
-    
+
     public class ColorSpinnerAdapter extends ArrayAdapter<Integer>
             implements SpinnerAdapter {
 
