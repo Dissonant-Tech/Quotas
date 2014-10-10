@@ -23,8 +23,8 @@
     <array name="default_color_array">
         <item>@color/Cobalt</item>
         <item>@color/Dark_Purple</item>
-        <item>@color/Harley_Davidson_Orange</item>
-        <item>@color/Apple_Green</item>
+        <item>@color/HarleyDavidsonOrange</item>
+        <item>@color/AppleGreen</item>
         <item>@color/Burning_Sand</item>
         <item>@color/Summer_Sky</item>
         <item>@color/Sunflower</item>

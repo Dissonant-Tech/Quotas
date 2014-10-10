@@ -61,6 +61,7 @@
  <color name="Orchid">#DA70D6</color>
  <color name="Thistle">#D8BFD8</color>
  <color name="LightGrey">#D3D3D3</color>
+ <color name="VeryLightGrey">#F0F0F0</color>
  <color name="Tan">#D2B48C</color>
  <color name="Chocolate">#D2691E</color>
  <color name="Peru">#CD853F</color>
@@ -145,13 +146,14 @@
  <color name="Cobalt">#154BA6</color>
  <color name="Dark_Purple">#741274</color>
  <color name="Sunflower">#E3C30B</color>
- <color name="Harley_Davidson_Orange">#BE2E01</color>
+ <color name="HarleyDavidsonOrange">#BE2E01</color>
  <color name="Summer_Sky">#3FA6E8</color>
- <color name="Apple_Green">#8DB103</color>
+ <color name="AppleGreen">#8DB103</color>
  <color name="Light_Goldenrod">#EEE083</color>
  <color name="Burning_Sand">#C97C64</color>
 
  <color name="primary">#2099FF</color>
  <color name="primary_dark">#2078FF</color>
  <color name="accent">#87CEFA</color>
+ <color name="accent_alt">#E84503</color>
 </resources>
