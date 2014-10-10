@@ -9,6 +9,7 @@
             style="@style/LinearLayout"
             android:orientation="vertical"
             android:layout_height="fill_parent"
+            android:clipChildren="false"
             >
 
         <android.support.v7.widget.CardView
@@ -20,25 +21,27 @@
                 android:layout_weight="1"
                 android:elevation="1dp"
                 card_view:cardBackgroundColor="@color/primary"
+                android:clipChildren="false"
                 >
 
-    <ImageButton
-            android:id="@+id/fab"
-            android:viewName="fab_button"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_width="@dimen/fab_size"
-            android:layout_height="@dimen/fab_size"
-            android:layout_gravity="bottom|right"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/margin_size"
-            android:background="@drawable/ripple"
-            android:stateListAnimator="@anim/fab_anim"
-            android:src="@drawable/ic_action_new"
-            android:elevation="2dp"
-            android:padding="12dp"
-            android:scaleType="fitCenter"
-        />
+        <ImageButton
+                android:id="@+id/fab"
+                android:viewName="fab_button"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_width="@dimen/fab_size"
+                android:layout_height="@dimen/fab_size"
+                android:layout_gravity="bottom|right"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="@dimen/margin_size"
+                android:background="@drawable/ripple"
+                android:stateListAnimator="@anim/fab_anim"
+                android:src="@drawable/ic_action_new"
+                android:elevation="2dp"
+                android:padding="12dp"
+                android:scaleType="fitCenter"
+                android:clipChildren="false"
+            />
             <LinearLayout
                     android:id="@+id/chart"
                     android:orientation="vertical"

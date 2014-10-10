@@ -4,7 +4,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="margin_size">84dp</dimen>
+    <dimen name="margin_size">-28dp</dimen>
     <dimen name="fab_size">56dp</dimen>
     <dimen name="fab_size_pressed">64dp</dimen>
 
