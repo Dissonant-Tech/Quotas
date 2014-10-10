@@ -36,6 +36,9 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
 
+    <string name="save_success">Quota Saved</string>
+    <string name="save_failed">Quota Save Failed!</string>
+
     <string name="edit_title_hint">Name</string>
     <string name="edit_description_title">Notes</string>
     <string name="edit_description_hint">Write Notes here</string>
