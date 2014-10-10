@@ -13,6 +13,7 @@ public class QuotaModel {
     private Time endTime;
     private boolean isActive;
     private DaysEnum[] repeatDays;
+    private int[] taskArray;
 
     public QuotaModel() {
 
@@ -95,6 +96,22 @@ public class QuotaModel {
      */
     public void setRepeatDays(DaysEnum[] repeatDays) {
         this.repeatDays = repeatDays;
+    }
+
+    /**
+     * @return the taskArray
+     */
+    public int[] getTaskArray() {
+        return taskArray;
+    }
+
+    /**
+     * Array of QuotaTask IDs that correspond to the QuotaModel instance.
+     *
+     * @param taskArray the taskArray to set
+     */
+    public void setTaskArray(int[] taskArray) {
+        this.taskArray = taskArray;
     }
 
     public void setDescription(String description) {
