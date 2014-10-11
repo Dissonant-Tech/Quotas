@@ -15,13 +15,13 @@ import com.dissonant.quotas.R;
 
 public class TimePickerFragment extends DialogFragment
     implements TimePickerDialog.OnTimeSetListener {
-    private Calendar mStartTime;
-    private Calendar mEndTime;
+    private Calendar mStartTime = Calendar.getInstance();
+    private Calendar mEndTime = Calendar.getInstance();
 
-    View v;
+    View mView;
 
-    public TimePickerFragment(View v) {
-        this.v = v;
+    public TimePickerFragment(View mView) {
+        this.mView = mView;
     }
 
     @Override
@@ -36,14 +36,14 @@ public class TimePickerFragment extends DialogFragment
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-        if (v.getId() == R.id.edit_start_time) {
-            Button startTimeButton = (Button) getView().findViewById(R.id.edit_start_time);
+        if (mView.getId() == R.id.edit_start_time) {
+            Button startTimeButton = (Button) mView.findViewById(R.id.edit_start_time);
             startTimeButton.setText(getTimeAsString(hourOfDay, minute));
             mStartTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
             mStartTime.set(Calendar.MINUTE, minute);
         }
-        else if (v.getId() == R.id.edit_end_time) {
-            Button endTimeButton = (Button) getView().findViewById(R.id.edit_end_time);
+        else if (mView.getId() == R.id.edit_end_time) {
+            Button endTimeButton = (Button) mView.findViewById(R.id.edit_end_time);
             endTimeButton.setText(getTimeAsString(hourOfDay, minute));
             mEndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
             mEndTime.set(Calendar.MINUTE, minute);
