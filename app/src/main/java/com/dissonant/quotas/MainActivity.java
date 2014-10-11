@@ -10,8 +10,6 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
@@ -20,7 +18,7 @@ import com.dissonant.quotas.db.QuotaModel;
 import com.dissonant.quotas.ui.QuotasChart;
 import com.dissonant.quotas.settings.SettingsActivity;
 
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity extends Activity {
     boolean resuming = false;
 
     QuotasChart mQuotasChart;
@@ -69,11 +67,6 @@ public class MainActivity extends Activity implements OnClickListener {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClick(View v) {
-        Intent i = new Intent(this, EditActivity.class);
-        startActivity(i);
-    }
-
     protected void onResume() {
         super.onResume();
         if (!resuming) {
@@ -85,7 +78,20 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     public void initView() {
-        initFab();
+        fabButton = (ImageButton)findViewById(R.id.fab);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
+
+        // FAB Outline
+        int size = getResources().getDimensionPixelSize(R.dimen.fab_size);
+        Outline mOutline = new Outline();
+        mOutline.setOval(0, 0, size, size);
+        findViewById(R.id.fab).setOutline(mOutline);
+
+        // achartengine Doughnut Chart
+        mQuotasChart = new QuotasChart();
+        mQuotasChart.init(this);
+        mQuotasChart.setData(models);
+        layout.addView(mQuotasChart.getView());
     }
 
     public void createClickListeners() {
@@ -108,16 +114,6 @@ public class MainActivity extends Activity implements OnClickListener {
         mQuotasChart.init(this);
         mQuotasChart.setData(models);
         layout.addView(mQuotasChart.getView());
-    }
-
-    public void initFab() {
-        fabButton = (ImageButton)findViewById(R.id.fab);
-
-        // FAB Outline
-        int size = getResources().getDimensionPixelSize(R.dimen.fab_size);
-        Outline mOutline = new Outline();
-        mOutline.setOval(0, 0, size, size);
-        findViewById(R.id.fab).setOutline(mOutline);
     }
 
     public void repaintView() {
