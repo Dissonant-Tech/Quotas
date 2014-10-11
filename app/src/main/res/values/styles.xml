@@ -58,4 +58,14 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="activityedit_button">
+        <item name="android:background">@color/WhiteSmoke</item>
+        <item name="android:elevation">1dp</item>
+        <item name="android:textColor">@color/PaleGreen</item>
+        <item name="android:layout_marginLeft">@dimen/activityedit_button_margin</item>
+        <item name="android:layout_marginRight">@dimen/activityedit_button_margin</item>
+        <item name="android:layout_marginBottom">@dimen/activityedit_button_margin</item>
+        <item name="android:layout_marginTop">@dimen/activityedit_button_margin</item>
+    </style>
+
 </resources>
