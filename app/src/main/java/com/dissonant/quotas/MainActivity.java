@@ -69,12 +69,7 @@ public class MainActivity extends Activity {
 
     protected void onResume() {
         super.onResume();
-        if (!resuming) {
-            populateView();
-            resuming = true;
-        } else {
-            repaintView();
-        }
+        repaintView();
     }
 
     public void initView() {
@@ -106,14 +101,6 @@ public class MainActivity extends Activity {
                 startActivity(i, options.toBundle());
             }
         });
-    }
-
-    public void populateView() {
-        LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
-        mQuotasChart = new QuotasChart();
-        mQuotasChart.init(this);
-        mQuotasChart.setData(models);
-        layout.addView(mQuotasChart.getView());
     }
 
     public void repaintView() {
