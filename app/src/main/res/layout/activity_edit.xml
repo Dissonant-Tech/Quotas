@@ -125,14 +125,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/edit_start_time_time"
-                            style="?android:attr/borderlessButtonStyle"
+                            style="@style/activityedit_button"
                         />
                     <Button
                             android:id="@+id/edit_end_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/edit_end_time_time"
-                            style="?android:attr/borderlessButtonStyle"
+                            style="@style/activityedit_button"
                         />
                 </LinearLayout>
 
@@ -160,7 +160,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/edit_duration_time"
-                        style="?android:attr/borderlessButtonStyle"
+                        style="@style/activityedit_button"
                     />
             </LinearLayout>
 

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,16 +12,19 @@ import android.view.View;
 import com.dissonant.quotas.R;
 import com.dissonant.quotas.ui.DoughnutSelector;
 
-public class TimeRangeDialogFragment extends DialogFragment {
+
+public class DoughnutDialogFragment extends DialogFragment {
+    private DoughnutSelector mDoughnutSelector;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Get dialog bulder and inflate the dialog layout
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View mDialogView = inflater.inflate(R.layout.dialog_time_range, null);
+        View mDialogView = inflater.inflate(R.layout.dialog_doughnut_selector, null);
 
         // Pass the inflated view and initialize the DoughnutSelector
-        initTimeRangeSelector(mDialogView);
+        initDoughnutSelector(mDialogView);
 
         builder.setView(mDialogView)
             .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
@@ -32,32 +36,23 @@ public class TimeRangeDialogFragment extends DialogFragment {
         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                TimeRangeDialogFragment.this.getDialog().cancel();
+                DoughnutDialogFragment.this.getDialog().cancel();
             }
         });
 
         // Create the AlertDialog and return it
         return builder.create();
     }
-    @Override
-    public void onStart() {
-        super.onStart();
 
-        // Safety check
-        if (getDialog() == null) {
-            return;
-        }
-
-        // Set the animation to use on showing and hiding the dialog
-        getDialog().getWindow().setWindowAnimations(
-                R.style.dialog_animation_slide_up);
-    }
-    public void initTimeRangeSelector(View v) {
-        DoughnutSelector mTimeRangeChart = (DoughnutSelector) v.findViewById(R.id.TimeRangeChart);
-        mTimeRangeChart.setTouchEnabled(true);
-        mTimeRangeChart.setDrawText(false);
-        mTimeRangeChart.setElevation(1);
-        mTimeRangeChart.setColor(getResources().getColor(R.color.LightGrey));
-        mTimeRangeChart.setBackgroundColor(getResources().getColor(R.color.primary));
+    public void initDoughnutSelector(View v) {
+        DoughnutSelector mDoughnutSelector = (DoughnutSelector) v.findViewById(R.id.doughnutSelector);
+        mDoughnutSelector.setColor(Color.CYAN);
+        mDoughnutSelector.setFormatDigits(0);
+        mDoughnutSelector.setUnit("");
+        mDoughnutSelector.showValue(0, 60, false);
+        mDoughnutSelector.setStepSize(1);
+        mDoughnutSelector.setTouchEnabled(true);
+        mDoughnutSelector.setElevation(1);
+        mDoughnutSelector.setmDoubleTapEnabled(false);
     }
 }
