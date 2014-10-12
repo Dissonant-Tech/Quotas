@@ -42,7 +42,7 @@
         <!-- EditActivity -->
         <activity
                 android:name="com.dissonant.quotas.EditActivity"
-                android:label="@string/edit_label"
+                android:label=""
                 android:parentActivityName="com.dissonant.quotas.MainActivity"
                 android:theme="@style/QuotasEditTheme"
                 >
