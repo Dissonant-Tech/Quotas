@@ -58,6 +58,11 @@ public class EditActivity extends Activity {
         return false;
     }
 
+    @Override
+    public void onBackPressed() {
+        this.finish();
+    }
+
     public void initView() {
         // get views
         fabButton = (ImageButton)findViewById(R.id.fab);

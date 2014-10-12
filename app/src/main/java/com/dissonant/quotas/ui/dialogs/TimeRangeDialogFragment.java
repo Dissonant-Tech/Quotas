@@ -39,6 +39,7 @@ public class TimeRangeDialogFragment extends DialogFragment {
         // Create the AlertDialog and return it
         return builder.create();
     }
+
     @Override
     public void onStart() {
         super.onStart();

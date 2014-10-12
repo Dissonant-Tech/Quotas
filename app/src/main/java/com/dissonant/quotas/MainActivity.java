@@ -7,16 +7,19 @@ import android.content.Intent;
 import android.graphics.Outline;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
 import com.dissonant.quotas.db.QuotaModel;
-import com.dissonant.quotas.ui.QuotasChart;
 import com.dissonant.quotas.settings.SettingsActivity;
+import com.dissonant.quotas.ui.QuotasChart;
 
 public class MainActivity extends Activity {
     boolean resuming = false;
@@ -25,11 +28,16 @@ public class MainActivity extends Activity {
     QuotaModel []models;
 
     private ImageButton fabButton;
+    private Animation slideUp;
+    private View mCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
+        mCardView = (View) findViewById(R.id.card_view);
 
         //init FAB, as well as set onClick
         initView();
@@ -97,7 +105,9 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, EditActivity.class);
                 ActivityOptions options = ActivityOptions
-                    .makeSceneTransitionAnimation(MainActivity.this, fabView, "fab_button");
+                    .makeSceneTransitionAnimation(MainActivity.this,
+                        Pair.create((View) fabView, "fab_button"));
+                //mCardView.startAnimation(slideUp);
                 startActivity(i, options.toBundle());
             }
         });
