@@ -8,4 +8,6 @@
             <enum name="top" value="0"/>
         </attr>
     </declare-styleable>
+
+    <attr name="floatingHintEditTextStyle" format="reference" />
 </resources>

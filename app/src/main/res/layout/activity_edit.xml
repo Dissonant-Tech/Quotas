@@ -44,12 +44,14 @@
                     android:orientation="horizontal"
                     android:layout_marginBottom="16dip"
                     >
-                <EditText
+                <com.dissonant.quotas.ui.views.FloatingHintEditText
                         android:id="@+id/edit_title"
                         style="@style/QuotasEditText"
                         android:layout_height="72dp"
+                        android:layout_width="0dp"
                         android:hint="@string/edit_title_hint"
                         android:inputType="textCapWords"
+                        android:textColor="@color/Black"
                         android:layout_weight="3"
                     />
                 <Spinner
