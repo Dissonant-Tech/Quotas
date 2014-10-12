@@ -39,6 +39,21 @@ public class TimeRangeDialogFragment extends DialogFragment {
         // Create the AlertDialog and return it
         return builder.create();
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // Safety check
+        if (getDialog() == null) {
+            return;
+        }
+
+        // Set the animation to use on showing and hiding the dialog
+        getDialog().getWindow().setWindowAnimations(
+                R.style.dialog_animation_slide_up);
+    }
+
     public void initTimeRangeSelector(View v) {
         DoughnutSelector mTimeRangeChart = (DoughnutSelector) v.findViewById(R.id.TimeRangeChart);
         mTimeRangeChart.setTouchEnabled(true);

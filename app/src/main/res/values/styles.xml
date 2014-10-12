@@ -68,4 +68,9 @@
         <item name="android:layout_marginTop">@dimen/activityedit_button_margin</item>
     </style>
 
+    <style name ="dialog_animation_slide_up">
+        <item name="android:windowEnterAnimation">@anim/slide_up_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_down_out</item>
+    </style>
+
 </resources>
