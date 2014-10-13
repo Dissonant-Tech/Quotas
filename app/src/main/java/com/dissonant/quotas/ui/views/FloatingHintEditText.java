@@ -15,15 +15,19 @@ import com.dissonant.quotas.R;
 
 public class FloatingHintEditText extends EditText {
     private static enum Animation { NONE, SHRINK, GROW }
+    private static final float HINT_SCALE = 0.6f;
+    private static final int ANIMATION_STEPS = 6;
 
-    private final Paint mFloatingHintPaint = new Paint();
-    private final ColorStateList mHintColors;
-    private final float mHintScale;
-    private final int mAnimationSteps;
+    private final Paint floatingHintPaint = new Paint();
+    private final ColorStateList floatingHintColors;
+    private final ColorStateList normalHintColors;
+    private final int defaultFloatingHintColor;
+    private final int defaultNormalHintColor;
 
-    private boolean mWasEmpty;
-    private int mAnimationFrame;
-    private Animation mAnimation = Animation.NONE;
+    private boolean wasEmpty;
+
+    private int animationFrame;
+    private Animation animation = Animation.NONE;
 
     public FloatingHintEditText(Context context) {
         this(context, null);
@@ -36,19 +40,17 @@ public class FloatingHintEditText extends EditText {
     public FloatingHintEditText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        TypedValue typedValue = new TypedValue();
-        getResources().getValue(R.dimen.floatinghintedittext_hint_scale, typedValue, true);
-        mHintScale = typedValue.getFloat();
-        mAnimationSteps = getResources().getInteger(R.dimen.floatinghintedittext_animation_steps);
-
-        mHintColors = getHintTextColors();
-        mWasEmpty = TextUtils.isEmpty(getText());
+        floatingHintColors = getResources().getColorStateList(R.color.floating_hint_text);
+        normalHintColors = getHintTextColors();
+        defaultFloatingHintColor = floatingHintColors.getDefaultColor();
+        defaultNormalHintColor = normalHintColors.getDefaultColor();
+        wasEmpty = TextUtils.isEmpty(getText());
     }
 
     @Override
     public int getCompoundPaddingTop() {
         final FontMetricsInt metrics = getPaint().getFontMetricsInt();
-        final int floatingHintHeight = (int) ((metrics.bottom - metrics.top) * mHintScale);
+        final int floatingHintHeight = (int) ((metrics.bottom - metrics.top) * HINT_SCALE);
         return super.getCompoundPaddingTop() + floatingHintHeight;
     }
 
@@ -59,11 +61,11 @@ public class FloatingHintEditText extends EditText {
         final boolean isEmpty = TextUtils.isEmpty(getText());
 
         // The empty state hasn't changed, so the hint stays the same.
-        if (mWasEmpty == isEmpty) {
+        if (wasEmpty == isEmpty) {
             return;
         }
 
-        mWasEmpty = isEmpty;
+        wasEmpty = isEmpty;
 
         // Don't animate if we aren't visible.
         if (!isShown()) {
@@ -71,10 +73,14 @@ public class FloatingHintEditText extends EditText {
         }
 
         if (isEmpty) {
-            mAnimation = Animation.GROW;
+            animation = Animation.GROW;
+
+            // The TextView will show a hint since the field is empty, but since we're animating
+            // from the floating hint, we don't want the normal hint to appear yet. We set it to
+            // transparent here, then restore the hint color after the animation has finished.
             setHintTextColor(Color.TRANSPARENT);
         } else {
-            mAnimation = Animation.SHRINK;
+            animation = Animation.SHRINK;
         }
     }
 
@@ -86,61 +92,74 @@ public class FloatingHintEditText extends EditText {
             return;
         }
 
-        final boolean isAnimating = mAnimation != Animation.NONE;
+        final boolean isAnimating = (animation != Animation.NONE);
 
         // The large hint is drawn by Android, so do nothing.
         if (!isAnimating && TextUtils.isEmpty(getText())) {
             return;
         }
 
-        mFloatingHintPaint.set(getPaint());
-        mFloatingHintPaint.setColor(
-                mHintColors.getColorForState(getDrawableState(), mHintColors.getDefaultColor()));
-
+        final Paint paint = getPaint();
         final float hintPosX = getCompoundPaddingLeft() + getScrollX();
         final float normalHintPosY = getBaseline();
-        final float floatingHintPosY = normalHintPosY + getPaint().getFontMetricsInt().top + getScrollY();
+        final float floatingHintPosY = normalHintPosY + paint.getFontMetricsInt().top + getScrollY();
         final float normalHintSize = getTextSize();
-        final float floatingHintSize = normalHintSize * mHintScale;
+        final float floatingHintSize = normalHintSize * HINT_SCALE;
+        final int[] stateSet = getDrawableState();
+        final int floatingHintColor = floatingHintColors.getColorForState(stateSet, defaultFloatingHintColor);
+
+        floatingHintPaint.set(paint);
 
         // If we're not animating, we're showing the floating hint, so draw it and bail.
         if (!isAnimating) {
-            mFloatingHintPaint.setTextSize(floatingHintSize);
-            canvas.drawText(getHint().toString(), hintPosX, floatingHintPosY, mFloatingHintPaint);
+            drawHint(canvas, floatingHintSize, floatingHintColor, hintPosX, floatingHintPosY);
             return;
         }
 
-        if (mAnimation == Animation.SHRINK) {
+        // We are animating, so draw the linearly interpolated frame.
+        final int normalHintColor = normalHintColors.getColorForState(stateSet, defaultNormalHintColor);
+        if (animation == Animation.SHRINK) {
             drawAnimationFrame(canvas, normalHintSize, floatingHintSize,
-                    hintPosX, normalHintPosY, floatingHintPosY);
+                    hintPosX, normalHintPosY, floatingHintPosY, normalHintColor, floatingHintColor);
         } else {
             drawAnimationFrame(canvas, floatingHintSize, normalHintSize,
-                    hintPosX, floatingHintPosY, normalHintPosY);
+                    hintPosX, floatingHintPosY, normalHintPosY, floatingHintColor, normalHintColor);
         }
 
-        mAnimationFrame++;
+        animationFrame++;
 
-        if (mAnimationFrame == mAnimationSteps) {
-            if (mAnimation == Animation.GROW) {
-                setHintTextColor(mHintColors);
+        if (animationFrame == ANIMATION_STEPS) {
+            // After the grow animation has finished, restore the normal TextView hint color that we
+            // removed in our onTextChanged listener.
+            if (animation == Animation.GROW) {
+                setHintTextColor(normalHintColors);
             }
-            mAnimation = Animation.NONE;
-            mAnimationFrame = 0;
+
+            animation = Animation.NONE;
+            animationFrame = 0;
         }
 
         invalidate();
     }
 
     private void drawAnimationFrame(Canvas canvas, float fromSize, float toSize,
-                                     float hintPosX, float fromY, float toY) {
+                                    float hintPosX, float fromY, float toY, int fromColor, int toColor) {
         final float textSize = lerp(fromSize, toSize);
         final float hintPosY = lerp(fromY, toY);
-        mFloatingHintPaint.setTextSize(textSize);
-        canvas.drawText(getHint().toString(), hintPosX, hintPosY, mFloatingHintPaint);
+        final int color = Color.rgb((int) lerp(Color.red(fromColor), Color.red(toColor)),
+                                    (int) lerp(Color.green(fromColor), Color.green(toColor)),
+                                    (int) lerp(Color.blue(fromColor), Color.blue(toColor)));
+        drawHint(canvas, textSize, color, hintPosX, hintPosY);
+    }
+
+    private void drawHint(Canvas canvas, float textSize, int color, float x, float y) {
+        floatingHintPaint.setTextSize(textSize);
+        floatingHintPaint.setColor(color);
+        canvas.drawText(getHint().toString(), x, y, floatingHintPaint);
     }
 
     private float lerp(float from, float to) {
-        final float alpha = (float) mAnimationFrame / (mAnimationSteps - 1);
+        final float alpha = (float) animationFrame / (ANIMATION_STEPS - 1);
         return from * (1 - alpha) + to * alpha;
     }
 }

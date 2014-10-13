@@ -4,91 +4,71 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="True"
-        android:layout_marginLeft="6dp"
-        android:layout_marginRight="6dp"
         tools:context="com.dissonant.quotas.EditActivity"
         >
-    <ImageButton
-            android:id="@+id/fab"
-            android:viewName="fab_button"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_width="@dimen/fab_size"
-            android:layout_height="@dimen/fab_size"
-            android:layout_gravity="bottom|right"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/ripple"
-            android:stateListAnimator="@anim/fab_anim"
-            android:src="@drawable/ic_action_save"
-            android:elevation="2dp"
-            android:padding="12dp"
-            android:scaleType="fitCenter"
-        />
-    <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
+    <LinearLayout
+            style="@style/LinearLayout"
+            android:orientation="vertical"
+            android:layout_height="fill_parent"
+            android:clipChildren="false"
             >
         <LinearLayout
-                android:id="@+id/edit_quota"
+                style="@style/LinearLayout"
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:elevation="1dp"
                 >
-
-            <LinearLayout
-                    android:id="@+id/edit_title_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="16dip"
+            <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view"
+                    android:layout_gravity="left"
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    card_view:cardBackgroundColor="@color/primary"
+                    android:clipChildren="false"
                     >
-                <com.dissonant.quotas.ui.views.FloatingHintEditText
-                        android:id="@+id/edit_title"
-                        style="@style/QuotasEditText"
-                        android:layout_height="72dp"
-                        android:layout_width="0dp"
-                        android:hint="@string/edit_title_hint"
-                        android:inputType="textCapWords"
-                        android:textColor="@color/Black"
-                        android:layout_weight="3"
-                    />
-                <Spinner
-                        android:id="@+id/edit_color_spinner"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:popupBackground="@null"
-                        android:dividerHeight="0dip"
-                        android:divider="@null"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="16dip"
-                    >
-
-                <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleType="fitCenter"
-                        android:layout_gravity="center_vertical"
-                        android:src="@drawable/ic_action_edit"
-                    />
-                <EditText
-                        android:id="@+id/edit_description"
+                <LinearLayout
+                        style="@style/LinearLayout"
+                        android:orientation="vertical"
+                        android:layout_height="fill_parent"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/edit_description_hint"
-                        android:inputType="textMultiLine"
-                        android:layout_marginBottom="12dip"
-                    />
+                        >
+                    <com.dissonant.quotas.ui.views.FloatingHintEditText
+                            android:id="@+id/edit_title"
+                            style="@style/edittext"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:hint="@string/edit_title_hint"
+                            android:inputType="textCapWords"
+                            android:textColor="@color/White"
+                            android:textSize="24dp"
+                            android:layout_weight="1"
+                        />
+                    <com.dissonant.quotas.ui.views.FloatingHintEditText
+                            android:id="@+id/edit_description"
+                            style="@style/edittext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:hint="@string/edit_description_hint"
+                            android:inputType="textCapWords"
+                            android:textColor="@color/White"
+                            android:layout_marginBottom="12dip"
+                        />
+                </LinearLayout>
 
-            </LinearLayout>
-            <!-- ========== Times ========== -->
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+        <!-- ========== Times ========== -->
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:elevation="1dp"
+                >
             <LinearLayout
                     style="@style/LinearLayout"
                     android:orientation="horizontal"
@@ -164,68 +144,31 @@
                         style="@style/activityedit_button"
                     />
             </LinearLayout>
-
-            <TextView
-                    style="@style/EditDividerTitle"
-                    android:text="@string/edit_repeat_title"
+            <Spinner
+                    android:id="@+id/edit_color_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:popupBackground="@null"
+                    android:dividerHeight="0dip"
+                    android:divider="@null"
                 />
-            <View
-                    style="@style/EditDivider"
+            <ImageButton
+                    android:id="@+id/fab"
+                    android:viewName="fab_button"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="@dimen/fab_size"
+                    android:layout_height="@dimen/fab_size"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/ripple"
+                    android:stateListAnimator="@anim/fab_anim"
+                    android:src="@drawable/ic_action_save"
+                    android:elevation="2dp"
+                    android:padding="12dp"
+                    android:scaleType="fitCenter"
                 />
-            <LinearLayout
-                    style="@style/LinearLayout"
-                    android:orientation="horizontal"
-                    >
-                <CheckBox
-                        android:title="@string/edit_repeat_monday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit_repeat_monday"
-                        android:textSize="12dp"
-                    />
-                <CheckBox
-                        android:title="@string/edit_repeat_tuesday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit_repeat_tuesday"
-                        android:textSize="12dp"
-                    />
-                <CheckBox
-                        android:title="@string/edit_repeat_wednesday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit_repeat_wednesday"
-                        android:textSize="12dp"
-                    />
-                <CheckBox
-                        android:title="@string/edit_repeat_thursday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit_repeat_thursday"
-                        android:textSize="12dp"
-                    />
-                <CheckBox
-                        android:title="@string/edit_repeat_friday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit_repeat_friday"
-                        android:textSize="12dp"
-                    />
-                <CheckBox
-                        android:title="@string/edit_repeat_saturday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit_repeat_saturday"
-                        android:textSize="12dp"
-                    />
-                <CheckBox
-                        android:title="@string/edit_repeat_sunday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit_repeat_sunday"
-                        android:textSize="12dp"
-                    />
-            </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 </RelativeLayout>

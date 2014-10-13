@@ -24,7 +24,7 @@
         <item name="android:paddingTop">0dp</item>
     </style>
 
-    <style name ="QuotasEditText"
+    <style name ="edittext"
             parent="@android:style/Widget.EditText">
     </style>
 

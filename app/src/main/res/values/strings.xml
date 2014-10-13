@@ -41,7 +41,7 @@
 
     <string name="edit_title_hint">Name</string>
     <string name="edit_description_title">Notes</string>
-    <string name="edit_description_hint">Write Notes here</string>
+    <string name="edit_description_hint">Description</string>
 
     <string name="edit_times_title">Times</string>
 
