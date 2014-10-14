@@ -35,19 +35,6 @@ public class TimePickerFragment extends DialogFragment
     }
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-        if (mView.getId() == R.id.edit_start_time) {
-            Button startTimeButton = (Button) mView.findViewById(R.id.edit_start_time);
-            startTimeButton.setText(getTimeAsString(hourOfDay, minute));
-            mStartTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            mStartTime.set(Calendar.MINUTE, minute);
-        }
-        else if (mView.getId() == R.id.edit_end_time) {
-            Button endTimeButton = (Button) mView.findViewById(R.id.edit_end_time);
-            endTimeButton.setText(getTimeAsString(hourOfDay, minute));
-            mEndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            mEndTime.set(Calendar.MINUTE, minute);
-        }
         genDefaultDuration();
     }
 
