@@ -26,6 +26,16 @@
 
     <style name ="edittext"
             parent="@android:style/Widget.EditText">
+        <item name="android:textColor">@color/White</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+    </style>
+
+    <style name="text_icon">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/text_regular</item>
+        <item name="android:textColorHint">@color/text_hint_regular</item>
     </style>
 
     <style name="EditDivider">
