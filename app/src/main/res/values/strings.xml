@@ -33,19 +33,17 @@
     <string name="chart_empty">There are no Quotas</string>
 
     <!-- EditActivity -->
-    <string name="save">Save</string>
-    <string name="cancel">Cancel</string>
-
-    <string name="save_success">Quota Saved</string>
-    <string name="save_failed">Quota Save Failed!</string>
-
     <string name="edit_title_hint">Title</string>
     <string name="edit_description_hint">Description</string>
+
+    <string name="edit_color_title">Color</string>
 
     <string name="edit_timerange_title">Time range</string>
     <string name="edit_timerange_value">None</string>
 
-    <string name="edit_color_title">Color</string>
+    <string name="edit_duration_title">Duration</string>
+    <string name="edit_duration_value">None</string>
+
 
     <string name="edit_times_title">Times</string>
 
@@ -59,7 +57,8 @@
     <string name="edit_duration_time"> --:-- </string>
 
     <string name="edit_repeat_title">Repeat</string>
-    <string name="edit_repeat">Repeat</string>
+    <string name="edit_repeat_value">Off</string>
+
     <string name="edit_repeat_checkbox">Repeat</string>
     <string name="edit_repeat_monthly">Monthly</string>
 
@@ -70,5 +69,10 @@
     <string name="edit_repeat_friday">Fri</string>
     <string name="edit_repeat_saturday">Sat</string>
     <string name="edit_repeat_sunday">Sun</string>
+    
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 
+    <string name="save_success">Quota Saved</string>
+    <string name="save_failed">Quota Save Failed!</string>
 </resources>

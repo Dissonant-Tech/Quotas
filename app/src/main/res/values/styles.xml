@@ -24,6 +24,13 @@
         <item name="android:paddingTop">0dp</item>
     </style>
 
+    <style name="icon">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_width">48dp</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:alpha">.64</item>
+    </style>
+
     <style name ="edittext"
             parent="@android:style/Widget.EditText">
         <item name="android:textColor">@color/White</item>
@@ -36,6 +43,7 @@
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/text_regular</item>
         <item name="android:textColorHint">@color/text_hint_regular</item>
+        <item name="android:alpha">.87</item>
     </style>
 
     <style name="EditDivider">

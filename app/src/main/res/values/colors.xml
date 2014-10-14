@@ -20,7 +20,7 @@
     <color name="text_hint_regular">#66000000</color>
     <color name="text_hint">#66FFFFFF</color>
 
-    <color name="icon_tint">#80FFFFFF</color>
+    <color name="icon_tint">#66FFFFFF</color>
 
     <color name="White">#FFFFFF</color>
     <color name="Ivory">#FFFFF0</color>
