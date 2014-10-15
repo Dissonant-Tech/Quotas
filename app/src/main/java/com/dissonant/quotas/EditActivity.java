@@ -15,6 +15,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.dissonant.quotas.ui.adapters.ColorSpinnerAdapter;
+import com.dissonant.quotas.ui.dialogs.TimeRangeDialogFragment;
 
 public class EditActivity extends Activity {
     private Spinner colorSpinner;
@@ -83,6 +84,14 @@ public class EditActivity extends Activity {
             repeatText.setText(R.string.off);
             repeatOptions.setVisibility(View.GONE);
         }
+    }
+
+    public void openTimeRangeDialog(View v) {
+        TimeRangeDialogFragment trDialog = new TimeRangeDialogFragment();
+        trDialog.show(getFragmentManager(), "timerange");
+    }
+
+    public void openDurationDialog(View v) {
     }
 
     public Integer[] getAsIntegerArray(int[] intArray) {

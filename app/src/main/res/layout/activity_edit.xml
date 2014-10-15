@@ -124,6 +124,8 @@
                             style="@style/LinearLayout"
                             android:orientation="horizontal"
                             android:layout_marginTop="16dp"
+                            android:background="@drawable/paper_ripple"
+                            android:onClick="openTimeRangeDialog"
                             >
                         <ImageView
                                 style="@style/icon"
@@ -151,6 +153,8 @@
                             style="@style/LinearLayout"
                             android:orientation="horizontal"
                             android:layout_marginTop="16dp"
+                            android:background="@drawable/paper_ripple"
+                            android:onClick="openDurationDialog"
                             >
                         <ImageView
                                 style="@style/icon"
