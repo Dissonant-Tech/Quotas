@@ -57,7 +57,7 @@
     <string name="edit_duration_time"> --:-- </string>
 
     <string name="repeat_title">Repeat</string>
-    <string name="repeat_value">Off</string>
+    <string name="repeat_value">@string/off</string>
 
     <string name="on">On</string>
     <string name="off">Off</string>

@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.dissonant.quotas.ui.adapters.ColorSpinnerAdapter;
 
@@ -73,10 +74,13 @@ public class EditActivity extends Activity {
 
     public void onRepeatToggled(View v) {
         boolean on = ((Switch) v).isChecked();
+        TextView repeatText = (TextView) findViewById(R.id.repeat_value);
 
         if (on) {
+            repeatText.setText(R.string.on);
             repeatOptions.setVisibility(View.VISIBLE);
         } else {
+            repeatText.setText(R.string.off);
             repeatOptions.setVisibility(View.GONE);
         }
     }

@@ -196,6 +196,7 @@
                                     android:text="@string/repeat_title"
                                 />
                             <TextView
+                                    android:id="@+id/repeat_value"
                                     android:text="@string/repeat_value"
                                     android:layout_height="wrap_content"
                                     android:layout_width="fill_parent"
