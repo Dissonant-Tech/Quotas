@@ -187,24 +187,27 @@
                             >
                         <TextView
                                 style="@style/text_icon"
-                                android:text="@string/edit_repeat_title"
+                                android:text="@string/repeat_title"
                             />
                         <TextView
-                                android:text="@string/edit_repeat_value"
+                                android:text="@string/repeat_value"
                                 android:layout_height="wrap_content"
                                 android:layout_width="fill_parent"
                                 android:textColor="@color/text_hint_regular"
                             />
                     </LinearLayout>
                     <Switch
+                            android:id="@+id/repeat_switch"
                             android:switchMinWidth="48dp"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
+                            android:onClick="onRepeatToggled"
                             >
                     </Switch>
                 </LinearLayout>
                 <LinearLayout
                         style="@style/LinearLayout"
+                        android:id="@+id/repeat_options"
                         android:orientation="horizontal"
                         android:layout_marginTop="16dp"
                         android:visibility="gone"

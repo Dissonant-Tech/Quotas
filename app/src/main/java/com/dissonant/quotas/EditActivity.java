@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import com.dissonant.quotas.ui.adapters.ColorSpinnerAdapter;
 
@@ -16,6 +18,8 @@ public class EditActivity extends Activity {
 
     private Integer[] colorArray;
     private ImageButton fabButton;
+    private Switch repeatSwitch;
+    private View repeatOptions;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,7 @@ public class EditActivity extends Activity {
 
 
         // Create click listeners for buttons
+        createClickListeners();
     }
 
     @Override
@@ -50,6 +55,8 @@ public class EditActivity extends Activity {
         // get views
         fabButton = (ImageButton)findViewById(R.id.fab);
         colorSpinner = (Spinner) findViewById(R.id.edit_color_spinner);
+        repeatSwitch = (Switch) findViewById(R.id.repeat_switch);
+        repeatOptions = (View) findViewById(R.id.repeat_options);
 
         // draw FAB Outline
         int size = getResources().getDimensionPixelSize(R.dimen.fab_size);
@@ -63,7 +70,17 @@ public class EditActivity extends Activity {
 
     }
 
-    public void initListeners() {
+    public void createClickListeners() {
+    }
+
+    public void onRepeatToggled(View v) {
+        boolean on = ((Switch) v).isChecked();
+
+        if (on) {
+            repeatOptions.setVisibility(View.VISIBLE);
+        } else {
+            repeatOptions.setVisibility(View.GONE);
+        }
     }
 
     public Integer[] getAsIntegerArray(int[] intArray) {

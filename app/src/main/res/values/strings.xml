@@ -56,8 +56,11 @@
     <string name="edit_duration_text">Duration: </string>
     <string name="edit_duration_time"> --:-- </string>
 
-    <string name="edit_repeat_title">Repeat</string>
-    <string name="edit_repeat_value">Off</string>
+    <string name="repeat_title">Repeat</string>
+    <string name="repeat_value">Off</string>
+
+    <string name="on">On</string>
+    <string name="off">Off</string>
 
     <string name="edit_repeat_checkbox">Repeat</string>
     <string name="edit_repeat_monthly">Monthly</string>
