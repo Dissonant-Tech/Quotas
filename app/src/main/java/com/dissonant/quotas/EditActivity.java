@@ -7,6 +7,8 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -31,9 +33,6 @@ public class EditActivity extends Activity {
         // Load default preferences
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
-
-        // Create click listeners for buttons
-        createClickListeners();
     }
 
     @Override
@@ -65,12 +64,11 @@ public class EditActivity extends Activity {
         findViewById(R.id.fab).setOutline(mOutline);
 
         // Parse int[] resource to Integer[], set colorSpinner colors
-        colorArray = getAsIntegerArray(getResources().getIntArray(R.array.default_color_array));
-        colorSpinner.setAdapter(new ColorSpinnerAdapter(this, R.layout.color_spinner, colorArray));
+        colorArray = getAsIntegerArray(getResources()
+                .getIntArray(R.array.default_color_array));
+        colorSpinner.setAdapter(new ColorSpinnerAdapter(this,
+                    R.layout.color_spinner, colorArray));
 
-    }
-
-    public void createClickListeners() {
     }
 
     public void onRepeatToggled(View v) {
