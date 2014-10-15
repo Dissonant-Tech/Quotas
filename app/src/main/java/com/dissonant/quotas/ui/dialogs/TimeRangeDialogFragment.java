@@ -53,6 +53,7 @@ public class TimeRangeDialogFragment extends DialogFragment {
         getDialog().getWindow().setWindowAnimations(
                 R.style.dialog_animation_slide_up);
     }
+
     public void initTimeRangeSelector(View v) {
         DoughnutSelector mTimeRangeChart = (DoughnutSelector) v.findViewById(R.id.TimeRangeChart);
         mTimeRangeChart.setTouchEnabled(true);

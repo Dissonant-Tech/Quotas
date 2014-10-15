@@ -62,17 +62,16 @@
     <string name="on">On</string>
     <string name="off">Off</string>
 
-    <string name="edit_repeat_checkbox">Repeat</string>
-    <string name="edit_repeat_monthly">Monthly</string>
+    <string-array name="week_day_array">
+        <item>Sun</item>
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+    </string-array>
 
-    <string name="edit_repeat_monday">Mon</string>
-    <string name="edit_repeat_tuesday">Tue</string>
-    <string name="edit_repeat_wednesday">Wed</string>
-    <string name="edit_repeat_thursday">Thur</string>
-    <string name="edit_repeat_friday">Fri</string>
-    <string name="edit_repeat_saturday">Sat</string>
-    <string name="edit_repeat_sunday">Sun</string>
-    
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
 

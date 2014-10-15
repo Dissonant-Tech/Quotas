@@ -46,6 +46,9 @@
         <item name="android:alpha">.87</item>
     </style>
 
+    <style name="togglebutton">
+    </style>
+
     <style name="EditDivider">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">2dip</item>

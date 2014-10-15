@@ -7,8 +7,6 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -93,6 +91,7 @@ public class EditActivity extends Activity {
 
     public void openDurationDialog(View v) {
     }
+
 
     public Integer[] getAsIntegerArray(int[] intArray) {
         Integer[] integerArray = new Integer[intArray.length];

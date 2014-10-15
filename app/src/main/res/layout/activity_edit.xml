@@ -225,36 +225,43 @@
                         android:visibility="gone"
                         >
                     <ToggleButton
+                            style="@style/togglebutton"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             >
                     </ToggleButton>
                     <ToggleButton
+                            style="@style/togglebutton"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             >
                     </ToggleButton>
                     <ToggleButton
+                            style="@style/togglebutton"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             >
                     </ToggleButton>
                     <ToggleButton
+                            style="@style/togglebutton"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             >
                     </ToggleButton>
                     <ToggleButton
+                            style="@style/togglebutton"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             >
                     </ToggleButton>
                     <ToggleButton
+                            style="@style/togglebutton"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             >
                     </ToggleButton>
                     <ToggleButton
+                            style="@style/togglebutton"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             >
