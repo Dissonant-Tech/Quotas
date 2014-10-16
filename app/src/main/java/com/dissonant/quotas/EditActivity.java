@@ -71,7 +71,6 @@ public class EditActivity extends Activity {
 
         colorSpinner.setAdapter(new ColorSpinnerAdapter(this,
                     R.layout.color_spinner, colorArray));
-
     }
 
     public void onRepeatToggled(View v) {

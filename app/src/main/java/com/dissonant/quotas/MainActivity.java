@@ -18,14 +18,14 @@ import android.widget.LinearLayout;
 import android.widget.SearchView;
 
 import com.dissonant.quotas.db.models.QuotaModel;
-import com.dissonant.quotas.ui.QuotasChart;
+import com.dissonant.quotas.ui.adapters.DoughnutChartAdapter;
 
 public class MainActivity extends Activity {
     boolean resuming = false;
 
-    QuotasChart mQuotasChart;
-    QuotaModel []models;
+    QuotaModel[] quotas;
 
+    private DoughnutChartAdapter doughnutChart;
     private ImageButton fabButton;
     private Animation slideUp;
     private View mCardView;
@@ -74,11 +74,6 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    protected void onResume() {
-        super.onResume();
-        repaintView();
-    }
-
     public void initView() {
         fabButton = (ImageButton)findViewById(R.id.fab);
         LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
@@ -90,10 +85,9 @@ public class MainActivity extends Activity {
         findViewById(R.id.fab).setOutline(mOutline);
 
         // achartengine Doughnut Chart
-        mQuotasChart = new QuotasChart();
-        mQuotasChart.init(this);
-        mQuotasChart.setData(models);
-        layout.addView(mQuotasChart.getView());
+        doughnutChart = new DoughnutChartAdapter(
+                getApplicationContext(), quotas);
+        layout.addView(doughnutChart.getView());
     }
 
     public void createClickListeners() {
@@ -110,9 +104,5 @@ public class MainActivity extends Activity {
                 startActivity(i, options.toBundle());
             }
         });
-    }
-
-    public void repaintView() {
-        mQuotasChart.repaint();
     }
 }

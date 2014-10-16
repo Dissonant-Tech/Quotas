@@ -17,6 +17,7 @@ public class ColorSpinnerAdapter extends ArrayAdapter<Integer>
     int layoutId;
     Integer[] colorArray;
 
+    // Optional fields
     String[] colorNameArray;
     TextView updateTarget;
     boolean updateView = false;
@@ -78,5 +79,4 @@ public class ColorSpinnerAdapter extends ArrayAdapter<Integer>
             updateTarget.setText(colorNameArray[position]);
         }
     }
-
 }

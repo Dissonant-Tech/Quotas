@@ -14,6 +14,7 @@ public class QuotaModel {
     private boolean isActive;
     private DaysEnum[] repeatDays;
     private int[] taskArray;
+    private int color;
 
     public QuotaModel() {
 
@@ -44,6 +45,11 @@ public class QuotaModel {
         this.setStartTime(startTime);
         this.setEndTime(endTime);
         this.setIsActive(isActive);
+    }
+
+    public int getDurationAsInt() {
+        int val = 0;
+        return val;
     }
 
     /**
@@ -112,6 +118,20 @@ public class QuotaModel {
      */
     public void setTaskArray(int[] taskArray) {
         this.taskArray = taskArray;
+    }
+
+    /**
+     * @return the color
+     */
+    public int getColor() {
+        return color;
+    }
+
+    /**
+     * @param color the color to set
+     */
+    public void setColor(int color) {
+        this.color = color;
     }
 
     public void setDescription(String description) {
