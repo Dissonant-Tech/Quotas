@@ -95,6 +95,8 @@ public class EditActivity extends Activity {
     }
 
     public void openDurationDialog(View v) {
+        TimeRangeDialogFragment trDialog = new TimeRangeDialogFragment();
+        trDialog.show(getFragmentManager(), "duration");
     }
 
 

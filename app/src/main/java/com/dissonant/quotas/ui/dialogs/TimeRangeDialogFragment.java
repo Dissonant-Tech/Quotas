@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.dissonant.quotas.R;
-import com.dissonant.quotas.ui.DoughnutSelector;
+import com.dissonant.quotas.ui.views.DoughnutSelector;
 
 public class TimeRangeDialogFragment extends DialogFragment {
     @Override

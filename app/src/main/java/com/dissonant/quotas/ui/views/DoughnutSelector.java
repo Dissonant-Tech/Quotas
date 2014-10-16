@@ -1,4 +1,4 @@
-package com.dissonant.quotas.ui;
+package com.dissonant.quotas.ui.views;
 
 import java.text.DecimalFormat;
 
