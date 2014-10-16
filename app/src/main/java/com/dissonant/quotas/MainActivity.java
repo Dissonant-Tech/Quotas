@@ -76,7 +76,7 @@ public class MainActivity extends Activity {
 
     public void initView() {
         fabButton = (ImageButton)findViewById(R.id.fab);
-        LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
+        LinearLayout chartLayout = (LinearLayout) findViewById(R.id.chart);
 
         // FAB Outline
         int size = getResources().getDimensionPixelSize(R.dimen.fab_size);
@@ -87,7 +87,7 @@ public class MainActivity extends Activity {
         // achartengine Doughnut Chart
         doughnutChart = new DoughnutChartAdapter(
                 getApplicationContext(), quotas);
-        layout.addView(doughnutChart.getView());
+        chartLayout.addView(doughnutChart.getView());
     }
 
     public void createClickListeners() {
