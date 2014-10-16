@@ -7,6 +7,8 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -68,10 +70,12 @@ public class EditActivity extends Activity {
                 .getIntArray(R.array.default_color_array));
         String[] colorNameArray = getResources()
             .getStringArray(R.array.color_name_array);
-
-        colorSpinner.setAdapter(new ColorSpinnerAdapter(this,
-                    R.layout.color_spinner, colorArray));
-
+        TextView target = (TextView) findViewById(R.id.color_value);
+        ColorSpinnerAdapter mSpinnerAdapter = new ColorSpinnerAdapter(this,
+                    R.layout.color_spinner, colorArray,
+                    colorNameArray, target);
+        colorSpinner.setAdapter(mSpinnerAdapter);
+        colorSpinner.setOnItemSelectedListener(mSpinnerAdapter);
     }
 
     public void onRepeatToggled(View v) {

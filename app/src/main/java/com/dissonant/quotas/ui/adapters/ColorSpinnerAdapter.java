@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -11,7 +13,7 @@ import android.widget.TextView;
 import com.dissonant.quotas.R;
 
 public class ColorSpinnerAdapter extends ArrayAdapter<Integer>
-    implements SpinnerAdapter {
+    implements SpinnerAdapter, OnItemSelectedListener {
 
     Context context;
     int layoutId;
@@ -73,10 +75,17 @@ public class ColorSpinnerAdapter extends ArrayAdapter<Integer>
 
     public void update(View row, int position) {
         row.setBackgroundColor(colorArray[position]);
+    }
 
+    public void onItemSelected(AdapterView<?> parent, View view,
+            int pos, long id) {
         if (updateView) {
-            updateTarget.setText(colorNameArray[position]);
+            updateTarget.setText(colorNameArray[pos]);
         }
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Do nothing
     }
 
 }
