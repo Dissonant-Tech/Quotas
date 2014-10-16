@@ -10,10 +10,14 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.dissonant.quotas.db.models.QuotaModel;
+
 public class QuotaAccess {
     private SQLiteDatabase database;
     private QuotasSQLiteHelper dbHelper;
     private String[] columns;
+
+    boolean isOpen = false;
 
     public QuotaAccess(Context context) {
         dbHelper = new QuotasSQLiteHelper(context);
@@ -22,18 +26,25 @@ public class QuotaAccess {
 
     public void open() throws SQLException {
         database = dbHelper.getWritableDatabase();
+        this.isOpen = true;
     }
 
     public void close() {
         dbHelper.close();
+        this.isOpen = false;
     }
 
     public void addQuota(QuotaModel quota) {
         Log.d("addQouta: ", quota.toString());
 
-        ContentValues values = QuotaToValues(quota);
+        if (!isOpen)
+            this.open();
 
+        ContentValues values = QuotaToValues(quota);
         database.insert(dbHelper.TABLE_QUOTAS, null, values);
+
+        if (isOpen)
+            this.close();
     }
 
     public QuotaModel getQuota(int id) {

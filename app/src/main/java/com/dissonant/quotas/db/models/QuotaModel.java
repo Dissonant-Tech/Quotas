@@ -1,4 +1,4 @@
-package com.dissonant.quotas.db;
+package com.dissonant.quotas.db.models;
 
 import com.dissonant.quotas.db.DaysEnum;
 import java.sql.Time;
