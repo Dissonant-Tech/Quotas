@@ -28,7 +28,7 @@
 
         <!-- SettingsActivity -->
         <activity
-                android:name="com.dissonant.quotas.settings.SettingsActivity"
+                android:name="com.dissonant.quotas.SettingsActivity"
                 android:label="@string/settings_label"
                 android:parentActivityName="com.dissonant.quotas.MainActivity"
                 android:theme="@style/QuotasSettingsTheme"
