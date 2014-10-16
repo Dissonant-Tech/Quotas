@@ -105,7 +105,8 @@
                                     android:text="@string/edit_color_title"
                                 />
                             <TextView
-                                    android:text="@string/edit_timerange_value"
+                                    android:id="@+id/color_value"
+                                    android:text="@string/color_value"
                                     android:layout_height="wrap_content"
                                     android:layout_width="fill_parent"
                                     android:textColor="@color/text_hint_regular"

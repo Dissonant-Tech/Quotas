@@ -29,6 +29,7 @@
         <item>@color/Summer_Sky</item>
         <item>@color/Sunflower</item>
     </array>
+
     <string-array name="color_name_array">
         <item>Cobalt</item>
         <item>Dark Purple</item>
@@ -46,6 +47,7 @@
     <string name="edit_description_hint">Description</string>
 
     <string name="edit_color_title">Color</string>
+    <string name="color_value">None</string>
 
     <string name="edit_timerange_title">Time range</string>
     <string name="edit_timerange_value">None</string>
@@ -55,15 +57,6 @@
 
 
     <string name="edit_times_title">Times</string>
-
-    <string name="edit_color_text">Color:</string>
-    <string name="edit_start_time_text">Between </string>
-    <string name="edit_start_time_time"> --:-- AM </string>
-    <string name="edit_end_time_text"> and </string>
-    <string name="edit_end_time_time"> --:-- AM </string>
-
-    <string name="edit_duration_text">Duration: </string>
-    <string name="edit_duration_time"> --:-- </string>
 
     <string name="repeat_title">Repeat</string>
     <string name="repeat_value">@string/off</string>
