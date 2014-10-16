@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 
 import com.dissonant.quotas.R;
 
@@ -16,10 +17,25 @@ public class ColorSpinnerAdapter extends ArrayAdapter<Integer>
     int layoutId;
     Integer[] colorArray;
 
+    String[] colorNameArray;
+    TextView updateTarget;
+    boolean updateView = false;
+
     public ColorSpinnerAdapter(Context context, int layoutId, Integer[] colorArray) {
-        super(context,R.layout.color_spinner, colorArray);
+        super(context, R.layout.color_spinner, colorArray);
         this.context = context;
         this.colorArray = colorArray;
+    }
+    
+    public ColorSpinnerAdapter(Context context, int layoutId, 
+            Integer[] colorArray, String[] colorNameArray, TextView updateTarget) {
+        super(context, R.layout.color_spinner, colorArray);
+
+        this.context = context;
+        this.colorArray = colorArray;
+        this.colorNameArray = colorNameArray;
+        this.updateTarget = updateTarget;
+        this.updateView = true;
     }
 
     @Override
@@ -32,9 +48,9 @@ public class ColorSpinnerAdapter extends ArrayAdapter<Integer>
                 context.getSystemService( Context.LAYOUT_INFLATER_SERVICE  );
             row = inflater.inflate(R.layout.color_spinner, parent, false);
 
-            row.setBackgroundColor(colorArray[position]);
+            update(row, position);
         } else {
-            row.setBackgroundColor(colorArray[position]);
+            update(row, position);
         }
         return row;
     }
@@ -48,10 +64,19 @@ public class ColorSpinnerAdapter extends ArrayAdapter<Integer>
                 context.getSystemService( Context.LAYOUT_INFLATER_SERVICE  );
             row = inflater.inflate(R.layout.color_spinner, parent, false);
 
-            row.setBackgroundColor(colorArray[position]);
+            update(row, position);
         } else {
-            row.setBackgroundColor(colorArray[position]);
+            update(row, position);
         }
         return row;
     }
+
+    public void update(View row, int position) {
+        row.setBackgroundColor(colorArray[position]);
+
+        if (updateView) {
+            updateTarget.setText(colorNameArray[position]);
+        }
+    }
+
 }
