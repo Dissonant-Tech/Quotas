@@ -1,7 +1,9 @@
-package com.dissonant.quotas.settings;
+package com.dissonant.quotas;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+
+import com.dissonant.quotas.ui.fragments.SettingsFragment;
 
 public class SettingsActivity extends PreferenceActivity {
    @Override

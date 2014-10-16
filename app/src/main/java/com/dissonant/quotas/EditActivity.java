@@ -66,6 +66,9 @@ public class EditActivity extends Activity {
         // Parse int[] resource to Integer[], set colorSpinner colors
         colorArray = getAsIntegerArray(getResources()
                 .getIntArray(R.array.default_color_array));
+        String[] colorNameArray = getResources()
+            .getStringArray(R.array.color_name_array);
+
         colorSpinner.setAdapter(new ColorSpinnerAdapter(this,
                     R.layout.color_spinner, colorArray));
 

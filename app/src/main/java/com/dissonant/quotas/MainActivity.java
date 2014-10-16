@@ -17,8 +17,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
-import com.dissonant.quotas.db.QuotaModel;
-import com.dissonant.quotas.settings.SettingsActivity;
+import com.dissonant.quotas.db.models.QuotaModel;
 import com.dissonant.quotas.ui.QuotasChart;
 
 public class MainActivity extends Activity {

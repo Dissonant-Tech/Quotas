@@ -29,6 +29,15 @@
         <item>@color/Summer_Sky</item>
         <item>@color/Sunflower</item>
     </array>
+    <string-array name="color_name_array">
+        <item>Cobalt</item>
+        <item>Dark Purple</item>
+        <item>Orange</item>
+        <item>Apple Green</item>
+        <item>Burning Sand</item>
+        <item>Summer Sky</item>
+        <item>Sunflower</item>
+    </string-array>
 
     <string name="chart_empty">There are no Quotas</string>
 

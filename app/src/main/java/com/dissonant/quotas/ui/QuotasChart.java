@@ -9,7 +9,7 @@ import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
 
 import com.dissonant.quotas.R;
-import com.dissonant.quotas.db.QuotaModel;
+import com.dissonant.quotas.db.models.QuotaModel;
 
 import android.content.Context;
 import android.content.SharedPreferences;

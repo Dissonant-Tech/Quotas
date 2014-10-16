@@ -1,4 +1,4 @@
-package com.dissonant.quotas.settings;
+package com.dissonant.quotas.ui.fragments;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
