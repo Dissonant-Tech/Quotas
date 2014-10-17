@@ -56,7 +56,7 @@ public class DoughnutChartAdapter {
                 this.context, this.mSeries, this.mRenderer);
     }
 
-    public void parseQuotas(QuotaModel[] quotas) {
+    private void parseQuotas(QuotaModel[] quotas) {
         for (int i = 0; i < quotas.length; i++) {
             this.titles[i] = quotas[i].getTitle();
             this.values[i] = quotas[i].getDurationAsInt();
@@ -90,7 +90,7 @@ public class DoughnutChartAdapter {
         }
     }
     
-    public void setEmpty() {
+    private void setEmpty() {
         mSeries.clear();
         mRenderer.removeAllRenderers();
 
@@ -107,7 +107,7 @@ public class DoughnutChartAdapter {
 
     }
     
-    public DefaultRenderer setupRenderer() {
+    private DefaultRenderer setupRenderer() {
         DefaultRenderer renderer = new DefaultRenderer();
 
         renderer.setChartTitle(

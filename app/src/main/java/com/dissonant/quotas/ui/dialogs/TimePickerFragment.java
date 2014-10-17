@@ -38,7 +38,7 @@ public class TimePickerFragment extends DialogFragment
         genDefaultDuration();
     }
 
-    public void genDefaultDuration() {
+    private void genDefaultDuration() {
         if (mStartTime.isSet(Calendar.HOUR_OF_DAY)
                 && mEndTime.isSet(Calendar.HOUR_OF_DAY)) {
             long milliSeconds = mStartTime.getTimeInMillis() - mEndTime.getTimeInMillis();
@@ -47,7 +47,7 @@ public class TimePickerFragment extends DialogFragment
         }
     }
     
-    public String getTimeAsString(int hourOfDay, int minute) {
+    private String getTimeAsString(int hourOfDay, int minute) {
         StringBuilder result;
         String format;
 
