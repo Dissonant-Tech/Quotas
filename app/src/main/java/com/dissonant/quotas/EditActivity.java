@@ -76,6 +76,20 @@ public class EditActivity extends Activity {
         colorSpinner.setOnItemSelectedListener(mSpinnerAdapter);
     }
 
+    public boolean validate() {
+        TextView title = (TextView) findViewById(R.id.edit_title);
+        TextView description = (TextView) findViewById(R.id.edit_description);
+
+        if (title.getText() == "" || title.getText() == null) {
+            return false;
+        }
+        if (description.getText() == "" || description.getText() == null) {
+            return false;
+        }
+
+        return true;
+    }
+
     public void onRepeatToggled(View v) {
         boolean on = ((Switch) v).isChecked();
         TextView repeatText = (TextView) findViewById(R.id.repeat_value);
