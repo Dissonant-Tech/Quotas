@@ -21,4 +21,4 @@ android:
         - android-L
         - extra
 
-script: "gradle assemble --stacktrace --debug"
+script: "gradle assemble"
