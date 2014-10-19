@@ -24,6 +24,8 @@ public class ColorSpinnerAdapter extends ArrayAdapter<Integer>
     TextView updateTarget;
     boolean updateView = false;
 
+    int selected;
+
     public ColorSpinnerAdapter(Context context, int layoutId, Integer[] colorArray) {
         super(context, R.layout.color_spinner, colorArray);
         this.context = context;
@@ -80,6 +82,7 @@ public class ColorSpinnerAdapter extends ArrayAdapter<Integer>
 
     public void onItemSelected(AdapterView<?> parent, View view,
             int pos, long id) {
+        selected = pos;
         if (updateView) {
             updateTarget.setText(colorNameArray[pos]);
         }
@@ -87,5 +90,9 @@ public class ColorSpinnerAdapter extends ArrayAdapter<Integer>
 
     public void onNothingSelected(AdapterView<?> parent) {
         // Do nothing
+    }
+
+    public int getColor() {
+        return colorArray[selected];
     }
 }

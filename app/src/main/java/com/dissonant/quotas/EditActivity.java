@@ -1,5 +1,7 @@
 package com.dissonant.quotas;
 
+import java.sql.Time;
+
 import android.app.Activity;
 import android.graphics.Outline;
 import android.os.Bundle;
@@ -22,6 +24,9 @@ public class EditActivity extends Activity {
     private ImageButton fabButton;
     private Switch repeatSwitch;
     private View repeatOptions;
+
+    private Time startTime;
+    private Time endTime;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -123,6 +128,34 @@ public class EditActivity extends Activity {
             counter++;
         }
         return integerArray;
+    }
+
+    /**
+     * @return the startTime
+     */
+    public Time getStartTime() {
+        return startTime;
+    }
+
+    /**
+     * @param startTime the startTime to set
+     */
+    public void setStartTime(Time startTime) {
+        this.startTime = startTime;
+    }
+
+    /**
+     * @return the endTime
+     */
+    public Time getEndTime() {
+        return endTime;
+    }
+
+    /**
+     * @param endTime the endTime to set
+     */
+    public void setEndTime(Time endTime) {
+        this.endTime = endTime;
     }
 
 }

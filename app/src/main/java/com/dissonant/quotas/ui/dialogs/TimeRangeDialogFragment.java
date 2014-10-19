@@ -26,7 +26,7 @@ public class TimeRangeDialogFragment extends DialogFragment {
             .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int id) {
-                    // save clicked
+                    setTimes();
                 }
             })
         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -61,5 +61,8 @@ public class TimeRangeDialogFragment extends DialogFragment {
         mTimeRangeChart.setElevation(1);
         mTimeRangeChart.setColor(getResources().getColor(R.color.LightGrey));
         mTimeRangeChart.setBackgroundColor(getResources().getColor(R.color.primary));
+    }
+
+    public void setTimes() {
     }
 }

@@ -36,6 +36,7 @@ public class DoughnutSelector extends View
     private float mMaxValue = 0f;
     private float mValueWidthPercent = 50f;
 
+    private boolean mDrawFace = true;
     private boolean mDrawInner = true;
     private boolean mDrawText = true;
     private boolean mTouchEnabled = true;
@@ -118,6 +119,18 @@ public class DoughnutSelector extends View
             else
                 drawText(canvas);
         }
+
+        if (mDrawFace) {
+            drawCustomFace(canvas);
+        }
+    }
+
+    /**
+     * draws text surrounding the view
+     *
+     * @param c
+     */
+    public void drawCustomFace(Canvas c) {
     }
 
     /**
@@ -736,6 +749,20 @@ public class DoughnutSelector extends View
         dist = (float) Math.sqrt(Math.pow(xDist, 2.0) + Math.pow(yDist, 2.0));
 
         return dist;
+    }
+
+    /**
+     * @return the mDrawFace
+     */
+    public boolean ismDrawFace() {
+        return mDrawFace;
+    }
+
+    /**
+     * @param mDrawFace the mDrawFace to set
+     */
+    public void setmDrawFace(boolean mDrawFace) {
+        this.mDrawFace = mDrawFace;
     }
 
     /**
