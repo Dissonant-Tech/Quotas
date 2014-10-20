@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Outline;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -78,11 +77,13 @@ public class MainActivity extends Activity {
         fabButton = (ImageButton)findViewById(R.id.fab);
         LinearLayout chartLayout = (LinearLayout) findViewById(R.id.chart);
 
+        /*
         // FAB Outline
         int size = getResources().getDimensionPixelSize(R.dimen.fab_size);
         Outline mOutline = new Outline();
         mOutline.setOval(0, 0, size, size);
         findViewById(R.id.fab).setOutline(mOutline);
+        */
 
         // achartengine Doughnut Chart
         doughnutChart = new DoughnutChartAdapter(
@@ -98,10 +99,9 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, EditActivity.class);
                 ActivityOptions options = ActivityOptions
-                    .makeSceneTransitionAnimation(MainActivity.this,
-                        Pair.create((View) fabView, "fab_button"));
+                    .makeSceneTransitionAnimation(MainActivity.this);
                 //mCardView.startAnimation(slideUp);
-                startActivity(i, options.toBundle());
+                startActivity(i);
             }
         });
     }

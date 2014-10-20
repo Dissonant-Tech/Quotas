@@ -62,11 +62,13 @@ public class EditActivity extends Activity {
         repeatSwitch = (Switch) findViewById(R.id.repeat_switch);
         repeatOptions = (View) findViewById(R.id.repeat_options);
 
+        /*
         // draw FAB Outline
         int size = getResources().getDimensionPixelSize(R.dimen.fab_size);
         Outline mOutline = new Outline();
         mOutline.setOval(0, 0, size, size);
         findViewById(R.id.fab).setOutline(mOutline);
+        */
 
         // Parse int[] resource to Integer[], set colorSpinner colors
         colorArray = getAsIntegerArray(getResources()
