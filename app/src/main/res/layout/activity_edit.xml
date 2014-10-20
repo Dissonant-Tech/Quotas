@@ -1,277 +1,260 @@
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        tools:context="com.dissonant.quotas.EditActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="True"
-        tools:context="com.dissonant.quotas.EditActivity"
+        android:orientation="vertical"
+        android:weightSum="100"
         >
     <LinearLayout
             style="@style/LinearLayout"
             android:orientation="vertical"
-            android:layout_height="fill_parent"
-            android:clipChildren="false"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="30"
+            android:background="@color/primary"
+            android:elevation="1dp"
             >
         <LinearLayout
                 style="@style/LinearLayout"
                 android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:elevation="1dp"
-                android:clipChildren="false"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="48dp"
                 >
-            <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/card_view"
-                    android:layout_gravity="left"
-                    android:layout_height="match_parent"
+            <com.dissonant.quotas.ui.views.FloatingHintEditText
+                    android:id="@+id/edit_title"
+                    style="@style/edittext"
+                    android:layout_height="72dp"
                     android:layout_width="match_parent"
-                    card_view:cardBackgroundColor="@color/primary"
-                    android:clipChildren="false"
-                    >
-                <LinearLayout
-                        style="@style/LinearLayout"
-                        android:orientation="vertical"
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent"
-                        android:layout_marginLeft="48dp"
-                        >
-                    <com.dissonant.quotas.ui.views.FloatingHintEditText
-                            android:id="@+id/edit_title"
-                            style="@style/edittext"
-                            android:layout_height="0dp"
-                            android:layout_width="match_parent"
-                            android:hint="@string/edit_title_hint"
-                            android:inputType="textCapWords"
-                            android:textSize="24dp"
-                            android:textStyle="bold"
-                            android:layout_weight="1"
-                            android:paddingBottom="8dp"
-                        />
-                    <com.dissonant.quotas.ui.views.FloatingHintEditText
-                            android:id="@+id/edit_description"
-                            style="@style/edittext"
-                            android:layout_height="0dp"
-                            android:layout_width="fill_parent"
-                            android:layout_weight="1.25"
-                            android:hint="@string/edit_description_hint"
-                            android:inputType="textMultiLine"
-                            android:layout_marginBottom="12dip"
-                        />
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
+                    android:hint="@string/edit_title_hint"
+                    android:inputType="textCapWords"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
+                    android:padding="2dp"
+                />
+            <com.dissonant.quotas.ui.views.FloatingHintEditText
+                    android:id="@+id/edit_description"
+                    style="@style/edittext"
+                    android:layout_height="48dp"
+                    android:layout_width="fill_parent"
+                    android:hint="@string/edit_description_hint"
+                    android:inputType="text"
+                    android:layout_marginBottom="8dip"
+                    android:padding="2dp"
+                />
         </LinearLayout>
-        <!-- ========== Times ========== -->
-        <ScrollView
+    </LinearLayout>
+    <!-- ========== Time Details ========== -->
+    <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="70"
+            >
+        <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:elevation="1dp"
                 >
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
                     android:elevation="1dp"
                     >
                 <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="fill_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="2"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginTop="16dp"
-                        android:elevation="1dp"
+                        style="@style/LinearLayout"
+                        android:orientation="horizontal"
                         >
+                    <ImageView
+                            style="@style/icon"
+                            android:src="@drawable/ic_label"
+                            android:tint="@color/icon_tint"
+                        />
                     <LinearLayout
                             style="@style/LinearLayout"
-                            android:orientation="horizontal"
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="16dp"
                             >
-                        <ImageView
-                                style="@style/icon"
-                                android:src="@drawable/ic_label"
-                                android:tint="@color/icon_tint"
+                        <TextView
+                                style="@style/text_icon"
+                                android:text="@string/edit_color_title"
                             />
-                        <LinearLayout
-                                style="@style/LinearLayout"
-                                android:orientation="vertical"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_marginLeft="16dp"
-                                >
-                            <TextView
-                                    style="@style/text_icon"
-                                    android:text="@string/edit_color_title"
-                                />
-                            <TextView
-                                    android:id="@+id/color_value"
-                                    android:text="@string/color_value"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="fill_parent"
-                                    android:textColor="@color/text_hint_regular"
-                                />
-                        </LinearLayout>
-                        <Spinner
-                                android:id="@+id/edit_color_spinner"
-                                android:layout_width="wrap_content"
+                        <TextView
+                                android:id="@+id/color_value"
+                                android:text="@string/color_value"
                                 android:layout_height="wrap_content"
-                                android:popupBackground="@null"
-                                android:dividerHeight="0dip"
-                                android:divider="@null"
+                                android:layout_width="fill_parent"
+                                android:textColor="@color/text_hint_regular"
                             />
                     </LinearLayout>
+                    <Spinner
+                            android:id="@+id/edit_color_spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:popupBackground="@null"
+                            android:dividerHeight="0dip"
+                            android:divider="@null"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                        style="@style/LinearLayout"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/paper_ripple"
+                        android:onClick="openTimeRangeDialog"
+                        >
+                    <ImageView
+                            style="@style/icon"
+                            android:src="@drawable/ic_clock"
+                            android:tint="@color/icon_tint"
+                        />
                     <LinearLayout
                             style="@style/LinearLayout"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="16dp"
-                            android:background="@drawable/paper_ripple"
-                            android:onClick="openTimeRangeDialog"
+                            android:orientation="vertical"
+                            android:layout_marginLeft="16dp"
                             >
-                        <ImageView
-                                style="@style/icon"
-                                android:src="@drawable/ic_clock"
-                                android:tint="@color/icon_tint"
+                        <TextView
+                                style="@style/text_icon"
+                                android:text="@string/edit_timerange_title"
                             />
-                        <LinearLayout
-                                style="@style/LinearLayout"
-                                android:orientation="vertical"
-                                android:layout_marginLeft="16dp"
-                                >
-                            <TextView
-                                    style="@style/text_icon"
-                                    android:text="@string/edit_timerange_title"
-                                />
-                            <TextView
-                                    android:text="@string/edit_timerange_value"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="fill_parent"
-                                    android:textColor="@color/text_hint_regular"
-                                />
-                        </LinearLayout>
-                    </LinearLayout>
-                    <LinearLayout
-                            style="@style/LinearLayout"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="16dp"
-                            android:background="@drawable/paper_ripple"
-                            android:onClick="openDurationDialog"
-                            >
-                        <ImageView
-                                style="@style/icon"
-                                android:src="@drawable/ic_clock"
-                                android:tint="@color/icon_tint"
+                        <TextView
+                                android:text="@string/edit_timerange_value"
+                                android:layout_height="wrap_content"
+                                android:layout_width="fill_parent"
+                                android:textColor="@color/text_hint_regular"
                             />
-                        <LinearLayout
-                                style="@style/LinearLayout"
-                                android:orientation="vertical"
-                                android:layout_marginLeft="16dp"
-                                >
-                            <TextView
-                                    style="@style/text_icon"
-                                    android:text="@string/edit_duration_title"
-                                />
-                            <TextView
-                                    android:text="@string/edit_duration_value"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="fill_parent"
-                                    android:textColor="@color/text_hint_regular"
-                                />
-                        </LinearLayout>
-                    </LinearLayout>
-                    <LinearLayout
-                            style="@style/LinearLayout"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="16dp"
-                            >
-                        <ImageView
-                                style="@style/icon"
-                                android:src="@drawable/ic_replay"
-                                android:tint="@color/icon_tint"
-                            />
-                        <LinearLayout
-                                style="@style/LinearLayout"
-                                android:orientation="vertical"
-                                android:layout_width="0dp"
-                                android:layout_weight=".75"
-                                android:layout_marginLeft="16dp"
-                                >
-                            <TextView
-                                    style="@style/text_icon"
-                                    android:text="@string/repeat_title"
-                                />
-                            <TextView
-                                    android:id="@+id/repeat_value"
-                                    android:text="@string/repeat_value"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="fill_parent"
-                                    android:textColor="@color/text_hint_regular"
-                                />
-                        </LinearLayout>
-                        <Switch
-                                android:id="@+id/repeat_switch"
-                                android:switchMinWidth="48dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="fill_parent"
-                                android:onClick="onRepeatToggled"
-                                >
-                        </Switch>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
                         style="@style/LinearLayout"
-                        android:id="@+id/repeat_options"
                         android:orientation="horizontal"
                         android:layout_marginTop="16dp"
-                        android:visibility="gone"
+                        android:background="@drawable/paper_ripple"
+                        android:onClick="openDurationDialog"
                         >
-                    <ToggleButton
-                            style="@style/togglebutton"
+                    <ImageView
+                            style="@style/icon"
+                            android:src="@drawable/ic_clock"
+                            android:tint="@color/icon_tint"
+                        />
+                    <LinearLayout
+                            style="@style/LinearLayout"
+                            android:orientation="vertical"
+                            android:layout_marginLeft="16dp"
+                            >
+                        <TextView
+                                style="@style/text_icon"
+                                android:text="@string/edit_duration_title"
+                            />
+                        <TextView
+                                android:text="@string/edit_duration_value"
+                                android:layout_height="wrap_content"
+                                android:layout_width="fill_parent"
+                                android:textColor="@color/text_hint_regular"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                        style="@style/LinearLayout"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="16dp"
+                        >
+                    <ImageView
+                            style="@style/icon"
+                            android:src="@drawable/ic_replay"
+                            android:tint="@color/icon_tint"
+                        />
+                    <LinearLayout
+                            style="@style/LinearLayout"
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:layout_weight=".75"
+                            android:layout_marginLeft="16dp"
+                            >
+                        <TextView
+                                style="@style/text_icon"
+                                android:text="@string/repeat_title"
+                            />
+                        <TextView
+                                android:id="@+id/repeat_value"
+                                android:text="@string/repeat_value"
+                                android:layout_height="wrap_content"
+                                android:layout_width="fill_parent"
+                                android:textColor="@color/text_hint_regular"
+                            />
+                    </LinearLayout>
+                    <Switch
+                            android:id="@+id/repeat_switch"
+                            android:switchMinWidth="48dp"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
+                            android:onClick="onRepeatToggled"
                             >
-                    </ToggleButton>
-                    <ToggleButton
-                            style="@style/togglebutton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            >
-                    </ToggleButton>
-                    <ToggleButton
-                            style="@style/togglebutton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            >
-                    </ToggleButton>
-                    <ToggleButton
-                            style="@style/togglebutton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            >
-                    </ToggleButton>
-                    <ToggleButton
-                            style="@style/togglebutton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            >
-                    </ToggleButton>
-                    <ToggleButton
-                            style="@style/togglebutton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            >
-                    </ToggleButton>
-                    <ToggleButton
-                            style="@style/togglebutton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            >
-                    </ToggleButton>
+                    </Switch>
                 </LinearLayout>
             </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+            <LinearLayout
+                    style="@style/LinearLayout"
+                    android:id="@+id/repeat_options"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone"
+                    >
+                <ToggleButton
+                        style="@style/togglebutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        >
+                </ToggleButton>
+                <ToggleButton
+                        style="@style/togglebutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        >
+                </ToggleButton>
+                <ToggleButton
+                        style="@style/togglebutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        >
+                </ToggleButton>
+                <ToggleButton
+                        style="@style/togglebutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        >
+                </ToggleButton>
+                <ToggleButton
+                        style="@style/togglebutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        >
+                </ToggleButton>
+                <ToggleButton
+                        style="@style/togglebutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        >
+                </ToggleButton>
+                <ToggleButton
+                        style="@style/togglebutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        >
+                </ToggleButton>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
     <ImageButton
             style="@style/fab"
             android:id="@+id/fab"
@@ -286,4 +269,4 @@
             android:padding="12dp"
             android:scaleType="fitCenter"
         />
-</RelativeLayout>
+</LinearLayout>
