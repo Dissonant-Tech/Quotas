@@ -51,6 +51,7 @@
                         android:padding="12dp"
                         android:scaleType="fitCenter"
                         android:clipChildren="false"
+                        android:elevation="2dp"
                     />
             </android.support.v7.widget.CardView>
         </LinearLayout>
