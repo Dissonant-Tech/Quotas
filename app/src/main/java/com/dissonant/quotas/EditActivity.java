@@ -3,12 +3,12 @@ package com.dissonant.quotas;
 import java.sql.Time;
 
 import android.app.Activity;
-import android.graphics.Outline;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -22,7 +22,7 @@ public class EditActivity extends Activity {
 
     private Integer[] colorArray;
     private ImageButton fabButton;
-    private Switch repeatSwitch;
+    private CheckBox repeatSwitch;
     private View repeatOptions;
 
     private Time startTime;
@@ -59,7 +59,7 @@ public class EditActivity extends Activity {
         // get views
         fabButton = (ImageButton)findViewById(R.id.fab);
         colorSpinner = (Spinner) findViewById(R.id.edit_color_spinner);
-        repeatSwitch = (Switch) findViewById(R.id.repeat_switch);
+        repeatSwitch = (CheckBox) findViewById(R.id.repeat_switch);
         repeatOptions = (View) findViewById(R.id.repeat_options);
 
         /*
@@ -98,16 +98,6 @@ public class EditActivity extends Activity {
     }
 
     public void onRepeatToggled(View v) {
-        boolean on = ((Switch) v).isChecked();
-        TextView repeatText = (TextView) findViewById(R.id.repeat_value);
-
-        if (on) {
-            repeatText.setText(R.string.on);
-            repeatOptions.setVisibility(View.VISIBLE);
-        } else {
-            repeatText.setText(R.string.off);
-            repeatOptions.setVisibility(View.GONE);
-        }
     }
 
     public void openTimeRangeDialog(View v) {

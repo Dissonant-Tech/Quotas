@@ -49,6 +49,7 @@
     </LinearLayout>
     <!-- ========== Time Details ========== -->
     <ScrollView
+            android:background="@color/White"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="70"
@@ -169,38 +170,13 @@
                         android:orientation="horizontal"
                         android:layout_marginTop="16dp"
                         >
-                    <ImageView
-                            style="@style/icon"
-                            android:src="@drawable/ic_replay"
-                            android:tint="@color/icon_tint"
-                        />
-                    <LinearLayout
-                            style="@style/LinearLayout"
-                            android:orientation="vertical"
-                            android:layout_width="0dp"
-                            android:layout_weight=".75"
-                            android:layout_marginLeft="16dp"
-                            >
-                        <TextView
-                                style="@style/text_icon"
-                                android:text="@string/repeat_title"
-                            />
-                        <TextView
-                                android:id="@+id/repeat_value"
-                                android:text="@string/repeat_value"
-                                android:layout_height="wrap_content"
-                                android:layout_width="fill_parent"
-                                android:textColor="@color/text_hint_regular"
-                            />
-                    </LinearLayout>
-                    <Switch
+                    <CheckBox
                             android:id="@+id/repeat_switch"
-                            android:switchMinWidth="48dp"
+                            android:text="@string/repeat_title"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:onClick="onRepeatToggled"
                             >
-                    </Switch>
+                    </CheckBox>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
