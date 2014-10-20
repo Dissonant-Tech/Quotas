@@ -18,7 +18,7 @@ android:
     components:
         - platform-tools
         - tools
-        - android-L
+        - android-21
         - extra
 
 script: "gradle assemble"
