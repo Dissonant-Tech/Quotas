@@ -11,6 +11,12 @@
         <item name="android:colorControlHighlight">@color/accent</item>
 
         <item name="android:windowContentTransitions">True</item>
+
+        <!-- specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/change_bounds</item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/change_bounds</item>
     </style>
 
     <!-- Quotas SettingsActivity Style -->
@@ -21,6 +27,12 @@
         <item name="android:colorPrimaryDark">@color/primary_dark</item>
         <item name="android:textColorPrimary">@color/Black</item>
         <item name="android:windowContentTransitions">True</item>
+
+        <!-- specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/change_image_transform</item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/change_image_transform</item>
     </style>
 
     <!-- Quotas EditActivity Style -->
@@ -29,6 +41,12 @@
         <item name="android:actionBarStyle">@style/QuotasActionBar</item>
         <item name="android:textColor">@color/Black</item>
         <item name="android:windowContentTransitions">True</item>
+
+        <!-- specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/change_bounds</item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/change_bounds</item>
     </style>
 
     <!-- Quotas ActionBar Style -->

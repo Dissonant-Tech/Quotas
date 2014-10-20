@@ -4,9 +4,9 @@ import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.graphics.Outline;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -98,8 +98,9 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, EditActivity.class);
                 ActivityOptions options = ActivityOptions
-                    .makeSceneTransitionAnimation(MainActivity.this);
-                startActivity(i);
+                    .makeSceneTransitionAnimation(MainActivity.this,
+                        Pair.create((View) fabView, "fab_button"));
+                startActivity(i, options.toBundle());
             }
         });
     }

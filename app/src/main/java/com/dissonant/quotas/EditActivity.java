@@ -52,7 +52,7 @@ public class EditActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        this.finish();
+        this.finishAfterTransition();
     }
 
     public void initView() {
