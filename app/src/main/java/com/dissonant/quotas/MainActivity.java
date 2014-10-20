@@ -27,7 +27,6 @@ public class MainActivity extends Activity {
     private DoughnutChartAdapter doughnutChart;
     private ImageButton fabButton;
     private Animation slideUp;
-    private View mCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
-        mCardView = (View) findViewById(R.id.card_view);
 
         //init FAB, as well as set onClick
         initView();
@@ -89,6 +87,7 @@ public class MainActivity extends Activity {
         doughnutChart = new DoughnutChartAdapter(
                 getApplicationContext(), quotas);
         chartLayout.addView(doughnutChart.getView());
+        fabButton.bringToFront();
     }
 
     public void createClickListeners() {
@@ -100,7 +99,6 @@ public class MainActivity extends Activity {
                 Intent i = new Intent(MainActivity.this, EditActivity.class);
                 ActivityOptions options = ActivityOptions
                     .makeSceneTransitionAnimation(MainActivity.this);
-                //mCardView.startAnimation(slideUp);
                 startActivity(i);
             }
         });
