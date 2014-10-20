@@ -10,7 +10,12 @@
         <item name="android:textColorPrimary">@color/White</item>
         <item name="android:colorControlHighlight">@color/accent</item>
 
+        <!-- Enable window content transitions  -->
         <item name="android:windowContentTransitions">True</item>
+
+        <!-- specify enter and exit transitions -->
+        <item name="android:windowEnterTransition">@transition/fade_in</item>
+        <item name="android:windowExitTransition">@transition/fade_out</item>
 
         <!-- specify shared element transitions -->
         <item name="android:windowSharedElementEnterTransition">
@@ -22,11 +27,19 @@
     <!-- Quotas SettingsActivity Style -->
     <style name="QuotasSettingsTheme"
             parent="@android:style/Widget.Material.Light">
-        <item name="android:actionBarStyle">@style/QuotasActionBar</item>
         <item name="android:colorPrimary">@color/primary</item>
         <item name="android:colorPrimaryDark">@color/primary_dark</item>
-        <item name="android:textColorPrimary">@color/Black</item>
+        <item name="android:textColorPrimary">@color/text_regular</item>
+        <item name="android:textColorSecondary">@color/text_hint_regular</item>
+        <item name="android:background">@color/White</item>
+        <item name="android:actionBarStyle">@style/QuotasActionBar</item>
+
+        <!-- Enable window content transitions  -->
         <item name="android:windowContentTransitions">True</item>
+
+        <!-- specify enter and exit transitions -->
+        <item name="android:windowEnterTransition">@transition/slide</item>
+        <item name="android:windowExitTransition">@transition/slide</item>
 
         <!-- specify shared element transitions -->
         <item name="android:windowSharedElementEnterTransition">
@@ -39,8 +52,16 @@
     <style name="QuotasEditTheme"
             parent="@style/QuotasTheme">
         <item name="android:actionBarStyle">@style/QuotasActionBar</item>
-        <item name="android:textColor">@color/Black</item>
+        <item name="android:textColorPrimary">@color/text_regular</item>
+        <item name="android:textColorSecondary">@color/text_hint_regular</item>
+        <item name="android:textColor">@color/text_regular</item>
+
+        <!-- Enable window content transitions  -->
         <item name="android:windowContentTransitions">True</item>
+
+        <!-- specify enter and exit transitions -->
+        <item name="android:windowEnterTransition">@transition/fade_in</item>
+        <item name="android:windowExitTransition">@transition/slide</item>
 
         <!-- specify shared element transitions -->
         <item name="android:windowSharedElementEnterTransition">

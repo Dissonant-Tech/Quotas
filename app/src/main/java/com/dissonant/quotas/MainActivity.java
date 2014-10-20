@@ -14,7 +14,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.SearchView;
 
 import com.dissonant.quotas.db.models.QuotaModel;
 import com.dissonant.quotas.ui.adapters.DoughnutChartAdapter;
@@ -48,12 +47,6 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
-            .getActionView();
-        int searchBarId = searchView.getContext().getResources().getIdentifier("android:id/search_bar", null, null);
-        LinearLayout searchBar = (LinearLayout) searchView.findViewById(searchBarId);
-        searchBar.setLayoutTransition(new LayoutTransition());
 
         return true;
     }

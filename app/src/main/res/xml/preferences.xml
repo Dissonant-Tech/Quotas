@@ -10,6 +10,7 @@
                 android:title="@string/pref_notify"
                 android:summary="@string/pref_notify_summ"
                 android:defaultValue="true"
+                android:textColor="@color/text_regular"
             />
     </PreferenceCategory>
     <PreferenceCategory
@@ -21,6 +22,7 @@
                 android:title="@string/pref_disturb"
                 android:summary="@string/pref_disturb_summ"
                 android:defaultValue="false"
+                android:textColor="@color/text_regular"
             />
     </PreferenceCategory>
 </PreferenceScreen>
