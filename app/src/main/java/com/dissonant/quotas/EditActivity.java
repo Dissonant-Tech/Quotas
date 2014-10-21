@@ -18,9 +18,13 @@ import com.dissonant.quotas.ui.adapters.ColorSpinnerAdapter;
 import com.dissonant.quotas.ui.dialogs.TimeRangeDialogFragment;
 
 public class EditActivity extends Activity {
-    private Spinner colorSpinner;
 
+    private Spinner colorSpinner;
     private Integer[] colorArray;
+    private String[] colorNameArray;
+    private TextView colorNameView;
+    private ColorSpinnerAdapter m_csAdapter;
+
     private ImageButton fabButton;
     private Switch repeatSwitch;
     private View repeatOptions;
@@ -33,7 +37,9 @@ public class EditActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
-        initView();
+        init();
+        setupView();
+        createListeners();
 
         // Load default preferences
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
@@ -55,12 +61,20 @@ public class EditActivity extends Activity {
         this.finishAfterTransition();
     }
 
-    public void initView() {
-        // get views
+    public void init() {
         fabButton = (ImageButton)findViewById(R.id.fab);
         colorSpinner = (Spinner) findViewById(R.id.edit_color_spinner);
         repeatSwitch = (Switch) findViewById(R.id.repeat_switch);
         repeatOptions = (View) findViewById(R.id.repeat_options);
+
+        colorArray = getAsIntegerArray(getResources()
+                .getIntArray(R.array.default_color_array));
+        colorNameArray = getResources()
+            .getStringArray(R.array.color_name_array);
+        colorNameView = (TextView) findViewById(R.id.color_value);
+        m_csAdapter = new ColorSpinnerAdapter(this,
+                    R.layout.color_spinner, colorArray,
+                    colorNameArray, colorNameView);
 
         /*
         // draw FAB Outline
@@ -70,17 +84,15 @@ public class EditActivity extends Activity {
         findViewById(R.id.fab).setOutline(mOutline);
         */
 
-        // Parse int[] resource to Integer[], set colorSpinner colors
-        colorArray = getAsIntegerArray(getResources()
-                .getIntArray(R.array.default_color_array));
-        String[] colorNameArray = getResources()
-            .getStringArray(R.array.color_name_array);
-        TextView target = (TextView) findViewById(R.id.color_value);
-        ColorSpinnerAdapter mSpinnerAdapter = new ColorSpinnerAdapter(this,
-                    R.layout.color_spinner, colorArray,
-                    colorNameArray, target);
-        colorSpinner.setAdapter(mSpinnerAdapter);
-        colorSpinner.setOnItemSelectedListener(mSpinnerAdapter);
+    }
+
+    public void setupView() {
+        colorSpinner.setAdapter(m_csAdapter);
+        colorSpinner.setOnItemSelectedListener(m_csAdapter);
+    }
+
+    public void createListeners() {
+        
     }
 
     public boolean validate() {
