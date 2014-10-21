@@ -25,16 +25,15 @@
     </style>
 
     <style name="icon">
-        <item name="android:layout_height">48dp</item>
-        <item name="android:layout_width">48dp</item>
-        <item name="android:padding">4dp</item>
-        <item name="android:alpha">.64</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_width">24dp</item>
+        <item name="android:alpha">.45</item>
     </style>
 
-    <style name ="edittext"
+    <style name ="floating_edittext"
             parent="@android:style/Widget.EditText">
         <item name="android:textColor">@color/text_regular</item>
-        <item name="android:textColorHint">@color/text_regular</item>
+        <item name="android:textColorHint">@color/text_hint_regular</item>
     </style>
 
     <style name="text_icon">
@@ -49,21 +48,11 @@
     <style name="togglebutton">
     </style>
 
-    <style name="EditDivider">
+    <style name="divider">
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">2dip</item>
-        <item name="android:layout_marginRight">8dip</item>
-        <item name="android:layout_marginLeft">8dip</item>
-        <item name="android:layout_marginBottom">8dip</item>
-        <item name="android:background">@color/DimGray</item>
-    </style>
-
-    <style name="EditDividerTitle">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">16dip</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:layout_marginLeft">16dip</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginBottom">16dip</item>
+        <item name="android:background">@color/divider</item>
     </style>
 
     <style name="LinearLayout">

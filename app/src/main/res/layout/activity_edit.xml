@@ -1,4 +1,3 @@
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         tools:context="com.dissonant.quotas.EditActivity"
@@ -7,8 +6,6 @@
         android:layout_centerInParent="True"
         android:orientation="vertical"
         android:background="@color/White"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
         >
     <LinearLayout
             style="@style/LinearLayout"
@@ -16,31 +13,69 @@
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             >
+        <!-- Title -->
         <com.dissonant.quotas.ui.views.FloatingHintEditText
                 android:id="@+id/edit_title"
-                style="@style/edittext"
-                android:layout_height="72dp"
+                style="@style/floating_edittext"
+                android:layout_height="48dp"
                 android:layout_width="match_parent"
                 android:hint="@string/edit_title_hint"
                 android:inputType="textCapWords"
-                android:textSize="24dp"
+                android:textSize="16dp"
                 android:textStyle="bold"
-                android:padding="2dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@null"
             />
-        <com.dissonant.quotas.ui.views.FloatingHintEditText
-                android:id="@+id/edit_description"
-                style="@style/edittext"
-                android:layout_height="48dp"
-                android:layout_width="fill_parent"
-                android:hint="@string/edit_description_hint"
-                android:inputType="text"
-                android:layout_marginBottom="16dip"
-                android:padding="2dp"
-            />
-        <!-- ========== Time Details ========== -->
+
+        <View style="@style/divider"/>
+
+        <!-- Times -->
         <LinearLayout
                 style="@style/LinearLayout"
                 android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/paper_ripple"
+                >
+            <ImageView
+                    style="@style/icon"
+                    android:src="@drawable/ic_clock"
+                />
+            <LinearLayout
+                    style="@style/LinearLayout"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="16dp"
+                    >
+                <TextView
+                        style="@style/text_icon"
+                        android:text="@string/edit_timerange_title"
+                    />
+                <TextView
+                        android:text="@string/edit_timerange_value"
+                        android:layout_height="wrap_content"
+                        android:layout_width="fill_parent"
+                        android:textColor="@color/text_hint_regular"
+                    />
+                <TextView
+                        style="@style/text_icon"
+                        android:text="@string/edit_duration_title"
+                    />
+                <TextView
+                        android:text="@string/edit_duration_value"
+                        android:layout_height="wrap_content"
+                        android:layout_width="fill_parent"
+                        android:textColor="@color/text_hint_regular"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Color -->
+        <LinearLayout
+                style="@style/LinearLayout"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 >
             <LinearLayout
                     style="@style/LinearLayout"
@@ -70,54 +105,8 @@
                     android:divider="@null"
                 />
         </LinearLayout>
-        <LinearLayout
-                style="@style/LinearLayout"
-                android:orientation="horizontal"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/paper_ripple"
-                android:onClick="openTimeRangeDialog"
-                >
-            <LinearLayout
-                    style="@style/LinearLayout"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="16dp"
-                    >
-                <TextView
-                        style="@style/text_icon"
-                        android:text="@string/edit_timerange_title"
-                    />
-                <TextView
-                        android:text="@string/edit_timerange_value"
-                        android:layout_height="wrap_content"
-                        android:layout_width="fill_parent"
-                        android:textColor="@color/text_hint_regular"
-                    />
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-                style="@style/LinearLayout"
-                android:orientation="horizontal"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/paper_ripple"
-                android:onClick="openDurationDialog"
-                >
-            <LinearLayout
-                    style="@style/LinearLayout"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="16dp"
-                    >
-                <TextView
-                        style="@style/text_icon"
-                        android:text="@string/edit_duration_title"
-                    />
-                <TextView
-                        android:text="@string/edit_duration_value"
-                        android:layout_height="wrap_content"
-                        android:layout_width="fill_parent"
-                        android:textColor="@color/text_hint_regular"
-                    />
-            </LinearLayout>
-        </LinearLayout>
+
+        <!-- Repeat -->
         <LinearLayout
                 style="@style/LinearLayout"
                 android:orientation="horizontal"
@@ -181,6 +170,20 @@
                     >
             </ToggleButton>
         </LinearLayout>
+
+        <!-- Notes -->
+        <com.dissonant.quotas.ui.views.FloatingHintEditText
+                android:id="@+id/edit_description"
+                style="@style/floating_edittext"
+                android:layout_height="48dp"
+                android:layout_width="fill_parent"
+                android:hint="@string/edit_description_hint"
+                android:inputType="text"
+                android:layout_marginBottom="16dip"
+                android:padding="2dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+            />
     </LinearLayout>
     <ImageButton
             style="@style/fab"

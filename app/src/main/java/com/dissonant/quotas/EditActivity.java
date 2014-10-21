@@ -75,15 +75,6 @@ public class EditActivity extends Activity {
         m_csAdapter = new ColorSpinnerAdapter(this,
                     R.layout.color_spinner, colorArray,
                     colorNameArray, colorNameView);
-
-        /*
-        // draw FAB Outline
-        int size = getResources().getDimensionPixelSize(R.dimen.fab_size);
-        Outline mOutline = new Outline();
-        mOutline.setOval(0, 0, size, size);
-        findViewById(R.id.fab).setOutline(mOutline);
-        */
-
     }
 
     public void setupView() {
