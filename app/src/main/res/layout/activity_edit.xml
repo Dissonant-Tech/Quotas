@@ -25,7 +25,6 @@
                 android:textStyle="bold"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:layout_marginBottom="8dp"
                 android:background="@null"
             />
 
@@ -35,7 +34,9 @@
         <LinearLayout
                 style="@style/LinearLayout"
                 android:orientation="horizontal"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:background="@drawable/paper_ripple"
                 >
             <ImageView
@@ -45,7 +46,7 @@
             <LinearLayout
                     style="@style/LinearLayout"
                     android:orientation="vertical"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginLeft="34dp"
                     >
                 <TextView
                         style="@style/text_icon"
@@ -67,8 +68,14 @@
                         android:layout_width="fill_parent"
                         android:textColor="@color/text_hint_regular"
                     />
+
             </LinearLayout>
         </LinearLayout>
+
+        <View 
+                style="@style/divider"
+                android:layout_marginLeft="72dp"
+            />
 
         <!-- Color -->
         <LinearLayout
@@ -77,6 +84,11 @@
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 >
+            <View
+                    style="@style/icon"
+                    android:background="@drawable/circle"
+                    android:alpha="1"
+                />
             <LinearLayout
                     style="@style/LinearLayout"
                     android:orientation="vertical"

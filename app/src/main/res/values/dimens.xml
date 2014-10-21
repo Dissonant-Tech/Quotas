@@ -15,4 +15,7 @@
     <item name="floatinghintedittext_hint_scale" type="dimen" format="float">0.6</item>
     <item name="floatinghintedittext_animation_steps" type="dimen" format="integer">6</item>
 
+    <dimen name="icon_height">24dp</dimen>
+    <dimen name="icon_width">24dp</dimen>
+
 </resources>

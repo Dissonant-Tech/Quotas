@@ -25,8 +25,8 @@
     </style>
 
     <style name="icon">
-        <item name="android:layout_height">24dp</item>
-        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">@dimen/icon_height</item>
+        <item name="android:layout_width">@dimen/icon_width</item>
         <item name="android:alpha">.45</item>
     </style>
 
@@ -51,7 +51,8 @@
     <style name="divider">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:layout_marginBottom">16dip</item>
+        <item name="android:layout_marginTop">8dip</item>
+        <item name="android:layout_marginBottom">8dip</item>
         <item name="android:background">@color/divider</item>
     </style>
 
