@@ -19,24 +19,21 @@ import com.dissonant.quotas.db.models.QuotaModel;
 import com.dissonant.quotas.ui.adapters.DoughnutChartAdapter;
 
 public class MainActivity extends Activity {
-    boolean resuming = false;
-
     QuotaModel[] quotas;
 
     private DoughnutChartAdapter doughnutChart;
     private ImageButton fabButton;
-    private Animation slideUp;
+    private LinearLayout chartContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
-
         //init FAB, as well as set onClick
-        initView();
-        createClickListeners();
+        init();
+        setupView();
+        createListeners();
 
         // Load default preferences
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
@@ -64,28 +61,22 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void initView() {
+    public void init() {
         fabButton = (ImageButton)findViewById(R.id.fab);
-        LinearLayout chartLayout = (LinearLayout) findViewById(R.id.chart);
-
-        /*
-        // FAB Outline
-        int size = getResources().getDimensionPixelSize(R.dimen.fab_size);
-        Outline mOutline = new Outline();
-        mOutline.setOval(0, 0, size, size);
-        findViewById(R.id.fab).setOutline(mOutline);
-        */
-
-        // achartengine Doughnut Chart
+        chartContainer = (LinearLayout) findViewById(R.id.chart);
         doughnutChart = new DoughnutChartAdapter(
                 getApplicationContext(), quotas);
-        chartLayout.addView(doughnutChart.getView());
-        fabButton.bringToFront();
     }
 
-    public void createClickListeners() {
+    public void setupView() {
+        fabButton.bringToFront();
+        chartContainer.addView(doughnutChart.getView());
+    }
+
+    public void createListeners() {
         final View fabView = findViewById(R.id.fab);
 
+        // Open EditActivity on FAB click
         fabButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
