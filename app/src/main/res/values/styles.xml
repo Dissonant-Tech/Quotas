@@ -27,7 +27,7 @@
     <style name="icon">
         <item name="android:layout_height">@dimen/icon_height</item>
         <item name="android:layout_width">@dimen/icon_width</item>
-        <item name="android:alpha">.45</item>
+        <item name="android:alpha">.55</item>
     </style>
 
     <style name ="floating_edittext"
