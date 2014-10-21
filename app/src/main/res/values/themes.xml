@@ -61,7 +61,7 @@
 
         <!-- specify enter and exit transitions -->
         <item name="android:windowEnterTransition">@transition/fade_in</item>
-        <item name="android:windowExitTransition">@transition/slide</item>
+        <item name="android:windowExitTransition">@transition/fade_out</item>
 
         <!-- specify shared element transitions -->
         <item name="android:windowSharedElementEnterTransition">

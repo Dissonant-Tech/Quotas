@@ -92,9 +92,7 @@
             <LinearLayout
                     style="@style/LinearLayout"
                     android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginLeft="34dp"
                     >
                 <TextView
                         style="@style/text_icon"
@@ -115,6 +113,33 @@
                     android:popupBackground="@null"
                     android:dividerHeight="0dip"
                     android:divider="@null"
+                />
+        </LinearLayout>
+
+        <View 
+                style="@style/divider"
+                android:layout_marginLeft="72dp"
+            />
+        
+        <!-- Location -->
+        <LinearLayout
+                style="@style/LinearLayout"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                >
+            <ImageView
+                    style="@style/icon"
+                    android:src="@drawable/ic_action_place"
+                />
+            <TextView
+                    android:id="@+id/color_value"
+                    android:text="@string/location"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:layout_marginLeft="34dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/text_hint_regular"
                 />
         </LinearLayout>
 

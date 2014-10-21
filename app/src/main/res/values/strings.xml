@@ -48,6 +48,8 @@
 
     <string name="edit_color_title">Color</string>
     <string name="color_value">None</string>
+    
+    <string name="location">location</string>
 
     <string name="edit_timerange_title">Time range</string>
     <string name="edit_timerange_value">None</string>
