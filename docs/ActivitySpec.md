@@ -6,6 +6,18 @@ programming styles.
 Lukily the highly decoupled API allows shaping them into either style relatively
 simple.
 
+Fields
+======
+
+1. Field names should be descriptive. lower-case word followed by upper-case words.
+    Example: `private ImageView fabButton` . ImageView is not descriptive and as such
+    `fabButton` is used for the field name.
+
+2. Member class names should start with `m_`. If member class names are too long they 
+    should be shortend by using lowercase letters in place of the first few 
+    (or more, as neccessary) words, followed by the full upppercase word(s) such as in 
+    the case of `private ColorSpinnerAdapter m_csAdapter`
+
 
 Methods
 =======
