@@ -73,10 +73,10 @@ public class MainActivity extends Activity {
         chartContainer = (LinearLayout) findViewById(R.id.chart);
         doughnutChart = new DoughnutChartAdapter(
                 getApplicationContext(), quotas);
-
     }
 
     public void setupView() {
+        fabButton.bringToFront();
         chartContainer.addView(doughnutChart.getView());
     }
 
