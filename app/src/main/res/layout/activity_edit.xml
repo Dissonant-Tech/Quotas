@@ -72,7 +72,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <View 
+        <View
                 style="@style/divider"
                 android:layout_marginLeft="72dp"
             />
@@ -93,6 +93,7 @@
                     style="@style/LinearLayout"
                     android:orientation="vertical"
                     android:layout_marginLeft="34dp"
+                    android:background="@drawable/paper_ripple"
                     >
                 <TextView
                         style="@style/text_icon"
@@ -116,11 +117,11 @@
                 />
         </LinearLayout>
 
-        <View 
+        <View
                 style="@style/divider"
                 android:layout_marginLeft="72dp"
             />
-        
+
         <!-- Location -->
         <LinearLayout
                 style="@style/LinearLayout"
@@ -140,6 +141,7 @@
                     android:layout_marginLeft="34dp"
                     android:textSize="16dp"
                     android:textColor="@color/text_hint_regular"
+                    android:background="@drawable/paper_ripple"
                 />
         </LinearLayout>
 
