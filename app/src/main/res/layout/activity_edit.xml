@@ -8,7 +8,6 @@
         android:background="@color/White"
         >
     <LinearLayout
-            style="@style/LinearLayout"
             android:orientation="vertical"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
@@ -34,10 +33,7 @@
         <LinearLayout
                 style="@style/LinearLayout"
                 android:orientation="horizontal"
-                android:layout_marginTop="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/paper_ripple"
+                android:paddingLeft="4dp"
                 >
             <ImageView
                     style="@style/icon"
@@ -46,7 +42,11 @@
             <LinearLayout
                     style="@style/LinearLayout"
                     android:orientation="vertical"
-                    android:layout_marginLeft="34dp"
+                    android:layout_marginLeft="20dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingRight="16dp"
+                    android:background="@drawable/paper_ripple"
                     >
                 <TextView
                         style="@style/text_icon"
@@ -81,20 +81,24 @@
         <LinearLayout
                 style="@style/LinearLayout"
                 android:orientation="horizontal"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
+                android:paddingLeft="4dp"
                 >
             <ImageView
                     android:id="@+id/color_icon"
                     style="@style/icon"
                     android:src="@drawable/circle"
+                    android:gravity="center_vertical"
+                    android:padding="2dp"
                     android:alpha="1"
                 />
             <LinearLayout
                     android:id="@+id/colorpicker"
                     style="@style/LinearLayout"
                     android:orientation="vertical"
-                    android:layout_marginLeft="34dp"
+                    android:layout_marginLeft="20dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingRight="16dp"
                     android:background="@drawable/paper_ripple"
                     >
                 <TextView
@@ -115,29 +119,6 @@
                 style="@style/divider"
                 android:layout_marginLeft="72dp"
             />
-
-        <!-- Location -->
-        <LinearLayout
-                style="@style/LinearLayout"
-                android:orientation="horizontal"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                >
-            <ImageView
-                    style="@style/icon"
-                    android:src="@drawable/ic_action_place"
-                />
-            <TextView
-                    android:id="@+id/color_value"
-                    android:text="@string/location"
-                    android:layout_height="wrap_content"
-                    android:layout_width="fill_parent"
-                    android:layout_marginLeft="34dp"
-                    android:textSize="16dp"
-                    android:textColor="@color/text_hint_regular"
-                    android:background="@drawable/paper_ripple"
-                />
-        </LinearLayout>
 
         <!-- Repeat -->
         <LinearLayout
