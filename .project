@@ -3,7 +3,7 @@
 	<name>Quotas</name>
 	<comment/>
 	<projects/>
-	<natures/>
+    <natures>java</natures>
 	<buildSpec/>
 	<linkedResources/>
 </projectDescription>
