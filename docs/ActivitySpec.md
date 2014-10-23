@@ -13,7 +13,7 @@ Fields
     Example: `private ImageView fabButton` . ImageView is not descriptive and as such
     `fabButton` is used for the field name.
 
-2. Member class names should start with `m_` to indicate they are class members.
+2. Member class names should start with `m` to indicate they are class members.
     
 3. If member class names are too long they should be shortend by using lowercase 
     letters in place of the first few (or more, as neccessary) words, followed by 
