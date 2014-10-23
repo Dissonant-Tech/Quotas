@@ -13,22 +13,24 @@ Fields
     Example: `private ImageView fabButton` . ImageView is not descriptive and as such
     `fabButton` is used for the field name.
 
-2. Member class names should start with `m_`. If member class names are too long they 
-    should be shortend by using lowercase letters in place of the first few 
-    (or more, as neccessary) words, followed by the full upppercase word(s) such as in 
-    the case of `private ColorSpinnerAdapter m_csAdapter`
+2. Member class names should start with `m` to indicate they are class members.
+    
+3. If member class names are too long they should be shortend by using lowercase 
+    letters in place of the first few (or more, as neccessary) words, followed by 
+    the full upppercase word(s) such as in the case of 
+    `private ColorSpinnerAdapter m_csAdapter`
 
 
 Methods
 =======
 
-    * init(): Initializes public fields. __Only__ initialize, do nothing else.
+1. init(): Initializes public fields. __Only__ initialize, do nothing else.
 
-    * setupView(): Connects android.View objects to their respective fields.
+2. setupView(): Connects android.View objects to their respective fields.
 
-    * createListeners(): Creates onClick and other listeners for initialized fields. 
-        _ This method may call to other methods or may be split in the future as it 
-            is prone to being very long _
+3. createListeners(): Creates onClick and other listeners for initialized fields. 
+    _This method may call to other methods or may be split in the future as it 
+        is prone to being very long_
 
 NOTES:
 ======
