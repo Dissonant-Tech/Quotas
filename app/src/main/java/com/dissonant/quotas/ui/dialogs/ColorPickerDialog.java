@@ -19,7 +19,7 @@ import com.dissonant.quotas.ui.adapters.ColorListAdapter;
 public class ColorPickerDialog extends DialogFragment {
     AlertDialog.Builder builder;
     LayoutInflater inflater;
-    View m_DialogView;
+    View mDialogView;
 
     ColorListAdapter m_cListAdapter;
     ArrayList<ColorListItem> colorArray;
@@ -33,14 +33,14 @@ public class ColorPickerDialog extends DialogFragment {
         builder = new AlertDialog.Builder(getActivity());
         inflater = getActivity().getLayoutInflater();
 
-        m_DialogView = inflater.inflate(R.layout.dialog_colorpicker, null);
+        mDialogView = inflater.inflate(R.layout.dialog_colorpicker, null);
         colorNameView = (TextView) getActivity().findViewById(R.id.color_value);
         colorView = (ImageView) getActivity().findViewById(R.id.color_icon);
 
         m_cListAdapter = new ColorListAdapter(getActivity().getBaseContext(),
                 R.layout.colorlist_row, colorArray);
 
-        builder.setView(m_DialogView);
+        builder.setView(mDialogView);
         builder.setAdapter(m_cListAdapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 colorNameView.setText(colorArray.get(which).getName());
