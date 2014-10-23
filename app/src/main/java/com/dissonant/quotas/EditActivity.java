@@ -1,6 +1,7 @@
 package com.dissonant.quotas;
 
 import java.sql.Time;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,22 +9,20 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
-import android.widget.Spinner;
-import android.widget.Switch;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.dissonant.quotas.ui.adapters.ColorSpinnerAdapter;
+import com.dissonant.quotas.model.ColorListItem;
+import com.dissonant.quotas.ui.dialogs.ColorPickerDialog;
 import com.dissonant.quotas.ui.dialogs.TimeRangeDialogFragment;
 
 public class EditActivity extends Activity {
 
-    private Spinner colorSpinner;
-    private Integer[] colorArray;
-    private String[] colorNameArray;
     private TextView colorNameView;
-    private ColorSpinnerAdapter m_csAdapter;
+    private LinearLayout colorPicker;
 
     private ImageButton fabButton;
     private CheckBox repeatSwitch;
@@ -62,28 +61,26 @@ public class EditActivity extends Activity {
     }
 
     public void init() {
-        fabButton = (ImageButton)findViewById(R.id.fab);
-        colorSpinner = (Spinner) findViewById(R.id.edit_color_spinner);
+        fabButton = (ImageButton) findViewById(R.id.fab);
+
+        colorPicker = (LinearLayout) findViewById(R.id.colorpicker);
+        colorNameView = (TextView) findViewById(R.id.color_value);
+
         repeatSwitch = (CheckBox) findViewById(R.id.repeat_switch);
         repeatOptions = (View) findViewById(R.id.repeat_options);
-
-        colorArray = getAsIntegerArray(getResources()
-                .getIntArray(R.array.default_color_array));
-        colorNameArray = getResources()
-            .getStringArray(R.array.color_name_array);
-        colorNameView = (TextView) findViewById(R.id.color_value);
-        m_csAdapter = new ColorSpinnerAdapter(this,
-                    R.layout.color_spinner, colorArray,
-                    colorNameArray, colorNameView);
     }
 
     public void setupView() {
-        colorSpinner.setAdapter(m_csAdapter);
-        colorSpinner.setOnItemSelectedListener(m_csAdapter);
     }
 
     public void createListeners() {
-        
+        colorPicker.setOnClickListener( new AdapterView.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ColorPickerDialog cpDialog = new ColorPickerDialog();
+                cpDialog.show(getFragmentManager(), "colorpicker");
+            }
+        });
     }
 
     public boolean validate() {
