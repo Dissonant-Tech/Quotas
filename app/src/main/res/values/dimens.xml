@@ -17,5 +17,6 @@
 
     <dimen name="icon_height">24dp</dimen>
     <dimen name="icon_width">24dp</dimen>
+    <dimen name="icon_margin">12dp</dimen>
 
 </resources>

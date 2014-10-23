@@ -62,10 +62,7 @@ public class EditActivity extends Activity {
 
     public void init() {
         fabButton = (ImageButton) findViewById(R.id.fab);
-
         colorPicker = (LinearLayout) findViewById(R.id.colorpicker);
-        colorNameView = (TextView) findViewById(R.id.color_value);
-
         repeatSwitch = (CheckBox) findViewById(R.id.repeat_switch);
         repeatOptions = (View) findViewById(R.id.repeat_options);
     }
