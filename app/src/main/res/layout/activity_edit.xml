@@ -84,9 +84,10 @@
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 >
-            <View
+            <ImageView
+                    android:id="@+id/color_icon"
                     style="@style/icon"
-                    android:background="@drawable/circle"
+                    android:src="@drawable/circle"
                     android:alpha="1"
                 />
             <LinearLayout
