@@ -32,7 +32,6 @@ public class ColorPickerDialog extends DialogFragment {
         m_cListAdapter = new ColorListAdapter(getActivity().getBaseContext(),
                 R.layout.colorlist_row, colorArray);
 
-        builder.setTitle(R.string.colorpicker_title);
         builder.setView(m_DialogView);
         builder.setAdapter(m_cListAdapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {

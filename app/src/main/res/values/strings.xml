@@ -81,6 +81,4 @@
 
     <string name="save_success">Quota Saved</string>
     <string name="save_failed">Quota Save Failed!</string>
-
-    <string name="colorpicker_title">Choose a color</string>
 </resources>
