@@ -1,7 +1,6 @@
 package com.dissonant.quotas;
 
 import java.sql.Time;
-import java.util.ArrayList;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,12 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
-import com.dissonant.quotas.model.ColorListItem;
 import com.dissonant.quotas.ui.dialogs.ColorPickerDialog;
 import com.dissonant.quotas.ui.dialogs.TimeRangeDialogFragment;
 
@@ -75,6 +74,21 @@ public class EditActivity extends Activity {
                 ColorPickerDialog cpDialog = new ColorPickerDialog();
                 cpDialog.show(getFragmentManager(), "colorpicker");
             }
+        });
+
+        Switch repeatSwitch = (Switch) findViewById(R.id.repeat_switch);
+        repeatSwitch.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            // toggle is enabled
+                            repeatOptions.setVisibility(View.VISIBLE);
+                        } else {
+                            // toggle is disabled
+                            repeatOptions.setVisibility(View.GONE);
+                        }
+                    }
         });
     }
 

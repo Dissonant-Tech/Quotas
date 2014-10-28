@@ -162,6 +162,7 @@
                         />
                 </LinearLayout>
                 <Switch
+                        android:id="@+id/repeat_switch"
                         android:checked="false"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
