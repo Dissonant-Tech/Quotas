@@ -221,25 +221,47 @@
                     >
             </ToggleButton>
         </LinearLayout>
-        
+
         <View
                 style="@style/divider"
                 android:layout_marginLeft="72dp"
             />
 
         <!-- Notes -->
-        <com.dissonant.quotas.ui.views.FloatingHintEditText
-                android:id="@+id/edit_description"
-                style="@style/floating_edittext"
-                android:layout_height="48dp"
-                android:layout_width="fill_parent"
-                android:hint="@string/edit_description_hint"
-                android:inputType="text"
-                android:layout_marginBottom="16dip"
-                android:padding="2dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-            />
+        <LinearLayout
+                style="@style/LinearLayout"
+                android:orientation="horizontal"
+                android:paddingLeft="4dp"
+                >
+            <ImageView
+                    style="@style/icon"
+                    android:src="@drawable/circle"
+                    android:gravity="center_vertical"
+                    android:padding="2dp"
+                    android:alpha="1"
+                />
+            <LinearLayout
+                    android:id="@+id/colorpicker"
+                    style="@style/LinearLayout"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="20dp"
+                    android:paddingBottom="8dp"
+                    android:paddingRight="16dp"
+                    android:background="@drawable/paper_ripple"
+                    >
+                <com.dissonant.quotas.ui.views.FloatingHintEditText
+                        android:id="@+id/edit_description"
+                        style="@style/floating_edittext"
+                        android:layout_height="wrap_content"
+                        android:layout_width="fill_parent"
+                        android:hint="@string/edit_description_hint"
+                        android:inputType="text"
+                        android:padding="2dp"
+                        android:background="@null"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
     <ImageButton
             style="@style/fab"
