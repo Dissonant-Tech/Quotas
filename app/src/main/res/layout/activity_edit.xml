@@ -27,7 +27,9 @@
                 android:background="@null"
             />
 
-        <View style="@style/divider"/>
+        <View style="@style/divider"
+                android:layout_marginTop="16dp"
+            />
 
         <!-- Times -->
         <LinearLayout
@@ -124,15 +126,50 @@
         <LinearLayout
                 style="@style/LinearLayout"
                 android:orientation="horizontal"
-                android:layout_marginTop="16dp"
+                android:paddingLeft="4dp"
                 >
-            <CheckBox
-                    android:id="@+id/repeat_switch"
-                    android:text="@string/repeat_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+            <ImageView
+                    android:id="@+id/color_icon"
+                    style="@style/icon"
+                    android:src="@drawable/ic_replay"
+                />
+            <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
                     >
-            </CheckBox>
+                <LinearLayout
+                        android:id="@+id/colorpicker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:paddingRight="16dp"
+                        android:background="@drawable/paper_ripple"
+                        android:layout_alignParentLeft="true"
+                        >
+                    <TextView
+                            style="@style/text_icon"
+                            android:text="@string/repeat_title"
+                        />
+                    <TextView
+                            android:id="@+id/color_value"
+                            android:text="@string/repeat_value"
+                            android:layout_height="wrap_content"
+                            android:layout_width="fill_parent"
+                            android:textColor="@color/text_hint_regular"
+                        />
+                </LinearLayout>
+                <Switch
+                        android:checked="false"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_toRightOf="@id/colorpicker"
+                        android:layout_marginRight="16dp"
+                    />
+            </RelativeLayout>
         </LinearLayout>
         <LinearLayout
                 style="@style/LinearLayout"
@@ -184,6 +221,11 @@
                     >
             </ToggleButton>
         </LinearLayout>
+        
+        <View
+                style="@style/divider"
+                android:layout_marginLeft="72dp"
+            />
 
         <!-- Notes -->
         <com.dissonant.quotas.ui.views.FloatingHintEditText

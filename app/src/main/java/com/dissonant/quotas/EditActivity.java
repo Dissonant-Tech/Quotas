@@ -25,7 +25,6 @@ public class EditActivity extends Activity {
     private LinearLayout colorPicker;
 
     private ImageButton fabButton;
-    private CheckBox repeatSwitch;
     private View repeatOptions;
 
     private Time startTime;
@@ -63,7 +62,6 @@ public class EditActivity extends Activity {
     public void init() {
         fabButton = (ImageButton) findViewById(R.id.fab);
         colorPicker = (LinearLayout) findViewById(R.id.colorpicker);
-        repeatSwitch = (CheckBox) findViewById(R.id.repeat_switch);
         repeatOptions = (View) findViewById(R.id.repeat_options);
     }
 
