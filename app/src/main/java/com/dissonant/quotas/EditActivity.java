@@ -1,7 +1,5 @@
 package com.dissonant.quotas;
 
-import java.sql.Time;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -10,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -20,37 +17,32 @@ import com.dissonant.quotas.ui.dialogs.TimeRangeDialogFragment;
 
 public class EditActivity extends Activity {
 
-    private TextView colorNameView;
-    private LinearLayout colorPicker;
-
-    private ImageButton fabButton;
-    private View repeatOptions;
-
-    private Time startTime;
-    private Time endTime;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
-        init();
-        setupView();
         createListeners();
 
         // Load default preferences
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return false;
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.edit, menu);
+
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return false;
+        int id = item.getItemId();
+        if (id == R.id.action_save) {
+            validate();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -58,16 +50,8 @@ public class EditActivity extends Activity {
         this.finishAfterTransition();
     }
 
-    public void init() {
-        fabButton = (ImageButton) findViewById(R.id.fab);
-        colorPicker = (LinearLayout) findViewById(R.id.colorpicker);
-        repeatOptions = (View) findViewById(R.id.repeat_options);
-    }
-
-    public void setupView() {
-    }
-
     public void createListeners() {
+        LinearLayout colorPicker = (LinearLayout) findViewById(R.id.colorpicker);
         colorPicker.setOnClickListener( new AdapterView.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,10 +61,12 @@ public class EditActivity extends Activity {
         });
 
         Switch repeatSwitch = (Switch) findViewById(R.id.repeat_switch);
+        final View repeatOptions = (View) findViewById(R.id.repeat_options);
         repeatSwitch.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    public void onCheckedChanged(
+                        CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             // toggle is enabled
                             repeatOptions.setVisibility(View.VISIBLE);
@@ -89,6 +75,14 @@ public class EditActivity extends Activity {
                             repeatOptions.setVisibility(View.GONE);
                         }
                     }
+        });
+
+        LinearLayout timeDuration = (LinearLayout) findViewById(R.id.duration_layout);
+        timeDuration.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTimeRangeDialog(v);
+            }
         });
     }
 
@@ -129,34 +123,6 @@ public class EditActivity extends Activity {
             counter++;
         }
         return integerArray;
-    }
-
-    /**
-     * @return the startTime
-     */
-    public Time getStartTime() {
-        return startTime;
-    }
-
-    /**
-     * @param startTime the startTime to set
-     */
-    public void setStartTime(Time startTime) {
-        this.startTime = startTime;
-    }
-
-    /**
-     * @return the endTime
-     */
-    public Time getEndTime() {
-        return endTime;
-    }
-
-    /**
-     * @param endTime the endTime to set
-     */
-    public void setEndTime(Time endTime) {
-        this.endTime = endTime;
     }
 
 }

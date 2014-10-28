@@ -54,7 +54,7 @@
         <item name="android:actionBarStyle">@style/QuotasActionBar</item>
         <item name="android:textColorPrimary">@color/White</item>
         <item name="android:textColorSecondary">@color/text_hint_regular</item>
-        <item name="android:textColor">@color/text_regular</item>
+        <item name="android:textColor">@color/White</item>
 
         <!-- Enable window content transitions  -->
         <item name="android:windowContentTransitions">True</item>

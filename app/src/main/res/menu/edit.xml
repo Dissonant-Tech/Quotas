@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.dissonant.quotas.MainActivity"
+    >
+
+    <!-- Settings Action -->
+    <item
+        android:id="@+id/action_save"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_save"
+        android:textColor="@color/White"
+    />
+
+</menu>
+

@@ -8,6 +8,7 @@
     <string name="edit_label">Edit</string>
 
     <string name="action_settings">Settings</string>
+    <string name="action_save">Save</string>
     <string name="action_search">search</string>
     <string name="action_websearch">search</string>
 
@@ -54,7 +55,7 @@
     <string name="edit_timerange_title">Time range</string>
     <string name="edit_timerange_value">None</string>
 
-    <string name="edit_duration_title">Notes</string>
+    <string name="edit_duration_title">Duration</string>
     <string name="edit_duration_value">None</string>
 
 

@@ -23,6 +23,7 @@
             android:layout_toRightOf="@id/icon"
             android:gravity="center_vertical"
             android:text="Default"
+            android:textColor="@color/text_regular"
             android:textSize="16dp" />
 
 </RelativeLayout>

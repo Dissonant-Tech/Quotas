@@ -46,31 +46,45 @@
                     android:orientation="vertical"
                     android:layout_marginLeft="20dp"
                     android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
                     android:paddingRight="16dp"
-                    android:background="@drawable/paper_ripple"
                     >
-                <TextView
-                        style="@style/text_icon"
-                        android:text="@string/edit_timerange_title"
-                    />
-                <TextView
-                        android:text="@string/edit_timerange_value"
-                        android:layout_height="wrap_content"
+                <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="fill_parent"
-                        android:textColor="@color/text_hint_regular"
-                    />
-                <TextView
-                        style="@style/text_icon"
-                        android:text="@string/edit_duration_title"
-                    />
-                <TextView
-                        android:text="@string/edit_duration_value"
                         android:layout_height="wrap_content"
+                        android:paddingBottom="8dp"
+                        android:background="@drawable/paper_ripple"
+                        >
+                    <TextView
+                            style="@style/text_icon"
+                            android:text="@string/edit_timerange_title"
+                        />
+                    <TextView
+                            android:text="@string/edit_timerange_value"
+                            android:layout_height="wrap_content"
+                            android:layout_width="fill_parent"
+                            android:textColor="@color/text_hint_regular"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                        android:id="@+id/duration_layout"
+                        android:orientation="vertical"
                         android:layout_width="fill_parent"
-                        android:textColor="@color/text_hint_regular"
-                    />
-
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="8dp"
+                        android:background="@drawable/paper_ripple"
+                        >
+                    <TextView
+                            style="@style/text_icon"
+                            android:text="@string/edit_duration_title"
+                        />
+                    <TextView
+                            android:text="@string/edit_duration_value"
+                            android:layout_height="wrap_content"
+                            android:layout_width="fill_parent"
+                            android:textColor="@color/text_hint_regular"
+                        />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
@@ -172,53 +186,55 @@
                     />
             </RelativeLayout>
         </LinearLayout>
+        <!-- Repeat Options -->
         <LinearLayout
                 style="@style/LinearLayout"
                 android:id="@+id/repeat_options"
                 android:orientation="horizontal"
                 android:layout_marginTop="16dp"
+                android:layout_marginLeft="72dp"
                 android:visibility="gone"
                 >
             <ToggleButton
                     style="@style/togglebutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:textOn="Mon"
+                    android:textOff="Mon"
                     >
             </ToggleButton>
             <ToggleButton
                     style="@style/togglebutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:textOn="Tue"
+                    android:textOff="Tue"
                     >
             </ToggleButton>
             <ToggleButton
                     style="@style/togglebutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:textOn="Wed"
+                    android:textOff="Wed"
                     >
             </ToggleButton>
             <ToggleButton
                     style="@style/togglebutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:textOn="Thu"
+                    android:textOff="Thu"
                     >
             </ToggleButton>
             <ToggleButton
                     style="@style/togglebutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:textOn="Fri"
+                    android:textOff="Fri"
                     >
             </ToggleButton>
             <ToggleButton
                     style="@style/togglebutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:textOn="Sat"
+                    android:textOff="Sat"
                     >
             </ToggleButton>
             <ToggleButton
                     style="@style/togglebutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:textOn="Sun"
+                    android:textOff="Sun"
                     >
             </ToggleButton>
         </LinearLayout>
