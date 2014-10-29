@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +21,11 @@ public class TimeRangeDialogFragment extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View mDialogView = inflater.inflate(R.layout.dialog_time_range, null);
 
+        int backgroundColor = getResources().getColor(
+                R.color.abc_background_cache_hint_selector_material_light);
+
         // Pass the inflated view and initialize the DoughnutSelector
-        initTimeRangeSelector(mDialogView);
+        initTimeRangeSelector(mDialogView, backgroundColor);
 
         builder.setView(mDialogView)
             .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
@@ -54,13 +59,13 @@ public class TimeRangeDialogFragment extends DialogFragment {
                 R.style.dialog_animation_slide_up);
     }
 
-    public void initTimeRangeSelector(View v) {
+    public void initTimeRangeSelector(View v, int backgroundColor) {
         DoughnutSelector mTimeRangeChart = (DoughnutSelector) v.findViewById(R.id.TimeRangeChart);
         mTimeRangeChart.setTouchEnabled(true);
-        mTimeRangeChart.setDrawText(false);
+        mTimeRangeChart.setDrawText(true);
         mTimeRangeChart.setElevation(1);
-        mTimeRangeChart.setColor(getResources().getColor(R.color.LightGrey));
-        mTimeRangeChart.setBackgroundColor(getResources().getColor(R.color.primary));
+        mTimeRangeChart.setColor(getResources().getColor(R.color.primary));
+        mTimeRangeChart.showValue(0.0f, 24.0f, false);
     }
 
     public void setTimes() {

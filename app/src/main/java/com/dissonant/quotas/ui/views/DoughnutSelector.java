@@ -40,7 +40,7 @@ public class DoughnutSelector extends View
     private boolean mDrawInner = true;
     private boolean mDrawText = true;
     private boolean mTouchEnabled = true;
-    private boolean mDoubleTapEnabled = true;
+    private boolean mDoubleTapEnabled = false;
 
     private int mDimAlpha = 80;
     private DecimalFormat mFormatValue = new DecimalFormat("###,###,###,##0.0");
@@ -343,6 +343,10 @@ public class DoughnutSelector extends View
      */
     public boolean isDrawInnerCircleEnabled() {
         return mDrawInner;
+    }
+
+    public void setInnerColor(int color) {
+        mInnerCirclePaint.setColor(color);
     }
 
     /**

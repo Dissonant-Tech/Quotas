@@ -11,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dissonant.quotas.ui.dialogs.ColorPickerDialog;
 import com.dissonant.quotas.ui.dialogs.TimeRangeDialogFragment;
@@ -40,7 +41,13 @@ public class EditActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_save) {
-            validate();
+            if (validateData()) {
+                Toast.makeText(this, getResources()
+                        .getString(R.string.save_success), Toast.LENGTH_SHORT);
+            } else {
+                Toast.makeText(this, getResources()
+                        .getString(R.string.save_failed), Toast.LENGTH_SHORT);
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -86,7 +93,7 @@ public class EditActivity extends Activity {
         });
     }
 
-    public boolean validate() {
+    public boolean validateData() {
         TextView title = (TextView) findViewById(R.id.edit_title);
         TextView description = (TextView) findViewById(R.id.edit_description);
 
@@ -98,9 +105,6 @@ public class EditActivity extends Activity {
         }
 
         return true;
-    }
-
-    public void onRepeatToggled(View v) {
     }
 
     public void openTimeRangeDialog(View v) {
