@@ -41,12 +41,12 @@ public class EditActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_save) {
-            if (validateData()) {
+            if (validData()) {
                 Toast.makeText(this, getResources()
-                        .getString(R.string.save_success), Toast.LENGTH_SHORT);
+                        .getString(R.string.save_success), Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, getResources()
-                        .getString(R.string.save_failed), Toast.LENGTH_SHORT);
+                        .getString(R.string.save_failed), Toast.LENGTH_SHORT).show();
             }
         }
         return super.onOptionsItemSelected(item);
@@ -88,12 +88,17 @@ public class EditActivity extends Activity {
         timeDuration.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openTimeRangeDialog(v);
+                if (validTimes()) {
+                    openDurationDialog(v);
+                } else {
+                    Toast.makeText(EditActivity.this, getResources()
+                        .getString(R.string.invalid_times), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
-    public boolean validateData() {
+    public boolean validData() {
         TextView title = (TextView) findViewById(R.id.edit_title);
         TextView description = (TextView) findViewById(R.id.edit_description);
 
@@ -105,6 +110,10 @@ public class EditActivity extends Activity {
         }
 
         return true;
+    }
+
+    public boolean validTimes() {
+        return false;
     }
 
     public void openTimeRangeDialog(View v) {
