@@ -14,7 +14,7 @@ public class Utils {
      * @param endTime a Date object of the ending time for the range.
      * @return ArrayList<String> of time range.
      */
-    public ArrayList<String> genTimeRangeArray(Date startTime, Date endTime) {
+    public ArrayList<String> getTimeRangeArray(Date startTime, Date endTime) {
         ArrayList<String> result = new ArrayList<String>();
         SimpleDateFormat sdFormat = new SimpleDateFormat("hh:mm");
         Calendar calendar = Calendar.getInstance();
