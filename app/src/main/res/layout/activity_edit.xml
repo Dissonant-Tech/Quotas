@@ -28,7 +28,7 @@
             />
 
         <View style="@style/divider"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
             />
 
         <!-- Times -->
