@@ -15,8 +15,10 @@ import android.widget.Toast;
 
 import com.dissonant.quotas.ui.dialogs.ColorPickerDialog;
 import com.dissonant.quotas.ui.dialogs.TimeRangeDialogFragment;
+import com.dissonant.quotas.utils.BasicTextValidator;
 
 public class EditActivity extends Activity {
+    BasicTextValidator titleValidator;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class EditActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_save) {
-            if (validData()) {
+            if (validate()) {
                 Toast.makeText(this, getResources()
                         .getString(R.string.save_success), Toast.LENGTH_SHORT).show();
             } else {
@@ -96,20 +98,17 @@ public class EditActivity extends Activity {
                 }
             }
         });
+
+        TextView titleText = (TextView) findViewById(R.id.edit_title);
+        titleValidator = new BasicTextValidator(titleText);
+        titleText.addTextChangedListener(titleValidator);
     }
 
-    public boolean validData() {
-        TextView title = (TextView) findViewById(R.id.edit_title);
-        TextView description = (TextView) findViewById(R.id.edit_description);
-
-        if (title.getText() == "" || title.getText() == null) {
-            return false;
+    public boolean validate() {
+        if (titleValidator.isValid()) {
+            return true;
         }
-        if (description.getText() == "" || description.getText() == null) {
-            return false;
-        }
-
-        return true;
+        return false;
     }
 
     public boolean validTimes() {
