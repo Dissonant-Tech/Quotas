@@ -47,25 +47,4 @@ public class TimePickerFragment extends DialogFragment
         }
     }
     
-    private String getTimeAsString(int hourOfDay, int minute) {
-        StringBuilder result;
-        String format;
-
-        if (hourOfDay == 0) {
-            hourOfDay += 12;
-            format = "AM";
-        } else if (hourOfDay == 12) {
-            format = "PM";
-        } else if (hourOfDay > 12) {
-            hourOfDay -= 12;
-            format = "PM";
-        } else {
-            format = "AM";
-        }
-        result = new StringBuilder().append(hourOfDay).append(":").append(minute)
-            .append(" ").append(format);
-
-        return result.toString();
-    }
-
 }

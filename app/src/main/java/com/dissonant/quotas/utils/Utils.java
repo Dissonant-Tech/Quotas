@@ -11,7 +11,7 @@ public class Utils {
      * Returns an ArrayList of strings denoting the minutes in a range of time.
      *
      * @param startTime a Date object of the starting time for the range.
-     * @param endTime a Date object of the ending time for the range.
+     * @param endTime   a Date object of the ending time for the range.
      * @return ArrayList<String> of time range.
      */
     public ArrayList<String> getTimeRangeArray(Date startTime, Date endTime) {
@@ -25,5 +25,33 @@ public class Utils {
             result.add(sdFormat.format(calendar.getTime()));
         }
         return result;
+    }
+    
+    /**
+     * Returns a string formatted time from integers of hours and minutes.
+     *
+     * @param hourOfDay hour of the day as int.
+     * @param minute    minute of the hour as an int.
+     * @return String of formatted time.
+     */
+    private String getTimeAsString(int hourOfDay, int minute) {
+        StringBuilder result;
+        String format;
+
+        if (hourOfDay == 0) {
+            hourOfDay += 12;
+            format = "AM";
+        } else if (hourOfDay == 12) {
+            format = "PM";
+        } else if (hourOfDay > 12) {
+            hourOfDay -= 12;
+            format = "PM";
+        } else {
+            format = "AM";
+        }
+        result = new StringBuilder().append(hourOfDay).append(":").append(minute)
+            .append(" ").append(format);
+
+        return result.toString();
     }
 }
