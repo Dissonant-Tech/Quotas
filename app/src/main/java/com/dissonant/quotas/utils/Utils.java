@@ -14,7 +14,7 @@ public class Utils {
      * @param endTime   a Date object of the ending time for the range.
      * @return ArrayList<String> of time range.
      */
-    public ArrayList<String> getTimeRangeArray(Date startTime, Date endTime) {
+    static public ArrayList<String> getTimeRangeArray(Date startTime, Date endTime) {
         ArrayList<String> result = new ArrayList<String>();
         SimpleDateFormat sdFormat = new SimpleDateFormat("hh:mm");
         Calendar calendar = Calendar.getInstance();
@@ -34,7 +34,7 @@ public class Utils {
      * @param minute    minute of the hour as an int.
      * @return String of formatted time.
      */
-    private String getTimeAsString(int hourOfDay, int minute) {
+    static public String getTimeAsString(int hourOfDay, int minute) {
         StringBuilder result;
         String format;
 

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dissonant.quotas.ui.dialogs.ColorPickerDialog;
+import com.dissonant.quotas.ui.dialogs.TimePickerFragment;
 import com.dissonant.quotas.ui.dialogs.TimeRangeDialogFragment;
 import com.dissonant.quotas.utils.BasicTextValidator;
 
@@ -86,19 +87,28 @@ public class EditActivity extends Activity {
                     }
         });
 
+        LinearLayout timesPicker = (LinearLayout) findViewById(R.id.timerange_layout);
+        timesPicker.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTimePickerDialog(v);
+                openTimePickerDialog(v);
+            }
+        });
+
         LinearLayout timeDuration = (LinearLayout) findViewById(R.id.duration_layout);
         timeDuration.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (validTimes()) {
-                    openDurationDialog(v);
+                    openTimeRangeDialog(v);
                 } else {
                     Toast.makeText(EditActivity.this, getResources()
                         .getString(R.string.invalid_times), Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
+;
         TextView titleText = (TextView) findViewById(R.id.edit_title);
         titleValidator = new BasicTextValidator(titleText);
         titleText.addTextChangedListener(titleValidator);
@@ -120,9 +130,9 @@ public class EditActivity extends Activity {
         trDialog.show(getFragmentManager(), "timerange");
     }
 
-    public void openDurationDialog(View v) {
-        TimeRangeDialogFragment trDialog = new TimeRangeDialogFragment();
-        trDialog.show(getFragmentManager(), "duration");
+    public void openTimePickerDialog(View v) {
+        TimePickerFragment tPickerFragment = new TimePickerFragment(v);
+        tPickerFragment.show(getFragmentManager(), "duration");
     }
 
 

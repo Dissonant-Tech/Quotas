@@ -49,21 +49,35 @@
                     android:paddingRight="16dp"
                     >
                 <LinearLayout
-                        android:orientation="vertical"
+                        android:id="@+id/timerange_layout"
+                        android:orientation="horizontal"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:paddingBottom="8dp"
                         android:background="@drawable/paper_ripple"
                         >
+                    <LinearLayout
+                            android:id="@+id/timerange_layout"
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            >
+                        <TextView
+                                style="@style/text_icon"
+                                android:text="@string/edit_timerange_title"
+                            />
+                        <TextView
+                                android:text="@string/edit_timerange_value"
+                                android:layout_height="wrap_content"
+                                android:layout_width="fill_parent"
+                                android:textColor="@color/text_hint_regular"
+                            />
+                    </LinearLayout>
                     <TextView
-                            style="@style/text_icon"
-                            android:text="@string/edit_timerange_title"
-                        />
-                    <TextView
-                            android:text="@string/edit_timerange_value"
                             android:layout_height="wrap_content"
                             android:layout_width="fill_parent"
-                            android:textColor="@color/text_hint_regular"
+                            android:id="@+id/timerange_value"
+                            android:text="@string/default_start_time"
                         />
                 </LinearLayout>
                 <LinearLayout
