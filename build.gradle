@@ -15,6 +15,9 @@ allprojects {
     repositories {
         jcenter()
     }
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked"
+    }
 }
 
 task wrapper(type: Wrapper) {

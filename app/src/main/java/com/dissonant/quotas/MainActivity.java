@@ -1,17 +1,13 @@
 package com.dissonant.quotas;
 
-import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -83,7 +79,7 @@ public class MainActivity extends Activity {
                 Intent i = new Intent(MainActivity.this, EditActivity.class);
                 ActivityOptions options = ActivityOptions
                     .makeSceneTransitionAnimation(MainActivity.this,
-                        Pair.create((View) fabView, "fab_button"));
+                        (View) fabView, "fab_button");
                 startActivity(i, options.toBundle());
             }
         });
