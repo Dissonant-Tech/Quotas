@@ -2,44 +2,42 @@ package com.dissonant.quotas.ui.dialogs;
 
 import java.util.Calendar;
 
-import com.dissonant.quotas.utils.Utils;
-
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.app.TimePickerDialog.OnTimeSetListener;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
-public class TimePickerFragment extends DialogFragment
-    implements TimePickerDialog.OnTimeSetListener {
+import com.dissonant.quotas.R;
+import com.dissonant.quotas.utils.Utils;
 
-    View mView;
-    String timePicked;
+public class TimePickerFragment extends DialogFragment {
 
-    public TimePickerFragment(View mView) {
-        this.mView = mView;
+    View view;
+    String title;
+    OnTimeSetListener timePickerListener;
+
+    public TimePickerFragment(View view, OnTimeSetListener timePickerListener, String title) {
+        this.view = view;
+        this.title = title;
+        this.timePickerListener = timePickerListener;
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        TimePickerDialog dialog;
         final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
 
-        return new TimePickerDialog(getActivity(), this, hour, minute,
+        dialog = new TimePickerDialog(getActivity(), timePickerListener, hour, minute,
                 DateFormat.is24HourFormat(getActivity()));
-    }
+        dialog.setTitle(title);
 
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        timePicked = Utils.getTimeAsString(hourOfDay, minute);
-    }
-
-    /**
-     * @return the timePicked
-     */
-    public String getTimePicked() {
-        return timePicked;
+        return dialog;
     }
 }

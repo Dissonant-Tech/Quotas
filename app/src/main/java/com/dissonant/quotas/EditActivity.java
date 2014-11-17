@@ -1,6 +1,7 @@
 package com.dissonant.quotas;
 
 import android.app.Activity;
+import android.app.TimePickerDialog.OnTimeSetListener;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.dissonant.quotas.ui.dialogs.ColorPickerDialog;
 import com.dissonant.quotas.ui.dialogs.TimePickerFragment;
 import com.dissonant.quotas.ui.dialogs.TimeRangeDialogFragment;
+import com.dissonant.quotas.ui.listeners.TimePickerListener;
 import com.dissonant.quotas.utils.BasicTextValidator;
 
 public class EditActivity extends Activity {
@@ -91,8 +93,13 @@ public class EditActivity extends Activity {
         timesPicker.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openTimePickerDialog(v);
-                openTimePickerDialog(v);
+                TextView endTimeView = (TextView) findViewById(R.id.end_time);
+                TimePickerListener endTimeListener = new TimePickerListener(endTimeView);
+                openTimePickerDialog(v, endTimeListener, "End Time");
+
+                TextView startTimeView = (TextView) findViewById(R.id.start_time);
+                TimePickerListener startTimeListener = new TimePickerListener(startTimeView);
+                openTimePickerDialog(v, startTimeListener, "Start Time");
             }
         });
 
@@ -112,6 +119,7 @@ public class EditActivity extends Activity {
         TextView titleText = (TextView) findViewById(R.id.edit_title);
         titleValidator = new BasicTextValidator(titleText);
         titleText.addTextChangedListener(titleValidator);
+
     }
 
     public boolean validate() {
@@ -125,16 +133,15 @@ public class EditActivity extends Activity {
         return false;
     }
 
-    public void openTimeRangeDialog(View v) {
+    public void openTimeRangeDialog(View view) {
         TimeRangeDialogFragment trDialog = new TimeRangeDialogFragment();
         trDialog.show(getFragmentManager(), "timerange");
     }
 
-    public void openTimePickerDialog(View v) {
-        TimePickerFragment tPickerFragment = new TimePickerFragment(v);
-        tPickerFragment.show(getFragmentManager(), "duration");
+    public void openTimePickerDialog(View view, OnTimeSetListener timePickerListener, String title) {
+        TimePickerFragment tPickerFragment = new TimePickerFragment(view, timePickerListener, title);
+        tPickerFragment.show(getFragmentManager(), "time");
     }
-
 
     public Integer[] getAsIntegerArray(int[] intArray) {
         Integer[] integerArray = new Integer[intArray.length];
@@ -146,5 +153,4 @@ public class EditActivity extends Activity {
         }
         return integerArray;
     }
-
 }
