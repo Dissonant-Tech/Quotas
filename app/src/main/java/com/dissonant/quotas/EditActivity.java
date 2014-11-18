@@ -101,7 +101,7 @@ public class EditActivity extends Activity {
                 }
             }
         });
-;
+
         TextView titleText = (TextView) findViewById(R.id.edit_title);
         titleValidator = new BasicTextValidator(titleText);
         titleText.addTextChangedListener(titleValidator);
