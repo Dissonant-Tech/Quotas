@@ -89,20 +89,6 @@ public class EditActivity extends Activity {
                     }
         });
 
-        LinearLayout timesPicker = (LinearLayout) findViewById(R.id.timerange_layout);
-        timesPicker.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TextView endTimeView = (TextView) findViewById(R.id.end_time);
-                TimePickerListener endTimeListener = new TimePickerListener(endTimeView);
-                openTimePickerDialog(v, endTimeListener, "End Time");
-
-                TextView startTimeView = (TextView) findViewById(R.id.start_time);
-                TimePickerListener startTimeListener = new TimePickerListener(startTimeView);
-                openTimePickerDialog(v, startTimeListener, "Start Time");
-            }
-        });
-
         LinearLayout timeDuration = (LinearLayout) findViewById(R.id.duration_layout);
         timeDuration.setOnClickListener( new View.OnClickListener() {
             @Override

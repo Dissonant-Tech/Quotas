@@ -56,28 +56,44 @@
                         android:paddingBottom="8dp"
                         android:background="@drawable/paper_ripple"
                         >
-                    <TextView
-                            style="@style/text_icon"
-                            android:text="@string/edit_timerange_title"
-                        />
                     <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             >
                         <TextView
-                                android:id="@+id/start_time"
-                                android:text="@string/edit_timerange_value"
-                                android:layout_height="wrap_content"
-                                android:layout_width="wrap_content"
-                                android:textColor="@color/text_hint_regular"
+                                style="@style/LabelText"
+                                android:text="@string/starttime_title"
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
                             />
-                        <TextView
-                                android:id="@+id/end_time"
-                                android:text="@string/edit_timerange_value"
+                        <Button
+                                android:id="@+id/starttime_button"
+                                android:text="@string/starttime_value"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
                                 android:layout_height="wrap_content"
-                                android:layout_width="wrap_content"
-                                android:textColor="@color/text_hint_regular"
+                                android:layout_marginRight="16dp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            >
+                        <TextView
+                                style="@style/LabelText"
+                                android:text="@string/endtime_title"
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
+                            />
+                        <Button
+                                android:id="@+id/endtime_button"
+                                android:text="@string/endtime_value"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="16dp"
                             />
                     </LinearLayout>
                 </LinearLayout>
