@@ -99,11 +99,11 @@ public class EditActivity extends Activity {
         timeDuration.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validTimes()) {
+                if (isTimeSet()) {
                     openTimeRangeDialog(v);
                 } else {
                     Toast.makeText(EditActivity.this, getResources()
-                        .getString(R.string.invalid_times), Toast.LENGTH_SHORT).show();
+                        .getString(R.string.times_not_set), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -151,8 +151,13 @@ public class EditActivity extends Activity {
         return false;
     }
 
-    public boolean validTimes() {
-        return false;
+    public boolean isTimeSet() {
+        if (quota.getStartTime() == null ||
+                quota.getEndTime() == null ) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public void openTimeRangeDialog(View view) {

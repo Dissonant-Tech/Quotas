@@ -85,5 +85,5 @@
 
     <string name="save_success">Quota Saved</string>
     <string name="save_failed">Save Failed!</string>
-    <string name="invalid_times">Start and End times are invalid!</string>
+    <string name="times_not_set">Please set a start and end time</string>
 </resources>
