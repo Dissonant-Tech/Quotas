@@ -8,16 +8,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.dissonant.quotas.ui.dialogs.ColorPickerDialog;
 import com.dissonant.quotas.ui.dialogs.TimePickerFragment;
 import com.dissonant.quotas.ui.dialogs.TimeRangeDialogFragment;
-import com.dissonant.quotas.ui.listeners.TimePickerListener;
 import com.dissonant.quotas.utils.BasicTextValidator;
 
 public class EditActivity extends Activity {
@@ -102,6 +103,30 @@ public class EditActivity extends Activity {
             }
         });
 
+        Button startTimeButton = (Button) findViewById(R.id.starttime_button);
+        startTimeButton.setOnClickListener( new View.OnClickListener() {
+            public void onClick(View v) {
+                OnTimeSetListener startTimeListener = new OnTimeSetListener() {
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                    }
+                };
+                openTimePickerDialog(v, startTimeListener, "Start Time");
+            }
+        });
+
+        Button endTimeButton = (Button) findViewById(R.id.endtime_button);
+        endTimeButton.setOnClickListener( new View.OnClickListener() {
+            public void onClick(View v) {
+                OnTimeSetListener startTimeListener = new OnTimeSetListener() {
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                    }
+                };
+                openTimePickerDialog(v, startTimeListener, "End Time");
+            }
+        });
+
         TextView titleText = (TextView) findViewById(R.id.edit_title);
         titleValidator = new BasicTextValidator(titleText);
         titleText.addTextChangedListener(titleValidator);
@@ -124,8 +149,9 @@ public class EditActivity extends Activity {
         trDialog.show(getFragmentManager(), "timerange");
     }
 
-    public void openTimePickerDialog(View view, OnTimeSetListener timePickerListener, String title) {
-        TimePickerFragment tPickerFragment = new TimePickerFragment(view, timePickerListener, title);
+    public void openTimePickerDialog(View view, OnTimeSetListener tListener, String title) {
+        TimePickerFragment tPickerFragment = new
+            TimePickerFragment(view, tListener, title);
         tPickerFragment.show(getFragmentManager(), "time");
     }
 
