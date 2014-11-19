@@ -20,6 +20,7 @@ import com.dissonant.quotas.ui.dialogs.ColorPickerDialog;
 import com.dissonant.quotas.ui.dialogs.TimePickerFragment;
 import com.dissonant.quotas.ui.dialogs.TimeRangeDialogFragment;
 import com.dissonant.quotas.utils.BasicTextValidator;
+import com.dissonant.quotas.utils.Utils;
 
 public class EditActivity extends Activity {
     BasicTextValidator titleValidator;
@@ -103,24 +104,24 @@ public class EditActivity extends Activity {
             }
         });
 
-        Button startTimeButton = (Button) findViewById(R.id.starttime_button);
+        final Button startTimeButton = (Button) findViewById(R.id.starttime_button);
         startTimeButton.setOnClickListener( new View.OnClickListener() {
             public void onClick(View v) {
                 OnTimeSetListener startTimeListener = new OnTimeSetListener() {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
+                        startTimeButton.setText(Utils.getTimeAsString(hourOfDay, minute));
                     }
                 };
                 openTimePickerDialog(v, startTimeListener);
             }
         });
 
-        Button endTimeButton = (Button) findViewById(R.id.endtime_button);
+        final Button endTimeButton = (Button) findViewById(R.id.endtime_button);
         endTimeButton.setOnClickListener( new View.OnClickListener() {
             public void onClick(View v) {
                 OnTimeSetListener startTimeListener = new OnTimeSetListener() {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
+                        endTimeButton.setText(Utils.getTimeAsString(hourOfDay, minute));
                     }
                 };
                 openTimePickerDialog(v, startTimeListener);
