@@ -36,8 +36,20 @@ public class Utils {
      */
     static public String getTimeAsString(int hourOfDay, int minute) {
         StringBuilder result;
+        String minuteFormat;
         String format;
 
+        result = new StringBuilder();
+        result.append(hourOfDay);
+        result.append(":");
+
+        // If minute is single digit, prepend with 0
+        if (minute <= 9) {
+            result.append("0");
+        }
+        result.append(minute);
+
+        // AM or PM
         if (hourOfDay == 0) {
             hourOfDay += 12;
             format = "AM";
@@ -49,9 +61,9 @@ public class Utils {
         } else {
             format = "AM";
         }
-        result = new StringBuilder().append(hourOfDay).append(":").append(minute)
-            .append(" ").append(format);
-
+        result.append(" ");
+        result.append(format);
+        
         return result.toString();
     }
 }
