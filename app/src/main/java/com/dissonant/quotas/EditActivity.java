@@ -111,7 +111,7 @@ public class EditActivity extends Activity {
 
                     }
                 };
-                openTimePickerDialog(v, startTimeListener, "Start Time");
+                openTimePickerDialog(v, startTimeListener);
             }
         });
 
@@ -123,7 +123,7 @@ public class EditActivity extends Activity {
 
                     }
                 };
-                openTimePickerDialog(v, startTimeListener, "End Time");
+                openTimePickerDialog(v, startTimeListener);
             }
         });
 
@@ -149,9 +149,8 @@ public class EditActivity extends Activity {
         trDialog.show(getFragmentManager(), "timerange");
     }
 
-    public void openTimePickerDialog(View view, OnTimeSetListener tListener, String title) {
-        TimePickerFragment tPickerFragment = new
-            TimePickerFragment(view, tListener, title);
+    public void openTimePickerDialog(View view, OnTimeSetListener tListener) {
+        TimePickerFragment tPickerFragment = new TimePickerFragment(view, tListener);
         tPickerFragment.show(getFragmentManager(), "time");
     }
 
