@@ -1,6 +1,7 @@
 package com.dissonant.quotas.utils;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -65,5 +66,22 @@ public class Utils {
         result.append(format);
         
         return result.toString();
+    }
+
+    static public String getTimeAsString(Time time, String format) {
+        if (format.isEmpty()) {
+            format = "hh:mm Hours";
+        }
+
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+
+        return sdf.format(time.getTime());
+    }
+
+    static public Time getTimeFromInt(int hourOfDay, int minute) {
+        Time time = Time.valueOf(new StringBuilder()
+            .append(hourOfDay).append(":").append(minute).append(":00").toString());
+
+        return time;
     }
 }
