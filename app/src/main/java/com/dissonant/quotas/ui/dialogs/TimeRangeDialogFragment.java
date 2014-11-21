@@ -1,5 +1,10 @@
 package com.dissonant.quotas.ui.dialogs;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -9,9 +14,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.dissonant.quotas.R;
-import com.dissonant.quotas.ui.views.DoughnutSelector;
+import com.dissonant.quotas.ui.views.CircleSelector;
 
-public class TimeRangeDialogFragment extends DialogFragment {
+public class TimeRangeDialogFragment extends DialogFragment
+    implements CircleSelector.SelectionListener {
+
+    private Time startTime;
+    private Time endTime;
+
+    public TimeRangeDialogFragment(Time startTime, Time endTime) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -26,13 +40,14 @@ public class TimeRangeDialogFragment extends DialogFragment {
         // Pass the inflated view and initialize the DoughnutSelector
         initTimeRangeSelector(mDialogView, backgroundColor);
 
-        builder.setView(mDialogView)
-            .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                }
-            })
-        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+        builder.setView(mDialogView);
+
+        builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 TimeRangeDialogFragment.this.getDialog().cancel();
@@ -58,11 +73,45 @@ public class TimeRangeDialogFragment extends DialogFragment {
     }
 
     public void initTimeRangeSelector(View v, int backgroundColor) {
-        DoughnutSelector mTimeRangeChart = (DoughnutSelector) v.findViewById(R.id.TimeRangeChart);
+        CircleSelector mTimeRangeChart = (CircleSelector) v.findViewById(R.id.TimeRangeChart);
+
+        String[] customText = genCustomText(this.startTime, this.endTime, 5);
+        mTimeRangeChart.setCustomText(customText);
+
         mTimeRangeChart.setTouchEnabled(true);
         mTimeRangeChart.setDrawText(true);
         mTimeRangeChart.setElevation(1);
         mTimeRangeChart.setColor(getResources().getColor(R.color.primary));
-        mTimeRangeChart.showValue(0.0f, 24.0f, false);
+        mTimeRangeChart.showValue(0.0f, customText.length, false);
+    }
+
+    public void onValueSelected(float val, float maxVal) {
+
+    }
+
+    public void onSelectionUpdate(float val, float maxVal) {
+
+    }
+
+    private String[] genCustomText(Time startTime, Time endTime, int stepSize) {
+        int numTimes = 0;
+        ArrayList<String> resultArr = new ArrayList<String>();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(startTime.getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm 'Hours'");
+
+        while (calendar.getTime().before(endTime)) {
+           resultArr.add(sdf.format(calendar.getTime()));
+           calendar.add(Calendar.MINUTE, stepSize);
+           numTimes++;
+        }
+
+        String[] result = new String[numTimes];
+
+        for (int i = 0; i < resultArr.size(); i++) {
+            result[i] = resultArr.get(i);
+        }
+        return result;
     }
 }

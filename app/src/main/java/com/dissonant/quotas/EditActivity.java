@@ -100,14 +100,15 @@ public class EditActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (isTimeSet()) {
-                    openTimeRangeDialog(v);
+                    openTimeRangeDialog(v, quota.getStartTime(), quota.getEndTime());
                 } else {
                     Toast.makeText(EditActivity.this, getResources()
-                        .getString(R.string.times_not_set), Toast.LENGTH_SHORT).show();
+                        .getString(R.string.time_not_set), Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
+        // FIXME: use SimpleDateFormat to format time
         // Open TimePicker, update button text and quota startTime
         final Button startTimeButton = (Button) findViewById(R.id.starttime_button);
         startTimeButton.setOnClickListener( new View.OnClickListener() {
@@ -123,6 +124,7 @@ public class EditActivity extends Activity {
             }
         });
 
+        // FIXME: use SimpleDateFormat to format time
         // Open TimePicker, update button text and quota endTime
         final Button endTimeButton = (Button) findViewById(R.id.endtime_button);
         endTimeButton.setOnClickListener( new View.OnClickListener() {
@@ -160,8 +162,8 @@ public class EditActivity extends Activity {
         }
     }
 
-    public void openTimeRangeDialog(View view) {
-        TimeRangeDialogFragment trDialog = new TimeRangeDialogFragment();
+    public void openTimeRangeDialog(View view, Time startTime, Time endTime) {
+        TimeRangeDialogFragment trDialog = new TimeRangeDialogFragment(startTime, endTime);
         trDialog.show(getFragmentManager(), "timerange");
     }
 

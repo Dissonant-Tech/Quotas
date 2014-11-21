@@ -22,10 +22,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
-public class DoughnutSelector extends View
+public class CircleSelector extends View
     implements OnGestureListener, OnDoubleTapListener {
 
-    private static final String LOG_TAG = "DoughnutSelector";
+    private static final String LOG_TAG = "CircleSelector";
 
     private String mUnit = "";
     private float mStartAngle = 270f;
@@ -53,17 +53,17 @@ public class DoughnutSelector extends View
 
     private ObjectAnimator mDrawAnimator;
 
-    public DoughnutSelector(Context context) {
+    public CircleSelector(Context context) {
         super(context);
         init();
     }
 
-    public DoughnutSelector(Context context, AttributeSet attrs) {
+    public CircleSelector(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public DoughnutSelector(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CircleSelector(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -397,7 +397,8 @@ public class DoughnutSelector extends View
     /**
      * Set an array of custom texts to be drawn instead of the value in the
      * center of the CircleDisplay. If set to null, the custom text will be
-     * reset and the value will be drawn. Make sure the length of the array corresponds with the maximum number of steps (set with setStepSize(float stepsize).
+     * reset and the value will be drawn. Make sure the length of the array 
+     * corresponds with the maximum number of steps (set with setStepSize(float stepsize).
      *
      * @param custom
      */

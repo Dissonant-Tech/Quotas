@@ -5,7 +5,7 @@
         android:padding="16dp"
         >
 
-    <com.dissonant.quotas.ui.views.DoughnutSelector
+    <com.dissonant.quotas.ui.views.CircleSelector
             android:id="@+id/TimeRangeChart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
