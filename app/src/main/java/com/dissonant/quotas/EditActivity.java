@@ -116,7 +116,7 @@ public class EditActivity extends Activity {
                 OnTimeSetListener startTimeListener = new OnTimeSetListener() {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         quota.setStartTime(Utils.getTimeFromInt(hourOfDay, minute));
-                        startTimeButton.setText(Utils.getTimeAsString(quota.getStartTime(), ""));
+                        startTimeButton.setText(Utils.getTimeAsString(quota.getStartTime(), "hh:mm a"));
                     }
                 };
                 openTimePickerDialog(v, startTimeListener);
@@ -131,7 +131,7 @@ public class EditActivity extends Activity {
                 OnTimeSetListener startTimeListener = new OnTimeSetListener() {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         quota.setEndTime(Utils.getTimeFromInt(hourOfDay, minute));
-                        endTimeButton.setText(Utils.getTimeAsString(quota.getEndTime(), ""));
+                        endTimeButton.setText(Utils.getTimeAsString(quota.getEndTime(), "hh:mm a"));
                     }
                 };
                 openTimePickerDialog(v, startTimeListener);
