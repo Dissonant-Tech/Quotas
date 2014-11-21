@@ -1,9 +1,12 @@
 package com.dissonant.quotas;
 
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.TimePickerDialog.OnTimeSetListener;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -17,6 +20,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.dissonant.quotas.db.models.QuotaModel;
 import com.dissonant.quotas.ui.dialogs.ColorPickerDialog;
@@ -79,7 +83,7 @@ public class EditActivity extends Activity {
         });
 
         Switch repeatSwitch = (Switch) findViewById(R.id.repeat_switch);
-        final View repeatOptions = (View) findViewById(R.id.repeat_options);
+        final LinearLayout repeatOptions = (LinearLayout) findViewById(R.id.repeat_options);
         repeatSwitch.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -94,6 +98,26 @@ public class EditActivity extends Activity {
                         }
                     }
         });
+        List<ToggleButton> repeatList = new ArrayList<ToggleButton>();
+        for (int i = 0; i < repeatOptions.getChildCount(); i++) {
+            repeatList.add((ToggleButton)repeatOptions.getChildAt(i));
+        }
+
+        CompoundButton.OnCheckedChangeListener
+            repeatToggleListener = new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged( CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        buttonView.setBackgroundColor(Color.BLUE);
+                    } else {
+                        buttonView.setBackgroundColor(Color.BLACK);
+                    }
+                }
+            };
+
+        for (ToggleButton toggle : repeatList) {
+            toggle.setOnCheckedChangeListener(repeatToggleListener);
+        }
 
         LinearLayout timeDuration = (LinearLayout) findViewById(R.id.duration_layout);
         timeDuration.setOnClickListener( new View.OnClickListener() {
@@ -108,7 +132,6 @@ public class EditActivity extends Activity {
             }
         });
 
-        // FIXME: use SimpleDateFormat to format time
         // Open TimePicker, update button text and quota startTime
         final Button startTimeButton = (Button) findViewById(R.id.starttime_button);
         startTimeButton.setOnClickListener( new View.OnClickListener() {
@@ -123,7 +146,6 @@ public class EditActivity extends Activity {
             }
         });
 
-        // FIXME: use SimpleDateFormat to format time
         // Open TimePicker, update button text and quota endTime
         final Button endTimeButton = (Button) findViewById(R.id.endtime_button);
         endTimeButton.setOnClickListener( new View.OnClickListener() {
@@ -141,14 +163,16 @@ public class EditActivity extends Activity {
         TextView titleText = (TextView) findViewById(R.id.edit_title);
         titleValidator = new BasicTextValidator(titleText);
         titleText.addTextChangedListener(titleValidator);
-
     }
 
     public boolean validate() {
-        if (titleValidator.isValid()) {
+        if (!titleValidator.isValid()) {
+            return false;
+        } else if (!isTimeSet()) {
+            return false;
+        } else {
             return true;
         }
-        return false;
     }
 
     public boolean isTimeSet() {
@@ -168,16 +192,5 @@ public class EditActivity extends Activity {
     public void openTimePickerDialog(View view, OnTimeSetListener tListener) {
         TimePickerFragment tPickerFragment = new TimePickerFragment(view, tListener);
         tPickerFragment.show(getFragmentManager(), "time");
-    }
-
-    public Integer[] getAsIntegerArray(int[] intArray) {
-        Integer[] integerArray = new Integer[intArray.length];
-        int counter = 0;
-
-        for (int i : intArray) {
-            integerArray[counter] = i;
-            counter++;
-        }
-        return integerArray;
     }
 }
