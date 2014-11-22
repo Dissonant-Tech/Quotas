@@ -7,7 +7,6 @@ import java.util.List;
 import android.app.Activity;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
