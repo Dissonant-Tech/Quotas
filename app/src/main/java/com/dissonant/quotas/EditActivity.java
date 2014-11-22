@@ -7,6 +7,9 @@ import java.util.List;
 import android.app.Activity;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -98,7 +101,12 @@ public class EditActivity extends Activity {
                         }
                     }
         });
+
         List<ToggleButton> repeatList = new ArrayList<ToggleButton>();
+        final Drawable repeatBgDrawable = getDrawable(R.drawable.circle);
+        final Drawable repeatBgDrawableSelected = getDrawable(R.drawable.circle);
+        repeatBgDrawableSelected.setColorFilter(Color.BLUE, Mode.SRC_IN);
+
         for (int i = 0; i < repeatOptions.getChildCount(); i++) {
             repeatList.add((ToggleButton)repeatOptions.getChildAt(i));
         }
@@ -108,9 +116,9 @@ public class EditActivity extends Activity {
                 @Override
                 public void onCheckedChanged( CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
-                        buttonView.setBackgroundColor(Color.BLUE);
+                        buttonView.setBackground(repeatBgDrawableSelected);
                     } else {
-                        buttonView.setBackgroundColor(Color.BLACK);
+                        buttonView.setBackground(repeatBgDrawable);
                     }
                 }
             };
