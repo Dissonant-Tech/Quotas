@@ -1,8 +1,6 @@
 package com.dissonant.quotas;
 
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
 
 import android.app.Activity;
 import android.app.TimePickerDialog.OnTimeSetListener;
@@ -16,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -24,10 +21,13 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.dissonant.quotas.controllers.BackgroundToggle;
+import com.dissonant.quotas.controllers.VisibilityToggle;
 import com.dissonant.quotas.db.models.QuotaModel;
 import com.dissonant.quotas.ui.dialogs.ColorPickerDialog;
 import com.dissonant.quotas.ui.dialogs.TimePickerFragment;
 import com.dissonant.quotas.ui.dialogs.TimeRangeDialogFragment;
+import com.dissonant.quotas.ui.views.EditView;
 import com.dissonant.quotas.utils.BasicTextValidator;
 import com.dissonant.quotas.utils.Utils;
 
@@ -35,10 +35,13 @@ public class EditActivity extends Activity {
     final QuotaModel quota = new QuotaModel();
     BasicTextValidator titleValidator;
 
+    View EditView;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit);
+        EditView = (EditView) View.inflate(this, R.layout.activity_edit, null);
+        setContentView(EditView);
 
         createListeners();
 
@@ -84,46 +87,18 @@ public class EditActivity extends Activity {
             }
         });
 
-        Switch repeatSwitch = (Switch) findViewById(R.id.repeat_switch);
-        final LinearLayout repeatOptions = (LinearLayout) findViewById(R.id.repeat_options);
-        repeatSwitch.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(
-                        CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            // toggle is enabled
-                            repeatOptions.setVisibility(View.VISIBLE);
-                        } else {
-                            // toggle is disabled
-                            repeatOptions.setVisibility(View.GONE);
-                        }
-                    }
-        });
+        Switch repeatSwitch = (Switch) findViewById(R.id.toggle);
+        final LinearLayout repeatOptions = (LinearLayout) findViewById(R.id.toggle_list);
+        repeatSwitch.setOnCheckedChangeListener(new VisibilityToggle((View) findViewById(R.id.toggle_list)));
 
-        List<ToggleButton> repeatList = new ArrayList<ToggleButton>();
         final Drawable repeatBgDrawable = getDrawable(R.drawable.circle);
         final Drawable repeatBgDrawableSelected = getDrawable(R.drawable.circle);
         repeatBgDrawableSelected.setColorFilter(Color.BLUE, Mode.SRC_IN);
 
+        BackgroundToggle repeatToggleListener = new BackgroundToggle(repeatBgDrawable, repeatBgDrawableSelected);
+
         for (int i = 0; i < repeatOptions.getChildCount(); i++) {
-            repeatList.add((ToggleButton)repeatOptions.getChildAt(i));
-        }
-
-        CompoundButton.OnCheckedChangeListener
-            repeatToggleListener = new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged( CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        buttonView.setBackground(repeatBgDrawableSelected);
-                    } else {
-                        buttonView.setBackground(repeatBgDrawable);
-                    }
-                }
-            };
-
-        for (ToggleButton toggle : repeatList) {
-            toggle.setOnCheckedChangeListener(repeatToggleListener);
+            ((ToggleButton)repeatOptions.getChildAt(i)).setOnCheckedChangeListener(repeatToggleListener);
         }
 
         LinearLayout timeDuration = (LinearLayout) findViewById(R.id.duration_layout);
@@ -167,7 +142,7 @@ public class EditActivity extends Activity {
             }
         });
 
-        TextView titleText = (TextView) findViewById(R.id.edit_title);
+        TextView titleText = (TextView) findViewById(R.id.title);
         titleValidator = new BasicTextValidator(titleText);
         titleText.addTextChangedListener(titleValidator);
     }

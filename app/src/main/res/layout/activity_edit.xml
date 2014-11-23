@@ -1,4 +1,5 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.dissonant.quotas.ui.views.EditView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         tools:context="com.dissonant.quotas.EditActivity"
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
             >
         <!-- Title -->
         <com.dissonant.quotas.ui.views.FloatingHintEditText
-                android:id="@+id/edit_title"
+                android:id="@+id/title"
                 style="@style/floating_edittext"
                 android:layout_height="48dp"
                 android:layout_width="match_parent"
@@ -170,106 +171,115 @@
         <!-- Repeat -->
         <LinearLayout
                 style="@style/LinearLayout"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:paddingLeft="4dp"
+                android:layout_height="wrap_content"
                 >
-            <ImageView
-                    android:id="@+id/color_icon"
-                    style="@style/icon"
-                    android:src="@drawable/ic_replay"
-                />
-            <RelativeLayout
-                    android:layout_width="fill_parent"
+            <LinearLayout
+                    style="@style/LinearLayout"
+                    android:id="@+id/repeat_List"
+                    android:orientation="horizontal"
+                    android:paddingLeft="4dp"
                     android:layout_height="wrap_content"
                     >
-                <LinearLayout
-                        android:id="@+id/colorpicker"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:paddingRight="16dp"
-                        android:background="@drawable/paper_ripple"
-                        android:layout_alignParentLeft="true"
-                        >
-                    <TextView
-                            style="@style/text_icon"
-                            android:text="@string/repeat_title"
-                        />
-                    <TextView
-                            android:id="@+id/color_value"
-                            android:text="@string/repeat_value"
-                            android:layout_height="wrap_content"
-                            android:layout_width="fill_parent"
-                            android:textColor="@color/text_hint_regular"
-                        />
-                </LinearLayout>
-                <Switch
-                        android:id="@+id/repeat_switch"
-                        android:checked="false"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_toRightOf="@id/colorpicker"
-                        android:layout_marginRight="16dp"
+                <ImageView
+                        android:id="@+id/color_icon"
+                        style="@style/icon"
+                        android:src="@drawable/ic_replay"
                     />
-            </RelativeLayout>
-        </LinearLayout>
-        <!-- Repeat Options -->
-        <LinearLayout
-                style="@style/LinearLayout"
-                android:id="@+id/repeat_options"
-                android:orientation="horizontal"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="72dp"
-                android:visibility="gone"
-                >
-            <ToggleButton
-                    style="@style/togglebutton"
-                    android:textOn="Mon"
-                    android:textOff="Mon"
+                <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        >
+                    <LinearLayout
+                            android:id="@+id/colorpicker"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginLeft="20dp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+                            android:paddingRight="16dp"
+                            android:background="@drawable/paper_ripple"
+                            android:layout_alignParentLeft="true"
+                            >
+                        <TextView
+                                style="@style/text_icon"
+                                android:text="@string/repeat_title"
+                            />
+                        <TextView
+                                android:id="@+id/color_value"
+                                android:text="@string/repeat_value"
+                                android:layout_height="wrap_content"
+                                android:layout_width="fill_parent"
+                                android:textColor="@color/text_hint_regular"
+                            />
+                    </LinearLayout>
+                    <Switch
+                            android:id="@+id/toggle"
+                            android:checked="false"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_toRightOf="@id/colorpicker"
+                            android:layout_marginRight="16dp"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+            <!-- Repeat Options -->
+            <LinearLayout
+                    style="@style/LinearLayout"
+                    android:id="@+id/toggle_list"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="72dp"
+                    android:visibility="gone"
                     >
-            </ToggleButton>
-            <ToggleButton
-                    style="@style/togglebutton"
-                    android:textOn="Tue"
-                    android:textOff="Tue"
-                    >
-            </ToggleButton>
-            <ToggleButton
-                    style="@style/togglebutton"
-                    android:textOn="Wed"
-                    android:textOff="Wed"
-                    >
-            </ToggleButton>
-            <ToggleButton
-                    style="@style/togglebutton"
-                    android:textOn="Thu"
-                    android:textOff="Thu"
-                    >
-            </ToggleButton>
-            <ToggleButton
-                    style="@style/togglebutton"
-                    android:textOn="Fri"
-                    android:textOff="Fri"
-                    >
-            </ToggleButton>
-            <ToggleButton
-                    style="@style/togglebutton"
-                    android:textOn="Sat"
-                    android:textOff="Sat"
-                    >
-            </ToggleButton>
-            <ToggleButton
-                    style="@style/togglebutton"
-                    android:textOn="Sun"
-                    android:textOff="Sun"
-                    >
-            </ToggleButton>
-        </LinearLayout>
+                <ToggleButton
+                        style="@style/togglebutton"
+                        android:textOn="Mon"
+                        android:textOff="Mon"
+                        >
+                </ToggleButton>
+                <ToggleButton
+                        style="@style/togglebutton"
+                        android:textOn="Tue"
+                        android:textOff="Tue"
+                        >
+                </ToggleButton>
+                <ToggleButton
+                        style="@style/togglebutton"
+                        android:textOn="Wed"
+                        android:textOff="Wed"
+                        >
+                </ToggleButton>
+                <ToggleButton
+                        style="@style/togglebutton"
+                        android:textOn="Thu"
+                        android:textOff="Thu"
+                        >
+                </ToggleButton>
+                <ToggleButton
+                        style="@style/togglebutton"
+                        android:textOn="Fri"
+                        android:textOff="Fri"
+                        >
+                </ToggleButton>
+                <ToggleButton
+                        style="@style/togglebutton"
+                        android:textOn="Sat"
+                        android:textOff="Sat"
+                        >
+                </ToggleButton>
+                <ToggleButton
+                        style="@style/togglebutton"
+                        android:textOn="Sun"
+                        android:textOff="Sun"
+                        >
+                </ToggleButton>
+            </LinearLayout>
 
+        </LinearLayout>
         <View
                 style="@style/divider"
                 android:layout_marginLeft="72dp"
@@ -298,7 +308,7 @@
                     android:background="@drawable/paper_ripple"
                     >
                 <com.dissonant.quotas.ui.views.FloatingHintEditText
-                        android:id="@+id/edit_description"
+                        android:id="@+id/description"
                         style="@style/floating_edittext"
                         android:layout_height="wrap_content"
                         android:layout_width="fill_parent"
@@ -324,4 +334,4 @@
             android:padding="12dp"
             android:scaleType="fitCenter"
         />
-</LinearLayout>
+</com.dissonant.quotas.ui.views.EditView>
