@@ -12,7 +12,7 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -22,6 +22,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.dissonant.quotas.controllers.BackgroundToggle;
+import com.dissonant.quotas.controllers.EditController;
 import com.dissonant.quotas.controllers.VisibilityToggle;
 import com.dissonant.quotas.db.models.QuotaModel;
 import com.dissonant.quotas.ui.dialogs.ColorPickerDialog;
@@ -35,14 +36,17 @@ public class EditActivity extends Activity {
     final QuotaModel quota = new QuotaModel();
     BasicTextValidator titleValidator;
 
-    View EditView;
+    EditView editView;
+    EditController controller;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EditView = (EditView) View.inflate(this, R.layout.activity_edit, null);
-        setContentView(EditView);
 
+        editView = (EditView) View.inflate(this, R.layout.activity_edit, null);
+        controller = new EditController(this, editView);
+
+        setContentView(editView);
         createListeners();
 
         // Load default preferences
@@ -78,12 +82,12 @@ public class EditActivity extends Activity {
     }
 
     public void createListeners() {
-        LinearLayout colorPicker = (LinearLayout) findViewById(R.id.colorpicker);
-        colorPicker.setOnClickListener( new AdapterView.OnClickListener() {
+        final LinearLayout colorPicker = (LinearLayout) findViewById(R.id.colorpicker);
+        colorPicker.setOnClickListener( new OnClickListener() {
             @Override
             public void onClick(View v) {
-                ColorPickerDialog cpDialog = new ColorPickerDialog();
-                cpDialog.show(getFragmentManager(), "colorpicker");
+                ColorPickerDialog dialog = new ColorPickerDialog(v);
+                dialog.show(getFragmentManager(), "colorpicker");
             }
         });
 
@@ -91,8 +95,8 @@ public class EditActivity extends Activity {
         final LinearLayout repeatOptions = (LinearLayout) findViewById(R.id.toggle_list);
         repeatSwitch.setOnCheckedChangeListener(new VisibilityToggle((View) findViewById(R.id.toggle_list)));
 
-        final Drawable repeatBgDrawable = getDrawable(R.drawable.circle);
-        final Drawable repeatBgDrawableSelected = getDrawable(R.drawable.circle);
+        Drawable repeatBgDrawable = getDrawable(R.drawable.circle);
+        Drawable repeatBgDrawableSelected = getDrawable(R.drawable.circle);
         repeatBgDrawableSelected.setColorFilter(Color.BLUE, Mode.SRC_IN);
 
         BackgroundToggle repeatToggleListener = new BackgroundToggle(repeatBgDrawable, repeatBgDrawableSelected);

@@ -127,6 +127,7 @@
 
         <!-- Color -->
         <LinearLayout
+                android:id="@+id/colorpicker"
                 style="@style/LinearLayout"
                 android:orientation="horizontal"
                 android:paddingLeft="4dp"
@@ -140,7 +141,6 @@
                     android:alpha="1"
                 />
             <LinearLayout
-                    android:id="@+id/colorpicker"
                     style="@style/LinearLayout"
                     android:orientation="vertical"
                     android:layout_marginLeft="20dp"

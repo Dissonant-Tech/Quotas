@@ -17,31 +17,34 @@ import com.dissonant.quotas.model.ColorListItem;
 import com.dissonant.quotas.ui.adapters.ColorListAdapter;
 
 public class ColorPickerDialog extends DialogFragment {
-    AlertDialog.Builder builder;
-    LayoutInflater inflater;
-    View mDialogView;
 
-    ColorListAdapter m_cListAdapter;
+    LayoutInflater inflater;
+    View dialogView;
+
+    ColorListAdapter colorListAdapter;
     ArrayList<ColorListItem> colorArray;
     TextView colorNameView;
     ImageView colorView;
+
+    public ColorPickerDialog(View v) {
+        this.colorView = (ImageView )v.findViewById(R.id.color_icon);
+        this.colorNameView = (TextView) v.findViewById(R.id.color_value);
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         colorArray = initColorArray();
         // Get dialog bulder and inflate the dialog layout
-        builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         inflater = getActivity().getLayoutInflater();
 
-        mDialogView = inflater.inflate(R.layout.dialog_colorpicker, null);
-        colorNameView = (TextView) getActivity().findViewById(R.id.color_value);
-        colorView = (ImageView) getActivity().findViewById(R.id.color_icon);
+        dialogView = inflater.inflate(R.layout.dialog_colorpicker, null);
 
-        m_cListAdapter = new ColorListAdapter(getActivity().getBaseContext(),
+        colorListAdapter = new ColorListAdapter(getActivity().getBaseContext(),
                 R.layout.colorlist_row, colorArray);
 
-        builder.setView(mDialogView);
-        builder.setAdapter(m_cListAdapter, new DialogInterface.OnClickListener() {
+        builder.setView(dialogView);
+        builder.setAdapter(colorListAdapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 colorNameView.setText(colorArray.get(which).getName());
                 colorView.setColorFilter(colorArray.get(which).getColor());
@@ -64,7 +67,7 @@ public class ColorPickerDialog extends DialogFragment {
         getDialog().getWindow().setWindowAnimations(
                 R.style.dialog_animation_slide_up);
     }
-    
+
     public ArrayList<ColorListItem> initColorArray() {
         ArrayList<ColorListItem> cArrayResult = new ArrayList<ColorListItem>();
 
