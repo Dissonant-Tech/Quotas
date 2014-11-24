@@ -10,6 +10,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -19,6 +20,8 @@ import com.dissonant.quotas.ui.views.CircleSelector;
 public class TimeRangeFragment extends DialogFragment
     implements CircleSelector.SelectionListener {
 
+    private static final String TAG = "TimeRangeFragment";
+
     public interface TimeRangeListener {
         void onTimeRangeSet(float val, float maxVal);
     }
@@ -26,6 +29,7 @@ public class TimeRangeFragment extends DialogFragment
     private Time startTime;
     private Time endTime;
     private TimeRangeListener listener;
+    private CircleSelector mDialogView;
     float val, maxVal;
 
     public TimeRangeFragment(Time startTime, Time endTime, TimeRangeListener listener) {
@@ -38,8 +42,9 @@ public class TimeRangeFragment extends DialogFragment
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Get dialog bulder and inflate the dialog layout
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View mDialogView = inflater.inflate(R.layout.dialog_time_range, null);
+
+        mDialogView = new CircleSelector(getActivity());
+        mDialogView.setSelectionListener(this);
 
         int backgroundColor = getResources().getColor(
                 R.color.abc_background_cache_hint_selector_material_light);
@@ -52,6 +57,9 @@ public class TimeRangeFragment extends DialogFragment
         builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("Saved with val: ").append(val).append(" maxVal: ").append(maxVal);
+                Log.d(TAG, sb.toString());
                 listener.onTimeRangeSet(val, maxVal);
             }
         });
@@ -81,16 +89,15 @@ public class TimeRangeFragment extends DialogFragment
     }
 
     public void initTimeRangeSelector(View v, int backgroundColor) {
-        CircleSelector mTimeRangeChart = (CircleSelector) v.findViewById(R.id.TimeRangeChart);
-
         String[] customText = genCustomText(this.startTime, this.endTime, 5);
-        mTimeRangeChart.setCustomText(customText);
+        mDialogView.setCustomText(customText);
 
-        mTimeRangeChart.setTouchEnabled(true);
-        mTimeRangeChart.setDrawText(true);
-        mTimeRangeChart.setElevation(1);
-        mTimeRangeChart.setColor(getResources().getColor(R.color.primary));
-        mTimeRangeChart.showValue(0.0f, customText.length, false);
+        mDialogView.setTouchEnabled(true);
+        mDialogView.setDrawText(true);
+        mDialogView.setElevation(1);
+        mDialogView.setColor(getResources().getColor(R.color.primary));
+        mDialogView.setStepSize(1);
+        mDialogView.showValue(0.0f, customText.length, false);
     }
 
     public void onValueSelected(float val, float maxVal) {

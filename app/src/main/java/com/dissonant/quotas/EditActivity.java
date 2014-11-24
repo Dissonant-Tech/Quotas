@@ -24,6 +24,7 @@ import com.dissonant.quotas.db.models.QuotaModel;
 import com.dissonant.quotas.ui.dialogs.ColorPickerFragment.ColorPickerListener;
 import com.dissonant.quotas.ui.dialogs.TimePickerFragment.TimePickerListener;
 import com.dissonant.quotas.ui.dialogs.TimeRangeFragment.TimeRangeListener;
+import com.dissonant.quotas.ui.views.CircleSelector;
 import com.dissonant.quotas.ui.views.EditView;
 import com.dissonant.quotas.utils.BasicTextValidator;
 import com.dissonant.quotas.utils.Utils;
@@ -119,6 +120,8 @@ public class EditActivity extends Activity
 
     @Override
     public void onTimeRangeSet(float val, float maxVal) {
+        CircleSelector timeRangeView = (CircleSelector) editView.getTimeRange();
+        timeRangeView.showValue(val, maxVal, false);
     }
 
     @Override
