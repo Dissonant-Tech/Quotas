@@ -52,11 +52,8 @@
 
     <string name="location">location</string>
 
-    <string name="starttime_title">Starting from: </string>
-    <string name="endtime_title">Ending at: </string>
-
-    <string name="starttime_value">00:00 AM</string>
-    <string name="endtime_value">00:00 AM</string>
+    <string name="starttime_value">Start</string>
+    <string name="endtime_value">End</string>
 
     <string name="edit_duration_title">Duration</string>
     <string name="edit_duration_value">None</string>

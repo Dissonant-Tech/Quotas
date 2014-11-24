@@ -47,35 +47,41 @@
                     android:orientation="horizontal"
                     android:layout_marginLeft="20dp"
                     android:paddingRight="16dp"
+                    android:weightSum="3"
                     >
-                <com.dissonant.quotas.ui.views.CircleSelector
+                <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="3"
+                        android:layout_height="120dp"
+                        android:layout_weight="2"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
                         >
-                </com.dissonant.quotas.ui.views.CircleSelector>
+                    <com.dissonant.quotas.ui.views.CircleSelector
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            >
+                    </com.dissonant.quotas.ui.views.CircleSelector>
+                </LinearLayout>
                 <LinearLayout
                         android:id="@+id/timerange_layout"
                         android:orientation="vertical"
-                        android:layout_width="fill_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
-                        android:background="@drawable/paper_ripple"
                         android:layout_weight="1"
                         >
                     <Button
                             android:id="@+id/starttime_button"
                             android:text="@string/starttime_value"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                         />
                     <Button
                             android:id="@+id/endtime_button"
                             android:text="@string/endtime_value"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                         />
                 </LinearLayout>

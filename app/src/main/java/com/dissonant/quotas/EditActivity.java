@@ -3,7 +3,6 @@ package com.dissonant.quotas;
 import java.sql.Time;
 
 import android.app.Activity;
-import android.app.TimePickerDialog.OnTimeSetListener;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
@@ -17,34 +16,34 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.dissonant.quotas.controllers.BackgroundToggle;
-import com.dissonant.quotas.controllers.EditController;
+import com.dissonant.quotas.controllers.TimePickerController;
 import com.dissonant.quotas.controllers.VisibilityToggle;
 import com.dissonant.quotas.db.models.QuotaModel;
 import com.dissonant.quotas.ui.dialogs.ColorPickerDialog;
-import com.dissonant.quotas.ui.dialogs.TimePickerFragment;
+import com.dissonant.quotas.ui.dialogs.TimePickerFragment.TimePickerDialogListener;
 import com.dissonant.quotas.ui.dialogs.TimeRangeDialogFragment;
 import com.dissonant.quotas.ui.views.EditView;
 import com.dissonant.quotas.utils.BasicTextValidator;
 import com.dissonant.quotas.utils.Utils;
 
-public class EditActivity extends Activity {
+public class EditActivity extends Activity
+    implements TimePickerDialogListener {
     final QuotaModel quota = new QuotaModel();
     BasicTextValidator titleValidator;
 
     EditView editView;
-    EditController controller;
+    Button endTimeButton;
+    Button startTimeButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         editView = (EditView) View.inflate(this, R.layout.activity_edit, null);
-        controller = new EditController(this, editView);
 
         setContentView(editView);
         createListeners();
@@ -105,46 +104,26 @@ public class EditActivity extends Activity {
             ((ToggleButton)repeatOptions.getChildAt(i)).setOnCheckedChangeListener(repeatToggleListener);
         }
 
-        LinearLayout timeDuration = (LinearLayout) findViewById(R.id.duration_layout);
-        timeDuration.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isTimeSet()) {
-                    openTimeRangeDialog(v, quota.getStartTime(), quota.getEndTime());
-                } else {
-                    Toast.makeText(EditActivity.this, getResources()
-                        .getString(R.string.time_not_set), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
+        //LinearLayout timeDuration = (LinearLayout) findViewById(R.id.duration_layout);
+//      timeDuration.setOnClickListener( new View.OnClickListener() {
+//          @Override
+//          public void onClick(View v) {
+//              if (isTimeSet()) {
+//                  openTimeRangeDialog(v, quota.getStartTime(), quota.getEndTime());
+//              } else {
+//                  Toast.makeText(EditActivity.this, getResources()
+//                      .getString(R.string.time_not_set), Toast.LENGTH_SHORT).show();
+//              }
+//          }
+//      });
+//
         // Open TimePicker, update button text and quota startTime
-        final Button startTimeButton = (Button) findViewById(R.id.starttime_button);
-        startTimeButton.setOnClickListener( new View.OnClickListener() {
-            public void onClick(View v) {
-                OnTimeSetListener startTimeListener = new OnTimeSetListener() {
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        quota.setStartTime(Utils.getTimeFromInt(hourOfDay, minute));
-                        startTimeButton.setText(Utils.getTimeAsString(quota.getStartTime(), "hh:mm a"));
-                    }
-                };
-                openTimePickerDialog(v, startTimeListener);
-            }
-        });
+        startTimeButton = (Button) findViewById(R.id.starttime_button);
+        startTimeButton.setOnClickListener(new TimePickerController(this, this));
 
         // Open TimePicker, update button text and quota endTime
-        final Button endTimeButton = (Button) findViewById(R.id.endtime_button);
-        endTimeButton.setOnClickListener( new View.OnClickListener() {
-            public void onClick(View v) {
-                OnTimeSetListener startTimeListener = new OnTimeSetListener() {
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        quota.setEndTime(Utils.getTimeFromInt(hourOfDay, minute));
-                        endTimeButton.setText(Utils.getTimeAsString(quota.getEndTime(), "hh:mm a"));
-                    }
-                };
-                openTimePickerDialog(v, startTimeListener);
-            }
-        });
+        endTimeButton = (Button) findViewById(R.id.endtime_button);
+        endTimeButton.setOnClickListener(new TimePickerController(this, this));
 
         TextView titleText = (TextView) findViewById(R.id.title);
         titleValidator = new BasicTextValidator(titleText);
@@ -170,13 +149,18 @@ public class EditActivity extends Activity {
         }
     }
 
+    public void onFinishedTimeSet(View view, int hourOfDay, int minute) {
+        if (startTimeButton.getId() == view.getId()) {
+            quota.setStartTime(Utils.getTimeFromInt(hourOfDay, minute));
+            startTimeButton.setText(Utils.getTimeAsString(quota.getStartTime(), "hh:mm a"));
+        } else if (endTimeButton.getId() == view.getId()) {
+            quota.setEndTime(Utils.getTimeFromInt(hourOfDay, minute));
+            endTimeButton.setText(Utils.getTimeAsString(quota.getEndTime(), "hh:mm a"));
+        }
+    }
+
     public void openTimeRangeDialog(View view, Time startTime, Time endTime) {
         TimeRangeDialogFragment trDialog = new TimeRangeDialogFragment(startTime, endTime);
         trDialog.show(getFragmentManager(), "timerange");
-    }
-
-    public void openTimePickerDialog(View view, OnTimeSetListener tListener) {
-        TimePickerFragment tPickerFragment = new TimePickerFragment(view, tListener);
-        tPickerFragment.show(getFragmentManager(), "time");
     }
 }
