@@ -64,4 +64,16 @@ public class EditView extends LinearLayout {
     public View getTimeRange() {
         return this.findViewById(R.id.timerange);
     }
+
+    /**
+     * Repeat Switch/Options
+     */
+
+    public View getRepeatSwitch() {
+        return this.findViewById(R.id.toggle);
+    }
+
+    public View getRepeatList() {
+        return this.findViewById(toggle_list);
+    }
 }

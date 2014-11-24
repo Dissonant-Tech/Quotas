@@ -84,16 +84,15 @@ public class EditActivity extends Activity
         // Calls onColorSet
         editView.getColorPicker().setOnClickListener(new ColorPickerController(this, this));
 
-        Switch repeatSwitch = (Switch) findViewById(R.id.toggle);
-        final LinearLayout repeatOptions = (LinearLayout) findViewById(R.id.toggle_list);
-        repeatSwitch.setOnCheckedChangeListener(new VisibilityToggle((View) findViewById(R.id.toggle_list)));
+        // Repeat List toggle switch
+        ((Switch) editView.getRepeatSwitch()).setOnCheckedChangeListener(new VisibilityToggle((View) findViewById(R.id.toggle_list)));
 
+        // Repeat Options List
+        LinearLayout repeatOptions = (LinearLayout) editView.getRepeatList();
         Drawable repeatBgDrawable = getDrawable(R.drawable.circle);
         Drawable repeatBgDrawableSelected = getDrawable(R.drawable.circle);
         repeatBgDrawableSelected.setColorFilter(Color.BLUE, Mode.SRC_IN);
-
         BackgroundToggle repeatToggleListener = new BackgroundToggle(repeatBgDrawable, repeatBgDrawableSelected);
-
         for (int i = 0; i < repeatOptions.getChildCount(); i++) {
             ((ToggleButton)repeatOptions.getChildAt(i)).setOnCheckedChangeListener(repeatToggleListener);
         }
