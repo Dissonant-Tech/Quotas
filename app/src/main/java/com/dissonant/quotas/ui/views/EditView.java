@@ -2,6 +2,7 @@ package com.dissonant.quotas.ui.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,15 +23,31 @@ public class EditView extends LinearLayout {
         return ((TextView) this.findViewById(R.id.description)).getText().toString();
     }
 
-    public String getStartTime() {
-        return ((Button) this.findViewById(R.id.starttime_button)).getText().toString();
+    /*
+     * Start and End Time buttons
+     */
+
+    public View getStartTime() {
+        return this.findViewById(R.id.starttime_button);
     }
 
-    public String getEndTime() {
-        return ((Button) this.findViewById(R.id.endtime_button)).getText().toString();
+    public View getEndTime() {
+        return this.findViewById(R.id.endtime_button);
     }
 
-    public void setListeners(OnClickListener listener) {
-        this.setOnClickListener(listener);
+    public void setStartTime(String text) {
+        ((Button) this.findViewById(R.id.starttime_button)).setText(text);
+    }
+
+    public void setEndTime(String text) {
+        ((Button) this.findViewById(R.id.endtime_button)).setText(text);
+    }
+
+    /**
+     * Color Picker
+     */
+
+    public View getColorPicker() {
+        return this.findViewById(R.id.colorpicker);
     }
 }

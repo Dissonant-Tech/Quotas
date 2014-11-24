@@ -32,20 +32,19 @@ import com.dissonant.quotas.utils.Utils;
 
 public class EditActivity extends Activity
     implements TimePickerDialogListener {
+
     final QuotaModel quota = new QuotaModel();
     BasicTextValidator titleValidator;
 
     EditView editView;
-    Button endTimeButton;
-    Button startTimeButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         editView = (EditView) View.inflate(this, R.layout.activity_edit, null);
-
         setContentView(editView);
+
         createListeners();
 
         // Load default preferences
@@ -81,8 +80,7 @@ public class EditActivity extends Activity
     }
 
     public void createListeners() {
-        final LinearLayout colorPicker = (LinearLayout) findViewById(R.id.colorpicker);
-        colorPicker.setOnClickListener( new OnClickListener() {
+        editView.getColorPicker().setOnClickListener( new OnClickListener() {
             @Override
             public void onClick(View v) {
                 ColorPickerDialog dialog = new ColorPickerDialog(v);
@@ -118,12 +116,10 @@ public class EditActivity extends Activity
 //      });
 //
         // Open TimePicker, update button text and quota startTime
-        startTimeButton = (Button) findViewById(R.id.starttime_button);
-        startTimeButton.setOnClickListener(new TimePickerController(this, this));
+        editView.getStartTime().setOnClickListener(new TimePickerController(this, this));
 
         // Open TimePicker, update button text and quota endTime
-        endTimeButton = (Button) findViewById(R.id.endtime_button);
-        endTimeButton.setOnClickListener(new TimePickerController(this, this));
+        editView.getEndTime().setOnClickListener(new TimePickerController(this, this));
 
         TextView titleText = (TextView) findViewById(R.id.title);
         titleValidator = new BasicTextValidator(titleText);
@@ -150,12 +146,12 @@ public class EditActivity extends Activity
     }
 
     public void onFinishedTimeSet(View view, int hourOfDay, int minute) {
-        if (startTimeButton.getId() == view.getId()) {
+        if (editView.getStartTime().getId() == view.getId()) {
             quota.setStartTime(Utils.getTimeFromInt(hourOfDay, minute));
-            startTimeButton.setText(Utils.getTimeAsString(quota.getStartTime(), "hh:mm a"));
-        } else if (endTimeButton.getId() == view.getId()) {
+            editView.setStartTime(Utils.getTimeAsString(quota.getStartTime(), "hh:mm a"));
+        } else if (editView.getEndTime().getId() == view.getId()) {
             quota.setEndTime(Utils.getTimeFromInt(hourOfDay, minute));
-            endTimeButton.setText(Utils.getTimeAsString(quota.getEndTime(), "hh:mm a"));
+            editView.setEndTime(Utils.getTimeAsString(quota.getEndTime(), "hh:mm a"));
         }
     }
 
