@@ -29,45 +29,10 @@ public class Utils {
     }
     
     /**
-     * Returns a string formatted time from integers of hours and minutes.
+     * Returns a string formatted time 
      *
-     * @param hourOfDay hour of the day as int.
-     * @param minute    minute of the hour as an int.
      * @return String of formatted time.
      */
-    static public String getTimeAsString(int hourOfDay, int minute) {
-        StringBuilder result;
-        String minuteFormat;
-        String format;
-
-        result = new StringBuilder();
-        result.append(hourOfDay);
-        result.append(":");
-
-        // If minute is single digit, prepend with 0
-        if (minute <= 9) {
-            result.append("0");
-        }
-        result.append(minute);
-
-        // AM or PM
-        if (hourOfDay == 0) {
-            hourOfDay += 12;
-            format = "AM";
-        } else if (hourOfDay == 12) {
-            format = "PM";
-        } else if (hourOfDay > 12) {
-            hourOfDay -= 12;
-            format = "PM";
-        } else {
-            format = "AM";
-        }
-        result.append(" ");
-        result.append(format);
-        
-        return result.toString();
-    }
-
     static public String getTimeAsString(Time time, String format) {
         if (format.isEmpty()) {
             format = "hh:mm Hours";
@@ -76,6 +41,10 @@ public class Utils {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
 
         return sdf.format(time.getTime());
+    }
+
+    static public String getTimeAsString(int hourOfDay, int minute, String format) {
+        return getTimeAsString(getTimeFromInt(hourOfDay, minute), format);
     }
 
     static public Time getTimeFromInt(int hourOfDay, int minute) {

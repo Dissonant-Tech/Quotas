@@ -1,7 +1,5 @@
 package com.dissonant.quotas;
 
-import java.sql.Time;
-
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
@@ -20,22 +18,24 @@ import android.widget.ToggleButton;
 import com.dissonant.quotas.controllers.BackgroundToggle;
 import com.dissonant.quotas.controllers.ColorPickerController;
 import com.dissonant.quotas.controllers.TimePickerController;
+import com.dissonant.quotas.controllers.TimeRangeController;
 import com.dissonant.quotas.controllers.VisibilityToggle;
 import com.dissonant.quotas.db.models.QuotaModel;
 import com.dissonant.quotas.ui.dialogs.ColorPickerFragment.ColorPickerListener;
 import com.dissonant.quotas.ui.dialogs.TimePickerFragment.TimePickerListener;
-import com.dissonant.quotas.ui.dialogs.TimeRangeDialogFragment;
+import com.dissonant.quotas.ui.dialogs.TimeRangeFragment.TimeRangeListener;
 import com.dissonant.quotas.ui.views.EditView;
 import com.dissonant.quotas.utils.BasicTextValidator;
 import com.dissonant.quotas.utils.Utils;
 
 public class EditActivity extends Activity
-    implements TimePickerListener, ColorPickerListener {
+    implements TimePickerListener, ColorPickerListener, TimeRangeListener {
 
     final QuotaModel quota = new QuotaModel();
     BasicTextValidator titleValidator;
 
     EditView editView;
+    TimeRangeController timeRangeController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,17 +97,8 @@ public class EditActivity extends Activity
             ((ToggleButton)repeatOptions.getChildAt(i)).setOnCheckedChangeListener(repeatToggleListener);
         }
 
-        editView.getTimeRange().setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isTimeSet()) {
-                    openTimeRangeDialog(v, quota.getStartTime(), quota.getEndTime());
-                } else {
-                    Toast.makeText(EditActivity.this, getResources()
-                        .getString(R.string.time_not_set), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        timeRangeController = new TimeRangeController(this, this, editView);
+        editView.getTimeRange().setOnClickListener(timeRangeController);
 
         // Calls onFinishedTimeSet()
         editView.getStartTime().setOnClickListener(new TimePickerController(this, this));
@@ -121,20 +112,13 @@ public class EditActivity extends Activity
     public boolean validate() {
         if (!titleValidator.isValid()) {
             return false;
-        } else if (!isTimeSet()) {
-            return false;
         } else {
             return true;
         }
     }
 
-    public boolean isTimeSet() {
-        if (quota.getStartTime() == null ||
-                quota.getEndTime() == null ) {
-            return false;
-        } else {
-            return true;
-        }
+    @Override
+    public void onTimeRangeSet(float val, float maxVal) {
     }
 
     @Override
@@ -146,15 +130,12 @@ public class EditActivity extends Activity
             quota.setEndTime(Utils.getTimeFromInt(hourOfDay, minute));
             editView.setEndTime(Utils.getTimeAsString(quota.getEndTime(), "hh:mm a"));
         }
+        timeRangeController.onFinishedTimeSet(view, hourOfDay, minute);
     }
 
     @Override
     public void onColorSet(String name, int color) {
+        quota.setColor(color);
         editView.setColorPicked(name, color);
-    }
-
-    public void openTimeRangeDialog(View view, Time startTime, Time endTime) {
-        TimeRangeDialogFragment trDialog = new TimeRangeDialogFragment(startTime, endTime);
-        trDialog.show(getFragmentManager(), "timerange");
     }
 }

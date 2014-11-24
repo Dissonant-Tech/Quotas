@@ -16,15 +16,22 @@ import android.view.View;
 import com.dissonant.quotas.R;
 import com.dissonant.quotas.ui.views.CircleSelector;
 
-public class TimeRangeDialogFragment extends DialogFragment
+public class TimeRangeFragment extends DialogFragment
     implements CircleSelector.SelectionListener {
+
+    public interface TimeRangeListener {
+        void onTimeRangeSet(float val, float maxVal);
+    }
 
     private Time startTime;
     private Time endTime;
+    private TimeRangeListener listener;
+    float val, maxVal;
 
-    public TimeRangeDialogFragment(Time startTime, Time endTime) {
+    public TimeRangeFragment(Time startTime, Time endTime, TimeRangeListener listener) {
         this.startTime = startTime;
         this.endTime = endTime;
+        this.listener = listener;
     }
 
     @Override
@@ -45,12 +52,13 @@ public class TimeRangeDialogFragment extends DialogFragment
         builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
+                listener.onTimeRangeSet(val, maxVal);
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                TimeRangeDialogFragment.this.getDialog().cancel();
+                TimeRangeFragment.this.getDialog().cancel();
             }
         });
 
@@ -86,11 +94,11 @@ public class TimeRangeDialogFragment extends DialogFragment
     }
 
     public void onValueSelected(float val, float maxVal) {
-
+        this.val = val;
+        this.maxVal = maxVal;
     }
 
     public void onSelectionUpdate(float val, float maxVal) {
-
     }
 
     private String[] genCustomText(Time startTime, Time endTime, int stepSize) {
