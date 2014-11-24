@@ -20,6 +20,10 @@ public class EditView extends LinearLayout {
         return ((TextView) this.findViewById(R.id.title)).getText().toString();
     }
 
+    public View getTitleView() {
+        return this.findViewById(R.id.title);
+    }
+
     public String getDescription() {
         return ((TextView) this.findViewById(R.id.description)).getText().toString();
     }

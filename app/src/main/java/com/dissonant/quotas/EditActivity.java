@@ -104,9 +104,8 @@ public class EditActivity extends Activity
         editView.getStartTime().setOnClickListener(new TimePickerController(this, this));
         editView.getEndTime().setOnClickListener(new TimePickerController(this, this));
 
-        TextView titleText = (TextView) findViewById(R.id.title);
-        titleValidator = new BasicTextValidator(titleText);
-        titleText.addTextChangedListener(titleValidator);
+        titleValidator = new BasicTextValidator((TextView) editView.getTitleView());
+        ((TextView) editView.getTitleView()).addTextChangedListener(titleValidator);
     }
 
     public boolean validate() {
