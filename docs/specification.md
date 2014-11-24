@@ -32,12 +32,8 @@ Software Requirements
 
 **Basic Tasks:**
     
-    1. Create quotas
-    2. Edit quotas
-    3. Delete quotas
-    4. List all quotas
-    5. Organize quotas
-    6. Notifications on Quota Completion/Overdue
+    1. Manage Quotas
+    2. Notifications on Quota Completion/Overdue
 
 
 System Architecture
@@ -75,12 +71,12 @@ UI Classes:
   * Daily/Weekly/Monthly Quota Overviews
 
   * DoughnutChart:
-      * Uses Database API to update chart on homepage.
+      * Recieves data in constructor or through public method
       * update method.
       * on Selected/deselected methods.
 
   * QuotaList:
-      * Uses Database API to update quota list on homepage.
+      * Recieves data in constructor or through public method
       * update method.
       * on Selected/deselected methods.
 
@@ -99,3 +95,13 @@ SQLHelper ----> MainActivity -----------> QuotasChart
                             Preferences
 
 ```
+
+Using the MVC pattern
+=====================
+
+QuotaModel classes will make up with Model.
+
+XML resources, and when more complicated functions are needed, java classes
+will make up the View.
+
+Activity classes and separate listeners will make up the controllers.
