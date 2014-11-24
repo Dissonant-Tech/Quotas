@@ -56,4 +56,12 @@ public class EditView extends LinearLayout {
         ((TextView) this.findViewById(R.id.color_value)).setText(name);
         ((ImageView) this.findViewById(R.id.color_icon)).setColorFilter(color);
     }
+
+    /**
+     * TimeRange/Duration
+     */
+
+    public View getTimeRange() {
+        return this.findViewById(R.id.timerange);
+    }
 }

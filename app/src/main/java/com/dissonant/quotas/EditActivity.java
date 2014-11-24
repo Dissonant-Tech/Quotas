@@ -97,19 +97,18 @@ public class EditActivity extends Activity
             ((ToggleButton)repeatOptions.getChildAt(i)).setOnCheckedChangeListener(repeatToggleListener);
         }
 
-        //LinearLayout timeDuration = (LinearLayout) findViewById(R.id.duration_layout);
-//      timeDuration.setOnClickListener( new View.OnClickListener() {
-//          @Override
-//          public void onClick(View v) {
-//              if (isTimeSet()) {
-//                  openTimeRangeDialog(v, quota.getStartTime(), quota.getEndTime());
-//              } else {
-//                  Toast.makeText(EditActivity.this, getResources()
-//                      .getString(R.string.time_not_set), Toast.LENGTH_SHORT).show();
-//              }
-//          }
-//      });
-//
+        editView.getTimeRange().setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isTimeSet()) {
+                    openTimeRangeDialog(v, quota.getStartTime(), quota.getEndTime());
+                } else {
+                    Toast.makeText(EditActivity.this, getResources()
+                        .getString(R.string.time_not_set), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         // Calls onFinishedTimeSet()
         editView.getStartTime().setOnClickListener(new TimePickerController(this, this));
         editView.getEndTime().setOnClickListener(new TimePickerController(this, this));

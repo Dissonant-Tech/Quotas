@@ -8,5 +8,9 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="CircleSelector">
+        <attr name="touchEnabled" format="boolean"/>
+    </declare-styleable>
+
     <attr name="floatingHintEditTextStyle" format="reference" />
 </resources>

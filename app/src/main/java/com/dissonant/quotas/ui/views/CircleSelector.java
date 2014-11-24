@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -21,6 +22,8 @@ import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+
+import com.dissonant.quotas.R;
 
 public class CircleSelector extends View
     implements OnGestureListener, OnDoubleTapListener {
@@ -60,12 +63,25 @@ public class CircleSelector extends View
 
     public CircleSelector(Context context, AttributeSet attrs) {
         super(context, attrs);
+        loadAttrs(context, attrs);
         init();
     }
 
     public CircleSelector(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        loadAttrs(context, attrs);
         init();
+    }
+
+    private void loadAttrs(Context context, AttributeSet attrs) {
+        TypedArray a = context.getTheme().obtainStyledAttributes(
+                attrs, R.styleable.CircleSelector, 0, 0);
+
+        try {
+            mTouchEnabled = a.getBoolean(R.styleable.CircleSelector_touchEnabled, false);
+        } finally {
+            a.recycle();
+        }
     }
 
     private void init() {
@@ -397,7 +413,7 @@ public class CircleSelector extends View
     /**
      * Set an array of custom texts to be drawn instead of the value in the
      * center of the CircleDisplay. If set to null, the custom text will be
-     * reset and the value will be drawn. Make sure the length of the array 
+     * reset and the value will be drawn. Make sure the length of the array
      * corresponds with the maximum number of steps (set with setStepSize(float stepsize).
      *
      * @param custom
@@ -557,10 +573,10 @@ public class CircleSelector extends View
 
                 switch (e.getAction()) {
 
-                // case MotionEvent.ACTION_DOWN:
-                // if (mListener != null)
-                // mListener.onSelectionStarted(mValue, mMaxValue);
-                // break;
+                    // case MotionEvent.ACTION_DOWN:
+                    // if (mListener != null)
+                    // mListener.onSelectionStarted(mValue, mMaxValue);
+                    // break;
                     case MotionEvent.ACTION_MOVE:
 
                         updateValue(x, y);
