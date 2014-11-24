@@ -16,19 +16,22 @@ import com.dissonant.quotas.R;
 import com.dissonant.quotas.model.ColorListItem;
 import com.dissonant.quotas.ui.adapters.ColorListAdapter;
 
-public class ColorPickerDialog extends DialogFragment {
+public class ColorPickerFragment extends DialogFragment {
+
+    public interface ColorPickerListener {
+        void onColorSet(String name, int color);
+    }
+
+    ColorPickerListener listener;
 
     LayoutInflater inflater;
     View dialogView;
 
     ColorListAdapter colorListAdapter;
     ArrayList<ColorListItem> colorArray;
-    TextView colorNameView;
-    ImageView colorView;
 
-    public ColorPickerDialog(View v) {
-        this.colorView = (ImageView )v.findViewById(R.id.color_icon);
-        this.colorNameView = (TextView) v.findViewById(R.id.color_value);
+    public ColorPickerFragment(ColorPickerListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -46,8 +49,7 @@ public class ColorPickerDialog extends DialogFragment {
         builder.setView(dialogView);
         builder.setAdapter(colorListAdapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                colorNameView.setText(colorArray.get(which).getName());
-                colorView.setColorFilter(colorArray.get(which).getColor());
+                listener.onColorSet(colorArray.get(which).getName(), colorArray.get(which).getColor());
             }
         });
 

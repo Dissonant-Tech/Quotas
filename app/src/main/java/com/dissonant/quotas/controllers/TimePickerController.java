@@ -6,14 +6,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.dissonant.quotas.ui.dialogs.TimePickerFragment;
-import com.dissonant.quotas.ui.dialogs.TimePickerFragment.TimePickerDialogListener;
+import com.dissonant.quotas.ui.dialogs.TimePickerFragment.TimePickerListener;
 
 public class TimePickerController implements OnClickListener {
 
     private Context context;
-    private TimePickerDialogListener listener;
+    private TimePickerListener listener;
 
-    public TimePickerController(Context context, TimePickerDialogListener listener){
+    public TimePickerController(Context context, TimePickerListener listener){
         this.context = context;
         this.listener = listener;
     }
@@ -23,7 +23,7 @@ public class TimePickerController implements OnClickListener {
         openTimePickerDialog(v, this.listener);
     }
 
-    public void openTimePickerDialog(View view, TimePickerDialogListener listener) {
+    public void openTimePickerDialog(View view, TimePickerListener listener) {
         TimePickerFragment tPickerFragment = new TimePickerFragment(view, listener);
         tPickerFragment.show(((Activity) this.context).getFragmentManager(), "timePicker");
     }

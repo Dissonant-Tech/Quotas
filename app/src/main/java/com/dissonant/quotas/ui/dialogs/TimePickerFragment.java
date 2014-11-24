@@ -14,14 +14,14 @@ import android.widget.TimePicker;
 public class TimePickerFragment extends DialogFragment 
     implements OnTimeSetListener {
 
-    public interface TimePickerDialogListener {
+    public interface TimePickerListener {
         void onFinishedTimeSet(View view, int hourOfDay, int minute);
     }
 
     View view;
-    TimePickerDialogListener listener;
+    TimePickerListener listener;
 
-    public TimePickerFragment(View view, TimePickerDialogListener listener) {
+    public TimePickerFragment(View view, TimePickerListener listener) {
         this.view = view;
         this.listener = listener;
     }

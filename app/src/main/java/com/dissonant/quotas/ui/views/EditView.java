@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -49,5 +50,10 @@ public class EditView extends LinearLayout {
 
     public View getColorPicker() {
         return this.findViewById(R.id.colorpicker);
+    }
+
+    public void setColorPicked(String name, int color) {
+        ((TextView) this.findViewById(R.id.color_value)).setText(name);
+        ((ImageView) this.findViewById(R.id.color_icon)).setColorFilter(color);
     }
 }

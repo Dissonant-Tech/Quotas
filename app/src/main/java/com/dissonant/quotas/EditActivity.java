@@ -11,8 +11,6 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -20,18 +18,19 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.dissonant.quotas.controllers.BackgroundToggle;
+import com.dissonant.quotas.controllers.ColorPickerController;
 import com.dissonant.quotas.controllers.TimePickerController;
 import com.dissonant.quotas.controllers.VisibilityToggle;
 import com.dissonant.quotas.db.models.QuotaModel;
-import com.dissonant.quotas.ui.dialogs.ColorPickerDialog;
-import com.dissonant.quotas.ui.dialogs.TimePickerFragment.TimePickerDialogListener;
+import com.dissonant.quotas.ui.dialogs.ColorPickerFragment.ColorPickerListener;
+import com.dissonant.quotas.ui.dialogs.TimePickerFragment.TimePickerListener;
 import com.dissonant.quotas.ui.dialogs.TimeRangeDialogFragment;
 import com.dissonant.quotas.ui.views.EditView;
 import com.dissonant.quotas.utils.BasicTextValidator;
 import com.dissonant.quotas.utils.Utils;
 
 public class EditActivity extends Activity
-    implements TimePickerDialogListener {
+    implements TimePickerListener, ColorPickerListener {
 
     final QuotaModel quota = new QuotaModel();
     BasicTextValidator titleValidator;
@@ -80,13 +79,9 @@ public class EditActivity extends Activity
     }
 
     public void createListeners() {
-        editView.getColorPicker().setOnClickListener( new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ColorPickerDialog dialog = new ColorPickerDialog(v);
-                dialog.show(getFragmentManager(), "colorpicker");
-            }
-        });
+
+        // Calls onColorSet
+        editView.getColorPicker().setOnClickListener(new ColorPickerController(this, this));
 
         Switch repeatSwitch = (Switch) findViewById(R.id.toggle);
         final LinearLayout repeatOptions = (LinearLayout) findViewById(R.id.toggle_list);
@@ -115,10 +110,8 @@ public class EditActivity extends Activity
 //          }
 //      });
 //
-        // Open TimePicker, update button text and quota startTime
+        // Calls onFinishedTimeSet()
         editView.getStartTime().setOnClickListener(new TimePickerController(this, this));
-
-        // Open TimePicker, update button text and quota endTime
         editView.getEndTime().setOnClickListener(new TimePickerController(this, this));
 
         TextView titleText = (TextView) findViewById(R.id.title);
@@ -145,6 +138,7 @@ public class EditActivity extends Activity
         }
     }
 
+    @Override
     public void onFinishedTimeSet(View view, int hourOfDay, int minute) {
         if (editView.getStartTime().getId() == view.getId()) {
             quota.setStartTime(Utils.getTimeFromInt(hourOfDay, minute));
@@ -153,6 +147,11 @@ public class EditActivity extends Activity
             quota.setEndTime(Utils.getTimeFromInt(hourOfDay, minute));
             editView.setEndTime(Utils.getTimeAsString(quota.getEndTime(), "hh:mm a"));
         }
+    }
+
+    @Override
+    public void onColorSet(String name, int color) {
+        editView.setColorPicked(name, color);
     }
 
     public void openTimeRangeDialog(View view, Time startTime, Time endTime) {
