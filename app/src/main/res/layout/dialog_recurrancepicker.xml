@@ -7,17 +7,19 @@
         >
     <LinearLayout
             android:orientation="horizontal"
-            android:layout_height="?android:listPreferredItemHeight"
+            android:layout_height="@dimen/listPreferredItemHeight"
             android:layout_width="fill_parent"
             android:weightSum="4"
+            android:background="@color/White"
             >
         <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="3"
+                android:textColor="@color/text_regular"
             />
-        <ToggleButton
+        <Switch
                 android:id="@+id/toggle"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
