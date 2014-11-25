@@ -82,7 +82,6 @@ public class EditActivity extends Activity
         timeRangeController = new TimeRangeController(this, this, editView);
         editView.getTimeRange().setOnClickListener(timeRangeController);
 
-
         titleValidator = new BasicTextValidator((TextView) editView.getTitleView());
         ((TextView) editView.getTitleView()).addTextChangedListener(titleValidator);
     }
@@ -112,6 +111,6 @@ public class EditActivity extends Activity
 
     @Override
     public void onRecurrenceSet() {
-        
+
     }
 }
