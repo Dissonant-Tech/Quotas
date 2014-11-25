@@ -83,4 +83,13 @@
     <string name="save_success">Quota Saved</string>
     <string name="save_failed">Save Failed!</string>
     <string name="time_not_set">Please set a start and end time</string>
+
+    <!-- Recurrance options array -->
+    <string name="recurrence_daily">Repeat Daily</string>
+    <string name="recurrence_weekly">Repeat Weekly</string>
+    <string name="recurrence_monthly">Repeat Monthly</string>
+    <string name="recurrence_yearly"> Repeat Yearly</string>
+
+    <string name="done">Done</string>
+
 </resources>

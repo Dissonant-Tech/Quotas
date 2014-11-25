@@ -73,11 +73,7 @@ public class EditView extends LinearLayout {
      * Repeat Switch/Options
      */
 
-    public View getRepeatSwitch() {
-        return this.findViewById(R.id.toggle);
-    }
-
-    public View getRepeatList() {
-        return this.findViewById(R.id.toggle_list);
+    public View getRepeat() {
+        return this.findViewById(R.id.repeat);
     }
 }

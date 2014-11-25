@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        >
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_height="?android:listPreferredItemHeight"
+            android:layout_width="fill_parent"
+            android:weightSum="4"
+            >
+        <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="3"
+            />
+        <ToggleButton
+                android:id="@+id/toggle"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+            />
+    </LinearLayout>
+</LinearLayout>
