@@ -22,4 +22,4 @@ android:
         - android-21
         - extra
 
-script: "gradle assemble"
+script: "./gradlew assembleDebug"
