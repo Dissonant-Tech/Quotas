@@ -78,6 +78,6 @@ public class EditView extends LinearLayout {
     }
 
     public View getRepeatList() {
-        return this.findViewById(toggle_list);
+        return this.findViewById(R.id.toggle_list);
     }
 }

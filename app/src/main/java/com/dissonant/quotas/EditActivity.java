@@ -1,5 +1,7 @@
 package com.dissonant.quotas;
 
+import java.sql.Time;
+
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
@@ -17,20 +19,17 @@ import android.widget.ToggleButton;
 
 import com.dissonant.quotas.controllers.BackgroundToggle;
 import com.dissonant.quotas.controllers.ColorPickerController;
-import com.dissonant.quotas.controllers.TimePickerController;
 import com.dissonant.quotas.controllers.TimeRangeController;
 import com.dissonant.quotas.controllers.VisibilityToggle;
 import com.dissonant.quotas.db.models.QuotaModel;
 import com.dissonant.quotas.ui.dialogs.ColorPickerFragment.ColorPickerListener;
-import com.dissonant.quotas.ui.dialogs.TimePickerFragment.TimePickerListener;
 import com.dissonant.quotas.ui.dialogs.TimeRangeFragment.TimeRangeListener;
 import com.dissonant.quotas.ui.views.CircleSelector;
 import com.dissonant.quotas.ui.views.EditView;
 import com.dissonant.quotas.utils.BasicTextValidator;
-import com.dissonant.quotas.utils.Utils;
 
 public class EditActivity extends Activity
-    implements TimePickerListener, ColorPickerListener, TimeRangeListener {
+    implements ColorPickerListener, TimeRangeListener {
 
     final QuotaModel quota = new QuotaModel();
     BasicTextValidator titleValidator;
@@ -100,9 +99,6 @@ public class EditActivity extends Activity
         timeRangeController = new TimeRangeController(this, this, editView);
         editView.getTimeRange().setOnClickListener(timeRangeController);
 
-        // Calls onFinishedTimeSet()
-        editView.getStartTime().setOnClickListener(new TimePickerController(this, this));
-        editView.getEndTime().setOnClickListener(new TimePickerController(this, this));
 
         titleValidator = new BasicTextValidator((TextView) editView.getTitleView());
         ((TextView) editView.getTitleView()).addTextChangedListener(titleValidator);
@@ -117,26 +113,17 @@ public class EditActivity extends Activity
     }
 
     @Override
-    public void onTimeRangeSet(float val, float maxVal) {
+    public void onTimeRangeSet(Time startTime, Time endTime, float val, float maxVal) {
         CircleSelector timeRangeView = (CircleSelector) editView.getTimeRange();
         timeRangeView.showValue(val, maxVal, false);
-    }
 
-    @Override
-    public void onFinishedTimeSet(View view, int hourOfDay, int minute) {
-        if (editView.getStartTime().getId() == view.getId()) {
-            quota.setStartTime(Utils.getTimeFromInt(hourOfDay, minute));
-            editView.setStartTime(Utils.getTimeAsString(quota.getStartTime(), "hh:mm a"));
-        } else if (editView.getEndTime().getId() == view.getId()) {
-            quota.setEndTime(Utils.getTimeFromInt(hourOfDay, minute));
-            editView.setEndTime(Utils.getTimeAsString(quota.getEndTime(), "hh:mm a"));
-        }
-        timeRangeController.onFinishedTimeSet(view, hourOfDay, minute);
+        quota.setStartTime(startTime);
+        quota.setEndTime(endTime);
     }
 
     @Override
     public void onColorSet(String name, int color) {
-        quota.setColor(color);
         editView.setColorPicked(name, color);
+        quota.setColor(color);
     }
 }

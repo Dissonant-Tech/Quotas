@@ -26,6 +26,10 @@ public class TimeRangeController implements OnClickListener, TimePickerListener 
         this.context = context;
         this.listener = listener;
         this.editView = editView;
+
+        // Calls onFinishedTimeSet()
+        editView.getStartTime().setOnClickListener(new TimePickerController(context, this));
+        editView.getEndTime().setOnClickListener(new TimePickerController(context, this));
     }
 
     @Override
@@ -42,8 +46,10 @@ public class TimeRangeController implements OnClickListener, TimePickerListener 
     public void onFinishedTimeSet(View view, int hourOfDay, int minute) {
         if (editView.getStartTime().getId() == view.getId()) {
             startTime = Utils.getTimeFromInt(hourOfDay, minute);
+            editView.setStartTime(Utils.getTimeAsString(startTime, "hh:mm a"));
         } else if (editView.getEndTime().getId() == view.getId()) {
             endTime = Utils.getTimeFromInt(hourOfDay, minute);
+            editView.setEndTime(Utils.getTimeAsString(endTime, "hh:mm a"));
         }
     }
 

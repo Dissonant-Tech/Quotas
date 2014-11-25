@@ -10,8 +10,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import com.dissonant.quotas.R;
@@ -23,7 +21,7 @@ public class TimeRangeFragment extends DialogFragment
     private static final String TAG = "TimeRangeFragment";
 
     public interface TimeRangeListener {
-        void onTimeRangeSet(float val, float maxVal);
+        void onTimeRangeSet(Time startTime, Time endTime, float val, float maxVal);
     }
 
     private Time startTime;
@@ -57,10 +55,7 @@ public class TimeRangeFragment extends DialogFragment
         builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                StringBuilder sb = new StringBuilder();
-                sb.append("Saved with val: ").append(val).append(" maxVal: ").append(maxVal);
-                Log.d(TAG, sb.toString());
-                listener.onTimeRangeSet(val, maxVal);
+                listener.onTimeRangeSet(startTime, endTime, val, maxVal);
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
