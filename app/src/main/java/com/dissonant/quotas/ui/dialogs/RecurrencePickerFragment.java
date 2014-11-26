@@ -17,7 +17,6 @@ import android.widget.Switch;
 
 import com.dissonant.quotas.R;
 
-//TODO: Add m_ or m to all member classes/fields. Add methods for updating body view with correct sub-views on spinner change
 
 public class RecurrencePickerFragment extends DialogFragment
     implements OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
@@ -51,13 +50,13 @@ public class RecurrencePickerFragment extends DialogFragment
     }
 
     public void setupView() {
-        // Setup Spinner
-        Spinner spinner = (Spinner) mDialogView.findViewById(R.id.recurrence_spinner);
-        spinner.setOnItemSelectedListener(this);
+        // Setup Recurrence Spinner
+        Spinner recurrenceSpinner = (Spinner) mDialogView.findViewById(R.id.recurrence_spinner);
+        recurrenceSpinner.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.recurrence_options, R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        recurrenceSpinner.setAdapter(adapter);
 
         // Setup dialog switch
         Switch dialogToggle = (Switch) mDialogView.findViewById(R.id.recurrence_toggle);
@@ -98,6 +97,6 @@ public class RecurrencePickerFragment extends DialogFragment
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            mDialogView.setEnabled(isChecked);
+        mDialogView.setEnabled(isChecked);
     }
 }

@@ -16,17 +16,21 @@
                 android:text="@string/every"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
+                android:textColor="@color/text_regular"
             />
         <EditText
                 android:id="@+id/daily_count"
+                android:minWidth="16dp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:inputType="number"
+                android:textColor="@color/text_regular"
             />
         <TextView
                 android:text="@string/days"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
+                android:textColor="@color/text_regular"
             />
     </LinearLayout>
     <LinearLayout
