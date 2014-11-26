@@ -25,7 +25,7 @@ import com.dissonant.quotas.utils.BasicTextValidator;
 public class EditActivity extends Activity
     implements ColorPickerListener, TimeRangeListener, RecurrencePickerListener {
 
-    final QuotaModel quota = new QuotaModel();
+    final QuotaModel mQuota = new QuotaModel();
     BasicTextValidator titleValidator;
 
     EditView editView;
@@ -99,14 +99,14 @@ public class EditActivity extends Activity
         CircleSelector timeRangeView = (CircleSelector) editView.getTimeRange();
         timeRangeView.showValue(val, maxVal, false);
 
-        quota.setStartTime(startTime);
-        quota.setEndTime(endTime);
+        mQuota.setStartTime(startTime);
+        mQuota.setEndTime(endTime);
     }
 
     @Override
     public void onColorSet(String name, int color) {
         editView.setColorPicked(name, color);
-        quota.setColor(color);
+        mQuota.setColor(color);
     }
 
     @Override
