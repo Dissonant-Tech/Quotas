@@ -4,6 +4,8 @@
         android:orientation="vertical"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
+        android:paddingLeft="@dimen/dialog_horizontal_margin"
+        android:paddingRight="@dimen/dialog_horizontal_margin"
         >
     <LinearLayout
             android:orientation="horizontal"
@@ -13,17 +15,23 @@
             android:background="@color/White"
             >
         <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/recurrence_spinner"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="3"
                 android:textColor="@color/text_regular"
             />
         <Switch
-                android:id="@+id/toggle"
+                android:id="@+id/recurrence_toggle"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
             />
+    </LinearLayout>
+    <LinearLayout
+            android:id="@+id/recurrence_body"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            >
     </LinearLayout>
 </LinearLayout>
