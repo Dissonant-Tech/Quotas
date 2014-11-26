@@ -22,4 +22,5 @@
     <dimen name="icon_margin">12dp</dimen>
 
     <dimen name="listPreferredItemHeight">64dp</dimen>
+    <dimen name="textPreferredLineHeight">24dp</dimen>
 </resources>

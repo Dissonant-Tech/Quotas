@@ -11,10 +11,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 
 import com.dissonant.quotas.R;
+
+//TODO: Add m_ or m to all member classes/fields. Add methods for updating body view with correct sub-views on spinner change
 
 public class RecurrencePickerFragment extends DialogFragment
     implements OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
@@ -26,9 +29,9 @@ public class RecurrencePickerFragment extends DialogFragment
 	private Context context;
 	private RecurrencePickerListener listener;
 
-    private LayoutInflater inflater;
-    private View dialogView;
-    private View dialogBodyView;
+    private LayoutInflater mInflater;
+    private View mDialogView;
+    private LinearLayout mDialogBodyView;
 
     public RecurrencePickerFragment(Context context, RecurrencePickerListener listener) {
 		this.context = context;
@@ -38,30 +41,31 @@ public class RecurrencePickerFragment extends DialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        inflater = getActivity().getLayoutInflater();
-        dialogView = inflater.inflate(R.layout.dialog_recurrancepicker, null);
+        mInflater = getActivity().getLayoutInflater();
+        mDialogView = mInflater.inflate(R.layout.dialog_recurrancepicker, null);
 
         setupView();
 
-        builder.setView(dialogView);
+        builder.setView(mDialogView);
         return builder.create();
     }
 
     public void setupView() {
         // Setup Spinner
-        Spinner spinner = (Spinner) dialogView.findViewById(R.id.recurrence_spinner);
+        Spinner spinner = (Spinner) mDialogView.findViewById(R.id.recurrence_spinner);
         spinner.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.recurrence_options, R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        // Setup dialog body
-        dialogBodyView = dialogView.findViewById(R.id.recurrence_body);
-
         // Setup dialog switch
-        Switch dialogToggle = (Switch) dialogView.findViewById(R.id.recurrence_toggle);
+        Switch dialogToggle = (Switch) mDialogView.findViewById(R.id.recurrence_toggle);
         dialogToggle.setOnCheckedChangeListener(this);
+
+        // Setup dialog body
+        mDialogBodyView = (LinearLayout) mDialogView.findViewById(R.id.recurrence_body);
+        setBodyView(R.layout.view_recurrence_daily);
     }
 
     public String genRecurranceString() {
@@ -73,14 +77,20 @@ public class RecurrencePickerFragment extends DialogFragment
         String selected = parent.getItemAtPosition(pos).toString();
 
         if (selected == getString(R.string.recurrence_daily)) {
-
+            setBodyView(R.layout.view_recurrence_daily);
         } else if (selected == getString(R.string.recurrence_weekly)) {
-
+            setBodyView(R.layout.view_recurrence_weekly);
         } else if (selected == getString(R.string.recurrence_monthly)) {
-
+            setBodyView(R.layout.view_recurrence_monthly);
         } else if (selected == getString(R.string.recurrence_yearly)) {
-
+            setBodyView(R.layout.view_recurrence_yearly);
         }
+    }
+
+    public void setBodyView(int viewId) {
+        View newView = mInflater.inflate(viewId, null);
+        mDialogBodyView.removeAllViews();
+        mDialogBodyView.addView(newView);
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
@@ -88,6 +98,6 @@ public class RecurrencePickerFragment extends DialogFragment
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            dialogView.setEnabled(isChecked);
+            mDialogView.setEnabled(isChecked);
     }
 }

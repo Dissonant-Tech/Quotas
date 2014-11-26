@@ -90,6 +90,8 @@
     <string name="recurrence_monthly">Repeat Monthly</string>
     <string name="recurrence_yearly"> Repeat Yearly</string>
 
+    <string name="every">Every</string>
+    <string name="days">days</string>
     <string name="done">Done</string>
 
 </resources>
