@@ -18,6 +18,9 @@
         <item name="floatingHintEditTextStyle">@style/Widget.FloatingHintEditText</item>
     </style>
 
+    <style name="TextAppearance" parent="android:TextAppearance">
+    </style>
+
     <style name="Widget"></style>
 
     <style name="Widget.FloatingHintEditText" parent="@android:style/Widget.EditText">
@@ -123,6 +126,11 @@
     </style>
 
     <style name="Dropdown">
+        <item name="android:textColor">@color/text_regular</item>
+    </style>
+
+    <style name="TextAppearance.RecurrencePickerStyle">
+        <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/text_regular</item>
     </style>
 
