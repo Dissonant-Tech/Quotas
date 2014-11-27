@@ -19,7 +19,6 @@
     <color name="transparent">#00FFFFFF</color>
     
     <!-- Text Colors -->
-
     <color name="text_regular">#D9000000</color>
     <color name="text_hint_regular">#66000000</color>
     <color name="text_hint">#66FFFFFF</color>

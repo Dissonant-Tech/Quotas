@@ -18,6 +18,9 @@
         <item name="floatingHintEditTextStyle">@style/Widget.FloatingHintEditText</item>
     </style>
 
+    <style name="TextAppearance" parent="android:TextAppearance">
+    </style>
+
     <style name="Widget"></style>
 
     <style name="Widget.FloatingHintEditText" parent="@android:style/Widget.EditText">
@@ -109,6 +112,26 @@
         <item name="android:layout_height">@dimen/fab_size</item>
         <item name="android:background">@drawable/ripple</item>
         <item name="android:stateListAnimator">@anim/fab_anim</item>
+    </style>
+
+    <style name="Dialog">
+        <item name="android:background">@color/White</item>
+        <item name="android:textColor">@color/text_regular</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="DialogTitle"
+            parent="@style/Dialog">
+        <item name="android:layout_height">@dimen/listPreferredItemHeight</item>
+    </style>
+
+    <style name="Dropdown">
+        <item name="android:textColor">@color/text_regular</item>
+    </style>
+
+    <style name="TextAppearance.RecurrencePickerStyle">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/text_regular</item>
     </style>
 
 </resources>

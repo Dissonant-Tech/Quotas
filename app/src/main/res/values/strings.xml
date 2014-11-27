@@ -83,4 +83,40 @@
     <string name="save_success">Quota Saved</string>
     <string name="save_failed">Save Failed!</string>
     <string name="time_not_set">Please set a start and end time</string>
+
+    <!-- Recurrance options array -->
+    <string name="recurrence_daily">Repeat Daily</string>
+    <string name="recurrence_weekly">Repeat Weekly</string>
+    <string name="recurrence_monthly">Repeat Monthly</string>
+    <string name="recurrence_yearly"> Repeat Yearly</string>
+
+    <string name="every">Every</string>
+    <string name="days">days</string>
+
+    <string name="recurrence_until_selected">Until</string>
+    <string name="recurrence_for_selected">For</string>
+
+    <string name="done">Done</string>
+
+
+    <!-- Specifies that a repeating event to repeat forever (based on the defined frequency) 
+      instead of ending at a future date[CHAR LIMIT=20] -->
+    <string name="recurrence_end_continously">Forever</string>
+    <!-- Specifies that a repeating event to repeat until a certain date[CHAR LIMIT=25] -->
+    <string name="recurrence_end_date_label">Until a date</string>
+    <!-- Specifies that a repeating event to repeat until a certain date[CHAR LIMIT=20] -->
+    <string name="recurrence_end_date">Until %s</string>
+    <!-- Specifies that a repeating event to repeat for a number of times. 
+      A repeating event can repeat forever, repeat in a certain frequency until a certain date, 
+    or repeat for a number of times. e.g. repeat 10 times and stop. This string is for the last case [CHAR LIMIT=25] -->
+    <string name="recurrence_end_count_label">For a number of events</string>
+    <string name="recurrence_end_count">For %d events</string>
+
+      <!-- Specifies that a repeating event should repeat for a certain number of iterations. [CHAR LIMIT=20]
+    <plurals name="recurrence_end_count">
+        <item quantity="one">For %d event</item>
+        <item quantity="other">For %d events</item>
+        </plurals>
+  -->
+
 </resources>
