@@ -1,32 +1,46 @@
 package com.dissonant.quotas.ui.dialogs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
-import android.graphics.Color;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.dissonant.quotas.R;
+import com.dissonant.quotas.ui.adapters.SwapSpinnerAdapter;
 
 
 public class RecurrencePickerFragment extends DialogFragment
     implements OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
+
+    private static final String TAG = "RecurrencePicker";
+
+    // Update android:maxLength in EditText as needed
+    private static final int INTERVAL_MAX = 99;
+    private static final int INTERVAL_DEFAULT = 1;
+    // Update android:maxLength in EditText as needed
+    private static final int COUNT_MAX = 730;
+    private static final int COUNT_DEFAULT = 5;
+
+    private RecurrenceModel mModel = new RecurrenceModel();
 
     public interface RecurrencePickerListener {
         void onRecurrenceSet();
@@ -42,12 +56,10 @@ public class RecurrencePickerFragment extends DialogFragment
 
     private Spinner mFreqSpinner;
 
-    private String mEndNeverStr;
-    private String mEndDateLabel;
-    private String mEndCountLabel;
     private Spinner mEndSpinner;
-    private ArrayList<CharSequence> mEndSpinnerArray = new ArrayList<CharSequence>(3);
-    private EndSpinnerAdapter mEndSpinnerAdapter;
+    private SwapSpinnerAdapter mSwapSpinnerAdapter;
+
+    private Resources mResources;
 
     public RecurrencePickerFragment(Context context, RecurrencePickerListener listener) {
         this.context = context;
@@ -59,6 +71,7 @@ public class RecurrencePickerFragment extends DialogFragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         mInflater = getActivity().getLayoutInflater();
         mView = mInflater.inflate(R.layout.dialog_recurrancepicker, null);
+        mResources = getResources();
 
         setupView();
 
@@ -86,26 +99,27 @@ public class RecurrencePickerFragment extends DialogFragment
     }
 
     public void setupEndSpinner() {
-        // Setup end spinner
-        mEndNeverStr = getString(R.string.recurrence_end_continously);
-        mEndDateLabel = getString(R.string.recurrence_end_date_label);
-        mEndCountLabel = getString(R.string.recurrence_end_count_label);
-
-        mEndSpinnerArray.add(mEndNeverStr);
-        mEndSpinnerArray.add(mEndDateLabel);
-        mEndSpinnerArray.add(mEndCountLabel);
         mEndSpinner = (Spinner) mView.findViewById(R.id.endSpinner);
         mEndSpinner.setOnItemSelectedListener(this);
 
-        mEndSpinnerAdapter = new EndSpinnerAdapter(getActivity(), mEndSpinnerArray,
+        ArrayList<CharSequence> endLabelArray = getCharSequenceArray(R.array.recurrence_end_label_array);
+        ArrayList<CharSequence> endArray = getCharSequenceArray(R.array.recurrence_end_array);
+
+        mSwapSpinnerAdapter = new SwapSpinnerAdapter(getActivity(), endLabelArray, endArray,
                 R.layout.recurrencepicker_freq_item, R.layout.recurrencepicker_end_text);
-        mEndSpinnerAdapter.setDropDownViewResource(R.layout.recurrencepicker_freq_item);
-        mEndSpinner.setAdapter(mEndSpinnerAdapter);
+        mSwapSpinnerAdapter.setDropDownViewResource(R.layout.recurrencepicker_freq_item);
+        mEndSpinner.setAdapter(mSwapSpinnerAdapter);
     }
 
     public String genRecurranceString() {
         StringBuilder sb = new StringBuilder();
         return sb.toString();
+    }
+
+    public ArrayList<CharSequence> getCharSequenceArray(int resourceId) {
+        ArrayList<CharSequence> result;
+        result = new ArrayList<CharSequence>(Arrays.asList(mResources.getStringArray(resourceId)));
+        return result;
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -149,81 +163,4 @@ public class RecurrencePickerFragment extends DialogFragment
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
     }
 
-    private class EndSpinnerAdapter extends ArrayAdapter<CharSequence> {
-
-        private String END_DATE_MARKER = "%s";
-        private String END_COUNT_MARKER = "%d";
-
-        private LayoutInflater mInflater;
-        private int mItemResourceId;
-        private int mTextResourceId;
-        private ArrayList<CharSequence> mStrings;
-        private String mEndDateString;
-        private boolean mUseFormStrings;
-
-        public EndSpinnerAdapter(Context context, ArrayList<CharSequence> strings,
-                int itemResourceId, int textResourceId) {
-            super(context, itemResourceId, strings);
-            mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            mItemResourceId = itemResourceId;
-            mTextResourceId = textResourceId;
-            mStrings = strings;
-            mEndDateString = getResources().getString(R.string.recurrence_end_date);
-
-            // If either date or count strings don't translate well, such that we aren't assured
-            // to have some text available to be placed in the spinner, then we'll have to use
-            // the more form-like versions of both strings instead.
-            int markerStart = mEndDateString.indexOf(END_DATE_MARKER);
-            if (markerStart <= 0) {
-                // The date string does not have any text before the "%s" so we'll have to use the
-                // more form-like strings instead.
-                mUseFormStrings = true;
-            } else {
-                String countEndStr = getResources().getQuantityString(
-                        R.plurals.recurrence_end_count, 1);
-                markerStart = countEndStr.indexOf(END_COUNT_MARKER);
-                if (markerStart <= 0) {
-                    // The count string does not have any text before the "%d" so we'll have to use
-                    // the more form-like strings instead.
-                    mUseFormStrings = true;
-                }
-            }
-
-            if (mUseFormStrings) {
-                // We'll have to set the layout for the spinner to be weight=0 so it doesn't
-                // take up too much space.
-                mEndSpinner.setLayoutParams(
-                        new TableLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1f));
-            }
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View v;
-            // Check if we can recycle the view
-            if (convertView == null) {
-                v = mInflater.inflate(mTextResourceId, parent, false);
-            } else {
-                v = convertView;
-            }
-
-            return v;
-        }
-
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            View v;
-            // Check if we can recycle the view
-            if (convertView == null) {
-                v = mInflater.inflate(mItemResourceId, parent, false);
-            } else {
-                v = convertView;
-            }
-
-            TextView item = (TextView) v.findViewById(R.id.spinner_item);
-            item.setText(mStrings.get(position));
-
-            return v;
-        }
-    }
 }

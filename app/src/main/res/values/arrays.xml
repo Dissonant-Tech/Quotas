@@ -6,9 +6,15 @@
         <item>@string/recurrence_yearly</item>
     </string-array>
 
+    <string-array name="recurrence_end_label_array">
+        <item>@string/recurrence_end_continously</item>
+        <item>@string/recurrence_end_date_label</item>
+        <item>@string/recurrence_end_count_label</item>
+    </string-array>
+
     <string-array name="recurrence_end_array">
         <item>@string/recurrence_end_continously</item>
-        <item>@string/recurrence_date_label</item>
-        <item>@string/recurrence_count_label</item>
+        <item>@string/recurrence_end_date</item>
+        <item>@string/recurrence_end_count</item>
     </string-array>
 </resources>
