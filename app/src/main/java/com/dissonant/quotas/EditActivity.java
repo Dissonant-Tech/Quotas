@@ -3,35 +3,29 @@ package com.dissonant.quotas;
 import java.sql.Time;
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.PorterDuff.Mode;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
-import com.dissonant.quotas.controllers.BackgroundToggle;
 import com.dissonant.quotas.controllers.ColorPickerController;
+import com.dissonant.quotas.controllers.RecurrencePickerController;
 import com.dissonant.quotas.controllers.TimeRangeController;
-import com.dissonant.quotas.controllers.VisibilityToggle;
 import com.dissonant.quotas.db.models.QuotaModel;
 import com.dissonant.quotas.ui.dialogs.ColorPickerFragment.ColorPickerListener;
+import com.dissonant.quotas.ui.dialogs.RecurrencePickerFragment.RecurrencePickerListener;
 import com.dissonant.quotas.ui.dialogs.TimeRangeFragment.TimeRangeListener;
 import com.dissonant.quotas.ui.views.CircleSelector;
 import com.dissonant.quotas.ui.views.EditView;
 import com.dissonant.quotas.utils.BasicTextValidator;
 
 public class EditActivity extends Activity
-    implements ColorPickerListener, TimeRangeListener {
+    implements ColorPickerListener, TimeRangeListener, RecurrencePickerListener {
 
-    final QuotaModel quota = new QuotaModel();
+    final QuotaModel mQuota = new QuotaModel();
     BasicTextValidator titleValidator;
 
     EditView editView;
@@ -83,22 +77,10 @@ public class EditActivity extends Activity
         // Calls onColorSet
         editView.getColorPicker().setOnClickListener(new ColorPickerController(this, this));
 
-        // Repeat List toggle switch
-        ((Switch) editView.getRepeatSwitch()).setOnCheckedChangeListener(new VisibilityToggle((View) findViewById(R.id.toggle_list)));
-
-        // Repeat Options List
-        LinearLayout repeatOptions = (LinearLayout) editView.getRepeatList();
-        Drawable repeatBgDrawable = getDrawable(R.drawable.circle);
-        Drawable repeatBgDrawableSelected = getDrawable(R.drawable.circle);
-        repeatBgDrawableSelected.setColorFilter(Color.BLUE, Mode.SRC_IN);
-        BackgroundToggle repeatToggleListener = new BackgroundToggle(repeatBgDrawable, repeatBgDrawableSelected);
-        for (int i = 0; i < repeatOptions.getChildCount(); i++) {
-            ((ToggleButton)repeatOptions.getChildAt(i)).setOnCheckedChangeListener(repeatToggleListener);
-        }
+        editView.getRepeat().setOnClickListener(new RecurrencePickerController(this, this));
 
         timeRangeController = new TimeRangeController(this, this, editView);
         editView.getTimeRange().setOnClickListener(timeRangeController);
-
 
         titleValidator = new BasicTextValidator((TextView) editView.getTitleView());
         ((TextView) editView.getTitleView()).addTextChangedListener(titleValidator);
@@ -117,13 +99,18 @@ public class EditActivity extends Activity
         CircleSelector timeRangeView = (CircleSelector) editView.getTimeRange();
         timeRangeView.showValue(val, maxVal, false);
 
-        quota.setStartTime(startTime);
-        quota.setEndTime(endTime);
+        mQuota.setStartTime(startTime);
+        mQuota.setEndTime(endTime);
     }
 
     @Override
     public void onColorSet(String name, int color) {
         editView.setColorPicked(name, color);
-        quota.setColor(color);
+        mQuota.setColor(color);
+    }
+
+    @Override
+    public void onRecurrenceSet() {
+
     }
 }
