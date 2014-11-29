@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 public class SwapSpinnerAdapter extends ArrayAdapter<CharSequence> {
 
+    private final String STRING_SUB_MARKER = "%s";
+    private final String INT_SUB_MARKER = "%d";
+
     private LayoutInflater mInflater;
     private int mItemResourceId;
     private int mTextResourceId;

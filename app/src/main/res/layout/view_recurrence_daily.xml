@@ -37,10 +37,15 @@
             />
     </LinearLayout>
     <LinearLayout
-            android:id="@+id/endSpinner"
             android:orientation="horizontal"
             android:layout_height="@dimen/listPreferredItemHeight"
             android:layout_width="fill_parent"
             >
+        <Spinner
+            android:id="@+id/endSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:textColor="@color/text_regular"
+            />
     </LinearLayout>
 </LinearLayout>
