@@ -9,15 +9,20 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.dissonant.quotas.R;
 import com.dissonant.quotas.ui.adapters.SwapSpinnerAdapter;
@@ -27,6 +32,15 @@ public class RecurrencePickerFragment extends DialogFragment
     implements OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
 
     private static final String TAG = "RecurrencePicker";
+
+    // Update android:maxLength in EditText as needed
+    private static final int INTERVAL_MAX = 99;
+    private static final int INTERVAL_DEFAULT = 1;
+    // Update android:maxLength in EditText as needed
+    private static final int COUNT_MAX = 730;
+    private static final int COUNT_DEFAULT = 5;
+
+    private RecurrenceModel mModel = new RecurrenceModel();
 
     public interface RecurrencePickerListener {
         void onRecurrenceSet();
