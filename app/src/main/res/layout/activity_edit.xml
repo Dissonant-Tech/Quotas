@@ -78,13 +78,19 @@
                         >
                     <Button
                             android:id="@+id/starttime_button"
+                            style="?android:attr/borderlessButtonStyle"
+                            android:background="@drawable/paper_ripple"
                             android:text="@string/starttime_value"
+                            android:textColor="@color/text_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                         />
                     <Button
                             android:id="@+id/endtime_button"
+                            style="?android:attr/borderlessButtonStyle"
+                            android:background="@drawable/paper_ripple"
                             android:text="@string/endtime_value"
+                            android:textColor="@color/text_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                         />
