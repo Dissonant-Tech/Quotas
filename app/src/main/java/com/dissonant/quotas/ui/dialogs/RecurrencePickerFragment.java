@@ -33,15 +33,6 @@ public class RecurrencePickerFragment extends DialogFragment
 
     private static final String TAG = "RecurrencePicker";
 
-    // Update android:maxLength in EditText as needed
-    private static final int INTERVAL_MAX = 99;
-    private static final int INTERVAL_DEFAULT = 1;
-    // Update android:maxLength in EditText as needed
-    private static final int COUNT_MAX = 730;
-    private static final int COUNT_DEFAULT = 5;
-
-    private RecurrenceModel mModel = new RecurrenceModel();
-
     public interface RecurrencePickerListener {
         void onRecurrenceSet();
     }
