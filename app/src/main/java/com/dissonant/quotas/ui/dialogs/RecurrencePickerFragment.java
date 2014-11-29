@@ -11,6 +11,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -20,11 +21,12 @@ import android.widget.Spinner;
 import android.widget.Switch;
 
 import com.dissonant.quotas.R;
-import com.dissonant.quotas.ui.adapters.SwapSpinnerAdapter;
+import com.dissonant.quotas.ui.widgets.EndSpinner;
 
 
 public class RecurrencePickerFragment extends DialogFragment
-    implements OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
+    implements OnItemSelectedListener, CompoundButton.OnCheckedChangeListener,
+               View.OnClickListener {
 
     private static final String TAG = "RecurrencePicker";
 
@@ -34,21 +36,20 @@ public class RecurrencePickerFragment extends DialogFragment
 
     private View mView;
 
-    private Context context;
+    private Context mContext;
     private RecurrencePickerListener listener;
 
     private LayoutInflater mInflater;
     private LinearLayout mBodyView;
-
     private Spinner mFreqSpinner;
 
-    private Spinner mEndSpinner;
-    private SwapSpinnerAdapter mSwapSpinnerAdapter;
+    private EndSpinner mEndSpinner;
+    private ViewGroup mEndSpinnerView;
 
     private Resources mResources;
 
     public RecurrencePickerFragment(Context context, RecurrencePickerListener listener) {
-        this.context = context;
+        this.mContext = context;
         this.listener = listener;
     }
 
@@ -56,7 +57,7 @@ public class RecurrencePickerFragment extends DialogFragment
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         mInflater = getActivity().getLayoutInflater();
-        mView = mInflater.inflate(R.layout.dialog_recurrancepicker, null);
+        mView = mInflater.inflate(R.layout.dialog_recurrencepicker, null);
         mResources = getResources();
 
         setupView();
@@ -82,19 +83,10 @@ public class RecurrencePickerFragment extends DialogFragment
         mBodyView = (LinearLayout) mView.findViewById(R.id.recurrence_body);
         setBodyView(R.layout.view_recurrence_daily);
 
-    }
-
-    public void setupEndSpinner() {
-        mEndSpinner = (Spinner) mView.findViewById(R.id.endSpinner);
-        mEndSpinner.setOnItemSelectedListener(this);
-
-        ArrayList<CharSequence> endLabelArray = getCharSequenceArray(R.array.recurrence_end_label_array);
-        ArrayList<CharSequence> endArray = getCharSequenceArray(R.array.recurrence_end_array);
-
-        mSwapSpinnerAdapter = new SwapSpinnerAdapter(getActivity(), endLabelArray, endArray,
-                R.layout.recurrencepicker_freq_item, R.layout.recurrencepicker_end_text);
-        mSwapSpinnerAdapter.setDropDownViewResource(R.layout.recurrencepicker_freq_item);
-        mEndSpinner.setAdapter(mSwapSpinnerAdapter);
+        ArrayList<CharSequence> listedItems = getCharSequenceArray(R.array.recurrence_end_label_array);
+        ArrayList<CharSequence> selectedItems = getCharSequenceArray(R.array.recurrence_end_array);
+        mEndSpinnerView = (ViewGroup) mView.findViewById(R.id.endSpinner);
+        mEndSpinner = new EndSpinner(mContext, mEndSpinnerView, listedItems, selectedItems);
     }
 
     public String genRecurranceString() {
@@ -108,12 +100,12 @@ public class RecurrencePickerFragment extends DialogFragment
         return result;
     }
 
+    @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         String selection = parent.getItemAtPosition(pos).toString();
 
         if (parent.getId() == R.id.recurrence_spinner) {
             setBodyView(selection);
-        } else if (parent.getId() == R.id.endSpinner) {
         }
     }
 
@@ -133,20 +125,30 @@ public class RecurrencePickerFragment extends DialogFragment
         View newView = mInflater.inflate(viewId, null);
         mBodyView.removeAllViews();
         mBodyView.addView(newView);
-        setupBodyView(viewId);
     }
 
-    public void setupBodyView(int viewId) {
-        if (viewId == R.layout.view_recurrence_daily) {
-            setupEndSpinner();
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        LinearLayout layout = (LinearLayout) mBodyView;
+
+        if (isChecked) {
+            for (int i = 0; i < layout.getChildCount(); i++) {
+                View child = layout.getChildAt(i);
+                child.setEnabled(true);
+            }
+        } else {
+            for (int i = 0; i < layout.getChildCount(); i++) {
+                View child = layout.getChildAt(i);
+                child.setEnabled(false);
+            }
         }
     }
 
-    public void onNothingSelected(AdapterView<?> parent) {
-
+    @Override
+    public void onClick(View v) {
     }
-
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-    }
-
 }
