@@ -1,9 +1,9 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 apply plugin: 'eclipse'
+apply plugin: 'android'
 
 buildscript {
     repositories {
+        mavenCentral()
         jcenter()
     }
     dependencies {
@@ -11,15 +11,28 @@ buildscript {
     }
 }
 
-allprojects {
-    repositories {
-        jcenter()
-    }
-    tasks.withType(JavaCompile) {
-        options.compilerArgs << "-Xlint:unchecked"
+android {
+    compileSdkVersion 'Google Inc.:Google APIs:21'
+    buildToolsVersion '21.1.2'
+
+    buildTypes {
+        release {
+            runProguard false
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+        }
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion  = '2.1'
+dependencies {
+    compile 'com.android.support:support-v4:21.0.0'
+    compile 'com.android.support:appcompat-v7:21.0.0'
+    compile 'com.android.support:cardview-v7:21.+'
+
+    compile files('libs/achartengine-1.1.0.jar')
 }
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.1'
+}
+
