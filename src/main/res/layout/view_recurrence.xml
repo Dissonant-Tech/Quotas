@@ -15,26 +15,15 @@
             >
         <TextView
                 android:text="@string/every"
-                android:layout_height="fill_parent"
-                android:layout_width="wrap_content"
-                android:textColor="@color/text_regular"
-                android:paddingTop="16dp"
+                style="@style/RecurrencePickerText"
             />
         <EditText
-                android:id="@+id/daily_count"
-                android:minWidth="32dp"
-                android:maxHeight="32dp"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:inputType="number"
-                android:textColor="@color/text_regular"
+                android:id="@+id/weekly_count"
+                style="@style/CountSelection"
             />
         <TextView
-                android:text="@string/days"
-                android:layout_height="fill_parent"
-                android:layout_width="wrap_content"
-                android:textColor="@color/text_regular"
-                android:paddingTop="16dp"
+                android:text="@string/weeks"
+                style="@style/RecurrencePickerText"
             />
     </LinearLayout>
     <LinearLayout
@@ -46,26 +35,15 @@
             >
         <TextView
                 android:text="@string/every"
-                android:layout_height="fill_parent"
-                android:layout_width="wrap_content"
-                android:textColor="@color/text_regular"
-                android:paddingTop="16dp"
+                style="@style/RecurrencePickerText"
             />
         <EditText
                 android:id="@+id/daily_count"
-                android:minWidth="32dp"
-                android:maxHeight="32dp"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:inputType="number"
-                android:textColor="@color/text_regular"
+                style="@style/CountSelection"
             />
         <TextView
                 android:text="@string/days"
-                android:layout_height="fill_parent"
-                android:layout_width="wrap_content"
-                android:textColor="@color/text_regular"
-                android:paddingTop="16dp"
+                style="@style/RecurrencePickerText"
             />
     </LinearLayout>
     <LinearLayout
@@ -77,26 +55,15 @@
             >
         <TextView
                 android:text="@string/every"
-                android:layout_height="fill_parent"
-                android:layout_width="wrap_content"
-                android:textColor="@color/text_regular"
-                android:paddingTop="16dp"
+                style="@style/RecurrencePickerText"
             />
         <EditText
-                android:id="@+id/daily_count"
-                android:minWidth="32dp"
-                android:maxHeight="32dp"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:inputType="number"
-                android:textColor="@color/text_regular"
+                android:id="@+id/monthly_count"
+                style="@style/CountSelection"
             />
         <TextView
-                android:text="@string/days"
-                android:layout_height="fill_parent"
-                android:layout_width="wrap_content"
-                android:textColor="@color/text_regular"
-                android:paddingTop="16dp"
+                android:text="@string/months"
+                style="@style/RecurrencePickerText"
             />
     </LinearLayout>
     <LinearLayout
@@ -108,26 +75,15 @@
             >
         <TextView
                 android:text="@string/every"
-                android:layout_height="fill_parent"
-                android:layout_width="wrap_content"
-                android:textColor="@color/text_regular"
-                android:paddingTop="16dp"
+                style="@style/RecurrencePickerText"
             />
         <EditText
-                android:id="@+id/daily_count"
-                android:minWidth="32dp"
-                android:maxHeight="32dp"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:inputType="number"
-                android:textColor="@color/text_regular"
+                android:id="@+id/yearly_count"
+                style="@style/CountSelection"
             />
         <TextView
                 android:text="@string/days"
-                android:layout_height="fill_parent"
-                android:layout_width="wrap_content"
-                android:textColor="@color/text_regular"
-                android:paddingTop="16dp"
+                style="@style/RecurrencePickerText"
             />
     </LinearLayout>
     <LinearLayout
