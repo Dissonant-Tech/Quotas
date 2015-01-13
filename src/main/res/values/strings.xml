@@ -77,6 +77,14 @@
         <item>Sat</item>
     </string-array>
 
+    <string name="sun">Sun</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
 
@@ -101,24 +109,11 @@
     <string name="done">Done</string>
 
 
-    <!-- Specifies that a repeating event to repeat forever (based on the defined frequency) 
-      instead of ending at a future date[CHAR LIMIT=20] -->
     <string name="recurrence_end_continously">Forever</string>
-    <!-- Specifies that a repeating event to repeat until a certain date[CHAR LIMIT=25] -->
     <string name="recurrence_end_date_label">Until a date</string>
-    <!-- Specifies that a repeating event to repeat until a certain date[CHAR LIMIT=20] -->
     <string name="recurrence_end_date">Until %s</string>
-    <!-- Specifies that a repeating event to repeat for a number of times. 
-      A repeating event can repeat forever, repeat in a certain frequency until a certain date, 
-    or repeat for a number of times. e.g. repeat 10 times and stop. This string is for the last case [CHAR LIMIT=25] -->
     <string name="recurrence_end_count_label">For a number of events</string>
     <string name="recurrence_end_count">For %d events</string>
 
-      <!-- Specifies that a repeating event should repeat for a certain number of iterations. [CHAR LIMIT=20]
-    <plurals name="recurrence_end_count">
-        <item quantity="one">For %d event</item>
-        <item quantity="other">For %d events</item>
-        </plurals>
-  -->
 
 </resources>

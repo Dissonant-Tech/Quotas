@@ -9,22 +9,75 @@
         >
     <LinearLayout
             android:id="@+id/recurrence_weekly"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_height="@dimen/listPreferredItemHeight"
             android:layout_width="fill_parent"
             >
-        <TextView
-                android:text="@string/every"
-                style="@style/RecurrencePickerText"
-            />
-        <EditText
-                android:id="@+id/weekly_count"
-                style="@style/CountSelection"
-            />
-        <TextView
-                android:text="@string/weeks"
-                style="@style/RecurrencePickerText"
-            />
+        <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                >
+            <TextView
+                    android:text="@string/every"
+                    style="@style/RecurrencePickerText"
+                />
+            <EditText
+                    android:id="@+id/weekly_count"
+                    style="@style/CountSelection"
+                />
+            <TextView
+                    android:text="@string/weeks"
+                    style="@style/RecurrencePickerText"
+                />
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                >
+            <ToggleButton
+                    android:id="@+id/mon_toggle"
+                    style="@style/RecurrencePickerToggle"
+                    android:textOn="@string/mon"
+                    android:textOff="@string/mon"
+                />
+            <ToggleButton
+                    android:id="@+id/tue_toggle"
+                    style="@style/RecurrencePickerToggle"
+                    android:textOn="@string/tue"
+                    android:textOff="@string/tue"
+                />
+            <ToggleButton
+                    android:id="@+id/wed_toggle"
+                    style="@style/RecurrencePickerToggle"
+                    android:textOn="@string/wed"
+                    android:textOff="@string/wed"
+                />
+            <ToggleButton
+                    android:id="@+id/thu_toggle"
+                    style="@style/RecurrencePickerToggle"
+                    android:textOn="@string/thu"
+                    android:textOff="@string/thu"
+                />
+            <ToggleButton
+                    android:id="@+id/fri_toggle"
+                    style="@style/RecurrencePickerToggle"
+                    android:textOn="@string/fri"
+                    android:textOff="@string/fri"
+                />
+            <ToggleButton
+                    android:id="@+id/sat_toggle"
+                    style="@style/RecurrencePickerToggle"
+                    android:textOn="@string/sat"
+                    android:textOff="@string/sat"
+                />
+            <ToggleButton
+                    android:id="@+id/sun_toggle"
+                    style="@style/RecurrencePickerToggle"
+                    android:textOn="@string/sun"
+                    android:textOff="@string/sun"
+                />
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
             android:id="@+id/recurrence_daily"
@@ -92,10 +145,10 @@
             android:layout_width="fill_parent"
             >
         <Spinner
-            android:id="@+id/endSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:textColor="@color/text_regular"
+                android:id="@+id/endSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textColor="@color/text_regular"
             />
     </LinearLayout>
 </LinearLayout>

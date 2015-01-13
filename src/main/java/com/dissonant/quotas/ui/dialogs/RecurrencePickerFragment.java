@@ -79,8 +79,8 @@ public class RecurrencePickerFragment extends DialogFragment
         // Setup dialog switch
         Switch dialogToggle = (Switch) mView.findViewById(R.id.recurrence_toggle);
         dialogToggle.setOnCheckedChangeListener(this);
-        
-        mRecurrenceViewIds = new int[]{ R.id.recurrence_daily, R.id.recurrence_weekly, 
+
+        mRecurrenceViewIds = new int[]{ R.id.recurrence_daily, R.id.recurrence_weekly,
             R.id.recurrence_monthly, R.id.recurrence_yearly };
 
         // Setup dialog body
