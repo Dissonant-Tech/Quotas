@@ -9,20 +9,15 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.TextView;
 
 import com.dissonant.quotas.R;
 import com.dissonant.quotas.ui.adapters.SwapSpinnerAdapter;
@@ -52,6 +47,8 @@ public class RecurrencePickerFragment extends DialogFragment
 
     private Resources mResources;
 
+    private int[] mRecurrenceViewIds;
+
     public RecurrencePickerFragment(Context context, RecurrencePickerListener listener) {
         this.context = context;
         this.listener = listener;
@@ -61,7 +58,7 @@ public class RecurrencePickerFragment extends DialogFragment
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         mInflater = getActivity().getLayoutInflater();
-        mView = mInflater.inflate(R.layout.dialog_recurrancepicker, null);
+        mView = mInflater.inflate(R.layout.dialog_recurrencepicker, null);
         mResources = getResources();
 
         setupView();
@@ -83,21 +80,28 @@ public class RecurrencePickerFragment extends DialogFragment
         Switch dialogToggle = (Switch) mView.findViewById(R.id.recurrence_toggle);
         dialogToggle.setOnCheckedChangeListener(this);
 
+        mRecurrenceViewIds = new int[]{ R.id.recurrence_daily, R.id.recurrence_weekly,
+            R.id.recurrence_monthly, R.id.recurrence_yearly };
+
         // Setup dialog body
         mBodyView = (LinearLayout) mView.findViewById(R.id.recurrence_body);
-        setBodyView(R.layout.view_recurrence_daily);
-
+        View recurrenceView = mInflater.inflate(R.layout.view_recurrence, null);
+        mBodyView.addView(recurrenceView);
+        setBodyView(R.id.recurrence_weekly);
     }
 
     public void setupEndSpinner() {
         mEndSpinner = (Spinner) mView.findViewById(R.id.endSpinner);
         mEndSpinner.setOnItemSelectedListener(this);
 
-        ArrayList<CharSequence> endLabelArray = getCharSequenceArray(R.array.recurrence_end_label_array);
-        ArrayList<CharSequence> endArray = getCharSequenceArray(R.array.recurrence_end_array);
+        ArrayList<CharSequence> endLabelArray =
+            getCharSequenceArray(R.array.recurrence_end_label_array);
+        ArrayList<CharSequence> endArray =
+            getCharSequenceArray(R.array.recurrence_end_array);
 
-        mSwapSpinnerAdapter = new SwapSpinnerAdapter(getActivity(), endLabelArray, endArray,
-                R.layout.recurrencepicker_freq_item, R.layout.recurrencepicker_end_text);
+        mSwapSpinnerAdapter = new SwapSpinnerAdapter(getActivity(),
+                endLabelArray, endArray, R.layout.recurrencepicker_freq_item,
+                R.layout.recurrencepicker_end_text);
         mSwapSpinnerAdapter.setDropDownViewResource(R.layout.recurrencepicker_freq_item);
         mEndSpinner.setAdapter(mSwapSpinnerAdapter);
     }
@@ -109,7 +113,9 @@ public class RecurrencePickerFragment extends DialogFragment
 
     public ArrayList<CharSequence> getCharSequenceArray(int resourceId) {
         ArrayList<CharSequence> result;
-        result = new ArrayList<CharSequence>(Arrays.asList(mResources.getStringArray(resourceId)));
+        result = new ArrayList<CharSequence>
+            (Arrays.asList(mResources.getStringArray(resourceId)));
+
         return result;
     }
 
@@ -124,31 +130,25 @@ public class RecurrencePickerFragment extends DialogFragment
 
     public void setBodyView(String selectedView) {
         if (selectedView == getString(R.string.recurrence_daily)) {
-            setBodyView(R.layout.view_recurrence_daily);
+            setBodyView(R.id.recurrence_daily);
         } else if (selectedView == getString(R.string.recurrence_weekly)) {
-            setBodyView(R.layout.view_recurrence_weekly);
+            setBodyView(R.id.recurrence_weekly);
         } else if (selectedView == getString(R.string.recurrence_monthly)) {
-            setBodyView(R.layout.view_recurrence_monthly);
+            setBodyView(R.id.recurrence_monthly);
         } else if (selectedView == getString(R.string.recurrence_yearly)) {
-            setBodyView(R.layout.view_recurrence_yearly);
+            setBodyView(R.id.recurrence_yearly);
         }
     }
 
     public void setBodyView(int viewId) {
-        View newView = mInflater.inflate(viewId, null);
-        mBodyView.removeAllViews();
-        mBodyView.addView(newView);
-        setupBodyView(viewId);
-    }
-
-    public void setupBodyView(int viewId) {
-        if (viewId == R.layout.view_recurrence_daily) {
-            setupEndSpinner();
+        for (int id : mRecurrenceViewIds) {
+            mBodyView.findViewById(id).setVisibility(View.GONE);
         }
+        mBodyView.findViewById(viewId).setVisibility(View.VISIBLE);
+        setupEndSpinner();
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

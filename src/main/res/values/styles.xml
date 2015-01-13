@@ -134,4 +134,25 @@
         <item name="android:textColor">@color/text_regular</item>
     </style>
 
+    <!-- RecurrencePicker theme -->
+    <style name="CountSelection">
+        <item name="android:minWidth">18dp</item>
+        <item name="android:minHeight">32dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:inputType">number</item>
+        <item name="android:textColor">@color/text_regular</item>
+    </style>
+
+    <style name="RecurrencePickerText">
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/text_regular</item>
+        <item name="android:paddingTop">16dp</item>
+    </style>
+
+    <style name="RecurrencePickerToggle">
+        <item name="android:layout_height">16dp</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
 </resources>
