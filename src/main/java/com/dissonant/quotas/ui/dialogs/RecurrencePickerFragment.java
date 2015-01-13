@@ -47,6 +47,8 @@ public class RecurrencePickerFragment extends DialogFragment
 
     private Resources mResources;
 
+    private int[] mRecurrenceViewIds;
+
     public RecurrencePickerFragment(Context context, RecurrencePickerListener listener) {
         this.context = context;
         this.listener = listener;
@@ -77,11 +79,15 @@ public class RecurrencePickerFragment extends DialogFragment
         // Setup dialog switch
         Switch dialogToggle = (Switch) mView.findViewById(R.id.recurrence_toggle);
         dialogToggle.setOnCheckedChangeListener(this);
+        
+        mRecurrenceViewIds = new int[]{ R.id.recurrence_daily, R.id.recurrence_weekly, 
+            R.id.recurrence_monthly, R.id.recurrence_yearly };
 
         // Setup dialog body
         mBodyView = (LinearLayout) mView.findViewById(R.id.recurrence_body);
-        setBodyView(R.layout.view_recurrence);
-
+        View recurrenceView = mInflater.inflate(R.layout.view_recurrence, null);
+        mBodyView.addView(recurrenceView);
+        setBodyView(R.id.recurrence_weekly);
     }
 
     public void setupEndSpinner() {
@@ -135,14 +141,14 @@ public class RecurrencePickerFragment extends DialogFragment
     }
 
     public void setBodyView(int viewId) {
-        View newView = mInflater.inflate(viewId, null);
-        mBodyView.removeAllViews();
-        mBodyView.addView(newView);
+        for (int id : mRecurrenceViewIds) {
+            mBodyView.findViewById(id).setVisibility(View.GONE);
+        }
+        mBodyView.findViewById(viewId).setVisibility(View.VISIBLE);
         setupEndSpinner();
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
