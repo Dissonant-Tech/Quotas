@@ -8,6 +8,7 @@
         android:paddingRight="@dimen/dialog_horizontal_margin"
         >
     <LinearLayout
+            android:id="@+id/recurrence_daily"
             android:orientation="horizontal"
             android:layout_height="@dimen/listPreferredItemHeight"
             android:layout_width="fill_parent"
