@@ -8,10 +8,103 @@
         android:paddingRight="@dimen/dialog_horizontal_margin"
         >
     <LinearLayout
+            android:id="@+id/recurrence_weekly"
+            android:orientation="horizontal"
+            android:layout_height="@dimen/listPreferredItemHeight"
+            android:layout_width="fill_parent"
+            >
+        <TextView
+                android:text="@string/every"
+                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:textColor="@color/text_regular"
+                android:paddingTop="16dp"
+            />
+        <EditText
+                android:id="@+id/daily_count"
+                android:minWidth="32dp"
+                android:maxHeight="32dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:inputType="number"
+                android:textColor="@color/text_regular"
+            />
+        <TextView
+                android:text="@string/days"
+                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:textColor="@color/text_regular"
+                android:paddingTop="16dp"
+            />
+    </LinearLayout>
+    <LinearLayout
             android:id="@+id/recurrence_daily"
             android:orientation="horizontal"
             android:layout_height="@dimen/listPreferredItemHeight"
             android:layout_width="fill_parent"
+            android:visibility="gone"
+            >
+        <TextView
+                android:text="@string/every"
+                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:textColor="@color/text_regular"
+                android:paddingTop="16dp"
+            />
+        <EditText
+                android:id="@+id/daily_count"
+                android:minWidth="32dp"
+                android:maxHeight="32dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:inputType="number"
+                android:textColor="@color/text_regular"
+            />
+        <TextView
+                android:text="@string/days"
+                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:textColor="@color/text_regular"
+                android:paddingTop="16dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+            android:id="@+id/recurrence_monthly"
+            android:orientation="horizontal"
+            android:layout_height="@dimen/listPreferredItemHeight"
+            android:layout_width="fill_parent"
+            android:visibility="gone"
+            >
+        <TextView
+                android:text="@string/every"
+                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:textColor="@color/text_regular"
+                android:paddingTop="16dp"
+            />
+        <EditText
+                android:id="@+id/daily_count"
+                android:minWidth="32dp"
+                android:maxHeight="32dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:inputType="number"
+                android:textColor="@color/text_regular"
+            />
+        <TextView
+                android:text="@string/days"
+                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:textColor="@color/text_regular"
+                android:paddingTop="16dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+            android:id="@+id/recurrence_yearly"
+            android:orientation="horizontal"
+            android:layout_height="@dimen/listPreferredItemHeight"
+            android:layout_width="fill_parent"
+            android:visibility="gone"
             >
         <TextView
                 android:text="@string/every"

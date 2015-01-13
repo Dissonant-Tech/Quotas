@@ -124,13 +124,13 @@ public class RecurrencePickerFragment extends DialogFragment
 
     public void setBodyView(String selectedView) {
         if (selectedView == getString(R.string.recurrence_daily)) {
-            setBodyView(R.layout.view_recurrence_daily);
+            setBodyView(R.id.recurrence_daily);
         } else if (selectedView == getString(R.string.recurrence_weekly)) {
-            setBodyView(R.layout.view_recurrence_weekly);
+            setBodyView(R.id.recurrence_weekly);
         } else if (selectedView == getString(R.string.recurrence_monthly)) {
-            setBodyView(R.layout.view_recurrence_monthly);
+            setBodyView(R.id.recurrence_monthly);
         } else if (selectedView == getString(R.string.recurrence_yearly)) {
-            setBodyView(R.layout.view_recurrence_yearly);
+            setBodyView(R.id.recurrence_yearly);
         }
     }
 
