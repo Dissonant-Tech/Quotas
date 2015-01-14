@@ -12,10 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dissonant.quotas.controllers.ColorPickerController;
+import com.dissonant.quotas.controllers.ColorPickerController.ColorPickerListener;
 import com.dissonant.quotas.controllers.RecurrencePickerController;
 import com.dissonant.quotas.controllers.TimeRangeController;
 import com.dissonant.quotas.db.models.QuotaModel;
-import com.dissonant.quotas.ui.dialogs.ColorPickerFragment.ColorPickerListener;
 import com.dissonant.quotas.ui.dialogs.RecurrencePickerFragment.RecurrencePickerListener;
 import com.dissonant.quotas.ui.dialogs.TimeRangeFragment.TimeRangeListener;
 import com.dissonant.quotas.ui.views.CircleSelector;
@@ -25,7 +25,7 @@ import com.dissonant.quotas.utils.BasicTextValidator;
 public class EditActivity extends Activity
     implements ColorPickerListener, TimeRangeListener, RecurrencePickerListener {
 
-    final QuotaModel mQuota = new QuotaModel();
+    QuotaModel mQuota = new QuotaModel();
     BasicTextValidator titleValidator;
 
     EditView editView;
@@ -75,7 +75,7 @@ public class EditActivity extends Activity
     public void createListeners() {
 
         // Calls onColorSet
-        editView.getColorPicker().setOnClickListener(new ColorPickerController(this, this));
+        editView.getColorPicker().setOnClickListener(new ColorPickerController(this, this, editView));
 
         editView.getRepeat().setOnClickListener(new RecurrencePickerController(this, this));
 
@@ -105,7 +105,6 @@ public class EditActivity extends Activity
 
     @Override
     public void onColorSet(String name, int color) {
-        editView.setColorPicked(name, color);
         mQuota.setColor(color);
     }
 
