@@ -10,11 +10,11 @@
     <LinearLayout
             android:id="@+id/recurrence_weekly"
             android:orientation="vertical"
-            android:layout_height="@dimen/listPreferredItemHeight"
+            android:layout_height="wrap_content"
             android:layout_width="fill_parent"
             >
         <LinearLayout
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/listPreferredItemHeight"
                 android:layout_width="fill_parent"
                 >
             <TextView
