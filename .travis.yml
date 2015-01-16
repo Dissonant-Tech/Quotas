@@ -12,6 +12,7 @@ before_script:
     - export PATH=$GRADLE_HOME/bin:$PATH
     - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
     - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
+    - echo yes | android update sdk --no-ui 
 
 android:
     components:
