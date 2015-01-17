@@ -21,6 +21,7 @@ import android.widget.Switch;
 import android.widget.ToggleButton;
 
 import com.dissonant.quotas.R;
+import com.dissonant.quotas.model.RecurrenceModel;
 import com.dissonant.quotas.ui.adapters.SwapSpinnerAdapter;
 
 

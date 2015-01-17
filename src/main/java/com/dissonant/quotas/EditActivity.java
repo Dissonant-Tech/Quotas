@@ -16,7 +16,7 @@ import com.dissonant.quotas.controllers.ColorPickerController.ColorPickerListene
 import com.dissonant.quotas.controllers.RecurrencePickerController;
 import com.dissonant.quotas.controllers.TimeRangeController;
 import com.dissonant.quotas.controllers.TimeRangeController.TimeRangeListener;
-import com.dissonant.quotas.db.models.QuotaModel;
+import com.dissonant.quotas.model.QuotaModel;
 import com.dissonant.quotas.ui.dialogs.RecurrencePickerFragment.RecurrencePickerListener;
 import com.dissonant.quotas.ui.views.CircleSelector;
 import com.dissonant.quotas.ui.views.EditView;

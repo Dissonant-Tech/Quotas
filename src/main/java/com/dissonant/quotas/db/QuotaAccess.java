@@ -10,7 +10,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.dissonant.quotas.db.models.QuotaModel;
+import com.dissonant.quotas.model.QuotaModel;
 
 public class QuotaAccess {
     private SQLiteDatabase database;

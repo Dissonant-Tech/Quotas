@@ -7,7 +7,7 @@ import android.os.Parcelable;
 import android.text.format.Time;
 
 
-class RecurrenceModel implements Parcelable {
+public class RecurrenceModel implements Parcelable {
 
     // Defualts
     

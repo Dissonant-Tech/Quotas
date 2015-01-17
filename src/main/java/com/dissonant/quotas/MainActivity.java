@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import com.dissonant.quotas.db.models.QuotaModel;
+import com.dissonant.quotas.model.QuotaModel;
 import com.dissonant.quotas.ui.adapters.DoughnutChartAdapter;
 
 public class MainActivity extends Activity {
