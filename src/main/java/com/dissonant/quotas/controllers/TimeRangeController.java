@@ -17,7 +17,7 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import com.dissonant.quotas.R;
-import com.dissonant.quotas.ui.dialogs.TimePickerFragment.TimePickerListener;
+import com.dissonant.quotas.controllers.TimePickerController.TimePickerListener;
 import com.dissonant.quotas.ui.views.CircleSelector;
 import com.dissonant.quotas.ui.views.EditView;
 import com.dissonant.quotas.utils.Utils;
@@ -82,7 +82,6 @@ public class TimeRangeController implements OnClickListener, TimePickerListener 
             implements CircleSelector.SelectionListener {
 
             private static final String TAG = "TimeRangeFragment";
-
 
             private Time startTime;
             private Time endTime;
