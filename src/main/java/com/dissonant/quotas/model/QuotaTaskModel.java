@@ -1,4 +1,4 @@
-package com.dissonant.quotas.db;
+package com.dissonant.quotas.model;
 
 import java.util.Calendar;
 

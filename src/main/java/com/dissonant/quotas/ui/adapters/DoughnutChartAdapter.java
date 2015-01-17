@@ -9,7 +9,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.dissonant.quotas.R;
-import com.dissonant.quotas.db.models.QuotaModel;
+import com.dissonant.quotas.model.QuotaModel;
 
 public class DoughnutChartAdapter {
 
