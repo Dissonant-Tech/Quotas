@@ -37,58 +37,58 @@ public class RecurrenceModel implements Parcelable {
     static final int STATE_NO_RECURRENCE = 0;
     static final int STATE_RECURRENCE = 1;
 
-    int recurrenceState;
+    public int recurrenceState;
 
     /**
      * FREQ: Repeat pattern
      *
      */
-    int freq = FREQ_WEEKLY;
+    public int freq = FREQ_WEEKLY;
 
     /**
      * INTERVAL: Every n days/weeks/months/years. n >= 1
      */
-    int interval = INTERVAL_DEFAULT;
+    public int interval = INTERVAL_DEFAULT;
 
     /**
      * UNTIL and COUNT: How does the the event end?
      *
      */
-    int end;
+    public int end;
 
     /**
      * UNTIL: Date of the last recurrence. Used when until == END_BY_DATE
      */
-    Time endDate;
+    public Time endDate;
 
     /**
      * COUNT: Times to repeat. Use when until == END_BY_COUNT
      */
-    int endCount = COUNT_DEFAULT;
+    public int endCount = COUNT_DEFAULT;
 
     /**
      * BYDAY: Days of the week to be repeated. Sun = 0, Mon = 1, etc
      */
-    boolean[] weeklyByDayOfWeek = new boolean[7];
+    public boolean[] weeklyByDayOfWeek = new boolean[7];
 
     /**
      * BYDAY AND BYMONTHDAY: How to repeat monthly events? Same date of the
      * month or Same nth day of week.
      *
      */
-    int monthlyRepeat;
+    public int monthlyRepeat;
 
     /**
      * Day of the month to repeat. Used when monthlyRepeat ==
      * MONTHLY_BY_DATE
      */
-    int monthlyByMonthDay;
+    public int monthlyByMonthDay;
 
     /**
      * Day of the week to repeat. Used when monthlyRepeat ==
      * MONTHLY_BY_NTH_DAY_OF_WEEK
      */
-    int monthlyByDayOfWeek;
+    public int monthlyByDayOfWeek;
 
     /**
      * Nth day of the week to repeat. Used when monthlyRepeat ==
@@ -97,7 +97,7 @@ public class RecurrenceModel implements Parcelable {
      * We support 5th, just to handle backwards capabilities with old bug, but it
      * gets converted to -1 once edited.
      */
-    int monthlyByNthDayOfWeek;
+    public int monthlyByNthDayOfWeek;
 
     /*
      * (generated method)

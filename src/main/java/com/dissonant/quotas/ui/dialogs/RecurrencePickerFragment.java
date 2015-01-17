@@ -63,6 +63,7 @@ public class RecurrencePickerFragment extends DialogFragment
         mInflater = getActivity().getLayoutInflater();
         mView = mInflater.inflate(R.layout.dialog_recurrencepicker, null);
         mResources = getResources();
+        mRecurrenceModel = new RecurrenceModel();
 
         setupView();
 
@@ -129,6 +130,7 @@ public class RecurrencePickerFragment extends DialogFragment
 
         if (parent.getId() == R.id.recurrence_spinner) {
             setBodyView(selection);
+            setRecurrenceFreq(selection);
         } else if (parent.getId() == R.id.endSpinner) {
         }
     }
@@ -161,8 +163,12 @@ public class RecurrencePickerFragment extends DialogFragment
             tb.setOnCheckedChangeListener( new ToggleButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton btn, boolean checked) {
+                    LinearLayout parent = (LinearLayout) btn.getParent();
+                    int index = parent.indexOfChild(btn);
                     if (checked) {
+                        mRecurrenceModel.weeklyByDayOfWeek[index] = true;
                     } else {
+                        mRecurrenceModel.weeklyByDayOfWeek[index] = false;
                     }
                 }
             });
@@ -173,5 +179,25 @@ public class RecurrencePickerFragment extends DialogFragment
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (buttonView.getId() == R.id.recurrence_toggle) {
+            if (isChecked) {
+                mRecurrenceModel.LAST_NTH_DAY_OF_WEEK = mRecurrenceModel.STATE_NO_RECURRENCE;
+            } else {
+                mRecurrenceModel.LAST_NTH_DAY_OF_WEEK = mRecurrenceModel.STATE_RECURRENCE;
+            }
+        }
+    }
+
+    private setRecurrenceFreq(int freq) {
+        switch (freq) {
+            case mRecurrenceModel.FREQ_DAILY: 
+                mRecurrenceModel.freq = mRecurrenceModel.FREQ_DAILY;
+            case mRecurrenceModel.FREQ_WEEKLY: 
+                mRecurrenceModel.freq = mRecurrenceModel.FREQ_WEEKLY;
+            case mRecurrenceModel.FREQ_MONTHLY: 
+                mRecurrenceModel.freq = mRecurrenceModel.FREQ_MONTHLY;
+            case mRecurrenceModel.FREQ_YEARLY: 
+                mRecurrenceModel.freq = mRecurrenceModel.FREQ_YEARLY;
+        }
     }
 }
