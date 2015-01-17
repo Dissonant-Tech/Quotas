@@ -18,6 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.ToggleButton;
 
 import com.dissonant.quotas.R;
 import com.dissonant.quotas.ui.adapters.SwapSpinnerAdapter;
@@ -146,6 +147,24 @@ public class RecurrencePickerFragment extends DialogFragment
         }
         mBodyView.findViewById(viewId).setVisibility(View.VISIBLE);
         setupEndSpinner();
+    }
+
+    private void setToggleListener(View view) {
+        LinearLayout toggles = (LinearLayout) view.findViewById(R.id.recurrence_toggles);
+        for (int i = 0; i < toggles.getChildCount(); i++) {
+            ToggleButton tb = (ToggleButton) toggleButtons.getChildAt(i);
+            tb.setOnCheckedChangeListener( new ToggleButton.OnCheckedChangeListener() {
+                public void onToggleClicked(View view) {
+                    boolean on = ((ToggleButton) view).isChecked();
+
+                    if (on) {
+                        view.setBackgroundColor(R.color.LightBlue);
+                    } else {
+                        view.setBackgroundColor(R.color.White);
+                    }
+                }
+            });
+        }
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
