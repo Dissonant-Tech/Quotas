@@ -152,8 +152,9 @@
     </style>
 
     <style name="RecurrencePickerToggle">
+        <item name="android:textColor">@color/text_regular</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:layout_width">48dp</item>
-        <item name="android:background">@drawable/recurrence_ring</item>
+        <item name="android:background">@drawable/recurrence_toggle_state</item>
     </style>
 </resources>
