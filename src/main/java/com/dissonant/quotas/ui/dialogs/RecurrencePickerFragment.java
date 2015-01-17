@@ -37,6 +37,7 @@ public class RecurrencePickerFragment extends DialogFragment
 
     private Context context;
     private RecurrencePickerListener listener;
+    private RecurrenceModel mRecurrenceModel;
 
     private LayoutInflater mInflater;
     private LinearLayout mBodyView;
@@ -89,6 +90,8 @@ public class RecurrencePickerFragment extends DialogFragment
         View recurrenceView = mInflater.inflate(R.layout.view_recurrence, null);
         mBodyView.addView(recurrenceView);
         setBodyView(R.id.recurrence_weekly);
+
+        setToggleListeners(mBodyView);
     }
 
     public void setupEndSpinner() {
@@ -149,18 +152,16 @@ public class RecurrencePickerFragment extends DialogFragment
         setupEndSpinner();
     }
 
-    private void setToggleListener(View view) {
+    private void setToggleListeners(View view) {
         LinearLayout toggles = (LinearLayout) view.findViewById(R.id.recurrence_toggles);
-        for (int i = 0; i < toggles.getChildCount(); i++) {
-            ToggleButton tb = (ToggleButton) toggleButtons.getChildAt(i);
-            tb.setOnCheckedChangeListener( new ToggleButton.OnCheckedChangeListener() {
-                public void onToggleClicked(View view) {
-                    boolean on = ((ToggleButton) view).isChecked();
 
-                    if (on) {
-                        view.setBackgroundColor(R.color.LightBlue);
+        for (int i = 0; i < toggles.getChildCount(); i++) {
+            ToggleButton tb = (ToggleButton) toggles.getChildAt(i);
+            tb.setOnCheckedChangeListener( new ToggleButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton btn, boolean checked) {
+                    if (checked) {
                     } else {
-                        view.setBackgroundColor(R.color.White);
                     }
                 }
             });
@@ -172,5 +173,4 @@ public class RecurrencePickerFragment extends DialogFragment
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
     }
-
 }
