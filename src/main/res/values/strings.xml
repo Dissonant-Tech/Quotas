@@ -115,5 +115,11 @@
     <string name="recurrence_end_count_label">For a number of events</string>
     <string name="recurrence_end_count">For %d events</string>
 
+    <!-- Specifies that a repeating event should repeat for a certain number of iterations. [CHAR LIMIT=20]-->
+    <plurals name="recurrence_end_count">
+        <item quantity="one">For %d event</item>
+        <item quantity="other">For %d events</item>
+    </plurals>
+
 
 </resources>

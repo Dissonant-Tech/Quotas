@@ -150,32 +150,5 @@
         <item name="android:background">@drawable/recurrence_toggle_state</item>
     </style>
 
-    <style name="RecurrenceInterval">
-        <item name="android:id">@id/recurrence_interval</item>
-        <item name="android:layout_height">@dimen/listPreferredItemHeight</item>
-        <item name="android:layout_width">fill_parent</item>
-    </style>
-
-    <style name="RecurrenceIntervalPre"
-            parent="RecurrenceText">
-        <item name="android:id">@id/recurrence_interval_pre</item>
-        <item name="android:text">@string/every</item>
-    </style>
-
-    <style name="RecurrenceIntervalCount">
-        <item name="android:id">@id/recurrence_interval_count</item>
-        <item name="android:minWidth">18dp</item>
-        <item name="android:minHeight">32dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:inputType">number</item>
-        <item name="android:textColor">@color/text_regular</item>
-    </style>
-
-    <style name="RecurrenceIntervalPost"
-            parent="RecurrenceText">
-        <item name="android:id">@id/recurrence_interval_post</item>
-    </style>
-
 </resources>
 
