@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<!-- The Recurrence Dialog reuses many of the same styles and views for its 
+  settings. Using the same IDs for its daily, weekly, etc, counter-parts will 
+  make extracting the chosen options much easier.
+  -->
+<resources>
+    <item type="id" name="recurrence_interval" />
+    <item type="id" name="recurrence_interval_pre" />
+    <item type="id" name="recurrence_interval_count" />
+    <item type="id" name="recurrence_interval_post" />
+</resources>

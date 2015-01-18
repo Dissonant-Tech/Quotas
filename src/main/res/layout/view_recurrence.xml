@@ -13,23 +13,13 @@
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
             >
-        <LinearLayout
-                android:layout_height="@dimen/listPreferredItemHeight"
-                android:layout_width="fill_parent"
-                >
-            <TextView
-                    android:text="@string/every"
-                    style="@style/RecurrencePickerText"
-                />
-            <EditText
-                    android:id="@+id/weekly_count"
-                    style="@style/CountSelection"
-                />
-            <TextView
-                    android:text="@string/weeks"
-                    style="@style/RecurrencePickerText"
-                />
+
+        <LinearLayout style="@style/RecurrenceInterval">
+            <TextView style="@style/RecurrenceIntervalPre"/>
+            <EditText style="@style/RecurrenceIntervalCount"/>
+            <TextView style="@style/RecurrenceIntervalPost"/>
         </LinearLayout>
+
         <LinearLayout
                 android:id="@+id/recurrence_toggles"
                 android:orientation="horizontal"
@@ -87,18 +77,11 @@
             android:layout_width="fill_parent"
             android:visibility="gone"
             >
-        <TextView
-                android:text="@string/every"
-                style="@style/RecurrencePickerText"
-            />
-        <EditText
-                android:id="@+id/daily_count"
-                style="@style/CountSelection"
-            />
-        <TextView
-                android:text="@string/days"
-                style="@style/RecurrencePickerText"
-            />
+        <LinearLayout style="@style/RecurrenceInterval">
+            <TextView style="@style/RecurrenceIntervalPre"/>
+            <EditText style="@style/RecurrenceIntervalCount"/>
+            <TextView style="@style/RecurrenceIntervalPost"/>
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
             android:id="@+id/recurrence_monthly"
@@ -107,18 +90,11 @@
             android:layout_width="fill_parent"
             android:visibility="gone"
             >
-        <TextView
-                android:text="@string/every"
-                style="@style/RecurrencePickerText"
-            />
-        <EditText
-                android:id="@+id/monthly_count"
-                style="@style/CountSelection"
-            />
-        <TextView
-                android:text="@string/months"
-                style="@style/RecurrencePickerText"
-            />
+        <LinearLayout style="@style/RecurrenceInterval">
+            <TextView style="@style/RecurrenceIntervalPre"/>
+            <EditText style="@style/RecurrenceIntervalCount"/>
+            <TextView style="@style/RecurrenceIntervalPost"/>
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
             android:id="@+id/recurrence_yearly"
@@ -127,18 +103,11 @@
             android:layout_width="fill_parent"
             android:visibility="gone"
             >
-        <TextView
-                android:text="@string/every"
-                style="@style/RecurrencePickerText"
-            />
-        <EditText
-                android:id="@+id/yearly_count"
-                style="@style/CountSelection"
-            />
-        <TextView
-                android:text="@string/days"
-                style="@style/RecurrencePickerText"
-            />
+        <LinearLayout style="@style/RecurrenceInterval">
+            <TextView style="@style/RecurrenceIntervalPre"/>
+            <EditText style="@style/RecurrenceIntervalCount"/>
+            <TextView style="@style/RecurrenceIntervalPost"/>
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
