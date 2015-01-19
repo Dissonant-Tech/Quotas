@@ -11,10 +11,12 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateUtils;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -32,7 +34,6 @@ import android.widget.ToggleButton;
 
 import com.dissonant.quotas.R;
 import com.dissonant.quotas.model.RecurrenceModel;
-import com.dissonant.quotas.ui.adapters.SwapSpinnerAdapter;
 
 
 public class RecurrencePickerFragment extends DialogFragment
@@ -59,10 +60,14 @@ public class RecurrencePickerFragment extends DialogFragment
     private LinearLayout mFreqView;
     private Spinner mFreqSpinner;
 
+    private ArrayList<CharSequence> mEndSpinnerArray = new ArrayList<CharSequence>(3);
     private Spinner mEndSpinner;
-    private SwapSpinnerAdapter mSwapSpinnerAdapter;
-    private TextView mEndDateTextView;
-    private EditText mEndCount;
+    private EndSpinnerAdapter mEndSpinnerAdapter;
+    private String mEndNeverStr;
+    private String mEndDateLabel;
+    private String mEndCountLabel;
+    private TextView mEndDateTextView;           
+    private EditText mEndCount;                  
     private TextView mPostEndCount;
     private boolean mHidePostEndCount;
 
@@ -83,6 +88,10 @@ public class RecurrencePickerFragment extends DialogFragment
     private RadioButton mRepeatMonthlyByNthDayOfWeek;
     private RadioButton mRepeatMonthlyByNthDayOfMonth;
     private String mMonthRepeatByDayOfWeekStr;
+
+    // Special cases in monthlyByNthDayOfWeek
+    private static final int FIFTH_WEEK_IN_A_MONTH = 5;
+    private static final int LAST_NTH_DAY_OF_WEEK = -1;
 
     private Button mDone;
     private Time mTime = new Time();
@@ -120,17 +129,15 @@ public class RecurrencePickerFragment extends DialogFragment
         mFreqSpinner = (Spinner) mView.findViewById(R.id.recurrence_spinner);
         mFreqSpinner.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.recurrence_options, R.layout.simple_spinner_item);
+                R.array.recurrence_freq, R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         mFreqSpinner.setAdapter(adapter);
-        
+
         mRecurrenceViewIds = new int[]{ R.id.recurrence_daily, R.id.recurrence_weekly,
             R.id.recurrence_monthly, R.id.recurrence_yearly };
 
         // Setup dialog body
-        mFreqView = (LinearLayout) mView.findViewById(R.id.recurrence_body);
-        View recurrenceView = mInflater.inflate(R.layout.view_recurrence, null);
-        mFreqView.addView(recurrenceView);
+        mFreqView = (LinearLayout) mView.findViewById(R.id.recurrence_frequency);
         setFreqView(R.id.recurrence_weekly);
 
         // Setup WeekDay toggles
@@ -167,8 +174,8 @@ public class RecurrencePickerFragment extends DialogFragment
             @Override
             public void onCheckedChanged(CompoundButton btn, boolean isChecked) {
                 mModel.recurrenceState = isChecked ? RecurrenceModel.STATE_RECURRENCE
-                    : RecurrenceModel.STATE_NO_RECURRENCE;
-                toggleViewOptions();
+            : RecurrenceModel.STATE_NO_RECURRENCE;
+        toggleViewOptions();
             }
         });
 
@@ -191,19 +198,20 @@ public class RecurrencePickerFragment extends DialogFragment
         mIntervalPost = (TextView) mView.findViewById(R.id.interval_post);
 
         // Setup Recurrence End Spinner
+        mEndNeverStr = mResources.getString(R.string.recurrence_end_continously);
+        mEndDateLabel = mResources.getString(R.string.recurrence_end_date_label);
+        mEndCountLabel = mResources.getString(R.string.recurrence_end_count_label);
+
+        mEndSpinnerArray.add(mEndNeverStr);
+        mEndSpinnerArray.add(mEndDateLabel);
+        mEndSpinnerArray.add(mEndCountLabel);
         mEndSpinner = (Spinner) mView.findViewById(R.id.endSpinner);
         mEndSpinner.setOnItemSelectedListener(this);
 
-        ArrayList<CharSequence> endLabelArray =
-            getCharSequenceArray(R.array.recurrence_end_label_array);
-        ArrayList<CharSequence> endArray =
-            getCharSequenceArray(R.array.recurrence_end_array);
-
-        mSwapSpinnerAdapter = new SwapSpinnerAdapter(getActivity(),
-                endLabelArray, endArray, R.layout.recurrencepicker_freq_item,
-                R.layout.recurrencepicker_end_text);
-        mSwapSpinnerAdapter.setDropDownViewResource(R.layout.recurrencepicker_freq_item);
-        mEndSpinner.setAdapter(mSwapSpinnerAdapter);
+        mEndSpinnerAdapter = new EndSpinnerAdapter(getActivity(), mEndSpinnerArray,
+                R.layout.recurrencepicker_freq_item, R.layout.recurrencepicker_end_text);
+        mEndSpinnerAdapter.setDropDownViewResource(R.layout.recurrencepicker_freq_item);
+        mEndSpinner.setAdapter(mEndSpinnerAdapter);
 
         mEndCount = (EditText) mView.findViewById(R.id.end_count);
         mEndCount.addTextChangedListener(new MinMaxTextWatcher(1,
@@ -257,6 +265,93 @@ public class RecurrencePickerFragment extends DialogFragment
             mIntervalPost.setText(intervalString.substring(postTextStart,
                         intervalString.length()).trim());
             mIntervalPre.setText(intervalString.substring(0, markerStart).trim());
+        }
+    }
+
+    /**
+     * Uses mModel.freq to update the dialog's views and hide views pertaining to
+     * other recurrence frequencies.
+     */
+    public void updateDialog() {
+        // Interval
+        // Checking before setting because this causes infinite recursion
+        // in afterTextWatcher
+        final String intervalStr = Integer.toString(mModel.interval);
+        if (!intervalStr.equals(mInterval.getText().toString())) {
+            mInterval.setText(intervalStr);
+        }
+
+        mFreqSpinner.setSelection(mModel.freq);
+        mWeekGroup.setVisibility(mModel.freq == RecurrenceModel.FREQ_WEEKLY ? View.VISIBLE : View.GONE);
+        mWeekGroup2.setVisibility(mModel.freq == RecurrenceModel.FREQ_WEEKLY ? View.VISIBLE : View.GONE);
+        //mMonthGroup.setVisibility(mModel.freq == RecurrenceModel.FREQ_MONTHLY ? View.VISIBLE : View.GONE);
+
+        switch (mModel.freq) {
+            case RecurrenceModel.FREQ_DAILY:
+                mIntervalResId = R.plurals.recurrence_interval_daily;
+                break;
+
+            case RecurrenceModel.FREQ_WEEKLY:
+                mIntervalResId = R.plurals.recurrence_interval_weekly;
+                for (int i = 0; i < 7; i++) {
+                    mWeekByDayButtons[i].setChecked(mModel.weeklyByDayOfWeek[i]);
+                }
+                break;
+
+            case RecurrenceModel.FREQ_MONTHLY:
+                mIntervalResId = R.plurals.recurrence_interval_monthly;
+
+                if (mModel.monthlyRepeat == RecurrenceModel.MONTHLY_BY_DATE) {
+                    //mMonthRepeatByRadioGroup.check(R.id.repeatMonthlyByNthDayOfMonth);
+                } else if (mModel.monthlyRepeat == RecurrenceModel.MONTHLY_BY_NTH_DAY_OF_WEEK) {
+                    //mMonthRepeatByRadioGroup.check(R.id.repeatMonthlyByNthDayOfTheWeek);
+                }
+
+                if (mMonthRepeatByDayOfWeekStr == null) {
+                    if (mModel.monthlyByNthDayOfWeek == 0) {
+                        mModel.monthlyByNthDayOfWeek = (mTime.monthDay + 6) / 7;
+                        // Since not all months have 5 weeks, we convert 5th NthDayOfWeek to
+                        // -1 for last monthly day of the week
+                        if (mModel.monthlyByNthDayOfWeek >= FIFTH_WEEK_IN_A_MONTH) {
+                            mModel.monthlyByNthDayOfWeek = LAST_NTH_DAY_OF_WEEK;
+                        }
+                        mModel.monthlyByDayOfWeek = mTime.weekDay;
+                    }
+
+                    String[] monthlyByNthDayOfWeekStrs =
+                        mMonthRepeatByDayOfWeekStrs[mModel.monthlyByDayOfWeek];
+
+                    // TODO(psliwowski): Find a better way handle -1 indexes
+                    int msgIndex = mModel.monthlyByNthDayOfWeek < 0 ? FIFTH_WEEK_IN_A_MONTH :
+                        mModel.monthlyByNthDayOfWeek;
+                    mMonthRepeatByDayOfWeekStr =
+                        monthlyByNthDayOfWeekStrs[msgIndex - 1];
+                    mRepeatMonthlyByNthDayOfWeek.setText(mMonthRepeatByDayOfWeekStr);
+                }
+                break;
+
+            case RecurrenceModel.FREQ_YEARLY:
+                mIntervalResId = R.plurals.recurrence_interval_yearly;
+                break;
+        }
+        updateIntervalText();
+        updateDoneButtonState();
+
+        mEndSpinner.setSelection(mModel.end);
+        if (mModel.end == RecurrenceModel.END_BY_DATE) {
+            final String dateStr = DateUtils.formatDateTime(getActivity(),
+                    mModel.endDate.toMillis(false), DateUtils.FORMAT_NUMERIC_DATE);
+            mEndDateTextView.setText(dateStr);
+        } else {
+            if (mModel.end == RecurrenceModel.END_BY_COUNT) {
+                // Checking before setting because this causes infinite
+                // recursion
+                // in afterTextWatcher
+                final String countStr = Integer.toString(mModel.endCount);
+                if (!countStr.equals(mEndCount.getText().toString())) {
+                    mEndCount.setText(countStr);
+                }
+            }
         }
     }
 
@@ -370,30 +465,10 @@ public class RecurrencePickerFragment extends DialogFragment
         mDone.setEnabled(true);
     }
 
-    private void setRecurrenceFreq(int freq) {
-        switch (freq) {
-            case RecurrenceModel.FREQ_DAILY:
-                mModel.freq = RecurrenceModel.FREQ_DAILY;
-                break;
-            case RecurrenceModel.FREQ_WEEKLY:
-                mModel.freq = RecurrenceModel.FREQ_WEEKLY;
-                break;
-            case RecurrenceModel.FREQ_MONTHLY:
-                mModel.freq = RecurrenceModel.FREQ_MONTHLY;
-                break;
-            case RecurrenceModel.FREQ_YEARLY:
-                mModel.freq = RecurrenceModel.FREQ_YEARLY;
-                break;
-        }
-    }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        String selection = parent.getItemAtPosition(pos).toString();
-
         if (parent == mFreqSpinner) {
-            setFreqView(selection);
-            setRecurrenceFreq(pos);
+            mModel.freq = pos;
         } else if (parent == mEndSpinner) {
             switch (pos) {
                 case RecurrenceModel.END_NEVER:
@@ -421,6 +496,7 @@ public class RecurrencePickerFragment extends DialogFragment
                     mModel.end == RecurrenceModel.END_BY_COUNT  && !mHidePostEndCount?
                     View.VISIBLE : View.GONE);
         }
+        updateDialog();
     }
 
     @Override
@@ -486,6 +562,142 @@ public class RecurrencePickerFragment extends DialogFragment
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+    }
+    private  class EndSpinnerAdapter extends ArrayAdapter<CharSequence> {
+        final String END_DATE_MARKER = "%s";
+        final String END_COUNT_MARKER = "%d";
+
+        private Context mContext;
+        private LayoutInflater mInflater;
+        private int mItemResourceId;
+        private int mTextResourceId;
+        private ArrayList<CharSequence> mStrings;
+        private String mEndDateString;
+        private boolean mUseFormStrings;
+
+        /**
+         * @param context
+         * @param textViewResourceId
+         * @param objects
+         */
+        public EndSpinnerAdapter(Context context, ArrayList<CharSequence> strings,
+                int itemResourceId, int textResourceId) {
+            super(context, itemResourceId, strings);
+            mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            mItemResourceId = itemResourceId;
+            mTextResourceId = textResourceId;
+            mContext = context;
+            mStrings = strings;
+            mEndDateString = context.getResources().getString(R.string.recurrence_end_date);
+
+            // If either date or count strings don't translate well, such that we aren't assured
+            // to have some text available to be placed in the spinner, then we'll have to use
+            // the more form-like versions of both strings instead.
+            int markerStart = mEndDateString.indexOf(END_DATE_MARKER);
+            if (markerStart <= 0) {
+                // The date string does not have any text before the "%s" so we'll have to use the
+                // more form-like strings instead.
+                mUseFormStrings = true;
+            } else {
+                String countEndStr = context.getResources().getQuantityString(
+                        R.plurals.recurrence_end_count, 1);
+                markerStart = countEndStr.indexOf(END_COUNT_MARKER);
+                if (markerStart <= 0) {
+                    // The count string does not have any text before the "%d" so we'll have to use
+                    // the more form-like strings instead.
+                    mUseFormStrings = true;
+                }
+            }
+
+            if (mUseFormStrings) {
+                // We'll have to set the layout for the spinner to be weight=0 so it doesn't
+                // take up too much space.
+                //mEndSpinner.setLayoutParams(
+                //        new TableLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1f));
+            }
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View v;
+            // Check if we can recycle the view
+            if (convertView == null) {
+                v = mInflater.inflate(mTextResourceId, parent, false);
+            } else {
+                v = convertView;
+            }
+
+            TextView item = (TextView) v.findViewById(R.id.spinner_item);
+            int markerStart;
+            switch (position) {
+                case RecurrenceModel.END_NEVER:
+                    item.setText(mStrings.get(RecurrenceModel.END_NEVER));
+                    break;
+                case RecurrenceModel.END_BY_DATE:
+                    markerStart = mEndDateString.indexOf(END_DATE_MARKER);
+
+                    if (markerStart != -1) {
+                        if (mUseFormStrings || markerStart == 0) {
+                            // If we get here, the translation of "Until" doesn't work correctly,
+                            // so we'll just set the whole "Until a date" string.
+                            //item.setText(mEndDateLabel);
+                        } else {
+                            item.setText(mEndDateString.substring(0, markerStart).trim());
+                        }
+                    }
+                    break;
+                case RecurrenceModel.END_BY_COUNT:
+                    String endString = mContext.getResources().getQuantityString(R.plurals.recurrence_end_count,
+                            mModel.endCount);
+                    markerStart = endString.indexOf(END_COUNT_MARKER);
+
+                    if (markerStart != -1) {
+                        if (mUseFormStrings || markerStart == 0) {
+                            // If we get here, the translation of "For" doesn't work correctly,
+                            // so we'll just set the whole "For a number of events" string.
+                            item.setText(mEndCountLabel);
+                            // Also, we'll hide the " events" that would have been at the end.
+                            mPostEndCount.setVisibility(View.GONE);
+                            // Use this flag so the onItemSelected knows whether to show it later.
+                            mHidePostEndCount = true;
+                        } else {
+                            int postTextStart = markerStart + END_COUNT_MARKER.length();
+                            mPostEndCount.setText(endString.substring(postTextStart,
+                                        endString.length()).trim());
+                            // In case it's a recycled view that wasn't visible.
+                            if (mModel.end == RecurrenceModel.END_BY_COUNT) {
+                                mPostEndCount.setVisibility(View.VISIBLE);
+                            }
+                            if (endString.charAt(markerStart - 1) == ' ') {
+                                markerStart--;
+                            }
+                            item.setText(endString.substring(0, markerStart).trim());
+                        }
+                    }
+                    break;
+                default:
+                    v = null;
+                    break;
+            }
+
+            return v;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            View v;
+            // Check if we can recycle the view
+            if (convertView == null) {
+                v = mInflater.inflate(mItemResourceId, parent, false);
+            } else {
+                v = convertView;
+            }
+
+            TextView item = (TextView) v.findViewById(R.id.spinner_item);
+            item.setText(mStrings.get(position));
+
+            return v;
         }
     }
 }
