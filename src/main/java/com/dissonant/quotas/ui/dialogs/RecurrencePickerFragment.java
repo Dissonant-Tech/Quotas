@@ -301,7 +301,7 @@ public class RecurrencePickerFragment extends DialogFragment
         }
     }
 
-    public void setFreqView(int viewId) {
+    private void setFreqView(int viewId) {
         for (int id : mRecurrenceViewIds) {
             mFreqView.findViewById(id).setVisibility(View.GONE);
         }
