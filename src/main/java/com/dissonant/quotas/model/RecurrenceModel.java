@@ -8,34 +8,34 @@ import android.text.format.Time;
 
 
 public class RecurrenceModel implements Parcelable {
-
-    // Defualts
     
     // Update android:maxLength in EditText as needed
-    private static final int INTERVAL_MAX = 99;
-    private static final int INTERVAL_DEFAULT = 1;
+    public static final int INTERVAL_MAX = 99;
+    public static final int INTERVAL_DEFAULT = 1;
     // Update android:maxLength in EditText as needed
-    private static final int COUNT_MAX = 730;
-    private static final int COUNT_DEFAULT = 5;
+    public static final int COUNT_MAX = 730;
+    public static final int COUNT_DEFAULT = 5;
 
     // Special cases in monthlyByNthDayOfWeek
-    private static final int FIFTH_WEEK_IN_A_MONTH = 5;
-    private static final int LAST_NTH_DAY_OF_WEEK = -1;
+    public static final int FIFTH_WEEK_IN_A_MONTH = 5;
+    public static final int LAST_NTH_DAY_OF_WEEK = -1;
 
-    static final int FREQ_DAILY = 0;
-    static final int FREQ_WEEKLY = 1;
-    static final int FREQ_MONTHLY = 2;
-    static final int FREQ_YEARLY = 3;
 
-    static final int END_NEVER = 0;
-    static final int END_BY_DATE = 1;
-    static final int END_BY_COUNT = 2;
+    public static final int FREQ_DAILY = 0;
+    public static final int FREQ_WEEKLY = 1;
+    public static final int FREQ_MONTHLY = 2;
+    public static final int FREQ_YEARLY = 3;
 
-    static final int MONTHLY_BY_DATE = 0;
-    static final int MONTHLY_BY_NTH_DAY_OF_WEEK = 1;
+    public static final int END_NEVER = 0;
+    public static final int END_BY_DATE = 1;
+    public static final int END_BY_COUNT = 2;
 
-    static final int STATE_NO_RECURRENCE = 0;
-    static final int STATE_RECURRENCE = 1;
+    public static final int MONTHLY_BY_DATE = 0;
+    public static final int MONTHLY_BY_NTH_DAY_OF_WEEK = 1;
+
+    public static final int STATE_NO_RECURRENCE = 0;
+    public static final int STATE_RECURRENCE = 1;
+
 
     public int recurrenceState;
 

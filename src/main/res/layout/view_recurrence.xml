@@ -11,10 +11,13 @@
     <LinearLayout
             android:id="@+id/interval_layout"
             android:layout_height="@dimen/listPreferredItemHeight"
-            android:layout_width="fill_parent" >
+            android:layout_width="fill_parent"
+            >
         <TextView
                 android:id="@+id/interval_pre"
                 android:text="@string/every"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
             />
         <EditText
                 android:id="@+id/interval_count"
@@ -26,7 +29,9 @@
                 android:textColor="@color/text_regular"
             />
         <TextView
-                android:id="@id/interval_post"
+                android:id="@+id/interval_post"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
             />
     </LinearLayout>
 
@@ -43,7 +48,7 @@
                 android:layout_width="fill_parent"
                 >
             <LinearLayout
-                    android:id="@+id/weekday_group"
+                    android:id="@+id/week_group"
                     android:orientation="horizontal"
                     android:layout_height="wrap_content"
                     android:layout_width="fill_parent"
@@ -74,7 +79,7 @@
                     />
             </LinearLayout>
             <LinearLayout
-                    android:id="@+id/weekday_group2"
+                    android:id="@+id/week_group2"
                     android:orientation="horizontal"
                     android:layout_height="wrap_content"
                     android:layout_width="fill_parent"
@@ -137,18 +142,26 @@
             />
         <EditText
                 android:id="@+id/end_count"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
             />
-        <textview
+        <TextView
                 android:id="@+id/end_post"
                 android:text="end post text"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
             />
-        <textview
+        <TextView
                 android:id="@+id/end_date"
                 android:text="end date text"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
             />
     </LinearLayout>
     <Button
             android:id="@+id/done"
             android:text="Done"
+            android:layout_height="@dimen/listPreferredItemHeight"
+            android:layout_width="fill_parent"
         />
 </LinearLayout>
