@@ -314,17 +314,27 @@ public class RecurrencePickerFragment extends DialogFragment
             mFreqSpinner.setEnabled(false);
             mEndSpinner.setEnabled(false);
             mEndCount.setEnabled(false);
+            mPostEndCount.setEnabled(false);
+            mEndDateTextView.setEnabled(false);
             mInterval.setEnabled(false);
             mIntervalPre.setEnabled(false);
             mIntervalPost.setEnabled(false);
+            for (ToggleButton btn : mWeekByDayButtons) {
+                btn.setEnabled(false);
+            }
         } else {
             mFreqView.setEnabled(true);
             mFreqSpinner.setEnabled(true);
             mEndSpinner.setEnabled(true);
             mEndCount.setEnabled(true);
+            mPostEndCount.setEnabled(true);
+            mEndDateTextView.setEnabled(true);
             mInterval.setEnabled(true);
             mIntervalPre.setEnabled(true);
             mIntervalPost.setEnabled(true);
+            for (ToggleButton btn : mWeekByDayButtons) {
+                btn.setEnabled(true);
+            }
         }
         updateDoneButtonState();
     }
