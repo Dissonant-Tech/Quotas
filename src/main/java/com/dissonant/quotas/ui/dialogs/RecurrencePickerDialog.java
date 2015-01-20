@@ -28,6 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -41,13 +42,14 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.dissonant.quotas.R;
+import com.dissonant.quotas.fragments.DatePickerFragment;
 import com.dissonant.quotas.model.RecurrenceModel;
 import com.dissonant.quotas.utils.Utils;
 
 
-public class RecurrencePickerFragment extends DialogFragment implements OnItemSelectedListener,
+public class RecurrencePickerDialog extends DialogFragment implements OnItemSelectedListener,
         OnCheckedChangeListener, OnClickListener,
-        android.widget.RadioGroup.OnCheckedChangeListener {
+        RadioGroup.OnCheckedChangeListener, DatePickerDialog.OnDateSetListener {
 
     private static final String TAG = "RecurrencePickerDialog";
 
@@ -65,10 +67,10 @@ public class RecurrencePickerFragment extends DialogFragment implements OnItemSe
     private static final int FIFTH_WEEK_IN_A_MONTH = 5;
     private static final int LAST_NTH_DAY_OF_WEEK = -1;
 
-    private DatePickerDialog mDatePickerDialog;
+    private DatePickerFragment mDatePickerFragment;
 
     public interface RecurrencePickerListener {
-        void onRecurrenceSet();
+        void onRecurrenceSet(RecurrenceModel model);
     }
 
     class minMaxTextWatcher implements TextWatcher {
@@ -198,7 +200,7 @@ public class RecurrencePickerFragment extends DialogFragment implements OnItemSe
 
     private RecurrencePickerListener mListener;
 
-    public RecurrencePickerFragment(Context context, RecurrencePickerListener listener) {
+    public RecurrencePickerDialog(Context context, RecurrencePickerListener listener) {
         mContext = context;
         mListener = listener;
     }
@@ -246,7 +248,7 @@ public class RecurrencePickerFragment extends DialogFragment implements OnItemSe
                 mTime.setToNow();
             }
         }
-        
+
         mResources = getResources();
         mView = inflater.inflate(R.layout.dialog_recurrencepicker, container, true);
 
@@ -285,7 +287,7 @@ public class RecurrencePickerFragment extends DialogFragment implements OnItemSe
         });
         mIntervalPreText = (TextView) mView.findViewById(R.id.interval_pre);
         mIntervalPostText = (TextView) mView.findViewById(R.id.interval_post);
-        
+
         mEndNeverStr = mResources.getString(R.string.recurrence_end_continously);
         mEndDateLabel = mResources.getString(R.string.recurrence_end_date_label);
         mEndCountLabel = mResources.getString(R.string.recurrence_end_count_label);
@@ -584,30 +586,6 @@ public class RecurrencePickerFragment extends DialogFragment implements OnItemSe
         }
     }
 
-    /**
-     * @param endDateString
-     */
-    private void setEndSpinnerEndDateStr(final String endDateString) {
-        mEndSpinnerArray.set(1, endDateString);
-        mEndSpinnerAdapter.notifyDataSetChanged();
-    }
-
-    private void doToast() {
-        Log.e(TAG, "Model = " + mModel.toString());
-        String rrule = "Test Toast";
-        if (mModel.recurrenceState == RecurrenceModel.STATE_NO_RECURRENCE) {
-            rrule = "Not repeating";
-        } else {
-        }
-
-        if (mToast != null) {
-            mToast.cancel();
-        }
-        mToast = Toast.makeText((Activity) mContext, rrule,
-                Toast.LENGTH_LONG);
-        mToast.show();
-    }
-
     // TODO Test and update for Right-to-Left
     private void updateIntervalText() {
         if (mIntervalResId == -1) {
@@ -690,7 +668,8 @@ public class RecurrencePickerFragment extends DialogFragment implements OnItemSe
     public void onNothingSelected(AdapterView<?> arg0) {
     }
 
-    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         if (mModel.endDate == null) {
             mModel.endDate = new Time(mTime.timezone);
             mModel.endDate.hour = mModel.endDate.minute = mModel.endDate.second = 0;
@@ -734,20 +713,15 @@ public class RecurrencePickerFragment extends DialogFragment implements OnItemSe
     @Override
     public void onClick(View v) {
         if (mEndDateTextView == v) {
-            if (mDatePickerDialog != null) {
-                mDatePickerDialog.dismiss();
+            if (mDatePickerFragment != null) {
+                mDatePickerFragment.dismiss();
             }
-            //mDatePickerDialog = DatePickerDialog.newInstance(this, mModel.endDate.year,
-            //        mModel.endDate.month, mModel.endDate.monthDay);
-            //mDatePickerDialog.setFirstDayOfWeek(Utils.getFirstDayOfWeekAsCalendar(getActivity()));
-            //mDatePickerDialog.setYearRange(Utils.YEAR_MIN, Utils.YEAR_MAX);
-            //mDatePickerDialog.show(getFragmentManager(), FRAG_TAG_DATE_PICKER);
+            mDatePickerFragment = DatePickerFragment.newInstance(mContext, this, mModel.endDate.year,
+                    mModel.endDate.month, mModel.endDate.monthDay);
+            mDatePickerFragment.show(getFragmentManager(), FRAG_TAG_DATE_PICKER);
         } else if (mDone == v) {
-            String rrule;
-            if (mModel.recurrenceState == RecurrenceModel.STATE_NO_RECURRENCE) {
-                rrule = null;
-            } else {
-            }
+            mListener.onRecurrenceSet(mModel);
+            Log.i(TAG, "Model: " + mModel.toString());
             dismiss();
         }
     }
