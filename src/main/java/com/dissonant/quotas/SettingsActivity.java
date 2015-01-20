@@ -3,7 +3,7 @@ package com.dissonant.quotas;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
-import com.dissonant.quotas.ui.fragments.SettingsFragment;
+import com.dissonant.quotas.fragments.SettingsFragment;
 
 public class SettingsActivity extends PreferenceActivity {
    @Override

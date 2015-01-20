@@ -1,7 +1,5 @@
 package com.dissonant.quotas.fragments;
 
-import java.util.Calendar;
-
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
@@ -24,6 +22,11 @@ public class DatePickerFragment extends DialogFragment {
         mYear = year;
         mMonth = month;
         mDay = day;
+    }
+
+    public static DatePickerFragment newInstance(Context context, OnDateSetListener listener,
+            int year, int month, int day ) {
+        return new DatePickerFragment(context, listener, year, month, day);
     }
 
     @Override

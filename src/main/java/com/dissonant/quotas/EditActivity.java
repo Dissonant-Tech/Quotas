@@ -17,6 +17,7 @@ import com.dissonant.quotas.controllers.RecurrencePickerController;
 import com.dissonant.quotas.controllers.TimeRangeController;
 import com.dissonant.quotas.controllers.TimeRangeController.TimeRangeListener;
 import com.dissonant.quotas.model.QuotaModel;
+import com.dissonant.quotas.model.RecurrenceModel;
 import com.dissonant.quotas.ui.dialogs.RecurrencePickerDialog.RecurrencePickerListener;
 import com.dissonant.quotas.ui.views.CircleSelector;
 import com.dissonant.quotas.ui.views.EditView;
@@ -109,7 +110,7 @@ public class EditActivity extends Activity
     }
 
     @Override
-    public void onRecurrenceSet() {
+    public void onRecurrenceSet(RecurrenceModel model) {
 
     }
 }
