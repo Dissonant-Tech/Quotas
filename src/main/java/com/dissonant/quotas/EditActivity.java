@@ -1,45 +1,31 @@
 package com.dissonant.quotas;
 
-import java.util.Calendar;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dissonant.quotas.controllers.ColorPickerController;
-import com.dissonant.quotas.controllers.ColorPickerController.ColorPickerListener;
-import com.dissonant.quotas.controllers.RecurrencePickerController;
-import com.dissonant.quotas.controllers.TimeRangeController;
-import com.dissonant.quotas.controllers.TimeRangeController.TimeRangeListener;
-import com.dissonant.quotas.model.QuotaModel;
-import com.dissonant.quotas.model.RecurrenceModel;
-import com.dissonant.quotas.ui.dialogs.RecurrencePickerDialog.RecurrencePickerListener;
-import com.dissonant.quotas.ui.views.CircleSelector;
+import com.dissonant.quotas.controllers.EditController;
+import com.dissonant.quotas.controllers.EditController.EditListener;
 import com.dissonant.quotas.ui.views.EditView;
-import com.dissonant.quotas.utils.BasicTextValidator;
 
-public class EditActivity extends Activity
-    implements ColorPickerListener, TimeRangeListener, RecurrencePickerListener {
 
-    QuotaModel mQuota = new QuotaModel();
-    BasicTextValidator titleValidator;
+public class EditActivity extends Activity implements EditListener {
 
-    EditView editView;
-    TimeRangeController timeRangeController;
+    EditView mView;
+    EditController mController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        editView = (EditView) View.inflate(this, R.layout.activity_edit, null);
-        setContentView(editView);
+        mView = (EditView) View.inflate(this, R.layout.activity_edit, null);
+        setContentView(mView);
 
-        createListeners();
+        mController = new EditController(this, this, mView);
 
         // Load default preferences
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
@@ -57,13 +43,6 @@ public class EditActivity extends Activity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_save) {
-            if (validate()) {
-                Toast.makeText(this, getResources()
-                        .getString(R.string.save_success), Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, getResources()
-                        .getString(R.string.save_failed), Toast.LENGTH_SHORT).show();
-            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -73,44 +52,9 @@ public class EditActivity extends Activity
         this.finishAfterTransition();
     }
 
-    public void createListeners() {
-
-        // Calls onColorSet
-        editView.getColorPicker().setOnClickListener(new ColorPickerController(this, this, editView));
-
-        editView.getRepeat().setOnClickListener(new RecurrencePickerController(this, this));
-
-        timeRangeController = new TimeRangeController(this, this, editView);
-        editView.getTimeRange().setOnClickListener(timeRangeController);
-
-        titleValidator = new BasicTextValidator((TextView) editView.getTitleView());
-        ((TextView) editView.getTitleView()).addTextChangedListener(titleValidator);
-    }
-
-    public boolean validate() {
-        if (!titleValidator.isValid()) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     @Override
-    public void onTimeRangeSet(Calendar startTime, Calendar endTime, float val, float maxVal) {
-        CircleSelector timeRangeView = (CircleSelector) editView.getTimeRange();
-        timeRangeView.showValue(val, maxVal, false);
-
-        mQuota.setStartTime(startTime);
-        mQuota.setEndTime(endTime);
+    public void onSaved() {
+        
     }
 
-    @Override
-    public void onColorSet(String name, int color) {
-        mQuota.setColor(color);
-    }
-
-    @Override
-    public void onRecurrenceSet(RecurrenceModel model) {
-
-    }
 }
