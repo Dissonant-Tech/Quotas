@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 
-import com.dissonant.quotas.ui.dialogs.RecurrencePickerFragment;
-import com.dissonant.quotas.ui.dialogs.RecurrencePickerFragment.RecurrencePickerListener;
+import com.dissonant.quotas.ui.dialogs.RecurrencePickerDialog;
+import com.dissonant.quotas.ui.dialogs.RecurrencePickerDialog.RecurrencePickerListener;
 
 
 public class RecurrencePickerController implements View.OnClickListener {
@@ -20,7 +20,7 @@ public class RecurrencePickerController implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        RecurrencePickerFragment dialog =  new RecurrencePickerFragment(this.context, this.listener);
+        RecurrencePickerDialog dialog =  new RecurrencePickerDialog(this.context, this.listener);
         dialog.show(((Activity) this.context).getFragmentManager(), "recurrencePicker");
     }
 }

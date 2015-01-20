@@ -45,7 +45,7 @@ import com.dissonant.quotas.model.RecurrenceModel;
 import com.dissonant.quotas.utils.Utils;
 
 
-public class RecurrencePickerFragment extends DialogFragment implements OnItemSelectedListener,
+public class RecurrencePickerDialog extends DialogFragment implements OnItemSelectedListener,
         OnCheckedChangeListener, OnClickListener,
         android.widget.RadioGroup.OnCheckedChangeListener {
 
@@ -198,7 +198,7 @@ public class RecurrencePickerFragment extends DialogFragment implements OnItemSe
 
     private RecurrencePickerListener mListener;
 
-    public RecurrencePickerFragment(Context context, RecurrencePickerListener listener) {
+    public RecurrencePickerDialog(Context context, RecurrencePickerListener listener) {
         mContext = context;
         mListener = listener;
     }
