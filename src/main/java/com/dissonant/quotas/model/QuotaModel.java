@@ -1,7 +1,11 @@
 package com.dissonant.quotas.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import android.text.format.Time;
+
 import com.dissonant.quotas.db.DaysEnum;
-import java.sql.Time;
 
 public class QuotaModel {
 
@@ -9,8 +13,8 @@ public class QuotaModel {
     private String title;
     private String description;
     private boolean repeat;
-    private Time startTime;
-    private Time endTime;
+    private Calendar startTime;
+    private Calendar endTime;
     private boolean isActive;
     private DaysEnum[] repeatDays;
     private int[] taskArray;
@@ -21,7 +25,7 @@ public class QuotaModel {
     }
 
     public QuotaModel(int id, String title, String description, 
-            boolean repeat, Time startTime, Time endTime, boolean isActive) { 
+            boolean repeat, Calendar startTime, Calendar endTime, boolean isActive) { 
 
         this.id = id;
         this.title = title;
@@ -36,7 +40,7 @@ public class QuotaModel {
      * Constructor for SQL 
      */
     public QuotaModel(int id, String title, String description, 
-            int repeat, String startTime, String endTime, int isActive) { 
+            int repeat, Calendar startTime, Calendar endTime, int isActive) { 
 
         this.id = id;
         this.title = title;
@@ -158,29 +162,19 @@ public class QuotaModel {
         return repeat;
     }
 
-    public void setStartTime(String startTime) {
-        Time t = Time.valueOf(startTime);
-        this.startTime = t;
-    }
-
-    public void setStartTime(Time startTime) {
+    public void setStartTime(Calendar startTime) {
         this.startTime = startTime;
     }
 
-    public Time getStartTime() {    
+    public Calendar getStartTime() {    
         return startTime;
     }
     
-    public void setEndTime(String endTime) {
-        Time t = Time.valueOf(endTime);
-        this.endTime = t;
-    }
-
-    public void setEndTime(Time endTime) {
+    public void setEndTime(Calendar endTime) {
         this.endTime = endTime;
     }
 
-    public Time getEndTime() {    
+    public Calendar getEndTime() {    
         return endTime;
     }
 

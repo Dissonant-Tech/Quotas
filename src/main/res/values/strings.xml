@@ -12,6 +12,11 @@
     <string name="action_search">search</string>
     <string name="action_websearch">search</string>
 
+    <!-- The button label for saving an event -->
+    <string name="save_label">Done</string>
+    <!-- The button label for discarding changes to an event -->
+    <string name="discard_label">Cancel</string>
+
     <!-- Settings and Preferences -->
     <string name="pref_notifications_title">Notification Settings</string>
     <string name="pref_notify">Enable Notifications</string>
@@ -161,5 +166,6 @@
         <item quantity="other">For %d events</item>
     </plurals>
 
-
+    <!-- Description of the selected marker for accessibility support [CHAR LIMIT = NONE]-->
+    <string name="acessibility_recurrence_choose_end_date_description">change end date</string>
 </resources>

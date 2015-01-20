@@ -23,4 +23,7 @@
 
     <dimen name="listPreferredItemHeight">64dp</dimen>
     <dimen name="textPreferredLineHeight">24dp</dimen>
+
+    <dimen name="recurrence_picker_height">340dp</dimen>
+    <dimen name="recurrence_picker_width">300dp</dimen>
 </resources>

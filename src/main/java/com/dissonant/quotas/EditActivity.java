@@ -1,6 +1,6 @@
 package com.dissonant.quotas;
 
-import java.sql.Time;
+import java.util.Calendar;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -95,7 +95,7 @@ public class EditActivity extends Activity
     }
 
     @Override
-    public void onTimeRangeSet(Time startTime, Time endTime, float val, float maxVal) {
+    public void onTimeRangeSet(Calendar startTime, Calendar endTime, float val, float maxVal) {
         CircleSelector timeRangeView = (CircleSelector) editView.getTimeRange();
         timeRangeView.showValue(val, maxVal, false);
 

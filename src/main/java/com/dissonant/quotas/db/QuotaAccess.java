@@ -1,5 +1,6 @@
 package com.dissonant.quotas.db;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -99,9 +100,15 @@ public class QuotaAccess {
     }
 
     private QuotaModel cursorToQuota(Cursor cursor) {
+        Calendar startTime = Calendar.getInstance();
+        Calendar endTime = Calendar.getInstance();
+
+        startTime.setTimeInMillis(cursor.getInt(4));
+        endTime.setTimeInMillis(cursor.getInt(4));
+
         QuotaModel quota = new QuotaModel(cursor.getInt(0),
                 cursor.getString(1), cursor.getString(2), cursor.getInt(3),
-                cursor.getString(4), cursor.getString(5), cursor.getInt(6));
+                startTime, endTime, cursor.getInt(6));
 
         return quota;
     }
@@ -112,9 +119,12 @@ public class QuotaAccess {
         values.put(dbHelper.COLUMN_TITLE, quota.getTitle());
         values.put(dbHelper.COLUMN_DESCRIPTION, quota.getDescription());
         values.put(dbHelper.COLUMN_REPEAT, quota.getRepeat());
-        values.put(dbHelper.COLUMN_STARTTIME, quota.getStartTime().toString());
-        values.put(dbHelper.COLUMN_ENDTIME, quota.getEndTime().toString());
         values.put(dbHelper.COLUMN_ISACTIVE, quota.getIsActive());
+
+        values.put(dbHelper.COLUMN_STARTTIME, 
+                String.valueOf(quota.getStartTime().getTimeInMillis()));
+        values.put(dbHelper.COLUMN_ENDTIME, 
+                String.valueOf(quota.getEndTime().getTimeInMillis()));
         
         return values;
     }

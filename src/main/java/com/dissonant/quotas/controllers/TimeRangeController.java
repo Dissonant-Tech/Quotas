@@ -1,6 +1,5 @@
 package com.dissonant.quotas.controllers;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,6 +11,7 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
@@ -27,10 +27,10 @@ public class TimeRangeController implements OnClickListener, TimePickerListener 
     private Context context;
     private TimeRangeListener listener;
     private EditView editView;
-    private Time startTime, endTime;
+    private Calendar startTime, endTime;
 
     public interface TimeRangeListener {
-        void onTimeRangeSet(Time startTime, Time endTime, float val, float maxVal);
+        void onTimeRangeSet(Calendar startTime, Calendar endTime, float val, float maxVal);
     }
 
     public TimeRangeController(Context context, TimeRangeListener listener, EditView editView){
@@ -64,7 +64,7 @@ public class TimeRangeController implements OnClickListener, TimePickerListener 
         }
     }
 
-    private void showTimeRangeDialog(Time startTime, Time endTime, TimeRangeListener listener) {
+    private void showTimeRangeDialog(Calendar startTime, Calendar endTime, TimeRangeListener listener) {
         TimeRangeFragment trDialog = new TimeRangeFragment(startTime, endTime, listener);
         trDialog.show(((Activity) this.context).getFragmentManager(), "timerangePicker");
     }
@@ -83,13 +83,13 @@ public class TimeRangeController implements OnClickListener, TimePickerListener 
 
             private static final String TAG = "TimeRangeFragment";
 
-            private Time startTime;
-            private Time endTime;
+            private Calendar startTime;
+            private Calendar endTime;
             private TimeRangeListener listener;
             private CircleSelector mDialogView;
             float val, maxVal;
 
-            public TimeRangeFragment(Time startTime, Time endTime, TimeRangeListener listener) {
+            public TimeRangeFragment(Calendar startTime, Calendar endTime, TimeRangeListener listener) {
                 this.startTime = startTime;
                 this.endTime = endTime;
                 this.listener = listener;
@@ -162,17 +162,15 @@ public class TimeRangeController implements OnClickListener, TimePickerListener 
             public void onSelectionUpdate(float val, float maxVal) {
             }
 
-            private String[] genCustomText(Time startTime, Time endTime, int stepSize) {
+            private String[] genCustomText(Calendar startTime, Calendar endTime, int stepSize) {
                 int numTimes = 0;
                 ArrayList<String> resultArr = new ArrayList<String>();
 
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTimeInMillis(startTime.getTime());
                 SimpleDateFormat sdf = new SimpleDateFormat("hh:mm 'Hours'");
 
-                while (calendar.getTime().before(endTime)) {
-                    resultArr.add(sdf.format(calendar.getTime()));
-                    calendar.add(Calendar.MINUTE, stepSize);
+                while (startTime.before(endTime)) {
+                    resultArr.add(sdf.format(startTime.getTimeInMillis()));
+                    startTime.add(Calendar.MINUTE, stepSize);
                     numTimes++;
                 }
 

@@ -183,4 +183,11 @@
     <color name="text_color_hint_floating_focused">@color/accent</color>
     <color name="text_color_hint">@color/tertiary</color>
 
+    <!-- RecurrenceDialog Colors -->
+    <color name="recurrence_picker_background">#fff2f2f2</color>
+
+    <color name="recurrence_spinner_text_color">@color/text_regular</color>
+
+    <color name="recurrence_bubble_text_color">@color/LightBlue</color>
+    <color name="recurrence_bubble_text_normal">#ff737373</color>
 </resources>
