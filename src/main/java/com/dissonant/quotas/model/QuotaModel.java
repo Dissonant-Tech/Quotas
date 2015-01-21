@@ -1,21 +1,18 @@
 package com.dissonant.quotas.model;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import android.text.format.Time;
 
 import com.dissonant.quotas.db.DaysEnum;
 
 public class QuotaModel {
 
     private int id;
-    private String title;
-    private String description;
-    private boolean repeat;
-    private Calendar startTime;
-    private Calendar endTime;
-    private boolean isActive;
+    private String title = "";
+    private String description = "";
+    private boolean repeat = false;
+    private Calendar startTime = Calendar.getInstance();
+    private Calendar endTime = Calendar.getInstance();
+    private boolean isActive = false;
     private DaysEnum[] repeatDays;
     private int[] taskArray;
     private int color;
@@ -24,8 +21,8 @@ public class QuotaModel {
 
     }
 
-    public QuotaModel(int id, String title, String description, 
-            boolean repeat, Calendar startTime, Calendar endTime, boolean isActive) { 
+    public QuotaModel(int id, String title, String description,
+            boolean repeat, Calendar startTime, Calendar endTime, boolean isActive) {
 
         this.id = id;
         this.title = title;
@@ -35,12 +32,12 @@ public class QuotaModel {
         this.endTime = endTime;
         this.isActive = isActive;
     }
-    
+
     /*
-     * Constructor for SQL 
+     * Constructor for SQL
      */
-    public QuotaModel(int id, String title, String description, 
-            int repeat, Calendar startTime, Calendar endTime, int isActive) { 
+    public QuotaModel(int id, String title, String description,
+            int repeat, Calendar startTime, Calendar endTime, int isActive) {
 
         this.id = id;
         this.title = title;
@@ -90,7 +87,7 @@ public class QuotaModel {
         this.isActive = isActive;
     }
 
-    public boolean getIsActive() {    
+    public boolean getIsActive() {
         return isActive;
     }
 
@@ -142,10 +139,10 @@ public class QuotaModel {
         this.description = description;
     }
 
-    public String getDescription() {    
+    public String getDescription() {
         return description;
     }
-    
+
     public void setRepeat(int repeat) {
         if (repeat >= 1) {
             this.repeat = true;
@@ -158,7 +155,7 @@ public class QuotaModel {
         this.repeat = repeat;
     }
 
-    public boolean getRepeat() {    
+    public boolean getRepeat() {
         return repeat;
     }
 
@@ -166,16 +163,23 @@ public class QuotaModel {
         this.startTime = startTime;
     }
 
-    public Calendar getStartTime() {    
+    public Calendar getStartTime() {
         return startTime;
     }
-    
+
     public void setEndTime(Calendar endTime) {
         this.endTime = endTime;
     }
 
-    public Calendar getEndTime() {    
+    public Calendar getEndTime() {
         return endTime;
+    }
+
+    @Override
+    public String toString() {
+        return "QuotaModel [title=" + title + ", color=" + color + ", start="
+            + startTime.getTimeInMillis() + ", end=" + endTime.getTimeInMillis() 
+            + "]";
     }
 
 }
