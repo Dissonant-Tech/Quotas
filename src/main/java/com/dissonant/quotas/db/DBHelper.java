@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class QuotasSQLiteHelper extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_QUOTAS = "quotas:";
     public static final String TABLE_TASKS = "tasks:";
@@ -51,7 +51,7 @@ public class QuotasSQLiteHelper extends SQLiteOpenHelper {
         + COLUMN_COMPLETED      + " integer default 0 "
         + ");";
 
-    public QuotasSQLiteHelper(Context context) {
+    public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -63,7 +63,7 @@ public class QuotasSQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.w(QuotasSQLiteHelper.class.getName(),
+        Log.w(DBHelper.class.getName(),
                 "Upgrading database from version " + oldVersion + " to "
                 + newVersion + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUOTAS);
