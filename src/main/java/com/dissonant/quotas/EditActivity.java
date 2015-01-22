@@ -1,21 +1,19 @@
 package com.dissonant.quotas;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.dissonant.quotas.controllers.ColorPickerController;
 import com.dissonant.quotas.controllers.RecurrencePickerController;
 import com.dissonant.quotas.controllers.TimeRangeController;
+import com.dissonant.quotas.controllers.TitleController;
 import com.dissonant.quotas.model.QuotaModel;
 import com.dissonant.quotas.ui.views.EditView;
-import com.dissonant.quotas.utils.BasicTextValidator;
 
 
 public class EditActivity extends Activity {
@@ -33,7 +31,6 @@ public class EditActivity extends Activity {
         setContentView(mView);
 
         mQuota = new QuotaModel();
-
         attachListeners();
 
         // Load default preferences
@@ -41,7 +38,6 @@ public class EditActivity extends Activity {
 
     }
     public void attachListeners() {
-        // Calls onColorSet
         mView.getColorPicker().setOnClickListener(
                 new ColorPickerController(this, mView, mQuota));
 
@@ -51,8 +47,7 @@ public class EditActivity extends Activity {
         mView.getTimeRange().setOnClickListener(
                 new TimeRangeController(this, mView, mQuota));
 
-        ((TextView) mView.getTitleView()).addTextChangedListener(
-                new BasicTextValidator((TextView) mView.getTitleView()));
+        TitleController titleController = new TitleController(this, mView, mQuota);
     }
 
     @Override

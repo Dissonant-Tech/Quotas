@@ -67,8 +67,12 @@ public class QuotaModel {
         this.id = id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public boolean setTitle(String title) {
+        if (EnsureValid(title)) {
+            this.title = title;
+            return true;
+        }
+        return false;
     }
 
     public String getTitle() {
@@ -182,4 +186,12 @@ public class QuotaModel {
             + "]";
     }
 
+    // Ensures strings are valid
+    private boolean EnsureValid(String str) {
+        if (str.isEmpty() || str == null) {
+            return false;
+        }
+        
+        return true;
+    }
 }
