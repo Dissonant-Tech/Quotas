@@ -13,14 +13,14 @@ import android.util.Log;
 
 import com.dissonant.quotas.model.QuotaModel;
 
-public class QuotaAccess implements DBAcessInterface<QuotaModel> {
+public class QuotaDBAccess implements DBAcessInterface<QuotaModel> {
     private SQLiteDatabase database;
     private DBHelper dbHelper;
     private String[] columns;
 
     boolean isOpen = false;
 
-    public QuotaAccess(Context context) {
+    public QuotaDBAccess(Context context) {
         dbHelper = new DBHelper(context);
         columns = dbHelper.getQuotaColumns();
     }

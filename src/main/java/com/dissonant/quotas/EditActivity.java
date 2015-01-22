@@ -7,11 +7,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.dissonant.quotas.controllers.ColorPickerController;
 import com.dissonant.quotas.controllers.RecurrencePickerController;
 import com.dissonant.quotas.controllers.TimeRangeController;
 import com.dissonant.quotas.controllers.TitleController;
+import com.dissonant.quotas.db.QuotaDBAccess;
 import com.dissonant.quotas.model.QuotaModel;
 import com.dissonant.quotas.ui.views.EditView;
 
@@ -22,6 +24,7 @@ public class EditActivity extends Activity {
 
     private EditView mView;
     private QuotaModel mQuota;
+    private QuotaDBAccess mQuotaDB;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,7 @@ public class EditActivity extends Activity {
         setContentView(mView);
 
         mQuota = new QuotaModel();
+        mQuotaDB = new QuotaDBAccess(this);
         attachListeners();
 
         // Load default preferences
@@ -63,6 +67,11 @@ public class EditActivity extends Activity {
         int id = item.getItemId();
         if (id == R.id.action_save) {
             Log.i(TAG, mQuota.toString());
+            if (true) {
+                Toast.makeText(this, "Save Failed", Toast.LENGTH_SHORT).show();
+            } else {
+
+            }
         }
         return super.onOptionsItemSelected(item);
     }
