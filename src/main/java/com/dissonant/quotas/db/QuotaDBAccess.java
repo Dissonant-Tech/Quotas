@@ -13,15 +13,15 @@ import android.util.Log;
 
 import com.dissonant.quotas.model.QuotaModel;
 
-public class QuotaAccess {
+public class QuotaDBAccess implements DBAcessInterface<QuotaModel> {
     private SQLiteDatabase database;
-    private QuotasSQLiteHelper dbHelper;
+    private DBHelper dbHelper;
     private String[] columns;
 
     boolean isOpen = false;
 
-    public QuotaAccess(Context context) {
-        dbHelper = new QuotasSQLiteHelper(context);
+    public QuotaDBAccess(Context context) {
+        dbHelper = new DBHelper(context);
         columns = dbHelper.getQuotaColumns();
     }
 
@@ -35,7 +35,7 @@ public class QuotaAccess {
         this.isOpen = false;
     }
 
-    public void addQuota(QuotaModel quota) {
+    public void add(QuotaModel quota) {
         Log.d("addQouta: ", quota.toString());
 
         if (!isOpen)
@@ -48,9 +48,9 @@ public class QuotaAccess {
             this.close();
     }
 
-    public QuotaModel getQuota(int id) {
-        Cursor cursor = database.query(QuotasSQLiteHelper.TABLE_QUOTAS,
-                columns, QuotasSQLiteHelper.COLUMN_ID + " = " + id,
+    public QuotaModel get(int id) {
+        Cursor cursor = database.query(DBHelper.TABLE_QUOTAS,
+                columns, DBHelper.COLUMN_ID + " = " + id,
                 null, null, null, null);
 
         if (cursor != null) {
@@ -63,10 +63,10 @@ public class QuotaAccess {
         return quota;
     }
 
-    public List<QuotaModel> getAllQuotas() {
+    public List<QuotaModel> getAll() {
         List<QuotaModel> quotas = new LinkedList<QuotaModel>();
 
-        String query = "SELECT * FROM " + QuotasSQLiteHelper.TABLE_QUOTAS;
+        String query = "SELECT * FROM " + DBHelper.TABLE_QUOTAS;
 
         Cursor cursor = database.rawQuery(query, null);
 
@@ -81,20 +81,20 @@ public class QuotaAccess {
         return quotas;
     }
 
-    public int updateQuota(QuotaModel quota) {
+    public int update(QuotaModel quota) {
         ContentValues values = QuotaToValues(quota);
 
-        int i = database.update(QuotasSQLiteHelper.TABLE_QUOTAS,
+        int i = database.update(DBHelper.TABLE_QUOTAS,
                 values,
-                QuotasSQLiteHelper.COLUMN_ID+" = ?",
+                DBHelper.COLUMN_ID+" = ?",
                 new String[] {String.valueOf(quota.getId())});
 
         return i;
     }
 
-    public void deleteQuota(QuotaModel quota) {
-        database.delete(QuotasSQLiteHelper.TABLE_QUOTAS,
-                QuotasSQLiteHelper.COLUMN_ID+" = ?",
+    public void del(QuotaModel quota) {
+        database.delete(DBHelper.TABLE_QUOTAS,
+                DBHelper.COLUMN_ID+" = ?",
                 new String[] {String.valueOf(quota.getId())});
 
     }
@@ -121,11 +121,11 @@ public class QuotaAccess {
         values.put(dbHelper.COLUMN_REPEAT, quota.getRepeat());
         values.put(dbHelper.COLUMN_ISACTIVE, quota.getIsActive());
 
-        values.put(dbHelper.COLUMN_STARTTIME, 
+        values.put(dbHelper.COLUMN_STARTTIME,
                 String.valueOf(quota.getStartTime().getTimeInMillis()));
-        values.put(dbHelper.COLUMN_ENDTIME, 
+        values.put(dbHelper.COLUMN_ENDTIME,
                 String.valueOf(quota.getEndTime().getTimeInMillis()));
-        
+
         return values;
     }
 }
