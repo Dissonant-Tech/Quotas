@@ -2,7 +2,7 @@ package com.dissonant.quotas.db;
 
 import java.util.List;
 
-public interface DAOInterface<T> {
+public interface GenericDao<T> {
     void add(T t);
     void del(T t);
 

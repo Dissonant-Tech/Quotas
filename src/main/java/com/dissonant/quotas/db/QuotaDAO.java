@@ -13,7 +13,7 @@ import android.util.Log;
 
 import com.dissonant.quotas.model.QuotaModel;
 
-public class QuotaDAO implements DAOInterface<QuotaModel> {
+public class QuotaDAO implements GenericDao<QuotaModel> {
     private SQLiteDatabase database;
     private DBHelper dbHelper;
     private String[] columns;
