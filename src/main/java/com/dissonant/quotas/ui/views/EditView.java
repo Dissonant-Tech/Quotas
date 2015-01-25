@@ -32,19 +32,19 @@ public class EditView extends LinearLayout {
      * Start and End Time buttons
      */
 
-    public View getStartTime() {
+    public View getStartView() {
         return this.findViewById(R.id.starttime_button);
     }
 
-    public View getEndTime() {
+    public View getEndView() {
         return this.findViewById(R.id.endtime_button);
     }
 
-    public void setStartTime(String text) {
+    public void setStartView(String text) {
         ((Button) this.findViewById(R.id.starttime_button)).setText(text);
     }
 
-    public void setEndTime(String text) {
+    public void setEndView(String text) {
         ((Button) this.findViewById(R.id.endtime_button)).setText(text);
     }
 

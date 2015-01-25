@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.dissonant.quotas.controllers.ColorPickerController;
 import com.dissonant.quotas.controllers.RecurrencePickerController;
+import com.dissonant.quotas.controllers.TimePickerController;
 import com.dissonant.quotas.controllers.TimeRangeController;
 import com.dissonant.quotas.controllers.TitleController;
 import com.dissonant.quotas.db.QuotaService;
@@ -47,7 +48,13 @@ public class EditActivity extends Activity {
                 new ColorPickerController(this, mView, mQuota));
 
         mView.getRepeat().setOnClickListener(
-                new RecurrencePickerController(this, mQuota, mView));
+                new RecurrencePickerController(this, mView, mQuota));
+
+        mView.getStartView().setOnClickListener(
+                new TimePickerController(this, mView, mQuota));
+
+        mView.getEndView().setOnClickListener(
+                new TimePickerController(this, mView, mQuota));
 
         mView.getTimeRange().setOnClickListener(
                 new TimeRangeController(this, mView, mQuota));
@@ -68,10 +75,9 @@ public class EditActivity extends Activity {
         int id = item.getItemId();
         if (id == R.id.action_save) {
             Log.i(TAG, mQuota.toString());
-            if (true) {
-                Toast.makeText(this, "Save Failed", Toast.LENGTH_SHORT).show();
+            if (mQuota.validate()) {
             } else {
-
+                Toast.makeText(this, "Save Failed", Toast.LENGTH_SHORT).show();
             }
         }
         return super.onOptionsItemSelected(item);
