@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.text.format.Time;
 
 
@@ -15,25 +14,25 @@ public class Utils {
     /**
      * Returns an ArrayList of strings denoting the minutes in a range of time.
      *
-     * @param startTime a Date object of the starting time for the range.
-     * @param endTime   a Date object of the ending time for the range.
+     * @param start a Date object of the starting time for the range.
+     * @param end   a Date object of the ending time for the range.
      * @return ArrayList<String> of time range.
      */
-    static public ArrayList<String> getTimeRangeArray(Date startTime, Date endTime) {
+    static public ArrayList<String> getTimeRangeArray(Date start, Date end) {
         ArrayList<String> result = new ArrayList<String>();
         SimpleDateFormat sdFormat = new SimpleDateFormat("hh:mm");
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(startTime);
+        calendar.setTime(start);
 
-        while (calendar.getTime().before(endTime)) {
+        while (calendar.getTime().before(end)) {
             calendar.add(calendar.MINUTE, 5);
             result.add(sdFormat.format(calendar.getTime()));
         }
         return result;
     }
-    
+
     /**
-     * Returns a string formatted time 
+     * Returns a string formatted time
      *
      * @return String of formatted time.
      */
@@ -51,9 +50,15 @@ public class Utils {
         return getTimeAsString(getTimeFromInt(hourOfDay, minute), format);
     }
 
+    static public String getTimeAsString(long time, String format) {
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(time);
+
+        return getTimeAsString(c, format);
+    }
+
     static public Calendar getTimeFromInt(int hourOfDay, int minute) {
         Calendar c = Calendar.getInstance();
-        c.setTimeInMillis(0);
 
         c.set(Calendar.HOUR_OF_DAY, hourOfDay);
         c.set(Calendar.MINUTE, minute);

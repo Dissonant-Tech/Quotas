@@ -50,9 +50,9 @@ public class QuotaModel {
     }
 
     public void setTitle(String title) {
-        if (EnsureValid(title)) {
+        if (ensureValid(title)) {
             this.title = title;
-        } 
+        }
     }
 
     public String getTitle() {
@@ -192,7 +192,16 @@ public class QuotaModel {
             + "]";
     }
 
-    private boolean EnsureValid(String str) {
+    public boolean validate() {
+        boolean isValid = true;
+        if (!ensureValid(this.title)) {
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    private boolean ensureValid(String str) {
         if (str == null || str.isEmpty()) {
             return false;
         } else {

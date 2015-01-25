@@ -9,16 +9,13 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import com.dissonant.quotas.R;
-import com.dissonant.quotas.controllers.TimePickerController.TimePickerListener;
 import com.dissonant.quotas.model.QuotaModel;
 import com.dissonant.quotas.ui.dialogs.TimeRangeFragment;
 import com.dissonant.quotas.ui.dialogs.TimeRangeFragment.TimeRangeListener;
 import com.dissonant.quotas.ui.views.CircleSelector;
 import com.dissonant.quotas.ui.views.EditView;
-import com.dissonant.quotas.utils.Utils;
 
-public class TimeRangeController implements OnClickListener, TimePickerListener, 
-       TimeRangeListener{
+public class TimeRangeController implements OnClickListener, TimeRangeListener {
 
     private Context mContext;
     private EditView mView;
@@ -29,10 +26,6 @@ public class TimeRangeController implements OnClickListener, TimePickerListener,
         mContext = context;
         mQuota = quota;
         mView = view;
-
-        // Calls onFinishedTimeSet()
-        mView.getStartTime().setOnClickListener(new TimePickerController(context, this));
-        mView.getEndTime().setOnClickListener(new TimePickerController(context, this));
     }
 
     @Override
@@ -45,21 +38,9 @@ public class TimeRangeController implements OnClickListener, TimePickerListener,
         }
     }
 
-    @Override
-    public void onFinishedTimeSet(View view, int hourOfDay, int minute) {
-        if (mView.getStartTime().getId() == view.getId()) {
-            startTime = Utils.getTimeFromInt(hourOfDay, minute);
-            mView.setStartTime(Utils.getTimeAsString(startTime, "hh:mm a"));
-        } else if (mView.getEndTime().getId() == view.getId()) {
-            endTime = Utils.getTimeFromInt(hourOfDay, minute);
-            mView.setEndTime(Utils.getTimeAsString(endTime, "hh:mm a"));
-        }
-    }
-
     private void showTimeRangeDialog(Calendar startTime, Calendar endTime, TimeRangeListener listener) {
         TimeRangeFragment trDialog = new TimeRangeFragment(startTime, endTime, listener);
         trDialog.show(((Activity) mContext).getFragmentManager(), "timerangePicker");
-    
     }
 
     @Override

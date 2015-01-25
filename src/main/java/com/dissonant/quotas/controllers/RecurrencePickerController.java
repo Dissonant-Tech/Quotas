@@ -18,7 +18,7 @@ public class RecurrencePickerController implements View.OnClickListener,
     private QuotaModel mQuota;
     private EditView mView;
 
-    public RecurrencePickerController(Context context, QuotaModel quota, EditView view ) {
+    public RecurrencePickerController(Context context, EditView view, QuotaModel quota) {
         mContext = context;
         mQuota = quota;
         mView = view;
