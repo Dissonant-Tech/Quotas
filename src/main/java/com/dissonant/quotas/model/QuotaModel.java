@@ -1,17 +1,16 @@
 package com.dissonant.quotas.model;
 
-import java.util.Calendar;
-
 import com.dissonant.quotas.db.DaysEnum;
 
 public class QuotaModel {
 
-    private int id;
+    private Long id;
     private String title = "";
     private String description = "";
     private boolean repeat = false;
-    private Calendar startTime = Calendar.getInstance();
-    private Calendar endTime = Calendar.getInstance();
+    private long startTime = 0;
+    private long endTime = 0;
+    private long duration = 0;
     private boolean isActive = false;
     private DaysEnum[] repeatDays;
     private int[] taskArray;
@@ -21,23 +20,11 @@ public class QuotaModel {
 
     }
 
-    public QuotaModel(int id, String title, String description,
-            boolean repeat, Calendar startTime, Calendar endTime, boolean isActive) {
-
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.repeat = repeat;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.isActive = isActive;
-    }
-
     /*
      * Constructor for SQL
      */
-    public QuotaModel(int id, String title, String description,
-            int repeat, Calendar startTime, Calendar endTime, int isActive) {
+    public QuotaModel(Long id, String title, String description,
+            int repeat, long startTime, long endTime, int isActive) {
 
         this.id = id;
         this.title = title;
@@ -48,31 +35,24 @@ public class QuotaModel {
         this.setIsActive(isActive);
     }
 
-    public int getDurationAsInt() {
-        int val = 0;
-        return val;
-    }
-
     /**
      * @return the id
      */
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public boolean setTitle(String title) {
+    public void setTitle(String title) {
         if (EnsureValid(title)) {
             this.title = title;
-            return true;
-        }
-        return false;
+        } 
     }
 
     public String getTitle() {
@@ -89,6 +69,48 @@ public class QuotaModel {
 
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
+    }
+
+    /**
+     * @return the startTime
+     */
+    public long getStartTime() {
+        return startTime;
+    }
+
+    /**
+     * @param startTime the startTime to set
+     */
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    /**
+     * @return the endTime
+     */
+    public long getEndTime() {
+        return endTime;
+    }
+
+    /**
+     * @param endTime the endTime to set
+     */
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
+    }
+
+    /**
+     * @return the duration
+     */
+    public long getDuration() {
+        return duration;
+    }
+
+    /**
+     * @param duration the duration to set
+     */
+    public void setDuration(long duration) {
+        this.duration = duration;
     }
 
     public boolean getIsActive() {
@@ -163,35 +185,18 @@ public class QuotaModel {
         return repeat;
     }
 
-    public void setStartTime(Calendar startTime) {
-        this.startTime = startTime;
-    }
-
-    public Calendar getStartTime() {
-        return startTime;
-    }
-
-    public void setEndTime(Calendar endTime) {
-        this.endTime = endTime;
-    }
-
-    public Calendar getEndTime() {
-        return endTime;
-    }
-
     @Override
     public String toString() {
         return "QuotaModel [title=" + title + ", color=" + color + ", start="
-            + startTime.getTimeInMillis() + ", end=" + endTime.getTimeInMillis() 
+            + startTime + ", end=" + endTime
             + "]";
     }
 
-    // Ensures strings are valid
     private boolean EnsureValid(String str) {
-        if (str.isEmpty() || str == null) {
+        if (str == null || str.isEmpty()) {
             return false;
+        } else {
+            return true;
         }
-        
-        return true;
     }
 }

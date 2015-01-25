@@ -1,6 +1,5 @@
 package com.dissonant.quotas.db;
 
-import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,14 +12,14 @@ import android.util.Log;
 
 import com.dissonant.quotas.model.QuotaModel;
 
-public class QuotaDAO implements GenericDao<QuotaModel> {
+public class QuotaDao implements GenericDao<QuotaModel, Long> {
     private SQLiteDatabase database;
     private DBHelper dbHelper;
     private String[] columns;
 
     boolean isOpen = false;
 
-    public QuotaDAO(Context context) {
+    public QuotaDao(Context context) {
         dbHelper = new DBHelper(context);
         columns = dbHelper.getQuotaColumns();
     }
@@ -35,6 +34,7 @@ public class QuotaDAO implements GenericDao<QuotaModel> {
         this.isOpen = false;
     }
 
+    @Override
     public void add(QuotaModel quota) {
         Log.d("addQouta: ", quota.toString());
 
@@ -48,7 +48,8 @@ public class QuotaDAO implements GenericDao<QuotaModel> {
             this.close();
     }
 
-    public QuotaModel get(int id) {
+    @Override
+    public QuotaModel get(Long id) {
         Cursor cursor = database.query(DBHelper.TABLE_QUOTAS,
                 columns, DBHelper.COLUMN_ID + " = " + id,
                 null, null, null, null);
@@ -63,7 +64,8 @@ public class QuotaDAO implements GenericDao<QuotaModel> {
         return quota;
     }
 
-    public List<QuotaModel> getAll() {
+    @Override
+    public List<QuotaModel> list() {
         List<QuotaModel> quotas = new LinkedList<QuotaModel>();
 
         String query = "SELECT * FROM " + DBHelper.TABLE_QUOTAS;
@@ -81,7 +83,8 @@ public class QuotaDAO implements GenericDao<QuotaModel> {
         return quotas;
     }
 
-    public int update(QuotaModel quota) {
+    @Override
+    public Long update(QuotaModel quota) {
         ContentValues values = QuotaToValues(quota);
 
         int i = database.update(DBHelper.TABLE_QUOTAS,
@@ -89,10 +92,11 @@ public class QuotaDAO implements GenericDao<QuotaModel> {
                 DBHelper.COLUMN_ID+" = ?",
                 new String[] {String.valueOf(quota.getId())});
 
-        return i;
+        return Long.valueOf(i);
     }
 
-    public void del(QuotaModel quota) {
+    @Override
+    public void remove(QuotaModel quota) {
         database.delete(DBHelper.TABLE_QUOTAS,
                 DBHelper.COLUMN_ID+" = ?",
                 new String[] {String.valueOf(quota.getId())});
@@ -100,15 +104,9 @@ public class QuotaDAO implements GenericDao<QuotaModel> {
     }
 
     private QuotaModel cursorToQuota(Cursor cursor) {
-        Calendar startTime = Calendar.getInstance();
-        Calendar endTime = Calendar.getInstance();
-
-        startTime.setTimeInMillis(cursor.getInt(4));
-        endTime.setTimeInMillis(cursor.getInt(4));
-
-        QuotaModel quota = new QuotaModel(cursor.getInt(0),
+        QuotaModel quota = new QuotaModel(Long.valueOf(cursor.getInt(0)),
                 cursor.getString(1), cursor.getString(2), cursor.getInt(3),
-                startTime, endTime, cursor.getInt(6));
+                cursor.getLong(4), cursor.getLong(5), cursor.getInt(6));
 
         return quota;
     }
@@ -120,11 +118,8 @@ public class QuotaDAO implements GenericDao<QuotaModel> {
         values.put(dbHelper.COLUMN_DESCRIPTION, quota.getDescription());
         values.put(dbHelper.COLUMN_REPEAT, quota.getRepeat());
         values.put(dbHelper.COLUMN_ISACTIVE, quota.getIsActive());
-
-        values.put(dbHelper.COLUMN_STARTTIME,
-                String.valueOf(quota.getStartTime().getTimeInMillis()));
-        values.put(dbHelper.COLUMN_ENDTIME,
-                String.valueOf(quota.getEndTime().getTimeInMillis()));
+        values.put(dbHelper.COLUMN_STARTTIME, quota.getStartTime());
+        values.put(dbHelper.COLUMN_ENDTIME, quota.getEndTime());
 
         return values;
     }

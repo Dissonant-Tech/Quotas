@@ -2,12 +2,12 @@ package com.dissonant.quotas.db;
 
 import java.util.List;
 
-public interface GenericDao<T> {
-    void add(T t);
-    void del(T t);
+public interface GenericDao<E, K> {
+    void add(E entity);
+    void remove(E entity);
 
-    T get(int id);
-    List<T> getAll();
+    K update(E entity);
 
-    int update(T t);
+    E get(K key);
+    List<E> list();
 }

@@ -59,7 +59,7 @@ public class DoughnutChartAdapter {
     private void parseQuotas(QuotaModel[] quotas) {
         for (int i = 0; i < quotas.length; i++) {
             this.titles[i] = quotas[i].getTitle();
-            this.values[i] = quotas[i].getDurationAsInt();
+            this.values[i] = quotas[i].getDuration();
             this.colors[i] = quotas[i].getColor();
         }
     }

@@ -13,7 +13,7 @@ import com.dissonant.quotas.controllers.ColorPickerController;
 import com.dissonant.quotas.controllers.RecurrencePickerController;
 import com.dissonant.quotas.controllers.TimeRangeController;
 import com.dissonant.quotas.controllers.TitleController;
-import com.dissonant.quotas.db.QuotaDAO;
+import com.dissonant.quotas.db.QuotaService;
 import com.dissonant.quotas.model.QuotaModel;
 import com.dissonant.quotas.ui.views.EditView;
 
@@ -24,7 +24,7 @@ public class EditActivity extends Activity {
 
     private EditView mView;
     private QuotaModel mQuota;
-    private QuotaDAO mQuotaDB;
+    private QuotaService mService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,8 @@ public class EditActivity extends Activity {
         setContentView(mView);
 
         mQuota = new QuotaModel();
-        mQuotaDB = new QuotaDAO(this);
+        mService = new QuotaService(this);
+
         attachListeners();
 
         // Load default preferences

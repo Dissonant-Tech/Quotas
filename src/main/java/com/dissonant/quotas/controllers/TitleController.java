@@ -14,7 +14,7 @@ public class TitleController implements OnFocusChangeListener {
 	private EditView mView;
 	private QuotaModel mQuota;
 
-    public TitleController(Context context, EditView view, QuotaModel quota) { 
+    public TitleController(Context context, EditView view, QuotaModel quota) {
 		mContext = context;
 		mView = view;
 		mQuota = quota;
@@ -25,10 +25,9 @@ public class TitleController implements OnFocusChangeListener {
 
     public void onFocusChange(View view, boolean hasFocus) {
         TextView textView = (TextView) view;
-        boolean isValid;
-        isValid = mQuota.setTitle(textView.getText().toString());
+        mQuota.setTitle(textView.getText().toString());
 
-        if (!isValid) {
+        if (mQuota.getTitle() == textView.getText().toString()) {
             textView.setError( textView.getHint() + " is required!");
         } else {
             textView.setError(null);

@@ -67,8 +67,8 @@ public class TimeRangeController implements OnClickListener, TimePickerListener,
         CircleSelector timeRangeView = (CircleSelector) mView.getTimeRange();
         timeRangeView.showValue(val, maxVal, false);
 
-        mQuota.setStartTime(startTime);
-        mQuota.setEndTime(endTime);
+        mQuota.setStartTime(startTime.getTimeInMillis());
+        mQuota.setEndTime(endTime.getTimeInMillis());
     }
 
     public boolean isTimeSet() {
