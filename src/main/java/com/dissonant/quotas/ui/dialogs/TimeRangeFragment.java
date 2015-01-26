@@ -19,20 +19,19 @@ public class TimeRangeFragment extends DialogFragment
 
     private static final String TAG = "TimeRangeFragment";
 
-    private Calendar startTime;
-    private Calendar endTime;
+    private long maxLength;
+    private long mStart, mEnd;
     private TimeRangeListener listener;
     private CircleSelector mDialogView;
     float val, maxVal;
-    
+
     public interface TimeRangeListener {
-        void onTimeRangeSet(Calendar startTime, Calendar endTime, float val, float maxVal);
+        void onTimeRangeSet(float val, float maxVal);
     }
 
-    public TimeRangeFragment(Calendar startTime, Calendar endTime, TimeRangeListener listener) {
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.listener = listener;
+    public TimeRangeFragment(long start, long end, TimeRangeListener listener) {
+        mStart = start;
+        mEnd = end;
     }
 
     @Override
@@ -54,7 +53,7 @@ public class TimeRangeFragment extends DialogFragment
         builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                listener.onTimeRangeSet(startTime, endTime, val, maxVal);
+                listener.onTimeRangeSet(val, maxVal);
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -83,7 +82,7 @@ public class TimeRangeFragment extends DialogFragment
     }
 
     public void initTimeRangeSelector(View v, int backgroundColor) {
-        String[] customText = genCustomText(this.startTime, this.endTime, 5);
+        String[] customText = genCustomText(mStart, mEnd, 5);
         mDialogView.setCustomText(customText);
 
         mDialogView.setTouchEnabled(true);
@@ -102,11 +101,16 @@ public class TimeRangeFragment extends DialogFragment
     public void onSelectionUpdate(float val, float maxVal) {
     }
 
-    private String[] genCustomText(Calendar startTime, Calendar endTime, int stepSize) {
+    private String[] genCustomText(long start, long end, int stepSize) {
         int numTimes = 0;
         ArrayList<String> resultArr = new ArrayList<String>();
 
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm 'Hours'");
+        Calendar startTime = Calendar.getInstance();
+        startTime.setTimeInMillis(start);
+
+        Calendar endTime = Calendar.getInstance();
+        endTime.setTimeInMillis(end);
 
         while (startTime.before(endTime)) {
             resultArr.add(sdf.format(startTime.getTimeInMillis()));

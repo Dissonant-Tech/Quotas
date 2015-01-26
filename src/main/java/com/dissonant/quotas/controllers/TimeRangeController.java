@@ -20,7 +20,7 @@ public class TimeRangeController implements OnClickListener, TimeRangeListener {
     private Context mContext;
     private EditView mView;
     private QuotaModel mQuota;
-    private Calendar startTime, endTime;
+    private long mStart, mEnd;
 
     public TimeRangeController(Context context, EditView view, QuotaModel quota){
         mContext = context;
@@ -31,30 +31,28 @@ public class TimeRangeController implements OnClickListener, TimeRangeListener {
     @Override
     public void onClick(View v) {
         if (isTimeSet()) {
-            showTimeRangeDialog(this.startTime, this.endTime, this);
+            showTimeRangeDialog(mStart, mEnd, this);
         } else {
             Toast.makeText(mContext, ((Activity) mContext).getResources()
                     .getString(R.string.time_not_set), Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void showTimeRangeDialog(Calendar startTime, Calendar endTime, TimeRangeListener listener) {
-        TimeRangeFragment trDialog = new TimeRangeFragment(startTime, endTime, listener);
+    private void showTimeRangeDialog(long start, long end, TimeRangeListener listener) {
+        TimeRangeFragment trDialog = new TimeRangeFragment(start, end, listener);
         trDialog.show(((Activity) mContext).getFragmentManager(), "timerangePicker");
     }
 
     @Override
-    public void onTimeRangeSet(Calendar startTime, Calendar endTime, float val, float maxVal) {
+    public void onTimeRangeSet(float val, float maxVal) {
         CircleSelector timeRangeView = (CircleSelector) mView.getTimeRange();
         timeRangeView.showValue(val, maxVal, false);
 
-        mQuota.setStartTime(startTime.getTimeInMillis());
-        mQuota.setEndTime(endTime.getTimeInMillis());
     }
 
-    public boolean isTimeSet() {
-        if (this.startTime == null ||
-                this.endTime == null ) {
+    private boolean isTimeSet() {
+        if (mQuota.getStartTime() == 0 ||
+                mQuota.getEndTime() == 0 ) {
             return false;
         } else {
             return true;
