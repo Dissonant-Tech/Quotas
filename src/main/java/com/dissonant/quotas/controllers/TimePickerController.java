@@ -14,14 +14,19 @@ import com.dissonant.quotas.utils.Utils;
 
 public class TimePickerController implements OnClickListener, OnTimeSetListener {
 
+    private static String TAG = "TimePickerController";
+
     private Context mContext;
     private EditView mView;
     private QuotaModel mQuota;
+    private boolean isStart;
 
-    public TimePickerController(Context context, EditView view, QuotaModel quota){
+    public TimePickerController(Context context, EditView view, 
+            QuotaModel quota, boolean isStart) {
         mContext = context;
         mView = view;
         mQuota = quota;
+        this.isStart = isStart;
     }
 
     @Override
@@ -33,11 +38,11 @@ public class TimePickerController implements OnClickListener, OnTimeSetListener 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute){
         long time;
-        if (mView.getStartView().getId() == view.getId()) {
+        if (isStart) {
             mQuota.setStartTime(
                     Utils.getTimeFromInt(hourOfDay, minute).getTimeInMillis());
             mView.setStartView(Utils.getTimeAsString(mQuota.getStartTime(), "hh:mm a"));
-        } else if (mView.getEndView().getId() == view.getId()) {
+        } else {
             mQuota.setEndTime(
                     Utils.getTimeFromInt(hourOfDay, minute).getTimeInMillis());
             mView.setEndView(Utils.getTimeAsString(mQuota.getEndTime(), "hh:mm a"));

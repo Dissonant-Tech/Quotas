@@ -51,10 +51,10 @@ public class EditActivity extends Activity {
                 new RecurrencePickerController(this, mView, mQuota));
 
         mView.getStartView().setOnClickListener(
-                new TimePickerController(this, mView, mQuota));
+                new TimePickerController(this, mView, mQuota, true));
 
         mView.getEndView().setOnClickListener(
-                new TimePickerController(this, mView, mQuota));
+                new TimePickerController(this, mView, mQuota, false));
 
         mView.getTimeRange().setOnClickListener(
                 new TimeRangeController(this, mView, mQuota));

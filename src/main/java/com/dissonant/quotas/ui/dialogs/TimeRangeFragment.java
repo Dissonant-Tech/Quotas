@@ -19,7 +19,8 @@ public class TimeRangeFragment extends DialogFragment
 
     private static final String TAG = "TimeRangeFragment";
 
-    private long maxLength;
+    private int mStepSize;
+    private float mDuration, mMaxDuration;
     private long mStart, mEnd;
     private TimeRangeListener listener;
     private CircleSelector mDialogView;
@@ -32,6 +33,8 @@ public class TimeRangeFragment extends DialogFragment
     public TimeRangeFragment(long start, long end, TimeRangeListener listener) {
         mStart = start;
         mEnd = end;
+        mStepSize = 1;
+        mMaxDuration = mStart - mEnd;
     }
 
     @Override
@@ -53,7 +56,7 @@ public class TimeRangeFragment extends DialogFragment
         builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                listener.onTimeRangeSet(val, maxVal);
+                listener.onTimeRangeSet(mDuration, mMaxDuration);
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -82,7 +85,7 @@ public class TimeRangeFragment extends DialogFragment
     }
 
     public void initTimeRangeSelector(View v, int backgroundColor) {
-        String[] customText = genCustomText(mStart, mEnd, 5);
+        String[] customText = genCustomText(mStart, mEnd, mStepSize);
         mDialogView.setCustomText(customText);
 
         mDialogView.setTouchEnabled(true);
@@ -93,11 +96,13 @@ public class TimeRangeFragment extends DialogFragment
         mDialogView.showValue(0.0f, customText.length, false);
     }
 
+    @Override
     public void onValueSelected(float val, float maxVal) {
-        this.val = val;
-        this.maxVal = maxVal;
+        mDuration = val;
+        mMaxDuration = maxVal;
     }
 
+    @Override
     public void onSelectionUpdate(float val, float maxVal) {
     }
 
