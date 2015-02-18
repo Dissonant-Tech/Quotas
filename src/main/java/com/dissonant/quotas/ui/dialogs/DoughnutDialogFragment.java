@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.dissonant.quotas.R;
-import com.dissonant.quotas.ui.views.CircleSelector;
+import com.dissonant.quotas.ui.views.CircleDisplay;
 
 
 public class DoughnutDialogFragment extends DialogFragment {
@@ -22,8 +22,8 @@ public class DoughnutDialogFragment extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View mDialogView = inflater.inflate(R.layout.dialog_doughnut_selector, null);
 
-        // Pass the inflated view and initialize the CircleSelector
-        initCircleSelector(mDialogView);
+        // Pass the inflated view and initialize the CircleDisplay
+        initCircleDisplay(mDialogView);
 
         builder.setView(mDialogView)
             .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
@@ -43,15 +43,14 @@ public class DoughnutDialogFragment extends DialogFragment {
         return builder.create();
     }
 
-    public void initCircleSelector(View v) {
-        CircleSelector mCircleSelector = (CircleSelector) v.findViewById(R.id.doughnutSelector);
-        mCircleSelector.setColor(Color.CYAN);
-        mCircleSelector.setFormatDigits(0);
-        mCircleSelector.setUnit("");
-        mCircleSelector.showValue(0, 60, false);
-        mCircleSelector.setStepSize(1);
-        mCircleSelector.setTouchEnabled(true);
-        mCircleSelector.setElevation(1);
-        mCircleSelector.setmDoubleTapEnabled(false);
+    public void initCircleDisplay(View v) {
+        CircleDisplay mCircleDisplay = (CircleDisplay) v.findViewById(R.id.doughnutSelector);
+        mCircleDisplay.setColor(Color.CYAN);
+        mCircleDisplay.setFormatDigits(0);
+        mCircleDisplay.setUnit("");
+        mCircleDisplay.showValue(0, 60, false);
+        mCircleDisplay.setStepSize(1);
+        mCircleDisplay.setTouchEnabled(true);
+        mCircleDisplay.setElevation(1);
     }
 }

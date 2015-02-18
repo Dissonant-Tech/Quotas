@@ -1,6 +1,5 @@
 package com.dissonant.quotas.ui.dialogs;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -11,11 +10,11 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 
+import com.dissonant.quotas.ui.views.CircleDisplay;
 import com.dissonant.quotas.R;
-import com.dissonant.quotas.ui.views.CircleSelector;
 
 public class TimeRangeFragment extends DialogFragment
-    implements CircleSelector.SelectionListener {
+    implements CircleDisplay.SelectionListener {
 
     private static final String TAG = "TimeRangeFragment";
 
@@ -23,7 +22,7 @@ public class TimeRangeFragment extends DialogFragment
     private float mDuration, mMaxDuration;
     private long mStart, mEnd;
     private TimeRangeListener listener;
-    private CircleSelector mDialogView;
+    private CircleDisplay mDialogView;
     float val, maxVal;
 
     public interface TimeRangeListener {
@@ -42,13 +41,13 @@ public class TimeRangeFragment extends DialogFragment
         // Get dialog bulder and inflate the dialog layout
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        mDialogView = new CircleSelector(getActivity());
+        mDialogView = new CircleDisplay(getActivity());
         mDialogView.setSelectionListener(this);
 
         int backgroundColor = getResources().getColor(
                 R.color.abc_background_cache_hint_selector_material_light);
 
-        // Pass the inflated view and initialize the DoughnutSelector
+        // Pass the inflated view and initialize the CircleDisplay
         initTimeRangeSelector(mDialogView, backgroundColor);
 
         builder.setView(mDialogView);
@@ -84,18 +83,6 @@ public class TimeRangeFragment extends DialogFragment
                 R.style.dialog_animation_slide_up);
     }
 
-    public void initTimeRangeSelector(View v, int backgroundColor) {
-        String[] customText = genCustomText(mStart, mEnd, mStepSize);
-        mDialogView.setCustomText(customText);
-
-        mDialogView.setTouchEnabled(true);
-        mDialogView.setDrawText(true);
-        mDialogView.setElevation(1);
-        mDialogView.setColor(getResources().getColor(R.color.primary));
-        mDialogView.setStepSize(1);
-        mDialogView.showValue(0.0f, customText.length, false);
-    }
-
     @Override
     public void onValueSelected(float val, float maxVal) {
         mDuration = val;
@@ -106,28 +93,68 @@ public class TimeRangeFragment extends DialogFragment
     public void onSelectionUpdate(float val, float maxVal) {
     }
 
+    public void initTimeRangeSelector(View v, int backgroundColor) {
+        // TODO: Fix CircleDisplay "array not long enough" errors
+        String[] customText = genCustomText(mStart, mEnd, mStepSize);
+        mDialogView.setCustomText(customText);
+
+        mDialogView.setUnit("");
+        mDialogView.setTouchEnabled(true);
+        mDialogView.setDrawText(true);
+        mDialogView.setElevation(1);
+        mDialogView.setStepSize(1.0f);
+        mDialogView.setColor(getResources().getColor(R.color.primary));
+        mDialogView.showValue(0.0f, customText.length, false);
+    }
+
     private String[] genCustomText(long start, long end, int stepSize) {
-        int numTimes = 0;
-        ArrayList<String> resultArr = new ArrayList<String>();
+        int hours = 0;
+        int minutes = 0;
 
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm 'Hours'");
         Calendar startTime = Calendar.getInstance();
-        startTime.setTimeInMillis(start);
-
         Calendar endTime = Calendar.getInstance();
+
+        startTime.setTimeInMillis(start);
         endTime.setTimeInMillis(end);
 
+        ArrayList<String> resultArr = new ArrayList<String>();
+
         while (startTime.before(endTime)) {
-            resultArr.add(sdf.format(startTime.getTimeInMillis()));
-            startTime.add(Calendar.MINUTE, stepSize);
-            numTimes++;
+            if (minutes >= 59) {
+                minutes = 0;
+                hours++;
+            } else {
+                minutes++;
+            }
+
+            resultArr.add(genTimeSentence(hours, minutes));
+            startTime.add(Calendar.MINUTE, 1);
         }
 
-        String[] result = new String[numTimes];
+        String[] result = new String[resultArr.size()];
 
         for (int i = 0; i < resultArr.size(); i++) {
             result[i] = resultArr.get(i);
         }
+
         return result;
+    }
+
+    public String genTimeSentence(int hours, int minutes) {
+        String strHours = "hours";
+        String strMinutes = "minutes";
+        String strAnd = " and ";
+        String pad = " ";
+
+        StringBuilder sb = new StringBuilder();
+
+        if (hours == 0) {
+            sb.append(minutes).append(pad).append(strMinutes);
+        } else {
+            sb.append(hours).append(pad).append(strHours)
+                .append(strAnd).append(minutes).append(pad).append(strMinutes);
+        }
+
+        return sb.toString();
     }
 }

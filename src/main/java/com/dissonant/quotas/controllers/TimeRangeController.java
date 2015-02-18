@@ -1,7 +1,5 @@
 package com.dissonant.quotas.controllers;
 
-import java.util.Calendar;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
@@ -12,7 +10,7 @@ import com.dissonant.quotas.R;
 import com.dissonant.quotas.model.QuotaModel;
 import com.dissonant.quotas.ui.dialogs.TimeRangeFragment;
 import com.dissonant.quotas.ui.dialogs.TimeRangeFragment.TimeRangeListener;
-import com.dissonant.quotas.ui.views.CircleSelector;
+import com.dissonant.quotas.ui.views.CircleDisplay;
 import com.dissonant.quotas.ui.views.EditView;
 
 public class TimeRangeController implements OnClickListener, TimeRangeListener {
@@ -20,7 +18,6 @@ public class TimeRangeController implements OnClickListener, TimeRangeListener {
     private Context mContext;
     private EditView mView;
     private QuotaModel mQuota;
-    private long mStart, mEnd;
 
     public TimeRangeController(Context context, EditView view, QuotaModel quota){
         mContext = context;
@@ -31,7 +28,7 @@ public class TimeRangeController implements OnClickListener, TimeRangeListener {
     @Override
     public void onClick(View v) {
         if (isTimeSet()) {
-            showTimeRangeDialog(mStart, mEnd, this);
+            showTimeRangeDialog(mQuota.getStartTime(), mQuota.getEndTime(), this);
         } else {
             Toast.makeText(mContext, ((Activity) mContext).getResources()
                     .getString(R.string.time_not_set), Toast.LENGTH_SHORT).show();
@@ -45,7 +42,7 @@ public class TimeRangeController implements OnClickListener, TimeRangeListener {
 
     @Override
     public void onTimeRangeSet(float val, float maxVal) {
-        CircleSelector timeRangeView = (CircleSelector) mView.getTimeRange();
+        CircleDisplay timeRangeView = (CircleDisplay) mView.getTimeRange();
         timeRangeView.showValue(val, maxVal, false);
 
     }
